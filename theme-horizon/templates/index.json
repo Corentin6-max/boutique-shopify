@@ -1,0 +1,119 @@
+{
+  "sections": {
+    "hero_accueil": {
+      "type": "hero",
+      "blocks": {
+        "kicker": { "type": "text", "settings": { "text": "<p>Fontaine à eau 7 L — acier inoxydable</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h6", "alignment": "center", "width": "fit-content", "max_width": "normal", "case": "uppercase", "letter_spacing": "wide" } },
+        "titre": { "type": "text", "settings": { "text": "<h1>Votre chat ne boit pas assez.</h1>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h1", "alignment": "center", "width": "fit-content", "max_width": "normal", "wrap": "balance" } },
+        "chapo": { "type": "text", "settings": { "text": "<p>Dans une gamelle, l'eau stagne, tiédit et prend le goût de la pièce. Il s'en détourne. Une eau qui circule, filtrée et fraîche, change ce comportement en quelques jours.</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "rte", "alignment": "center", "width": "fit-content", "max_width": "narrow" } },
+        "bouton": { "type": "button", "settings": { "label": "Découvrir la fontaine — 89,95 €", "link": "shopify://collections/fontaines-hydratation", "open_in_new_tab": false, "style_class": "button", "width": "fit-content" } }
+      },
+      "block_order": ["kicker", "titre", "chapo", "bouton"],
+      "settings": {
+        "media_type_1": "image", "media_type_2": "image",
+        "stack_media_on_mobile": false, "custom_mobile_media": false,
+        "open_in_new_tab": false,
+        "content_direction": "column", "vertical_on_mobile": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 20,
+        "section_width": "page-width", "section_height": "medium",
+        "background_color": "#F2F4F5",
+        "toggle_overlay": false,
+        "padding-block-start": 96, "padding-block-end": 96
+      }
+    },
+
+    "bandeau_confiance": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "text", "settings": { "text": "<p>Livraison offerte en France</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h6", "width": "fit-content", "wrap": "nowrap", "case": "uppercase", "letter_spacing": "wide" } },
+        "m2": { "type": "text", "settings": { "text": "<p>Retours sous 90 jours</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h6", "width": "fit-content", "wrap": "nowrap", "case": "uppercase", "letter_spacing": "wide" } },
+        "m3": { "type": "text", "settings": { "text": "<p>Paiement sécurisé</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h6", "width": "fit-content", "wrap": "nowrap", "case": "uppercase", "letter_spacing": "wide" } },
+        "m4": { "type": "text", "settings": { "text": "<p>Service client français</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h6", "width": "fit-content", "wrap": "nowrap", "case": "uppercase", "letter_spacing": "wide" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"],
+      "settings": {
+        "movement_direction": "normal",
+        "background_color": "#FFFFFF",
+        "padding-block-start": 18, "padding-block-end": 18,
+        "gap_between_elements": 56
+      }
+    },
+
+    "liste_produits": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row", "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between", "vertical_alignment": "flex-end",
+            "align_baseline": true, "gap": 12,
+            "width": "fill", "height": "fit",
+            "background_media": "none", "border": "none",
+            "padding-block-start": 0, "padding-block-end": 0
+          },
+          "blocks": {
+            "titre_liste": { "type": "_product-list-text", "settings": { "text": "<h3>Nos produits</h3>", "width": "fit-content", "alignment": "left", "type_preset": "h4" } },
+            "lien_liste": { "type": "_product-list-button", "settings": { "label": "Voir toute la boutique", "open_in_new_tab": false, "style_class": "link", "width": "fit-content" } }
+          },
+          "block_order": ["titre_liste", "lien_liste"]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": { "product_card_gap": 8, "border": "none", "border_radius": 0, "padding-block-start": 0, "padding-block-end": 0 },
+          "blocks": {
+            "carte_image": { "type": "_product-card-gallery", "settings": { "image_ratio": "square", "border": "none", "border_radius": 0 } },
+            "carte_titre": { "type": "product-title", "settings": { "width": "100%", "alignment": "left", "type_preset": "rte", "font_size": "1rem", "line_height": "tight", "wrap": "pretty", "padding-block-start": 6 } },
+            "carte_prix": { "type": "price", "settings": { "show_sale_price_first": true, "type_preset": "h6", "width": "100%", "alignment": "left" } },
+            "carte_panier": { "type": "buy-buttons", "settings": {} }
+          },
+          "block_order": ["carte_image", "carte_titre", "carte_prix", "carte_panier"]
+        }
+      },
+      "settings": {
+        "collection": "accessoires-pour-chiens",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "1",
+        "mobile_card_size": "62cqw",
+        "columns_gap": 16, "rows_gap": 24,
+        "icons_style": "arrow", "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 64, "padding-block-end": 64
+      }
+    },
+
+    "hero_histoire": {
+      "type": "hero",
+      "blocks": {
+        "h_titre": { "type": "text", "settings": { "text": "<h2>Une gamme courte, pensée autour d'un usage</h2>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "h3", "alignment": "center", "width": "fit-content", "max_width": "normal", "wrap": "balance" } },
+        "h_texte": { "type": "text", "settings": { "text": "<p>Que votre animal boive assez, et que son coin repas reste propre. Quatre produits qui se complètent, plutôt que quarante qui se ressemblent.</p>", "text_color": "{{ settings.color_palette.foreground }}", "type_preset": "rte", "alignment": "center", "width": "fit-content", "max_width": "narrow" } },
+        "h_bouton": { "type": "button", "settings": { "label": "Notre histoire", "link": "/pages/notre-histoire", "open_in_new_tab": false, "style_class": "button-secondary", "width": "fit-content" } }
+      },
+      "block_order": ["h_titre", "h_texte", "h_bouton"],
+      "settings": {
+        "media_type_1": "image", "media_type_2": "image",
+        "stack_media_on_mobile": false, "custom_mobile_media": false,
+        "open_in_new_tab": false,
+        "content_direction": "column", "vertical_on_mobile": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 18,
+        "section_width": "page-width", "section_height": "small",
+        "background_color": "#F2F4F5",
+        "toggle_overlay": false,
+        "padding-block-start": 72, "padding-block-end": 72
+      }
+    }
+  },
+  "order": ["hero_accueil", "bandeau_confiance", "liste_produits", "hero_histoire"]
+}
