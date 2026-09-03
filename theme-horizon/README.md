@@ -45,3 +45,31 @@ rayon des boutons 14 px. Tout se change dans **Personnaliser → Réglages du th
 ## Prévisualiser
 
 Boutique en ligne → Thèmes → « Velluno — Boutique (sans Vitals) » → Aperçu.
+
+## En-tête et pied de page
+
+Sur Horizon tel qu'installé, la section d'en-tête, la barre d'annonce et les deux
+sections de pied de page arrivent avec `"disabled": true` — la boutique
+s'afficherait sans navigation ni pied de page. Elles ont été **activées**, et
+leurs textes traduits :
+
+- barre d'annonce : « Livraison offerte en France · Retours sous 90 jours » et
+  « Paiement sécurisé · Service client français »
+- newsletter : « Recevez nos conseils d'hydratation »
+- bouton : « S'inscrire »
+- « Powered by Shopify » retiré du copyright
+- liens sociaux retirés : ils pointaient vers facebook.com, instagram.com et x.com
+  génériques
+
+Le menu principal est `main-menu`, déjà en français.
+
+## Ce qui n'est PAS recréé
+
+Seules la page d'accueil, l'en-tête et le pied de page ont été refaits.
+**Les pages produit, collection, panier, recherche et blog sont celles de Horizon
+par défaut**, avec quelques libellés encore en anglais (« Disclosures »,
+« You may also like »).
+
+La page d'accueil compte 4 sections, contre 11 sur le thème Vitals. Ne sont pas
+reprises : les deux blocs « Image & liste d'avantages », le bloc de 4 cartes,
+l'argument vétérinaire sur les problèmes rénaux, et le badge d'avis Vitals.
