@@ -1,101 +1,108 @@
-# À faire avant mise en ligne
+# À faire
 
 Points ouverts, par ordre d'urgence.
 
 ---
 
-## 🔴 1. Doublons à trancher
+## 🔴 1. Compléter et publier les mentions légales et les CGV
 
-La boutique contient **deux séries des mêmes 4 produits**, toutes deux en ACTIVE.
-Les clients voient donc chaque produit en double sur le storefront.
+Les deux pages existent mais restent en **brouillon** : elles contiennent des champs
+`[RAISON SOCIALE]`, `[SIRET]`, `[ADRESSE]`, `[NOM DU MÉDIATEUR]`.
 
-**Série A — conservée et retravaillée** (import DSers du 1er sept.)
-
-| Product ID | Produit |
-|---|---|
-| `11094761275729` | Fontaine 7L |
-| `11094760259921` | Filtres |
-| `11094762455377` | Tapis silicone |
-| `11094776643921` | Jouet os |
-
-Stock réel synchronisé avec les fournisseurs. C'est la seule série livrable — d'où le
-choix de tout construire dessus. Ses prix étaient au prix d'achat (fontaine à 51,86 €,
-soit **une marge nulle**) : corrigés.
-
-**Série B — doublons, à traiter** (créée le 2 sept.)
-
-| Product ID | Produit | Stock |
-|---|---|---|
-| `11098253328721` | Stainless Steel Pet Water Fountain – 7L | 0 |
-| `11098259259729` | Replacement Filters For Cat Water Fountains 2.2L | 0 |
-| `11098262372689` | Bone-Shaped Dog Chew Toy | 0 |
-| `11098266763601` | Waterproof Silicone Pet Feeding Mat | 0 |
-
-Titres anglais, stock à 0, aucun lien fournisseur : invendables en l'état.
-
-**Décision à prendre :** les passer en brouillon (réversible en un clic) ou les archiver.
-Non traité ici — c'est une modification du storefront en ligne, elle revient au
-propriétaire de la boutique.
+Ces deux pages sont **obligatoires** pour un site marchand français. Complétez-les avec
+les informations réelles de l'entreprise, puis publiez-les. Pensez aussi à l'adhésion à
+un médiateur de la consommation (article L612-1), également obligatoire.
 
 ---
 
-## 🔴 2. Mapper les packs dans DSers, puis les publier
+## 🔴 2. Doublons de produits à trancher
+
+Deux séries des mêmes 4 produits coexistent, toutes deux en ACTIVE : les clients voient
+chaque produit en double.
+
+**Série A — conservée et retravaillée** (import DSers, stock réel synchronisé)
+
+`11094761275729` fontaine · `11094760259921` filtres · `11094762455377` tapis ·
+`11094776643921` jouet
+
+**Série B — doublons à traiter** (titres anglais, stock 0, aucun lien fournisseur)
+
+`11098253328721` · `11098259259729` · `11098262372689` · `11098266763601`
+
+Les passer en brouillon (réversible) ou les archiver. Non fait ici : c'est une
+modification du storefront en ligne, elle revient au propriétaire de la boutique.
+
+---
+
+## 🔴 3. Mapper les packs dans DSers, puis les publier
 
 Les 4 packs sont en **DRAFT**. Ce sont des produits neufs, sans lien fournisseur :
 publiés tels quels, ils encaisseraient des commandes que DSers ne saurait pas router.
 
-Pour chacun : mapper chaque variante vers les produits AliExpress listés dans
-[bundles.md](bundles.md) (ou dans le métachamp `supplier.composition` du produit),
-puis passer le produit en **ACTIVE**.
+Mapper chaque variante vers les produits AliExpress listés dans [bundles.md](bundles.md)
+— ou dans le métachamp `supplier.composition` du produit — puis passer en **ACTIVE**.
 
 ---
 
-## 🟠 3. Images
+## 🟠 4. Le design du thème
 
-Aucune image n'a été ajoutée aux packs — à insérer manuellement.
+Le thème live (Vitals Store Builder) ne peut pas être modifié par l'API : Shopify bloque
+toute écriture sur le thème publié. Le design se règle dans **Boutique en ligne →
+Personnaliser**. Voir [storefront.md](storefront.md).
 
-Les 4 produits de la série A ont conservé leurs visuels AliExpress importés par DSers.
-Ils sont fonctionnels mais génériques : des visuels propres sur fond neutre, aux mêmes
-cadrages sur les 4 fiches, feraient beaucoup pour la crédibilité de la marque.
+Priorités visuelles, dans l'ordre d'impact :
+
+1. **Barre de réassurance en en-tête** — reprendre les 4 promesses du bandeau produit,
+   visibles sur toutes les pages
+2. **Page d'accueil** — une seule bannière, la fontaine en héros, puis les packs
+3. **Typographie** — deux polices maximum, une pour les titres, une pour le texte
+4. **Palette** — une couleur d'accent unique pour les boutons, le reste en neutres
+5. **Logo** — un logo texte propre vaut mieux qu'un logo image approximatif
 
 ---
 
-## 🟠 4. Commander un échantillon de filtres
+## 🟠 5. Images
 
-Le fournisseur des filtres (Vissoiter Online Store) n'a **qu'un seul avis pour 37 ventes**.
-C'est le produit qui porte toute la récurrence de la boutique. Vérifier la qualité et la
+Aucune image sur les 4 packs — à insérer manuellement.
+
+Les 4 produits gardent leurs visuels AliExpress importés par DSers : fonctionnels mais
+génériques, avec des cadrages et des fonds différents d'une fiche à l'autre. Des visuels
+homogènes sur fond neutre sont ce qui sépare le plus visiblement une boutique amateur
+d'une boutique crédible.
+
+---
+
+## 🟠 6. Commander un échantillon de filtres
+
+Le fournisseur des filtres (Vissoiter Online Store) n'a **qu'un seul avis pour 37 ventes**,
+et c'est lui qui porte toute la récurrence de la boutique. Vérifier la qualité et la
 compatibilité 2,2 L avant d'engager du budget publicitaire, et identifier un fournisseur
 de secours. Voir [fournisseurs.md](fournisseurs.md).
 
 ---
 
-## 🟡 5. Annoncer les livraisons multiples
+## 🟡 7. Tenir la promesse « réponse sous 24 à 48 h »
 
-Un pack à 4 fournisseurs part en jusqu'à 4 colis, avec 4 numéros de suivi et des dates
-d'arrivée différentes. Sans mention explicite en page produit **et** dans l'e-mail de
-confirmation, cela génère mécaniquement des réclamations « commande incomplète ».
-
-Délais fournisseurs : 8 à 14 jours, sauf le tapis (10 à 16 jours) — c'est le plus lent
-qui détermine la date à annoncer.
+C'est le seul engagement du bandeau de réassurance qui ne dépend pas d'un réglage
+technique mais d'une organisation. Une adresse `contact@velluno.fr` relevée tous les
+jours ouvrés suffit — mais elle doit l'être.
 
 ---
 
-## 🟡 6. Produits hors périmètre
+## 🟡 8. Produits hors périmètre
 
-Quatre montres connectées traînent dans le catalogue, toutes à stock 0, sans rapport
-avec l'animalerie :
-
-`11095270588753` · `11095271539025` · `11095272685905` · `11095273406801` (déjà archivé)
-
-Elles diluent le positionnement de la boutique. À archiver, sauf intention contraire.
+Quatre montres connectées traînent dans le catalogue, toutes à stock 0, sans rapport avec
+l'animalerie : `11095270588753` · `11095271539025` · `11095272685905` ·
+`11095273406801` (déjà archivé). Elles diluent le positionnement. À archiver, sauf
+intention contraire.
 
 ---
 
-## 🟡 7. Pistes commerciales
+## 🟡 9. Pistes commerciales
 
 - **Relance filtres à J+240** — chaque acheteur de fontaine devient un client récurrent.
   C'est le levier de rentabilité le plus évident du catalogue.
 - **Upsell panier** — proposer le jouet à 8,95 € (77 % de marge) sur toute commande.
-- **Code de bienvenue** — un −10 % sur la fontaine reste à 32 € de marge. Confortable.
-- **Seuil de livraison gratuite à 49 €** — au-dessus du panier accessoires, en dessous
-  du prix de la fontaine : pousse mécaniquement vers les packs.
+- **Code de bienvenue** — un −10 % sur la fontaine laisse encore 32 € de marge.
+- **Avis clients** — le bandeau promet, les avis prouvent. C'est le prochain gain de
+  conversion une fois les premières commandes passées.

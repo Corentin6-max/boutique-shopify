@@ -15,6 +15,7 @@ la boutique est gérée directement dans Shopify.
 | [catalogue/bundles.md](catalogue/bundles.md) | Les 4 packs et leur mapping DSers |
 | [catalogue/fournisseurs.md](catalogue/fournisseurs.md) | Fiches fournisseurs et niveaux de risque |
 | [catalogue/collections.md](catalogue/collections.md) | Arborescence des collections |
+| [catalogue/storefront.md](catalogue/storefront.md) | Réassurance, pages et navigation |
 | [catalogue/a-faire.md](catalogue/a-faire.md) | Points ouverts avant mise en ligne |
 
 ## Produit phare
