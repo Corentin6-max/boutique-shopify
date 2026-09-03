@@ -1,0 +1,268 @@
+{
+  "sections": {
+    "vitals_8e910774_CnEQtd": {
+      "type": "vitals-8e910774",
+      "blocks": {
+        "caption_44wa84": { "type": "caption", "settings": { "caption": "FONTAINE 7 L — ACIER INOXYDABLE", "caption_size": "16", "caption_weight": "600", "caption_color": "#222222", "caption_alternative_font": false, "caption_font": "sans_serif_n4" } },
+        "heading_NLceN3": { "type": "heading", "settings": { "heading": "Une hydratation fraîche, en continu", "heading_size": "32", "heading_style": "regular", "heading_color": "#222222", "heading_alternative_font": false, "heading_font": "sans_serif_n4" } },
+        "text_9kJb7i": { "type": "text", "settings": { "description": "<p>Notre fontaine en acier inoxydable 7 L assure à votre animal une eau filtrée et fraîche à toute heure, en silence.</p>", "description_size": "16", "description_color": "#222222", "description_alternative_font": false, "description_font": "sans_serif_n4" } },
+        "buttons_bBJyRG": { "type": "buttons", "settings": { "primary_button_label": "Découvrir la fontaine", "primary_button_link": "shopify://collections/fontaines-hydratation", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "primary_button_corner": 0, "primary_new_tab": false, "secondary_button_label": "", "secondary_button_link": "", "secondary_button_style": "link", "secondary_text_color": "#222222", "secondary_background_color": "", "secondary_border_color": "", "secondary_button_corner": 0, "secondary_new_tab": false } }
+      },
+      "block_order": ["caption_44wa84", "heading_NLceN3", "text_9kJb7i", "buttons_bBJyRG"],
+      "name": "🧡 Vitals: Text Box & Background",
+      "settings": {
+        "image": "", "overlay_opacity": 0, "overlay_color": "#222222",
+        "desktop_banner_height": "medium", "mobile_banner_height": "medium",
+        "section_background": "#f5f5f5", "add_parallax": false,
+        "text_box_height": "default", "text_box_background": "#ffffff", "text_box_opacity": 100, "text_box_border_radius": 0,
+        "desktop_content_position": "center-center", "mobile_content_position": "center",
+        "layout_type": "desktop", "section_width": 100, "section_width_mobile": 100, "section_max_width": "",
+        "padding_top": 0, "padding_bottom": 0, "margin_top": 0, "margin_bottom": 0,
+        "padding_top_mobile": 0, "padding_bottom_mobile": 0, "margin_top_mobile": 0, "margin_bottom_mobile": 0
+      }
+    },
+
+    "vitals_ce7789ea_RaHGkC": {
+      "type": "vitals-ce7789ea",
+      "blocks": {
+        "icon_EiFWaE": { "type": "icon", "settings": { "icon_type": "icon", "icon": "shipping_fast", "font_awesome": "", "icon_image_corner_radius": 0, "icon_title": "Livraison offerte", "icon_description": "Partout en France, sans minimum d'achat" } },
+        "icon_yqERPn": { "type": "icon", "settings": { "icon_type": "icon", "icon": "undo_alt", "font_awesome": "", "icon_image_corner_radius": 0, "icon_title": "Retours sous 90 jours", "icon_description": "Satisfait ou remboursé" } },
+        "icon_6grgtL": { "type": "icon", "settings": { "icon_type": "icon", "icon": "shield_alt", "font_awesome": "", "icon_image_corner_radius": 0, "icon_title": "Paiement sécurisé", "icon_description": "Transaction cryptée SSL" } },
+        "icon_svcFR01": { "type": "icon", "settings": { "icon_type": "icon", "icon": "comments", "font_awesome": "", "icon_image_corner_radius": 0, "icon_title": "Service client français", "icon_description": "Réponse sous 24 à 48 h" } }
+      },
+      "block_order": ["icon_EiFWaE", "icon_yqERPn", "icon_6grgtL", "icon_svcFR01"],
+      "name": "🧡 Vitals: Value Icons",
+      "settings": {
+        "icon_color": "#93abf9", "icon_size": 24,
+        "icon_title_size": "16", "icon_title_color": "#222222",
+        "icon_description_size": "14", "icon_description_color": "#222222",
+        "icons_per_row_desktop": 4, "icons_mobile_layout": "2",
+        "space_between_icons": 24, "space_between_rows": 64, "space_between_rows_mobile": 40,
+        "heading": "", "heading_size": "32", "heading_style": "regular", "heading_alignment": "center", "heading_color": "#222222",
+        "section_background_style": "color", "section_background": "#f5f5f5",
+        "section_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "section_background_animation": false,
+        "overlay_color": "#222222", "overlay_opacity": 0,
+        "section_width": 80, "section_max_width": "", "spacing_type": "desktop",
+        "padding_top": 40, "padding_bottom": 40, "margin_top": 0, "margin_bottom": 0,
+        "padding_top_mobile": 20, "padding_bottom_mobile": 20, "margin_top_mobile": 0, "margin_bottom_mobile": 0
+      }
+    },
+
+    "vitals_fc2b5214_HN6rxq": {
+      "type": "vitals-fc2b5214",
+      "blocks": {
+        "caption_ENMPmi": { "type": "caption", "settings": { "caption": "", "caption_size": "16", "caption_weight": "400", "caption_color": "#222222", "caption_alternative_font": false, "caption_font": "sans_serif_n4" } },
+        "heading_Y4jdXG": { "type": "heading", "settings": { "heading": "Hydratez. Protégez. Simplifiez.", "heading_size": "32", "heading_style": "regular", "heading_color": "#222222", "heading_alternative_font": false, "heading_font": "sans_serif_n4", "heading_background": "none", "heading_background_color": "#f5f5f5", "heading_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "heading_background_corner_style": "round" } },
+        "text_YxeGQR": { "type": "text", "settings": { "description": "<p>Fontaine 7L en inox avec recharge sans fil — pour chiens et chats.</p>", "description_size": "16", "description_color": "#222222", "description_alternative_font": true, "description_font": "libre_baskerville_n4" } },
+        "benefit_APLRfW": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check-circle", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Encouragez votre animal à boire davantage" } },
+        "benefit_PhKDdt": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check-circle", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Eau fraîche filtrée en permanence" } },
+        "benefit_BTQ4ad": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check-circle", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Recharge sans fil, zéro câble apparent" } },
+        "buttons_NqCwRH": { "type": "buttons", "settings": { "buttons_size": "small", "primary_button_behaviour": "link", "primary_button_label": "COMMANDER >", "primary_button_link": "/products/7l-stainless-steel-wireless-recharging-sensor-cat-water-fountain-auto-drinking-fountain-for-cats-dog-drinker-pet-dispenser-bowl", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "primary_button_corner": 0, "primary_new_tab": false, "secondary_button_label": "", "secondary_button_link": "", "secondary_button_style": "solid", "secondary_text_color": "#ffffff", "secondary_background_color": "#222222", "secondary_border_color": "#222222", "secondary_button_corner": 0, "secondary_new_tab": false } }
+      },
+      "block_order": ["caption_ENMPmi", "heading_Y4jdXG", "text_YxeGQR", "benefit_APLRfW", "benefit_PhKDdt", "benefit_BTQ4ad", "buttons_NqCwRH"],
+      "name": "🧡 Vitals: Image & Benefit List",
+      "settings": {
+        "image_source": "upload", "image": "", "image_url": "", "aspect_ratio": "square",
+        "image_position_desktop": "left", "image_position_mobile": "above",
+        "text_alignment": "left", "text_box_width": 70,
+        "text_box_background_style": "color", "text_box_background": "rgba(0,0,0,0)",
+        "text_box_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "text_box_animation": false,
+        "text_box_border_color": "#222222", "corner_radius": 0,
+        "icon_color": "#93abf9", "icon_size": 20, "icon_background": "none",
+        "icon_background_color": "#d6d6d6", "icon_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "icon_background_corner_radius": 0,
+        "benefit_text_color": "#222222", "benefit_text_size": "16",
+        "section_background_type": "color", "section_background": "",
+        "section_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "section_background_animation": false,
+        "overlay_color": "#222222", "overlay_opacity": 0,
+        "layout_type": "mobile", "section_width": 95, "section_max_width": "1100",
+        "padding_top": 0, "padding_bottom": 0, "margin_top": 80, "margin_bottom": 90,
+        "section_width_mobile": 90, "padding_top_mobile": 60, "padding_bottom_mobile": 40,
+        "margin_top_mobile": 0, "margin_bottom_mobile": 0, "product": ""
+      }
+    },
+
+    "vitals_1dfa728d_Gdrecq": {
+      "type": "vitals-1dfa728d",
+      "blocks": {
+        "icon_DFpVMx": { "type": "icon", "settings": { "icon_type": "icon", "icon": "none", "font_awesome": "<i class=\"fas fa-check\"></i>", "image_shape": "square", "image_corner_radius": 0, "icon_color_enabled": false, "icon_color": "#222222", "icon_title": "Approuvé par des milliers", "icon_description": "Choisi pour favoriser une bonne hydratation et le bon fonctionnement des reins." } },
+        "icon_Rgyqkg": { "type": "icon", "settings": { "icon_type": "icon", "icon": "none", "font_awesome": "<i class=\"fas fa-check\"></i>", "image_shape": "square", "image_corner_radius": 0, "icon_color_enabled": false, "icon_color": "#222222", "icon_title": "Un entretien de dix secondes", "icon_description": "Rincer rapidement ou mettre au lave-vaisselle." } },
+        "icon_m6Pxbf": { "type": "icon", "settings": { "icon_type": "icon", "icon": "none", "font_awesome": "<i class=\"fas fa-check\"></i>", "image_shape": "square", "image_corner_radius": 0, "icon_color_enabled": false, "icon_color": "#222222", "icon_title": "Silencieuse, même la nuit", "icon_description": "Pas de bourdonnement ni de vrombissement pour effrayer les chiens." } },
+        "icon_xMWaVE": { "type": "icon", "settings": { "icon_type": "icon", "icon": "none", "font_awesome": "<i class=\"fas fa-check\"></i>", "image_shape": "square", "image_corner_radius": 0, "icon_color_enabled": false, "icon_color": "#222222", "icon_title": "Une semaine d'autonomie", "icon_description": "Capacité de 7 L, pour les chiens de toutes tailles comme pour les chats." } }
+      },
+      "block_order": ["icon_DFpVMx", "icon_Rgyqkg", "icon_m6Pxbf", "icon_xMWaVE"],
+      "name": "🧡 Vitals: Value Icons Cards & Image",
+      "settings": {
+        "image": "", "image_aspect_ratio": "square", "image_corner_radius": 0, "image_size": "medium",
+        "position_on_desktop": "center", "position_on_mobile": "above",
+        "icon_color": "#93abf9", "icon_size": 36, "icon_background": "none",
+        "icon_background_color": "#dfdfdf", "icon_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)",
+        "icon_border_color": "#222222", "icon_background_corner_radius": 0,
+        "icons_mobile_layout": "2", "space_between_icons": 32,
+        "icon_title_size": "20", "icon_title_color": "#222222",
+        "icon_description_size": "16", "icon_description_color": "#222222",
+        "icon_block_style": "color", "icon_block_background": "#ffffff", "icon_block_opacity": 100,
+        "icon_block_border": "#222222", "icon_block_shadow": false, "icon_card_shadow_color": "#222222", "shadow_size": "large",
+        "heading": "Une hydratation fraîche et filtrée, pensée pour le bien-être de votre animal",
+        "heading_size": "32", "heading_style": "regular", "heading_alignment": "center", "heading_color": "#222222",
+        "section_background_style": "color", "section_background": "#f4f6fb",
+        "section_gradient": "linear-gradient(90deg, rgba(245, 245, 245, 1), rgba(226, 226, 226, 1) 100%)",
+        "enable_animation": false, "overlay_color": "#222222", "overlay_opacity": 0,
+        "section_width": 80, "section_max_width": "", "spacing_type": "mobile",
+        "padding_top": 80, "padding_bottom": 80, "margin_top": 0, "margin_bottom": 0,
+        "padding_top_mobile": 60, "padding_bottom_mobile": 60, "margin_top_mobile": 0, "margin_bottom_mobile": 0, "product": ""
+      }
+    },
+
+    "vitals_fc2b5214_TVTRYn": {
+      "type": "vitals-fc2b5214",
+      "blocks": {
+        "caption_WixQKw": { "type": "caption", "settings": { "caption": "CONSEILS DE SANTÉ APPROUVÉS PAR DES VÉTÉRINAIRES", "caption_size": "16", "caption_weight": "600", "caption_color": "#222222", "caption_alternative_font": false, "caption_font": "sans_serif_n4" } },
+        "heading_jNDzFj": { "type": "heading", "settings": { "heading": "Réduit le risque de problèmes rénaux et d'infections urinaires", "heading_size": "32", "heading_style": "bold", "heading_color": "#222222", "heading_alternative_font": false, "heading_font": "sans_serif_n4", "heading_background": "none", "heading_background_color": "#f5f5f5", "heading_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "heading_background_corner_style": "round" } },
+        "text_jNX67G": { "type": "text", "settings": { "description": "<p>Selon le Journal of Veterinary Internal Medicine, l'un des problèmes de santé les plus courants chez le chien est l'insuffisance rénale chronique due à une mauvaise hydratation.</p>", "description_size": "16", "description_color": "#222222", "description_alternative_font": false, "description_font": "sans_serif_n4" } },
+        "benefit_fxkLPh": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Les chiens boivent naturellement davantage d'<strong>eau courante.</strong>" } },
+        "benefit_Nt4PGp": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Une meilleure <strong>hydratation</strong> favorise <strong>la santé des reins</strong> et du système urinaire." } },
+        "benefit_MAMD88": { "type": "benefit", "settings": { "icon_type": "icon", "icon": "check", "font_awesome": "", "icon_image_corner_radius": 0, "change_icon_color": false, "icon_color": "#222222", "benefit_text": "Conçu pour aider à prévenir <strong>les problèmes d'hydratation à long terme.</strong>" } },
+        "buttons_n8KY3D": { "type": "buttons", "settings": { "buttons_size": "small", "primary_button_behaviour": "link", "primary_button_label": "Voir la fontaine", "primary_button_link": "shopify://collections/fontaines-hydratation", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "primary_button_corner": 0, "primary_new_tab": false, "secondary_button_label": "", "secondary_button_link": "", "secondary_button_style": "solid", "secondary_text_color": "#ffffff", "secondary_background_color": "#222222", "secondary_border_color": "#222222", "secondary_button_corner": 0, "secondary_new_tab": false } }
+      },
+      "block_order": ["caption_WixQKw", "heading_jNDzFj", "text_jNX67G", "benefit_fxkLPh", "benefit_Nt4PGp", "benefit_MAMD88", "buttons_n8KY3D"],
+      "name": "🧡 Vitals: Image & Benefits List",
+      "settings": {
+        "image_source": "upload", "image": "", "image_url": "", "aspect_ratio": "square",
+        "image_position_desktop": "left", "image_position_mobile": "above",
+        "text_alignment": "left", "text_box_width": 70,
+        "text_box_background_style": "color", "text_box_background": "#F3F3F3",
+        "text_box_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "text_box_animation": false,
+        "text_box_border_color": "#222222", "corner_radius": 0,
+        "icon_color": "#222222", "icon_size": 20, "icon_background": "none",
+        "icon_background_color": "#d6d6d6", "icon_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "icon_background_corner_radius": 0,
+        "benefit_text_color": "#222222", "benefit_text_size": "16",
+        "section_background_type": "color", "section_background": "#ffffff",
+        "section_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "section_background_animation": false,
+        "overlay_color": "#222222", "overlay_opacity": 0,
+        "layout_type": "desktop", "section_width": 70, "section_max_width": "",
+        "padding_top": 40, "padding_bottom": 40, "margin_top": 0, "margin_bottom": 0,
+        "section_width_mobile": 80, "padding_top_mobile": 20, "padding_bottom_mobile": 20,
+        "margin_top_mobile": 0, "margin_bottom_mobile": 0, "product": ""
+      }
+    },
+
+    "vitals_d9d73599_djGjeH": {
+      "type": "vitals-d9d73599",
+      "blocks": {
+        "heading_JiLkaU": { "type": "heading", "settings": { "heading": "Nos produits", "heading_size": "32", "heading_style": "regular", "description": "", "description_size": "16", "text_color": "#222222" } },
+        "collection_PUReKm": { "type": "collection", "settings": { "collection": "new-arrivals", "tab_title": "", "products_limit": 4 } },
+        "button_Q7j7zM": { "type": "button", "settings": { "primary_button_label": "Voir toute la collection", "primary_button_link": "shopify://collections/new-arrivals", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "button_alignment": "center", "primary_button_corner": 0, "primary_new_tab": false } }
+      },
+      "block_order": ["heading_JiLkaU", "collection_PUReKm", "button_Q7j7zM"],
+      "name": "🧡 Vitals: Featured Collection Grid",
+      "settings": {
+        "image_aspect_ratio": "square", "cards_radius": 0, "show_vendor": false, "show_product_rating": true,
+        "product_name_vendor_size": "14", "product_card_text_color": "#222222",
+        "price_size": "14", "price_color": "#222222", "product_card_discounted_price_color": "#222222",
+        "product_text_alignment": "left", "products_per_row_desktop": "4", "products_per_row_mobile": "2",
+        "hide_collections": true, "product_card_gap": 24, "text_alignment": "center",
+        "tabs_color": "#222222", "tabs_size": "16",
+        "section_background_style": "color", "section_background": "",
+        "overlay_color": "#222222", "overlay_opacity": 0,
+        "section_width": 100, "section_max_width": "1130", "spacing_type": "desktop",
+        "padding_top": 0, "padding_bottom": 0, "margin_top": 50, "margin_bottom": 50,
+        "padding_top_mobile": 40, "padding_bottom_mobile": 40, "margin_top_mobile": 0, "margin_bottom_mobile": 0
+      }
+    },
+
+    "vitals_8e910774_ArUVhh": {
+      "type": "vitals-8e910774",
+      "blocks": {
+        "caption_dULKHq": { "type": "caption", "settings": { "caption": "", "caption_size": "16", "caption_weight": "400", "caption_color": "#222222", "caption_alternative_font": false, "caption_font": "sans_serif_n4" } },
+        "heading_J9J7WA": { "type": "heading", "settings": { "heading": "Notre histoire", "heading_size": "32", "heading_style": "regular", "heading_color": "#222222", "heading_alternative_font": false, "heading_font": "sans_serif_n4" } },
+        "text_qWJang": { "type": "text", "settings": { "description": "<p>Une gamme courte, pensée autour d'un usage : que votre animal boive assez, et que son coin repas reste propre. Quatre produits qui se complètent, plutôt que quarante qui se ressemblent.</p>", "description_size": "16", "description_color": "#222222", "description_alternative_font": false, "description_font": "sans_serif_n4" } },
+        "buttons_XgxPWQ": { "type": "buttons", "settings": { "primary_button_label": "En savoir plus", "primary_button_link": "/pages/notre-histoire", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "primary_button_corner": 0, "primary_new_tab": false, "secondary_button_label": "", "secondary_button_link": "", "secondary_button_style": "link", "secondary_text_color": "#222222", "secondary_background_color": "", "secondary_border_color": "", "secondary_button_corner": 0, "secondary_new_tab": false } }
+      },
+      "block_order": ["caption_dULKHq", "heading_J9J7WA", "text_qWJang", "buttons_XgxPWQ"],
+      "name": "🧡 Vitals: Text Box & Background",
+      "settings": {
+        "image": "", "overlay_opacity": 0, "overlay_color": "#222222",
+        "desktop_banner_height": "small", "mobile_banner_height": "small",
+        "section_background": "#f5f5f5", "add_parallax": false,
+        "text_box_height": "default", "text_box_background": "#ffffff", "text_box_opacity": 100, "text_box_border_radius": 0,
+        "desktop_content_position": "center-center", "mobile_content_position": "center",
+        "layout_type": "desktop", "section_width": 100, "section_width_mobile": 100, "section_max_width": "",
+        "padding_top": 0, "padding_bottom": 0, "margin_top": 0, "margin_bottom": 0,
+        "padding_top_mobile": 0, "padding_bottom_mobile": 0, "margin_top_mobile": 0, "margin_bottom_mobile": 0
+      }
+    },
+
+    "vitals_14a1bc53_pY9U3e": {
+      "type": "vitals-14a1bc53",
+      "blocks": {
+        "icon_34pedr": { "type": "icon", "settings": { "icon_type": "icon", "icon": "shipping_fast", "font_awesome": "", "title": "Livraison offerte en France", "text_link": "", "change_icon_color": false, "block_icon_color": "#ffffff", "change_text_color": false, "block_text_color": "#ffffff", "text_alternative_font": false, "text_font": "sans_serif_n4" } },
+        "icon_mJWahP": { "type": "icon", "settings": { "icon_type": "icon", "icon": "shield_alt", "font_awesome": "", "title": "Paiement sécurisé", "text_link": "", "change_icon_color": false, "block_icon_color": "#ffffff", "change_text_color": false, "block_text_color": "#ffffff", "text_alternative_font": false, "text_font": "sans_serif_n4" } },
+        "icon_xyaJBa": { "type": "icon", "settings": { "icon_type": "icon", "icon": "undo_alt", "font_awesome": "", "title": "Retours sous 90 jours", "text_link": "", "change_icon_color": false, "block_icon_color": "#ffffff", "change_text_color": false, "block_text_color": "#ffffff", "text_alternative_font": false, "text_font": "sans_serif_n4" } },
+        "icon_PnnV7A": { "type": "icon", "settings": { "icon_type": "icon", "icon": "comments", "font_awesome": "", "title": "Service client français", "text_link": "", "change_icon_color": false, "block_icon_color": "#ffffff", "change_text_color": false, "block_text_color": "#ffffff", "text_alternative_font": false, "text_font": "sans_serif_n4" } }
+      },
+      "block_order": ["icon_34pedr", "icon_mJWahP", "icon_xyaJBa", "icon_PnnV7A"],
+      "name": "🧡 Vitals: Rotating Bar & Icons",
+      "settings": {
+        "rotating_bar_layout": "auto-rotating", "icon_alignment": "left", "rotating_bar_speed": "70",
+        "space_between_icons": 40, "rotating_bar_height": "medium",
+        "text_size": "16", "text_style": "regular", "text_color": "#222222",
+        "icon_color": "#93abf9", "icon_size": 20, "line_thickness": 1,
+        "section_background": "color", "rotating_bar_background": "#f5f5f5",
+        "section_gradient": "linear-gradient(to right, #fed951, #ff46c7)",
+        "top_margin": 0, "bottom_margin": 80, "top_margin_mobile": 0, "bottom_margin_mobile": 60
+      }
+    },
+
+    "1754471878711dceee": {
+      "type": "apps",
+      "blocks": { "vitals_all_reviews_badge_VnpmCc": { "type": "shopify://apps/vitals/blocks/all-reviews-badge/aeb48102-2a5a-4f39-bdbd-d8d49f4e20b8", "settings": {} } },
+      "block_order": ["vitals_all_reviews_badge_VnpmCc"],
+      "settings": { "include_margins": true }
+    },
+
+    "vitals_321d44ce_napVwj": {
+      "type": "vitals-321d44ce",
+      "blocks": {
+        "caption_RcrBtR": { "type": "caption", "settings": { "caption": "", "caption_size": "16", "caption_weight": "400", "caption_color": "#222222", "caption_alternative_font": false, "caption_font": "sans_serif_n4" } },
+        "heading_tfLz7k": { "type": "heading", "settings": { "heading": "Découvrez la boutique", "heading_size": "32", "heading_style": "regular", "heading_color": "#222222", "heading_alternative_font": false, "heading_font": "sans_serif_n4", "heading_background": "none", "heading_background_color": "#f5f5f5", "heading_background_gradient": "linear-gradient(to right, #fed951, #ff46c7)", "heading_background_corner_style": "round" } },
+        "text_NVpYXB": { "type": "text", "settings": { "description": "<p>Fontaines, filtres, tapis de gamelle et jouets — parcourez la gamme.</p>", "description_size": "16", "description_color": "#222222", "description_alternative_font": false, "description_font": "sans_serif_n4" } },
+        "buttons_pRpxTz": { "type": "buttons", "settings": { "buttons_size": "small", "primary_button_behaviour": "link", "primary_button_label": "VOIR LA BOUTIQUE >", "primary_button_link": "shopify://collections/all", "primary_button_style": "solid", "primary_text_color": "#ffffff", "primary_background_color": "#222222", "primary_border_color": "#222222", "primary_button_corner": 0, "primary_new_tab": false, "secondary_button_label": "", "secondary_button_link": "", "secondary_button_style": "solid", "secondary_text_color": "#ffffff", "secondary_background_color": "#222222", "secondary_border_color": "#222222", "secondary_button_corner": 0, "secondary_new_tab": false } }
+      },
+      "block_order": ["caption_RcrBtR", "heading_tfLz7k", "text_NVpYXB", "buttons_pRpxTz"],
+      "name": "🧡 Vitals: Text & Button",
+      "settings": {
+        "content_alignment": "left", "content_layout_desktop": "horizontal",
+        "section_background_style": "regular", "section_background": "#f4f6fb",
+        "section_gradient": "linear-gradient(0deg, rgba(247, 247, 247, 1) 48%, rgba(239, 239, 239, 1) 57%)",
+        "enable_animation": true, "block_corner_radius": 0,
+        "layout_type": "mobile", "section_width": 100, "content_width": 100,
+        "section_width_mobile": 100, "content_width_mobile": 100, "section_max_width": "1100",
+        "padding_top": 60, "padding_bottom": 60, "margin_top": 0, "margin_bottom": 90,
+        "padding_top_mobile": 40, "padding_bottom_mobile": 40, "margin_top_mobile": 0, "margin_bottom_mobile": 70
+      }
+    },
+
+    "velluno_custom_assets": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{{ 'velluno-custom.css' | asset_url | stylesheet_tag }}\n{{ 'velluno-custom.js' | asset_url | script_tag }}",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "vitals_8e910774_CnEQtd",
+    "vitals_ce7789ea_RaHGkC",
+    "vitals_fc2b5214_HN6rxq",
+    "vitals_1dfa728d_Gdrecq",
+    "vitals_fc2b5214_TVTRYn",
+    "vitals_d9d73599_djGjeH",
+    "vitals_8e910774_ArUVhh",
+    "vitals_14a1bc53_pY9U3e",
+    "1754471878711dceee",
+    "vitals_321d44ce_napVwj",
+    "velluno_custom_assets"
+  ]
+}

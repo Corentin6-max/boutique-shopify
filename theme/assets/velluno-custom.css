@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Velluno — personnalisations du thème
+   Tout se règle dans le bloc :root ci-dessous. Change une valeur, le reste suit.
+   ========================================================================== */
+
+:root{
+  /* Titre des cartes produit */
+  --vl-card-title-size: 15px;
+  --vl-card-title-weight: 600;
+  --vl-card-title-leading: 1.35;
+  --vl-card-title-color: #222222;
+
+  /* Prix des cartes produit */
+  --vl-card-price-size: 15px;
+  --vl-card-price-weight: 500;
+
+  /* Bouton « Ajouter au panier » */
+  --vl-atc-bg: #222222;
+  --vl-atc-fg: #ffffff;
+  --vl-atc-border: #222222;
+  --vl-atc-radius: 0px;
+  --vl-atc-size: 14px;
+  --vl-atc-padding: 11px 14px;
+
+  /* Défilement horizontal mobile */
+  --vl-mobile-card-width: 62%;   /* largeur d'une carte : 62% = on voit la suivante */
+  --vl-mobile-gap: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   1. Titre des produits sur les cartes
+   -------------------------------------------------------------------------- */
+.VtlsProductsGridProdCardTextContainer__ProductTitle{
+  font-size: var(--vl-card-title-size) !important;
+  font-weight: var(--vl-card-title-weight) !important;
+  line-height: var(--vl-card-title-leading) !important;
+  color: var(--vl-card-title-color) !important;
+  -webkit-line-clamp: 2;
+  /* réserve deux lignes : les cartes gardent la même hauteur, les prix s'alignent */
+  min-height: calc(var(--vl-card-title-size) * var(--vl-card-title-leading) * 2);
+}
+
+.VtlsProductsGridProdCardTextContainer__Prices{
+  font-size: var(--vl-card-price-size) !important;
+  font-weight: var(--vl-card-price-weight) !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Bouton « Ajouter au panier » (injecté par velluno-custom.js)
+   -------------------------------------------------------------------------- */
+.vl-atc{
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: var(--vl-atc-padding);
+  background: var(--vl-atc-bg);
+  color: var(--vl-atc-fg);
+  border: 1px solid var(--vl-atc-border);
+  border-radius: var(--vl-atc-radius);
+  font-family: inherit;
+  font-size: var(--vl-atc-size);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+.vl-atc:hover{ opacity: .85; }
+.vl-atc[disabled]{ opacity: .55; cursor: default; }
+.vl-atc--done{ background: #1c7a3e; border-color: #1c7a3e; }
+.vl-atc--soldout{ background: transparent; color: #767676; border-color: #cfcfcf; cursor: default; }
+
+/* la carte pousse le bouton en bas : toutes les cartes finissent à la même hauteur */
+.VtlsProductsGridProdCard{ height: 100%; }
+
+/* --------------------------------------------------------------------------
+   3. Mobile — les produits sur une seule ligne, en défilement horizontal
+   (992px = le point de bascule desktop de Vitals)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px){
+  .VtlsFeaturedCollectionGridContent__Products{
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: var(--vl-mobile-gap);
+    padding-bottom: 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    /* les cartes affleurent le bord de l'écran : ça se voit que ça défile */
+    scroll-padding-left: 0;
+  }
+  .VtlsFeaturedCollectionGridContent__Products > *{
+    flex: 0 0 var(--vl-mobile-card-width);
+    max-width: var(--vl-mobile-card-width);
+    scroll-snap-align: start;
+  }
+  .VtlsFeaturedCollectionGridContent__Products::-webkit-scrollbar{ height: 4px; }
+  .VtlsFeaturedCollectionGridContent__Products::-webkit-scrollbar-thumb{
+    background: rgba(34,34,34,.28);
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .vl-atc{ transition: none; }
+}
