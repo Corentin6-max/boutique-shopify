@@ -276,19 +276,59 @@ short.
 5. **The predictive-search skeleton** shows three placeholder rows regardless of
    how many results return. Correct, cheap, and slightly less polished than a
    count-aware skeleton.
-6. **`theme check` was not run.** The Shopify CLI is not installed in this
-   environment, and installing it would have meant a login prompt — out of
-   bounds per Rule #1. Every section schema, every template and every locale is
-   validated as JSON by `build.sh`, and every translation key is cross-checked,
-   but a genuine Liquid lint has not happened. **Run `shopify theme check` once
-   locally** — it needs no authentication.
+6. ~~`theme check` was not run.~~ **Resolved.** `@shopify/theme-check-node`
+   runs offline inside `build.sh` with no authentication. It found four real
+   Liquid syntax errors that had made the first archive unusable — see §7-bis.
+   Current state: 0 errors, 0 warnings.
 
 ---
+
+## 7-bis. The first archive was rejected by Shopify — what was wrong
+
+The client reported the theme would not import. It was two separate faults,
+both mine, and both now covered by a gate in `build.sh`.
+
+**1. Four required templates were missing.** Shopify refuses a theme upload
+outright when any of its nineteen required templates is absent. I had shipped
+fifteen. Missing: `article`, `blog`, `list-collections`, `gift_card` — none of
+which the brief mentioned, because they are Shopify's requirement, not the
+client's. Now written, in the theme's own style, and `build.sh` step 4 fails
+the build if any of the nineteen goes missing again.
+
+**2. Four Liquid syntax errors.** I had written nested output tags to hand a
+placeholder to JavaScript:
+
+```liquid
+data-template="{{ 'products.price.installment_html' | t: amount: '{{ amount }}' | escape }}"
+```
+
+`{{ … }}` inside `{{ … }}` is a parse error. It appeared in `price.liquid`,
+`shipping-estimate.liquid` and twice in `product-bundle.liquid`. Fixed by
+assigning a plain token (`%%amount%%`, `%%from%%`, `%%to%%`, `%%count%%`) and
+substituting it client-side; the JS was updated to match.
+
+**Why my own checks missed both.** `build.sh` validated every `{% schema %}`
+block as JSON and cross-checked every translation key, but it never parsed
+Liquid itself, and it never checked which templates Shopify requires. Both
+were in NOTES.md §7 as a known gap — "theme check was not run" — which is
+exactly the gap that bit. A documented gap is still a gap.
+
+**What changed so it cannot recur.** `@shopify/theme-check-node` is now a dev
+dependency and runs inside `build.sh`; it is the real Shopify linter, works
+entirely offline and needs no authentication, so Rule #1 is untouched. The
+build now fails on any Liquid error. Current state: **0 errors, 0 warnings**.
+
+```bash
+npm install          # once
+./build.sh           # includes theme-check + the required-template gate
+```
 
 ## 8. How to verify what I claim
 
 ```bash
-./build.sh                          # full gate: JSON, i18n, externals, budgets, ZIP
+npm install                         # once — installs theme-check
+./build.sh                          # full gate: Liquid lint, required templates,
+                                    # JSON, i18n, externals, budgets, ZIP
 python3 tools/test_products_csv.py  # 51 checks on the catalogue CSV
 python3 tools/check_translations.py # every Liquid key exists in fr.default.json
 grep -rn '\[\[' content/pages/      # the placeholders you must fill (65)

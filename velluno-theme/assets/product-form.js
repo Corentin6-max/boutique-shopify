@@ -83,9 +83,9 @@ class VariantPicker {
     // Instalment line — 4× without fees, computed from the live price
     const instalment = qs('[data-instalment]', this.root);
     if (instalment && variant) {
-      const template = instalment.dataset.template || '{{ amount }}';
+      const template = instalment.dataset.template || '%%amount%%';
       instalment.textContent = template.replace(
-        '{{ amount }}',
+        '%%amount%%',
         formatMoney(Math.round(variant.price / 4), this.moneyFormat)
       );
     }
@@ -208,8 +208,8 @@ function initBundle() {
       compareEl.hidden = compare <= total;
     }
     if (savingEl) {
-      savingEl.textContent = (savingEl.dataset.template || '{{ amount }}').replace(
-        '{{ amount }}',
+      savingEl.textContent = (savingEl.dataset.template || '%%amount%%').replace(
+        '%%amount%%',
         formatMoney(compare - total, format)
       );
       savingEl.hidden = compare <= total;
@@ -218,7 +218,7 @@ function initBundle() {
       button.disabled = count === 0;
       const label = qs('.btn__label', button);
       if (label && button.dataset.labelTemplate) {
-        label.textContent = button.dataset.labelTemplate.replace('{{ count }}', String(count));
+        label.textContent = button.dataset.labelTemplate.replace('%%count%%', String(count));
       }
     }
   };

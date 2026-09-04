@@ -1,0 +1,79 @@
+{%- comment -%}
+  Article page. Narrow measure, same rich-text rhythm as the content pages.
+{%- endcomment -%}
+<div class="container container--narrow">
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" style="padding-top: var(--sp-5);">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li aria-current="page">{{ article.title }}</li>
+    </ol>
+  </nav>
+
+  <article>
+    <header class="page-header">
+      <p class="eyebrow">{{ article.published_at | date: '%d %B %Y' }}</p>
+      <h1 class="page-header__title">{{ article.title }}</h1>
+    </header>
+
+    {%- if article.image -%}
+      <div class="media" style="--ratio: 62%; border-radius: var(--radius-card); overflow: hidden;">
+        <img src="{{ article.image | image_url: width: 1400 }}"
+             srcset="{{ article.image | image_url: width: 700 }} 700w,
+                     {{ article.image | image_url: width: 1400 }} 1400w"
+             sizes="(min-width: 760px) 760px, 100vw"
+             alt="{{ article.image.alt | escape }}"
+             width="{{ article.image.width }}" height="{{ article.image.height }}"
+             loading="eager" fetchpriority="high" decoding="async">
+      </div>
+    {%- endif -%}
+
+    <div class="page-body rte mt-6">{{ article.content }}</div>
+  </article>
+
+  {%- if blog.comments_enabled? -%}
+    <section class="mt-8" aria-labelledby="comments-title">
+      <h2 class="h4" id="comments-title">{{ 'blogs.comments_title' | t }}</h2>
+
+      {%- if article.comments_count > 0 -%}
+        {%- for comment in article.comments -%}
+          <div class="contact-aside mt-5">
+            <p class="small">{{ comment.content }}</p>
+            <p class="caption mt-4">{{ comment.author }} — {{ comment.created_at | date: '%d/%m/%Y' }}</p>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- form 'new_comment', article, class: 'stack mt-6' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-status form-status--success" role="status">{{ 'blogs.comment_success' | t }}</p>
+        {%- endif -%}
+        {{ form.errors | default_errors }}
+        <div class="grid grid--2">
+          <div class="field">
+            <label class="field__label" for="comment-author">{{ 'contact.form.name' | t }}</label>
+            <input class="input" id="comment-author" type="text" name="comment[author]" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="comment-email">{{ 'contact.form.email' | t }}</label>
+            <input class="input" id="comment-email" type="email" name="comment[email]" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="comment-body">{{ 'contact.form.message' | t }}</label>
+          <textarea class="textarea" id="comment-body" name="comment[body]" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">{{ 'blogs.comment_submit' | t }}</button>
+      {%- endform -%}
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

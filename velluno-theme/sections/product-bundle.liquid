@@ -71,12 +71,15 @@
             <div class="bundle__total" data-bundle-total>—</div>
             <s class="small muted" data-bundle-compare hidden></s>
           </div>
+          {%- comment -%} %%amount%% / %%count%% are substituted client-side. {%- endcomment -%}
+          {%- assign amount_token = '%%amount%%' -%}
           <span class="bundle__saving" data-bundle-saving
-                data-template="{{ 'products.bundle.saving_html' | t: amount: '{{ amount }}' | escape }}" hidden></span>
+                data-template="{{ 'products.bundle.saving_html' | t: amount: amount_token | escape }}" hidden></span>
         </div>
 
+        {%- assign count_token = '%%count%%' -%}
         <button type="button" class="btn btn--sage btn--full btn--lg" data-bundle-add
-                data-label-template="{{ 'products.bundle.add_selection' | t: count: '{{ count }}' | escape }}">
+                data-label-template="{{ 'products.bundle.add_selection' | t: count: count_token | escape }}">
           <span class="btn__label">{{ 'products.bundle.add_selection' | t: count: 1 }}</span>
           <span class="btn__spinner"><span class="spinner"></span></span>
         </button>

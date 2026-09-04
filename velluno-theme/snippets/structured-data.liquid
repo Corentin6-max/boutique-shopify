@@ -108,7 +108,6 @@
     }
     {%- if settings.social_instagram != blank or settings.social_facebook != blank %},
     "sameAs": [
-      {%- assign socials = '' | split: ',' -%}
       {%- if settings.social_instagram != blank %}{{ settings.social_instagram | json }}{% if settings.social_facebook != blank %},{% endif %}{% endif %}
       {%- if settings.social_facebook != blank %}{{ settings.social_facebook | json }}{% endif %}
     ]

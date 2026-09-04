@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Toutes les collections",
+        "subtitle": "Quatre objets, rangés par usage."
+      }
+    }
+  },
+  "order": ["main"]
+}

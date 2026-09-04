@@ -1,0 +1,75 @@
+{%- comment -%}
+  Blog listing. Required by Shopify even when the shop has no blog yet:
+  a theme missing templates/blog is refused at upload.
+{%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" style="padding-top: var(--sp-5);">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li aria-current="page">{{ blog.title }}</li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-header__title">{{ blog.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="lede mt-4">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- paginate blog.articles by 12 -%}
+    {%- if blog.articles.size > 0 -%}
+      <div class="collection-grid" data-reveal-group>
+        {%- for article in blog.articles -%}
+          <article class="product-card" data-reveal>
+            {%- if article.image -%}
+              <div class="product-card__media media">
+                <img src="{{ article.image | image_url: width: 720 }}"
+                     srcset="{{ article.image | image_url: width: 360 }} 360w,
+                             {{ article.image | image_url: width: 720 }} 720w"
+                     sizes="(min-width: 768px) 33vw, 100vw"
+                     alt="{{ article.image.alt | escape }}"
+                     width="{{ article.image.width }}" height="{{ article.image.height }}"
+                     loading="lazy" decoding="async">
+              </div>
+            {%- endif -%}
+            <div class="product-card__body">
+              <p class="product-card__meta">{{ article.published_at | date: '%d %B %Y' }}</p>
+              <h2 class="product-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <p class="product-card__meta">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a class="pagination__item" href="{{ part.url }}">{{ part.title }}</a>
+            {%- else -%}
+              <span class="pagination__item" aria-current="page">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <div class="empty-state__icon">{% render 'icon', name: 'chat' %}</div>
+        <h2 class="empty-state__title">{{ 'blogs.empty_title' | t }}</h2>
+        <p class="empty-state__text">{{ 'blogs.empty_text' | t }}</p>
+        <a class="btn btn--primary" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "Sous-titre (facultatif)" }
+  ]
+}
+{% endschema %}

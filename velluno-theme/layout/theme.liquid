@@ -97,18 +97,11 @@
       .js [data-reveal]{opacity:0;transform:translateY(14px)}
     </style>
 
-    {%- comment -%} Full stylesheet: non-blocking, with a no-JS fallback. {%- endcomment -%}
-    <link rel="preload" href="{{ 'velluno.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ 'velluno.css' | asset_url }}"></noscript>
-    <script>
-      // Browsers without rel=preload support still need the stylesheet.
-      (function () {
-        var link = document.querySelector('link[rel="preload"][as="style"]');
-        if (link && !(link.relList && link.relList.supports && link.relList.supports('preload'))) {
-          link.rel = 'stylesheet';
-        }
-      })();
-    </script>
+    {%- comment -%}
+      Full stylesheet, preloaded. stylesheet_tag handles the preload hint and
+      the fallback itself, so no inline onload swap is needed.
+    {%- endcomment -%}
+    {{ 'velluno.css' | asset_url | stylesheet_tag: preload: true }}
 
     <script type="module" src="{{ 'velluno.js' | asset_url }}"></script>
     <script type="module" src="{{ 'cart-drawer.js' | asset_url }}"></script>

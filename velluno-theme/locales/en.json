@@ -209,7 +209,8 @@
         "other": "{{ count }} products"
       },
       "sort_by": "Sort by",
-      "view_all": "View all"
+      "view_all": "View all",
+      "all_title": "All collections"
     }
   },
   "customer": {
@@ -349,5 +350,23 @@
     "enter": "Enter",
     "error": "Wrong password. Please try again.",
     "powered_by": "Shop powered by Shopify"
+  },
+  "blogs": {
+    "empty_title": "No articles yet",
+    "empty_text": "The VELLUNO journal is coming soon: care tips, material choices, and what we learn while making things.",
+    "comments_title": "Comments",
+    "comment_submit": "Post comment",
+    "comment_success": "Thank you. Your comment is published."
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Here is your {{ value }} gift card",
+      "subtitle": "VELLUNO gift card",
+      "code_label": "Your code, to enter at checkout",
+      "remaining": "Remaining balance: {{ balance }}",
+      "expires_on": "Valid until {{ date }}",
+      "expired": "This gift card has expired.",
+      "shop_link": "Use my card"
+    }
   }
 }

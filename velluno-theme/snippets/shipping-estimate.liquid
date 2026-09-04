@@ -9,12 +9,18 @@
   Accepts:
   - class {String}
 {%- endcomment -%}
+{%- comment -%} %%from%% / %%to%% are substituted client-side by velluno.js. {%- endcomment -%}
+{%- assign from_token = '%%from%%' -%}
+{%- assign to_token = '%%to%%' -%}
+{%- capture estimate_template -%}
+  {{- 'shipping.estimate_range_html' | t: from: from_token, to: to_token -}}
+{%- endcapture -%}
 <p class="eta{% if class %} {{ class }}{% endif %}"
    data-shipping-estimate
    data-min-days="{{ settings.shipping_min_days | default: 5 }}"
    data-max-days="{{ settings.shipping_max_days | default: 12 }}"
    data-cutoff-hour="{{ settings.shipping_cutoff_hour | default: 14 }}"
-   data-template="{{ 'shipping.estimate_range_html' | t: from: '{{ from }}', to: '{{ to }}' | escape }}">
+   data-template="{{ estimate_template | escape }}">
   <span data-estimate-range>{{ 'shipping.estimate_fallback' | t: min: settings.shipping_min_days, max: settings.shipping_max_days }}</span>
 </p>
 <span class="caption">{{ 'shipping.estimate_disclaimer' | t }}</span>

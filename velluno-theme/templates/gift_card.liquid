@@ -1,0 +1,34 @@
+{%- comment -%}
+  Gift card. Required by Shopify. Standalone page: it is opened from an
+  e-mail, so it carries its own minimal chrome rather than the store header.
+{%- endcomment -%}
+<div class="container container--narrow section" style="text-align: center;">
+  <div class="password__logo" style="display: flex; justify-content: center;">
+    {% render 'velluno-logo', variant: 'mark' %}
+  </div>
+
+  <p class="eyebrow mt-6">{{ 'gift_cards.issued.subtitle' | t }}</p>
+  <h1 class="h2">{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money }}</h1>
+
+  {%- if gift_card.expired -%}
+    <p class="form-status form-status--error mt-5" role="status" style="justify-content: center;">
+      {% render 'icon', name: 'alert' %} {{ 'gift_cards.issued.expired' | t }}
+    </p>
+  {%- elsif gift_card.expires_on -%}
+    <p class="caption mt-4">{{ 'gift_cards.issued.expires_on' | t: date: gift_card.expires_on | date: '%d/%m/%Y' }}</p>
+  {%- endif -%}
+
+  {%- if gift_card.balance != gift_card.initial_value -%}
+    <p class="muted mt-4">{{ 'gift_cards.issued.remaining' | t: balance: gift_card.balance | money }}</p>
+  {%- endif -%}
+
+  <div class="shipping-block mt-6" style="text-align: left;">
+    <p class="caption">{{ 'gift_cards.issued.code_label' | t }}</p>
+    <p class="h4 mt-4" style="letter-spacing: .08em; word-break: break-all;">
+      {{ gift_card.code | format_code }}
+    </p>
+  </div>
+
+  <a class="btn btn--primary btn--lg mt-6" href="{{ shop.url }}">{{ 'gift_cards.issued.shop_link' | t }}</a>
+  <p class="caption mt-5">{{ 'shipping.rates_summary' | t }}</p>
+</div>

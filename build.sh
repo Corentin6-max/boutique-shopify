@@ -108,7 +108,30 @@ PY
 ok "Tous les JSON du thème sont valides."
 
 # ---------------------------------------------------------------------------
-step "4/7  Vérification des clés de traduction"
+step "4/8  Templates obligatoires"
+# ---------------------------------------------------------------------------
+# Shopify REFUSES a theme upload when any of these is missing. This is the
+# check that would have caught the first rejected archive.
+missing=""
+for t in 404 article blog cart collection gift_card index list-collections \
+         page password product search; do
+  ls "$THEME_DIR/templates/$t".* >/dev/null 2>&1 || missing="$missing templates/$t"
+done
+for t in account activate_account addresses login order register reset_password; do
+  ls "$THEME_DIR/templates/customers/$t".* >/dev/null 2>&1 \
+    || missing="$missing templates/customers/$t"
+done
+[ -n "$missing" ] && fail "Templates obligatoires manquants — Shopify refusera l'import :$missing"
+ok "Les 19 templates obligatoires sont présents"
+
+for required in "layout/theme.liquid" "config/settings_schema.json"; do
+  [ -f "$THEME_DIR/$required" ] || fail "Fichier obligatoire manquant : $required"
+done
+ls "$THEME_DIR"/locales/*.default.json >/dev/null 2>&1 || fail "Aucune locale par défaut (*.default.json)."
+ok "layout/theme.liquid, config/settings_schema.json et la locale par défaut sont présents"
+
+# ---------------------------------------------------------------------------
+step "5/8  Vérification des clés de traduction"
 # ---------------------------------------------------------------------------
 if [ -f tools/check_translations.py ]; then
   python3 tools/check_translations.py > /tmp/velluno-i18n.txt 2>&1 \
@@ -119,7 +142,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-step "5/7  Fichiers interdits & appels réseau externes"
+step "6/8  Fichiers interdits & appels réseau externes"
 # ---------------------------------------------------------------------------
 forbidden=$(find "$THEME_DIR" \
   \( -name 'node_modules' -o -name '.git' -o -name '.DS_Store' -o -name '__MACOSX' \) \
@@ -142,7 +165,7 @@ fi
 ok "Aucune dépendance externe (pas de CDN tiers, pas de Google Fonts)"
 
 # ---------------------------------------------------------------------------
-step "6/7  Budgets de performance"
+step "7/8  Budgets de performance"
 # ---------------------------------------------------------------------------
 css_bytes=$(cat "$THEME_DIR"/assets/*.css | wc -c)
 js_bytes=$(cat "$THEME_DIR"/assets/*.js | wc -c)
@@ -162,7 +185,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-step "7/7  Construction de l'archive"
+step "8/8  Construction de l'archive"
 # ---------------------------------------------------------------------------
 rm -f "$ZIP_NAME"
 # -x excludes belt-and-braces; step 5 already guarantees they are absent.
@@ -185,15 +208,18 @@ fi
 [ "$zip_bytes" -gt "$WARN_BYTES" ] && warn "ZIP = $(human "$zip_bytes"), au-dessus de la cible de 8 Mo."
 
 # ---------------------------------------------------------------------------
-# Optional: offline Liquid linting. Skipped when it would require a login.
+# Liquid linting via @shopify/theme-check-node. Runs entirely offline and
+# needs no authentication. Install once with:
+#   npm install @shopify/theme-check-node
 # ---------------------------------------------------------------------------
-if command -v shopify >/dev/null 2>&1; then
-  step "Bonus  shopify theme check (hors ligne)"
-  if shopify theme check --path "$THEME_DIR" 2>/dev/null; then
-    ok "theme check terminé"
-  else
-    warn "theme check indisponible hors ligne ou a signalé des avertissements — ignoré."
-  fi
+if [ -f tools/theme-check.mjs ] && node -e "require.resolve('@shopify/theme-check-node')" 2>/dev/null; then
+  step "Bonus  theme-check (hors ligne, sans authentification)"
+  check_output=$(node tools/theme-check.mjs "$THEME_DIR" 2>/dev/null | grep -v Deprecation)
+  echo "$check_output" | grep -q "ERROR: 0" \
+    && ok "theme-check : 0 erreur" \
+    || { echo "$check_output"; fail "theme-check a signalé des erreurs Liquid."; }
+else
+  warn "theme-check non installé — 'npm install @shopify/theme-check-node' pour l'activer."
 fi
 
 printf '\n%s========================================%s\n' "$BOLD" "$OFF"

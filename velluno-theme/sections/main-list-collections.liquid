@@ -1,0 +1,56 @@
+{%- comment -%}
+  All-collections index (/collections). Required by Shopify.
+{%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" style="padding-top: var(--sp-5);">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li aria-current="page">{{ 'sections.collection.all_title' | t }}</li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-header__title">{{ section.settings.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="lede mt-4">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="grid grid--3 page-body" data-reveal-group>
+    {%- for collection in collections -%}
+      <a class="collection-card" href="{{ collection.url }}" data-reveal>
+        <span class="collection-card__bg">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 800 }}"
+                 srcset="{{ collection.featured_image | image_url: width: 400 }} 400w,
+                         {{ collection.featured_image | image_url: width: 800 }} 800w"
+                 sizes="(min-width: 1024px) 33vw, 100vw"
+                 alt="" width="800" height="600" loading="lazy" decoding="async">
+          {%- endif -%}
+        </span>
+        <span class="collection-card__veil" aria-hidden="true"></span>
+        <span class="collection-card__body">
+          <span class="collection-card__title">{{ collection.title }}</span>
+          <span class="collection-card__count">{{ 'sections.collection.product_count' | t: count: collection.products_count }}</span>
+        </span>
+      </a>
+    {%- else -%}
+      <div class="empty-state">
+        <div class="empty-state__icon">{% render 'icon', name: 'package' %}</div>
+        <h2 class="empty-state__title">{{ 'sections.collection.empty_title' | t }}</h2>
+        <p class="empty-state__text">{{ 'sections.collection.empty_text' | t }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste des collections",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Toutes les collections" },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Quatre objets, rangés par usage." }
+  ]
+}
+{% endschema %}

@@ -38,10 +38,14 @@ Si `velluno-theme.zip` n'est pas déjà là :
 ./build.sh
 ```
 
-Le script valide tous les JSON, vérifie les clés de traduction, contrôle les
-budgets CSS/JS, refuse les fichiers interdits, puis construit l'archive. Il
-**échoue** si quelque chose empêcherait l'import. Il ne contacte aucune
+Le script **analyse le Liquid avec le vrai linter Shopify** (`theme-check`,
+hors ligne, sans authentification), vérifie que les **19 templates obligatoires**
+sont présents, valide tous les JSON, contrôle les clés de traduction et les
+budgets CSS/JS, refuse les fichiers interdits, puis construit l'archive.
+Il **échoue** si quelque chose empêcherait l'import. Il ne contacte aucune
 boutique.
+
+Au premier lancement : `npm install` (installe `@shopify/theme-check-node`).
 
 ---
 
@@ -373,7 +377,7 @@ page** au remplacement.
       sélecteur de pack
 - [ ] La bannière cookies apparaît, « Refuser » fonctionne et ne réapparaît pas
 - [ ] Test de la page 404 et de la recherche sans résultat
-- [ ] `shopify theme check` en local (aucune authentification requise)
+- [ ] `./build.sh` se termine sans erreur (theme-check inclus)
 
 ---
 

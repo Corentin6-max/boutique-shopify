@@ -1,0 +1,15 @@
+{
+  "name": "velluno-shopify",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Outils de build et de validation du thème VELLUNO. Aucune dépendance n'est livrée dans le ZIP.",
+  "scripts": {
+    "build": "./build.sh",
+    "check": "node tools/theme-check.mjs velluno-theme",
+    "test:csv": "python3 tools/test_products_csv.py",
+    "test:i18n": "python3 tools/check_translations.py"
+  },
+  "devDependencies": {
+    "@shopify/theme-check-node": "^3.24.0"
+  }
+}

@@ -209,7 +209,8 @@
         "other": "{{ count }} produits"
       },
       "sort_by": "Trier par",
-      "view_all": "Tout voir"
+      "view_all": "Tout voir",
+      "all_title": "Toutes les collections"
     }
   },
   "customer": {
@@ -349,5 +350,23 @@
     "enter": "Entrer",
     "error": "Mot de passe incorrect. Réessayez.",
     "powered_by": "Boutique propulsée par Shopify"
+  },
+  "blogs": {
+    "empty_title": "Aucun article pour le moment",
+    "empty_text": "Le journal VELLUNO arrive bientôt : conseils d'entretien, choix des matières, et ce qu'on apprend en fabriquant.",
+    "comments_title": "Commentaires",
+    "comment_submit": "Publier le commentaire",
+    "comment_success": "Merci. Votre commentaire est publié."
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Voici votre carte cadeau de {{ value }}",
+      "subtitle": "Carte cadeau VELLUNO",
+      "code_label": "Votre code, à saisir au moment du paiement",
+      "remaining": "Solde restant : {{ balance }}",
+      "expires_on": "Valable jusqu'au {{ date }}",
+      "expired": "Cette carte cadeau a expiré.",
+      "shop_link": "Utiliser ma carte"
+    }
   }
 }

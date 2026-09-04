@@ -36,7 +36,9 @@
 </div>
 {%- if show_installment -%}
   {%- assign quarter = price | divided_by: 4 -%}
-  <p class="installment" data-instalment data-template="{{ 'products.price.installment_html' | t: amount: '{{ amount }}' | escape }}">
+  {%- comment -%} %%amount%% is substituted client-side by product-form.js. {%- endcomment -%}
+  {%- assign amount_token = '%%amount%%' -%}
+  <p class="installment" data-instalment data-template="{{ 'products.price.installment_html' | t: amount: amount_token | escape }}">
     {{ 'products.price.installment_html' | t: amount: quarter | money }}
   </p>
 {%- endif -%}

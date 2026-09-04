@@ -482,10 +482,10 @@ function initShippingEstimate() {
     const to = fmt.format(addBusinessDays(base, max));
 
     const target = qs('[data-estimate-range]', node) || node;
-    const template = node.dataset.template || '{{ from }} — {{ to }}';
+    const template = node.dataset.template || '%%from%% — %%to%%';
     target.innerHTML = template
-      .replace('{{ from }}', `<strong>${from}</strong>`)
-      .replace('{{ to }}', `<strong>${to}</strong>`);
+      .replace('%%from%%', `<strong>${from}</strong>`)
+      .replace('%%to%%', `<strong>${to}</strong>`);
   });
 }
 
