@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "vendor": { "type": "vendor", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": { "style": "cards" } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "shipping": { "type": "shipping", "settings": { "always_free_shipping": false } },
+        "accordions": { "type": "accordions", "settings": {} }
+      },
+      "block_order": [
+        "breadcrumb", "vendor", "title", "rating", "price",
+        "variant_picker", "buy_buttons", "shipping", "accordions"
+      ],
+      "settings": {}
+    },
+    "reviews": { "type": "reviews", "settings": { "eyebrow": "Avis", "title": "Avis clients" } },
+    "cross-sell": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-sellers",
+        "eyebrow": "Pour aller avec",
+        "title": "Complétez votre installation",
+        "products_to_show": 4,
+        "show_view_all": false,
+        "align": "left",
+        "background": "sand"
+      }
+    }
+  },
+  "order": ["main", "reviews", "cross-sell"]
+}

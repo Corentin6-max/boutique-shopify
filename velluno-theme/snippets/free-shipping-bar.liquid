@@ -1,0 +1,41 @@
+{%- comment -%}
+  Free-shipping progress. The threshold is a single theme setting so the cart,
+  the drawer and the announcement bar can never disagree.
+
+  Note: the Source 7L fountain always ships free regardless of the total. When
+  the cart contains it, we say so instead of showing a progress bar the customer
+  does not need to fill.
+
+  Accepts:
+  - cart {Object} (required)
+{%- endcomment -%}
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | times: 100
+  assign has_free_item = false
+  for item in cart.items
+    if item.product.metafields.velluno.free_shipping == true or item.product.handle == settings.free_shipping_product_handle
+      assign has_free_item = true
+      break
+    endif
+  endfor
+  assign remaining = threshold | minus: cart.total_price
+-%}
+{%- if has_free_item -%}
+  <div class="ship-bar ship-bar--complete">
+    <p class="ship-bar__text">{% render 'icon', name: 'truck' %} {{ 'shipping.free_item_in_cart' | t }}</p>
+    <div class="ship-bar__track"><div class="ship-bar__fill" style="width: 100%"></div></div>
+  </div>
+{%- elsif remaining > 0 -%}
+  {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
+  <div class="ship-bar">
+    <p class="ship-bar__text">{{ 'shipping.free_shipping_remaining_html' | t: amount: remaining | money }}</p>
+    <div class="ship-bar__track">
+      <div class="ship-bar__fill" style="width: {{ progress }}%"></div>
+    </div>
+  </div>
+{%- else -%}
+  <div class="ship-bar ship-bar--complete">
+    <p class="ship-bar__text">{% render 'icon', name: 'check-circle' %} {{ 'shipping.free_shipping_reached' | t }}</p>
+    <div class="ship-bar__track"><div class="ship-bar__fill" style="width: 100%"></div></div>
+  </div>
+{%- endif -%}

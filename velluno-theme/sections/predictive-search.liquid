@@ -1,0 +1,45 @@
+{%- comment -%}
+  Rendered by Shopify's /search/suggest endpoint and injected into the header
+  panel by velluno.js. Never rendered as a page section — it has no schema
+  settings and is not exposed in the editor.
+{%- endcomment -%}
+<div data-search-results>
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <p class="eyebrow">{{ 'general.search.suggestions' | t }}</p>
+      <div class="search-results__list">
+        {%- for product in predictive_search.resources.products -%}
+          <a class="search-result" href="{{ product.url }}">
+            <span class="search-result__media">
+              {%- if product.featured_media -%}
+                <img src="{{ product.featured_media | image_url: width: 120 }}" alt=""
+                     width="56" height="56" loading="lazy">
+              {%- endif -%}
+            </span>
+            <span>
+              <span class="cart-line__title">{{ product.title }}</span>
+              {%- if product.type != blank -%}
+                <span class="cart-line__variant">{{ product.type }}</span>
+              {%- endif -%}
+            </span>
+            <span class="small">{{ product.price | money }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+      <p class="mt-5">
+        <a class="link small" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}">
+          {{ 'general.search.view_all' | t }}
+        </a>
+      </p>
+    {%- else -%}
+      <p class="muted small">{{ 'general.search.no_results_title' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Recherche prédictive",
+  "settings": []
+}
+{% endschema %}

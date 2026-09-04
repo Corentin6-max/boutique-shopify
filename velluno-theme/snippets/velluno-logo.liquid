@@ -1,0 +1,20 @@
+{%- comment -%}
+  VELLUNO wordmark. Inline SVG so it inherits currentColor and never blocks
+  paint with a network request.
+
+  Accepts:
+  - variant {String} "wordmark" (default) or "mark" (wordmark + water drop)
+  - class   {String}
+{%- endcomment -%}
+{%- assign variant = variant | default: 'wordmark' -%}
+{%- if variant == 'mark' -%}
+  <svg class="velluno-logo{% if class %} {{ class }}{% endif %}" viewBox="0 0 232 32" fill="none" role="img" aria-label="VELLUNO">
+    <path d="M14 3.5s7.2 8 7.2 13.1a7.2 7.2 0 0 1-14.4 0C6.8 11.5 14 3.5 14 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14 21.4a4.6 4.6 0 0 1-4.6-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".45"/>
+    <text x="40" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="19" letter-spacing="3.42" fill="currentColor">VELLUNO</text>
+  </svg>
+{%- else -%}
+  <svg class="velluno-logo{% if class %} {{ class }}{% endif %}" viewBox="0 0 196 26" fill="none" role="img" aria-label="VELLUNO">
+    <text x="0" y="19" font-family="Georgia, 'Times New Roman', serif" font-size="19" letter-spacing="3.42" fill="currentColor">VELLUNO</text>
+  </svg>
+{%- endif -%}

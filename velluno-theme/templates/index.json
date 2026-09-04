@@ -1,0 +1,91 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-editorial",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "text": "Livraison offerte dès 39 € — fontaine toujours livrée gratuitement" } },
+        "p2": { "type": "point", "settings": { "text": "Retours gratuits sous 90 jours" } },
+        "p3": { "type": "point", "settings": { "text": "Service client français, réponse sous 24 h ouvrées" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "eyebrow": "Hydratation & confort du quotidien",
+        "title": "De l'eau fraîche en continu, sans y penser.",
+        "text": "La fontaine Source 7L en inox tient jusqu'à deux semaines pour un chat. Silencieuse, sans câble dans l'eau, et assez sobre pour rester dans le salon.",
+        "media_position": "right",
+        "cta_label": "Découvrir la Source 7L",
+        "cta_link": "/products/fontaine-eau-velluno-7l-inox",
+        "cta2_label": "Voir la boutique",
+        "cta2_link": "/collections/best-sellers"
+      }
+    },
+    "usp": {
+      "type": "usp-bar",
+      "blocks": {
+        "u1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte dès 39 €", "text": "4,90 € en Colissimo, 3,90 € en point relais en dessous du seuil." } },
+        "u2": { "type": "item", "settings": { "icon": "return", "title": "Retours gratuits sous 90 jours", "text": "Remboursement sous 14 jours après réception du retour." } },
+        "u3": { "type": "item", "settings": { "icon": "shield", "title": "Colis garanti", "text": "Perdu ou endommagé : réexpédié ou remboursé." } },
+        "u4": { "type": "item", "settings": { "icon": "chat", "title": "Service client français", "text": "Réponse sous 24 h ouvrées, contact@velluno.fr." } }
+      },
+      "block_order": ["u1", "u2", "u3", "u4"],
+      "settings": {}
+    },
+    "hero-product": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-sellers",
+        "eyebrow": "Le produit signature",
+        "title": "La Source 7L, et ce qui va avec",
+        "text": "Quatre objets, pensés pour durer : une fontaine en inox, ses filtres, un tapis qui contient les débordements, et de quoi occuper les mâchoires.",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "align": "left",
+        "background": "bone"
+      }
+    },
+    "brand": {
+      "type": "image-with-text",
+      "settings": {
+        "media_position": "left",
+        "ratio": 110,
+        "eyebrow": "Pourquoi l'inox",
+        "title": "Le plastique retient tout. L'inox, rien.",
+        "text": "<p>Une gamelle en plastique se raye, et chaque rayure devient un abri à bactéries — c'est aussi ce qui explique les odeurs tenaces au bout de quelques mois. L'inox 304 ne se raye pas dans un usage normal, ne jaunit pas, passe au lave-vaisselle et se nettoie en trente secondes.</p><p>C'est plus cher à fabriquer. C'est aussi la raison pour laquelle nous ne faisons pas de fontaine en plastique.</p>",
+        "cta_label": "Voir la Source 7L",
+        "cta_link": "/products/fontaine-eau-velluno-7l-inox",
+        "background": "bone"
+      }
+    },
+    "collections": {
+      "type": "collection-grid",
+      "blocks": {
+        "c1": { "type": "collection", "settings": { "collection": "hydratation", "title": "Hydratation" } },
+        "c2": { "type": "collection", "settings": { "collection": "coin-repas", "title": "Coin repas" } },
+        "c3": { "type": "collection", "settings": { "collection": "jeu-mastication", "title": "Jeu & mastication" } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "eyebrow": "Nos univers", "title": "Par usage" }
+    },
+    "statement": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "La marque",
+        "title": "L'essentiel, pensé pour eux",
+        "text": "<p>VELLUNO fabrique peu d'objets, et les fabrique bien. Pas de gadget, pas de bol qui clignote : de l'inox, du silicone alimentaire, du caoutchouc sans BPA. Des objets qu'on est content de laisser visibles dans son salon, et qu'on rachète rarement.</p>",
+        "cta_label": "Notre histoire",
+        "cta_link": "/pages/a-propos",
+        "background": "sand"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "title": "Un e-mail par mois, pas davantage",
+        "text": "Conseils d'entretien, rappel de changement de filtre, nouveautés. Désinscription en un clic.",
+        "background": "ink"
+      }
+    }
+  },
+  "order": ["hero", "usp", "hero-product", "brand", "collections", "statement", "newsletter"]
+}

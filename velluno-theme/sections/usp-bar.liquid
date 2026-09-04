@@ -1,0 +1,64 @@
+{%- comment -%}
+  The four reassurance points, immediately under the hero. Values come from
+  the schema so a merchant can edit them, but the defaults mirror shipping.*
+  exactly — they must never contradict the product page or the footer.
+{%- endcomment -%}
+<section class="usp">
+  <div class="container">
+    <div class="usp__grid" data-reveal-group>
+      {%- for block in section.blocks -%}
+        <div class="usp__item" data-reveal {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, class: 'usp__icon' %}
+          <div>
+            <p class="usp__title">{{ block.settings.title }}</p>
+            <p class="usp__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bandeau garanties",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Garantie",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "shield", "label": "Garantie" },
+            { "value": "lock", "label": "Paiement" },
+            { "value": "chat", "label": "Service client" },
+            { "value": "leaf", "label": "Végétal" },
+            { "value": "drop", "label": "Goutte" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "text", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bandeau garanties",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte dès 39 €", "text": "4,90 € en Colissimo, 3,90 € en point relais en dessous." } },
+        { "type": "item", "settings": { "icon": "return", "title": "Retours gratuits sous 90 jours", "text": "Remboursement sous 14 jours après réception du retour." } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Colis garanti", "text": "Perdu ou endommagé : réexpédié ou remboursé." } },
+        { "type": "item", "settings": { "icon": "chat", "title": "Service client français", "text": "Réponse sous 24 h ouvrées, en français." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

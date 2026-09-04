@@ -1,0 +1,85 @@
+{%- comment -%}
+  Collection listing with sorting and pagination.
+{%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" style="padding-top: var(--sp-5);">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li aria-current="page">{{ collection.title }}</li>
+    </ol>
+  </nav>
+
+  <div class="collection-hero">
+    <h1 class="collection-hero__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection-hero__desc rte">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="collection-toolbar">
+    <p class="collection-toolbar__count">
+      {{ 'sections.collection.product_count' | t: count: collection.products_count }}
+    </p>
+
+    {%- if section.settings.show_sorting -%}
+      <form method="get" action="{{ collection.url }}">
+        <label class="visually-hidden" for="sort-by">{{ 'sections.collection.sort_by' | t }}</label>
+        <select class="select" id="sort-by" name="sort_by" onchange="this.form.submit()">
+          {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}"{% if option.value == current_sort %} selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+        <noscript><button type="submit" class="btn btn--sm btn--ghost">OK</button></noscript>
+      </form>
+    {%- endif -%}
+  </div>
+
+  {%- paginate collection.products by 24 -%}
+    {%- if collection.products.size > 0 -%}
+      <div class="collection-grid collection-grid--4" data-reveal-group>
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, eager: forloop.first %}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+          {%- if paginate.previous -%}
+            <a class="pagination__item" href="{{ paginate.previous.url }}"
+               aria-label="{{ 'general.pagination.previous' | t }}">←</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a class="pagination__item" href="{{ part.url }}"
+                 aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+            {%- else -%}
+              <span class="pagination__item" aria-current="page">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a class="pagination__item" href="{{ paginate.next.url }}"
+               aria-label="{{ 'general.pagination.next' | t }}">→</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <div class="empty-state__icon">{% render 'icon', name: 'package' %}</div>
+        <h2 class="empty-state__title">{{ 'sections.collection.empty_title' | t }}</h2>
+        <p class="empty-state__text">{{ 'sections.collection.empty_text' | t }}</p>
+        <a class="btn btn--primary" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "checkbox", "id": "show_sorting", "label": "Afficher le tri", "default": true }
+  ]
+}
+{% endschema %}

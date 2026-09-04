@@ -1,0 +1,95 @@
+{%- comment -%}
+  Footer. Carries the shipping and returns promise one last time, because a
+  visitor who scrolled this far is often looking for exactly that.
+{%- endcomment -%}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        {% render 'velluno-logo', variant: 'mark' %}
+        <p class="footer__tagline">{{ settings.brand_tagline | default: "L'essentiel, pensé pour eux." }}</p>
+
+        <ul class="footer__list mt-6">
+          <li>{% render 'icon', name: 'truck' %} {{ 'shipping.free_threshold_html' | t }}</li>
+          <li>{% render 'icon', name: 'return' %} {{ 'shipping.returns_title' | t }}</li>
+          <li>{% render 'icon', name: 'chat' %} {{ 'shipping.support_summary' | t }}</li>
+        </ul>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              <h2 class="footer__title">{{ block.settings.title | default: linklists[block.settings.menu].title }}</h2>
+              <ul class="footer__list">
+                {%- for link in linklists[block.settings.menu].links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+          {%- when 'contact' -%}
+            <div {{ block.shopify_attributes }}>
+              <h2 class="footer__title">{{ block.settings.title }}</h2>
+              <ul class="footer__list">
+                <li>
+                  <a href="mailto:{{ settings.contact_email | default: 'contact@velluno.fr' }}">
+                    {{ settings.contact_email | default: 'contact@velluno.fr' }}
+                  </a>
+                </li>
+                <li>{{ settings.support_hours }}</li>
+                <li>{{ 'shipping.carriers_short' | t }}</li>
+                {%- if settings.social_instagram != blank -%}
+                  <li><a href="{{ settings.social_instagram }}" rel="me noopener" target="_blank">Instagram</a></li>
+                {%- endif -%}
+                {%- if settings.social_facebook != blank -%}
+                  <li><a href="{{ settings.social_facebook }}" rel="me noopener" target="_blank">Facebook</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      {%- assign current_year = 'now' | date: '%Y' -%}
+      <p>{{ 'sections.footer.copyright' | t: year: current_year, name: shop.name }}</p>
+      <p>{{ 'shipping.vat_included' | t }}</p>
+      <div class="footer__payments">
+        {% render 'trust-badges' %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Colonne de liens",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Boutique" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Service client" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "title": "Boutique" } },
+      { "type": "menu", "settings": { "title": "Aide" } },
+      { "type": "contact", "settings": { "title": "Service client" } }
+    ]
+  }
+}
+{% endschema %}

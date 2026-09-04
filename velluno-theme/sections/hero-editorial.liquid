@@ -1,0 +1,100 @@
+{%- comment -%}
+  Editorial hero. Text on one side, a single full-bleed image on the other —
+  no carousel, no overlay text on a busy photo. One promise, one action.
+{%- endcomment -%}
+<section class="hero{% if section.settings.media_position == 'left' %} hero--media-left{% endif %}">
+  <div class="container">
+    <div class="hero__grid">
+      <div class="hero__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="hero__title">{{ section.settings.title }}</h1>
+        {%- if section.settings.text != blank -%}
+          <p class="hero__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+
+        <div class="hero__actions">
+          {%- if section.settings.cta_label != blank -%}
+            <a class="btn btn--primary btn--lg" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a class="btn btn--secondary btn--lg" href="{{ section.settings.cta2_link }}">{{ section.settings.cta2_label }}</a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="hero__points">
+            {%- for block in section.blocks -%}
+              <li class="hero__point" {{ block.shopify_attributes }}>
+                {% render 'icon', name: 'check-circle' %}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="hero__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1400 }}"
+            srcset="{{ section.settings.image | image_url: width: 700 }} 700w,
+                    {{ section.settings.image | image_url: width: 1100 }} 1100w,
+                    {{ section.settings.image | image_url: width: 1400 }} 1400w"
+            sizes="(min-width: 900px) 54vw, 100vw"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="eager" fetchpriority="high" decoding="async">
+        {%- else -%}
+          <img src="{{ 'placeholder-hero.svg' | asset_url }}" alt=""
+               width="1200" height="900" loading="eager" decoding="async">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Héro éditorial",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Hydratation & confort du quotidien" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "De l'eau fraîche, en continu, sans y penser." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "La fontaine Source 7L en inox tient jusqu'à deux semaines pour un chat. Silencieuse, sans câble dans l'eau, et assez belle pour rester dans le salon." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Position de l'image",
+      "options": [{ "value": "right", "label": "À droite" }, { "value": "left", "label": "À gauche" }],
+      "default": "right"
+    },
+    { "type": "header", "content": "Actions" },
+    { "type": "text", "id": "cta_label", "label": "Bouton principal", "default": "Découvrir la Source 7L" },
+    { "type": "url", "id": "cta_link", "label": "Lien du bouton principal" },
+    { "type": "text", "id": "cta2_label", "label": "Bouton secondaire", "default": "Voir la boutique" },
+    { "type": "url", "id": "cta2_link", "label": "Lien du bouton secondaire" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Argument",
+      "limit": 4,
+      "settings": [{ "type": "text", "id": "text", "label": "Texte" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Héro éditorial",
+      "blocks": [
+        { "type": "point", "settings": { "text": "Livraison offerte dès 39 €" } },
+        { "type": "point", "settings": { "text": "Retours gratuits sous 90 jours" } },
+        { "type": "point", "settings": { "text": "Service client français" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

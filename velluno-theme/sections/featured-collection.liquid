@@ -1,0 +1,70 @@
+{%- comment -%}
+  A row of products from one collection. Used on the homepage and as the
+  cross-sell band at the bottom of a product page.
+{%- endcomment -%}
+{%- assign products_to_show = section.settings.products_to_show | default: 4 -%}
+<section class="section{% if section.settings.background == 'sand' %} section--sand{% endif %}"
+         aria-labelledby="featured-{{ section.id }}">
+  <div class="container">
+    <div class="section__head{% if section.settings.align == 'center' %} section__head--center{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="h2" id="featured-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="lede mt-4{% if section.settings.align == 'center' %} mx-auto{% endif %}">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign target = collections[section.settings.collection] -%}
+    {%- if target.products.size > 0 -%}
+      <div class="collection-grid{% if products_to_show > 3 %} collection-grid--4{% endif %}" data-reveal-group>
+        {%- for product in target.products limit: products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all and target.products_count > products_to_show -%}
+        <p class="text-center mt-6">
+          <a class="btn btn--secondary" href="{{ target.url }}">{{ 'sections.collection.view_all' | t }}</a>
+        </p>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <div class="empty-state__icon">{% render 'icon', name: 'package' %}</div>
+        <h3 class="empty-state__title">{{ 'sections.collection.empty_title' | t }}</h3>
+        <p class="empty-state__text">{{ 'sections.collection.empty_text' | t }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection en vedette",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les essentiels" },
+    { "type": "text", "id": "text", "label": "Texte" },
+    { "type": "range", "id": "products_to_show", "label": "Produits affichés", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Afficher « Tout voir »", "default": true },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement du titre",
+      "options": [{ "value": "left", "label": "À gauche" }, { "value": "center", "label": "Centré" }],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [{ "value": "bone", "label": "Ivoire" }, { "value": "sand", "label": "Sable" }],
+      "default": "bone"
+    }
+  ],
+  "presets": [{ "name": "Collection en vedette" }]
+}
+{% endschema %}

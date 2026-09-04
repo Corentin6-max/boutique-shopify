@@ -1,0 +1,15 @@
+{%- comment -%}
+  Renders one icon from the sprite inlined in layout/theme.liquid.
+
+  Accepts:
+  - name  {String}  icon id without the "icon-" prefix (required)
+  - class {String}  extra class names
+  - size  {Number}  px, applied to both dimensions (default: inherits CSS)
+  - title {String}  accessible name. Omit for decorative icons — they are
+                    then hidden from assistive tech with aria-hidden.
+{%- endcomment -%}
+<svg class="icon icon--{{ name }}{% if class %} {{ class }}{% endif %}"
+  {%- if size %} width="{{ size }}" height="{{ size }}"{% endif %}
+  {%- if title %} role="img" aria-label="{{ title | escape }}"{% else %} aria-hidden="true" focusable="false"{% endif %}>
+  <use href="#icon-{{ name }}"></use>
+</svg>

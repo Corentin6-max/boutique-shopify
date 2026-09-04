@@ -1,0 +1,108 @@
+{%- comment -%}
+  OBJECTION ANSWERED: "I'll need extras anyway — will I have to reorder in a
+  week?" Bundling the mat and the filters at the moment of decision raises AOV
+  without a discount app: the total is recomputed in the browser and sent as a
+  single /cart/add.js call.
+
+  The first line is locked to the product being viewed and re-prices itself
+  when the pack selector changes (velluno:variant:change).
+{%- endcomment -%}
+{%- liquid
+  assign main_variant = product.selected_or_first_available_variant
+-%}
+<section class="section section--tight" aria-labelledby="bundle-title">
+  <div class="container container--narrow">
+    <div class="bundle" data-bundle data-money-format="{{ shop.money_format | escape }}" data-reveal>
+      <h2 class="h3" id="bundle-title">{{ 'products.bundle.title' | t }}</h2>
+      {%- capture default_subtitle %}{{ 'products.bundle.subtitle' | t }}{% endcapture -%}
+      <p class="muted mt-4">{{ section.settings.subtitle | default: default_subtitle }}</p>
+
+      <div class="bundle__items mt-5">
+        {%- comment -%} Line 1: the product on screen. Always included. {%- endcomment -%}
+        <label class="bundle__item is-checked" data-bundle-item data-bundle-main
+               data-variant-id="{{ main_variant.id }}"
+               data-price="{{ main_variant.price }}"
+               data-compare="{{ main_variant.compare_at_price | default: main_variant.price }}">
+          <input type="checkbox" checked>
+          <span class="bundle__check" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+          <span class="bundle__media media">
+            {%- if product.featured_media -%}
+              <img src="{{ product.featured_media | image_url: width: 140 }}" alt="" width="64" height="64" loading="lazy">
+            {%- endif -%}
+          </span>
+          <span>
+            <span class="bundle__name">{{ product.title | truncate: 46 }}</span>
+            <span class="bundle__variant" data-bundle-item-variant>{{ main_variant.title }}</span>
+          </span>
+          <span class="bundle__price" data-bundle-item-price>{{ main_variant.price | money }}</span>
+        </label>
+
+        {%- for block in section.blocks -%}
+          {%- assign bundled = block.settings.product -%}
+          {%- if bundled != blank -%}
+            {%- assign bundled_variant = bundled.selected_or_first_available_variant -%}
+            <label class="bundle__item{% if block.settings.checked %} is-checked{% endif %}"
+                   data-bundle-item
+                   data-variant-id="{{ bundled_variant.id }}"
+                   data-price="{{ bundled_variant.price }}"
+                   data-compare="{{ bundled_variant.compare_at_price | default: bundled_variant.price }}"
+                   {{ block.shopify_attributes }}>
+              <input type="checkbox" {% if block.settings.checked %}checked{% endif %}>
+              <span class="bundle__check" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+              <span class="bundle__media media">
+                {%- if bundled.featured_media -%}
+                  <img src="{{ bundled.featured_media | image_url: width: 140 }}" alt="" width="64" height="64" loading="lazy">
+                {%- endif -%}
+              </span>
+              <span>
+                <span class="bundle__name">{{ bundled.title | truncate: 46 }}</span>
+                <span class="bundle__variant">{{ bundled_variant.title }}</span>
+              </span>
+              <span class="bundle__price">{{ bundled_variant.price | money }}</span>
+            </label>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="bundle__foot">
+        <div class="bundle__totals">
+          <div>
+            <span class="small muted">{{ 'products.bundle.total' | t }}</span>
+            <div class="bundle__total" data-bundle-total>—</div>
+            <s class="small muted" data-bundle-compare hidden></s>
+          </div>
+          <span class="bundle__saving" data-bundle-saving
+                data-template="{{ 'products.bundle.saving_html' | t: amount: '{{ amount }}' | escape }}" hidden></span>
+        </div>
+
+        <button type="button" class="btn btn--sage btn--full btn--lg" data-bundle-add
+                data-label-template="{{ 'products.bundle.add_selection' | t: count: '{{ count }}' | escape }}">
+          <span class="btn__label">{{ 'products.bundle.add_selection' | t: count: 1 }}</span>
+          <span class="btn__spinner"><span class="spinner"></span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Achetez ensemble",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Tout ce qu'il faut pour installer le coin hydratation d'un seul coup." }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Produit associé",
+      "limit": 3,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produit" },
+        { "type": "checkbox", "id": "checked", "label": "Coché par défaut", "default": true }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Achetez ensemble" }]
+}
+{% endschema %}

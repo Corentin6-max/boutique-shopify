@@ -1,0 +1,219 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "breadcrumb": { "type": "breadcrumb", "settings": {} },
+        "vendor": { "type": "vendor", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "style": "cards",
+            "pack_note_1": "La fontaine seule, avec son premier filtre 4 étages.",
+            "pack_badge_1": "",
+            "pack_note_2": "Environ 6 mois de filtration couverts — soit 1,00 € le filtre.",
+            "pack_badge_2": "Le plus choisi",
+            "pack_note_3": "Environ 12 mois couverts — soit 0,95 € le filtre.",
+            "pack_badge_3": "Meilleure valeur"
+          }
+        },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "shipping": { "type": "shipping", "settings": { "always_free_shipping": true } },
+        "accordions": {
+          "type": "accordions",
+          "settings": {
+            "content_2": "<table><tr><th>Capacité</th><td>7 litres</td></tr><tr><th>Matériaux</th><td>Cuve en inox 304, socle ABS</td></tr><tr><th>Dimensions</th><td>Environ 24 × 24 × 16 cm</td></tr><tr><th>Alimentation</th><td>5 V / 2 A, module magnétique, câble USB-C</td></tr><tr><th>Niveau sonore</th><td>Moins de 30 dB</td></tr><tr><th>Filtration</th><td>4 étages : coton, charbon actif, résine échangeuse d'ions, mousse fine</td></tr><tr><th>Entretien</th><td>Nettoyage complet toutes les 2 semaines, filtre à changer toutes les 3 à 4 semaines</td></tr></table>",
+            "content_3": "<ul><li>1 fontaine Source 7L (cuve inox + socle)</li><li>1 module d'alimentation magnétique</li><li>1 câble USB-C</li><li>1 filtre 4 étages déjà installé</li><li>1 notice en français</li></ul>",
+            "content_4": "<p>Videz, rincez et essuyez la cuve toutes les deux semaines. La cuve inox passe au lave-vaisselle ; le socle électronique se nettoie au chiffon humide, jamais immergé.</p><p>Changez le filtre toutes les 3 à 4 semaines, ou dès que le débit faiblit. Rincez le filtre neuf 30 secondes à l'eau claire avant de l'installer : cela évacue les fines particules de charbon.</p><p>Un lot de 10 filtres couvre environ 6 mois d'utilisation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "breadcrumb", "vendor", "title", "rating", "price",
+        "variant_picker", "buy_buttons", "shipping", "accordions"
+      ],
+      "settings": {}
+    },
+
+    "bundle": {
+      "type": "product-bundle",
+      "blocks": {
+        "b1": { "type": "product", "settings": { "product": "filtres-rechange-velluno-source", "checked": true } },
+        "b2": { "type": "product", "settings": { "product": "tapis-gamelle-silicone-velluno", "checked": true } }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": { "subtitle": "Le filtre de rechange et le tapis anti-débordement, ajoutés en une fois." }
+    },
+
+    "benefit-1": {
+      "type": "image-with-text",
+      "settings": {
+        "media_position": "left",
+        "ratio": 100,
+        "eyebrow": "01 — Inox 304",
+        "title": "Ni odeur, ni dépôt, ni plastique rayé",
+        "text": "<p>Le plastique se raye à l'usage, et chaque rayure retient les bactéries et les odeurs. L'inox 304 ne se raye pas dans un usage normal, ne retient pas les odeurs, et la cuve passe au lave-vaisselle.</p>",
+        "background": "bone"
+      }
+    },
+    "benefit-2": {
+      "type": "image-with-text",
+      "settings": {
+        "media_position": "right",
+        "ratio": 100,
+        "eyebrow": "02 — Moins de 30 dB",
+        "title": "Assez silencieuse pour une chambre",
+        "text": "<p>La pompe tourne sous les 30 dB, soit le niveau d'une pièce calme. On l'oublie dans un salon, et elle ne réveille personne la nuit.</p>",
+        "background": "bone"
+      }
+    },
+    "benefit-3": {
+      "type": "image-with-text",
+      "settings": {
+        "media_position": "left",
+        "ratio": 100,
+        "eyebrow": "03 — 7 litres",
+        "title": "Jusqu'à deux semaines d'autonomie",
+        "text": "<p>Environ deux semaines pour un chat, cinq jours pour un grand chien. De quoi partir en week-end l'esprit tranquille, ou couvrir un foyer à plusieurs animaux sans remplir tous les matins.</p><p>Une fenêtre de niveau et un témoin lumineux indiquent quand refaire le plein.</p>",
+        "background": "bone"
+      }
+    },
+
+    "comparison": {
+      "type": "product-comparison",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "criterion": "Matériau de la cuve", "value_a": "Inox 304 : ne retient ni odeurs ni bactéries", "value_b": "Plastique ABS : se raye, puis retient les odeurs" } },
+        "r2": { "type": "row", "settings": { "criterion": "Capacité", "value_a": "7 litres", "value_b": "1,5 à 2,5 litres en général" } },
+        "r3": { "type": "row", "settings": { "criterion": "Autonomie", "value_a": "Jusqu'à 2 semaines pour un chat", "value_b": "2 à 4 jours" } },
+        "r4": { "type": "row", "settings": { "criterion": "Niveau sonore", "value_a": "Moins de 30 dB", "value_b": "Souvent 40 dB et plus" } },
+        "r5": { "type": "row", "settings": { "criterion": "Alimentation", "value_a": "Module magnétique sans fil, rien à ronger", "value_b": "Câble qui plonge dans le bac" } },
+        "r6": { "type": "row", "settings": { "criterion": "Filtration", "value_a": "4 étages : coton, charbon actif, résine, mousse", "value_b": "1 à 2 étages" } },
+        "r7": { "type": "row", "settings": { "criterion": "Lave-vaisselle", "value_a": "Cuve compatible", "value_b": "Rarement compatible" } },
+        "r8": { "type": "row", "settings": { "criterion": "Rechanges", "value_a": "Filtres dédiés, disponibles à l'unité et en lot", "value_b": "Souvent introuvables après un an" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8"],
+      "settings": {
+        "eyebrow": "Comparatif",
+        "title": "Inox VELLUNO ou plastique premier prix ?",
+        "criterion_label": "Critère",
+        "column_a": "VELLUNO Source 7L",
+        "column_b": "Fontaine plastique d'entrée de gamme",
+        "footnote": "Comparaison établie à partir des fiches techniques publiques des fontaines plastiques 1,5 à 2,5 L les plus vendues en ligne. Les caractéristiques varient d'un modèle à l'autre."
+      }
+    },
+
+    "reviews": { "type": "reviews", "settings": { "eyebrow": "Avis", "title": "Avis clients" } },
+
+    "faq": {
+      "type": "product-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps tient un remplissage de 7 litres ?",
+            "answer": "<p>Environ deux semaines pour un chat seul, cinq jours pour un grand chien, quelques jours de moins dans un foyer à plusieurs animaux. Nous recommandons malgré tout de renouveler l'eau au moins une fois par semaine, même si le niveau est encore haut.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "À quelle fréquence faut-il changer le filtre ?",
+            "answer": "<p>Toutes les 3 à 4 semaines, ou dès que le débit faiblit. Un lot de 10 filtres couvre environ 6 mois. Les packs « Fontaine + 10 filtres » et « Fontaine + 20 filtres » évitent d'y penser pendant 6 ou 12 mois.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "La fontaine est-elle vraiment silencieuse ?",
+            "answer": "<p>La pompe fonctionne sous 30 dB, soit le niveau d'une pièce calme. Si un ronronnement apparaît, c'est presque toujours que le niveau d'eau est passé sous le repère minimum : la pompe aspire alors de l'air. Refaites le plein, le bruit disparaît.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Y a-t-il un câble dans l'eau ?",
+            "answer": "<p>Non. L'électronique est déportée dans un module magnétique qui se fixe sous le socle : aucun fil ne traverse le bac, et rien ne traîne à portée de dents. Le câble USB-C ne relie que le module à la prise.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Mon chat boit peu. Est-ce que cela peut aider ?",
+            "answer": "<p>L'eau en mouvement encourage souvent la prise de boisson, et c'est un conseil fréquemment donné par les vétérinaires. Une fontaine reste toutefois un objet du quotidien, pas un dispositif de soin : si votre animal boit anormalement peu ou beaucoup, parlez-en à votre vétérinaire.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Comment se nettoie-t-elle ?",
+            "answer": "<p>Cuve inox : lave-vaisselle ou éponge non abrasive, tous les quinze jours. Socle électronique : chiffon humide uniquement, jamais immergé. Comptez cinq minutes pour un nettoyage complet.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Quels sont les délais et les frais de livraison ?",
+            "answer": "<p>La Source 7L est toujours livrée gratuitement, quel que soit le montant de la commande. Expédition sous 24 à 48 h, réception estimée sous 5 à 12 jours ouvrés, en Colissimo, Mondial Relay ou Colis Privé — le point relais se choisit au moment du paiement.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Et si elle ne me convient pas ?",
+            "answer": "<p>Vous disposez de 90 jours pour la renvoyer, retour gratuit, produit non utilisé ou défectueux. Le remboursement intervient sous 14 jours après réception du retour. Ces 90 jours sont un engagement commercial VELLUNO, qui s'ajoute à votre droit de rétractation légal de 14 jours.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "Les filtres sont-ils compatibles avec d'autres fontaines ?",
+            "answer": "<p>Nos filtres 4 étages sont conçus pour la Source 7L et s'adaptent également aux fontaines inox 2,2 L de format courant. Vérifiez le diamètre du logement à filtre avant de commander si votre modèle n'est pas une VELLUNO.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9"],
+      "settings": { "eyebrow": "Vos questions", "title": "Questions fréquentes" }
+    },
+
+    "cross-sell": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "rechanges",
+        "eyebrow": "Pensez au rechange",
+        "title": "Complétez votre installation",
+        "text": "Un filtre tient 3 à 4 semaines. Un lot de 10 couvre environ 6 mois — de quoi ne plus y penser.",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "align": "left",
+        "background": "sand"
+      }
+    },
+
+    "reassurance": {
+      "type": "usp-bar",
+      "blocks": {
+        "u1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Toujours gratuite pour la Source 7L, quel que soit le montant." } },
+        "u2": { "type": "item", "settings": { "icon": "return", "title": "90 jours pour changer d'avis", "text": "Retour gratuit, remboursement sous 14 jours après réception." } },
+        "u3": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, Visa, Mastercard, PayPal, Apple Pay." } },
+        "u4": { "type": "item", "settings": { "icon": "chat", "title": "Service client français", "text": "Réponse sous 24 h ouvrées, contact@velluno.fr." } }
+      },
+      "block_order": ["u1", "u2", "u3", "u4"],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "bundle",
+    "benefit-1",
+    "benefit-2",
+    "benefit-3",
+    "comparison",
+    "reviews",
+    "faq",
+    "cross-sell",
+    "reassurance"
+  ]
+}

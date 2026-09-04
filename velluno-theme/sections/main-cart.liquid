@@ -1,0 +1,114 @@
+{%- comment -%}
+  Cart page. Kept as a real page even when the drawer is enabled: some
+  customers navigate straight to /cart, and it is the no-JS fallback.
+{%- endcomment -%}
+<div class="section">
+  <div class="container">
+    <div class="page-header" style="padding-top: 0;">
+      <h1 class="page-header__title">{{ 'cart.title' | t }}</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div class="cart-page__grid">
+          <div>
+            <div class="cart-table__head" aria-hidden="true">
+              <span></span>
+              <span>{{ 'cart.product' | t }}</span>
+              <span>{{ 'cart.quantity' | t }}</span>
+              <span>{{ 'cart.line_total' | t }}</span>
+            </div>
+
+            {%- for item in cart.items -%}
+              <div class="cart-row">
+                <a class="cart-line__media media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+                  {%- if item.image -%}
+                    <img src="{{ item.image | image_url: width: 200 }}" alt="" width="96" height="96" loading="lazy">
+                  {%- endif -%}
+                </a>
+
+                <div>
+                  <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="cart-line__variant">{{ item.variant.title }}</p>
+                  {%- endunless -%}
+                  {%- if item.variant.sku != blank -%}
+                    <p class="caption">{{ 'products.product.sku' | t: sku: item.variant.sku }}</p>
+                  {%- endif -%}
+                  <p class="small mt-4">{{ item.final_price | money }}</p>
+                </div>
+
+                <div>
+                  <label class="visually-hidden" for="qty-{{ forloop.index }}">{{ 'cart.quantity' | t }}</label>
+                  <div class="qty">
+                    <input class="qty__input" id="qty-{{ forloop.index }}" type="number" min="0"
+                           name="updates[]" value="{{ item.quantity }}" style="width: 64px;">
+                  </div>
+                  <a class="link small mt-4" href="{{ item.url_to_remove }}"
+                     aria-label="{{ 'cart.remove' | t: title: item.product.title }}">
+                    {{ 'cart.remove_short' | t }}
+                  </a>
+                </div>
+
+                <div class="cart-row__total">{{ item.final_line_price | money }}</div>
+              </div>
+            {%- endfor -%}
+
+            <div class="cluster mt-6">
+              <button type="submit" name="update" class="btn btn--ghost btn--sm">{{ 'cart.update' | t }}</button>
+            </div>
+          </div>
+
+          <aside class="cart-summary">
+            {% render 'free-shipping-bar', cart: cart %}
+
+            <div class="cart-summary__row">
+              <span>{{ 'cart.subtotal' | t }}</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <div class="cart-summary__row">
+              <span>{{ 'cart.shipping' | t }}</span>
+              <span class="muted">{{ 'cart.shipping_calculated' | t }}</span>
+            </div>
+            <div class="cart-summary__row cart-summary__row--total">
+              <span>{{ 'cart.total' | t }}</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="caption mt-4">{{ 'cart.taxes_note' | t }}</p>
+
+            {%- if settings.cart_show_note -%}
+              <div class="field mt-5">
+                <label class="field__label" for="cart-note">{{ 'cart.note_label' | t }}</label>
+                <textarea class="textarea" id="cart-note" name="note" style="min-height: 90px;">{{ cart.note }}</textarea>
+              </div>
+            {%- endif -%}
+
+            <button type="submit" name="checkout" class="btn btn--primary btn--full btn--lg mt-5">
+              {{ 'cart.checkout' | t }}
+            </button>
+            <a class="btn btn--ghost btn--full mt-4" href="{{ routes.all_products_collection_url }}">
+              {{ 'cart.continue_shopping' | t }}
+            </a>
+
+            <div class="mt-5">{% render 'trust-badges', show_label: true %}</div>
+            <p class="caption mt-4">{% render 'icon', name: 'return' %} {{ 'shipping.returns_summary' | t }}</p>
+          </aside>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <div class="empty-state__icon">{% render 'icon', name: 'cart' %}</div>
+        <h2 class="empty-state__title">{{ 'cart.empty_title' | t }}</h2>
+        <p class="empty-state__text">{{ 'cart.empty_text' | t }}</p>
+        <a class="btn btn--primary" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Panier",
+  "settings": []
+}
+{% endschema %}

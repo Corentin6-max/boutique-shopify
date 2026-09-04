@@ -1,0 +1,63 @@
+{%- comment -%}
+  Reviews. Ships FUNCTIONAL BUT EMPTY on purpose: no invented review, no
+  invented name, no invented photo. The markup and the empty state are ready
+  for a real review app (Judge.me, Loox) — see SETUP.md for the swap.
+
+  Until a review app writes reviews.rating_count, no aggregateRating is emitted
+  anywhere in the theme.
+{%- endcomment -%}
+{%- liquid
+  assign rating_count = product.metafields.reviews.rating_count | default: 0
+-%}
+<section class="section" id="reviews" aria-labelledby="reviews-title">
+  <div class="container container--narrow">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- capture default_title %}{{ 'products.reviews.title' | t }}{% endcapture -%}
+      <h2 class="h2" id="reviews-title">{{ section.settings.title | default: default_title }}</h2>
+    </div>
+
+    {%- comment -%}
+      An app block dropped here (Judge.me etc.) replaces the empty state.
+    {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>{% render block %}</div>
+      {%- endfor -%}
+    {%- elsif rating_count > 0 -%}
+      <div class="reviews__app" id="velluno-reviews-app"></div>
+    {%- else -%}
+      <div class="reviews__empty" data-reveal>
+        <span class="stars stars--empty" aria-hidden="true">
+          {%- for i in (1..5) -%}{% render 'icon', name: 'star-outline' %}{%- endfor -%}
+        </span>
+        <h3 class="h4">{{ 'products.reviews.empty_title' | t }}</h3>
+        <p class="muted mt-4">{{ 'products.reviews.empty_text' | t }}</p>
+        {%- if section.settings.review_url != blank -%}
+          <a class="btn btn--secondary mt-6" href="{{ section.settings.review_url }}">
+            {{ 'products.reviews.empty_cta' | t }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Avis" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Avis clients" },
+    {
+      "type": "url",
+      "id": "review_url",
+      "label": "Lien « Écrire un avis »",
+      "info": "Laissez vide tant qu'aucune application d'avis n'est installée."
+    }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Avis clients" }]
+}
+{% endschema %}

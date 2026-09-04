@@ -1,0 +1,42 @@
+{%- comment -%}
+  Price with compare-at and a savings pill.
+
+  Accepts:
+  - product   {Object}  optional, used for price_varies / price_min
+  - variant   {Object}  optional, takes precedence over product
+  - size      {String}  "large" on the product page
+  - show_saving {Boolean}
+  - show_installment {Boolean}  renders "ou 4 × X sans frais"
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign price = variant.price
+    assign compare = variant.compare_at_price
+  else
+    assign price = product.price
+    assign compare = product.compare_at_price
+  endif
+  assign on_sale = false
+  if compare > price
+    assign on_sale = true
+    assign saving_percent = compare | minus: price | times: 100.0 | divided_by: compare | round
+  endif
+-%}
+<div class="price{% if size == 'large' %} price--large{% endif %}{% if on_sale %} price--on-sale{% endif %}" data-price-target>
+  {%- if product.price_varies and variant == nil -%}
+    <span class="price__amount" data-price-amount>{{ 'products.price.from_html' | t: price: price | money }}</span>
+  {%- else -%}
+    <span class="price__amount" data-price-amount>{{ price | money }}</span>
+  {%- endif -%}
+  <s class="price__compare" data-price-compare{% unless on_sale %} hidden{% endunless %}>{% if on_sale %}{{ compare | money }}{% endif %}</s>
+  {%- if show_saving -%}
+    <span class="badge badge--saving" data-price-saving{% unless on_sale %} hidden{% endunless %}>{% if on_sale %}-{{ saving_percent }} %{% endif %}</span>
+  {%- endif -%}
+  <span class="visually-hidden">{{ 'products.price.tax_included' | t }}</span>
+</div>
+{%- if show_installment -%}
+  {%- assign quarter = price | divided_by: 4 -%}
+  <p class="installment" data-instalment data-template="{{ 'products.price.installment_html' | t: amount: '{{ amount }}' | escape }}">
+    {{ 'products.price.installment_html' | t: amount: quarter | money }}
+  </p>
+{%- endif -%}

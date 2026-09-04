@@ -1,0 +1,53 @@
+{%- comment -%}
+  Product card used by every grid. The whole card is clickable but only the
+  title is focusable, so keyboard users get one stop per product.
+
+  Accepts:
+  - product {Object} (required)
+  - ratio   {String} padding-top for the media box (default 100%)
+  - eager   {Boolean} skip lazy-loading for above-the-fold cards
+{%- endcomment -%}
+{%- assign ratio = ratio | default: '100%' -%}
+<article class="product-card" data-reveal>
+  <div class="product-card__badges">
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <span class="badge badge--clay">-{{ pct }} %</span>
+    {%- endif -%}
+    {%- unless product.available -%}
+      <span class="badge badge--outline">{{ 'products.card.sold_out' | t }}</span>
+    {%- endunless -%}
+  </div>
+
+  <div class="product-card__media media" style="--ratio: {{ ratio }}">
+    {%- if product.featured_media -%}
+      <img
+        src="{{ product.featured_media | image_url: width: 720 }}"
+        srcset="{{ product.featured_media | image_url: width: 360 }} 360w,
+                {{ product.featured_media | image_url: width: 540 }} 540w,
+                {{ product.featured_media | image_url: width: 720 }} 720w,
+                {{ product.featured_media | image_url: width: 1080 }} 1080w"
+        sizes="(min-width: 768px) 33vw, 50vw"
+        alt="{{ product.featured_media.alt | escape }}"
+        width="{{ product.featured_media.width }}"
+        height="{{ product.featured_media.height }}"
+        loading="{% if eager %}eager{% else %}lazy{% endif %}"
+        decoding="async">
+    {%- else -%}
+      <img src="{{ 'product-placeholder.svg' | asset_url }}" alt=""
+           width="800" height="800" loading="lazy" decoding="async">
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__body">
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    {%- if product.type != blank -%}
+      <p class="product-card__meta">{{ product.type }}</p>
+    {%- endif -%}
+    <div class="product-card__price">
+      {% render 'price', product: product %}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,24 @@
+{
+  "settings_schema": {
+    "colors": { "name": "Colours" },
+    "typography": { "name": "Typography" },
+    "brand": { "name": "Brand" },
+    "shipping": { "name": "Shipping & guarantees" },
+    "support": { "name": "Customer service" },
+    "privacy": { "name": "Privacy" },
+    "cart": { "name": "Cart" }
+  },
+  "sections": {
+    "announcement": { "name": "Announcement bar" },
+    "header": { "name": "Header" },
+    "footer": { "name": "Footer" },
+    "hero": { "name": "Editorial hero" },
+    "usp": { "name": "Guarantee bar" },
+    "product": { "name": "Product page" },
+    "bundle": { "name": "Buy together" },
+    "comparison": { "name": "Comparison table" },
+    "faq": { "name": "Product FAQ" },
+    "reviews": { "name": "Customer reviews" },
+    "newsletter": { "name": "Newsletter" }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {
+        "title": "Nous contacter",
+        "subtitle": "Une question avant d'acheter, un souci de livraison ? Écrivez-nous, nous répondons sous 24 h ouvrées, en français."
+      }
+    }
+  },
+  "order": ["main"]
+}

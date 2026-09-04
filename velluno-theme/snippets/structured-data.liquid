@@ -1,0 +1,131 @@
+{%- comment -%}
+  JSON-LD. One graph per page type.
+
+  Commercial honesty: aggregateRating is emitted ONLY when a review app has
+  written a real rating metafield. No reviews, no rating — Google penalises
+  invented ratings and so does the DGCCRF.
+{%- endcomment -%}
+
+{%- if request.page_type == 'product' -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ shop.url | append: product.url | json }},
+    "sku": {{ current_variant.sku | json }},
+    "description": {{ product.description | strip_html | truncate: 500 | json }},
+    "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+    {%- if product.featured_media %}
+    "image": [
+      {%- for media in product.media limit: 5 -%}
+        {{ media | image_url: width: 1200 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ],
+    {%- endif %}
+    {%- comment -%} Only real, app-written ratings are ever exposed here. {%- endcomment -%}
+    {%- assign rating = product.metafields.reviews.rating.value -%}
+    {%- assign rating_count = product.metafields.reviews.rating_count -%}
+    {%- if rating and rating_count > 0 %}
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating.rating | json }},
+      "bestRating": {{ rating.scale_max | json }},
+      "ratingCount": {{ rating_count | json }}
+    },
+    {%- endif %}
+    "offers": [
+      {%- for variant in product.variants -%}
+      {
+        "@type": "Offer",
+        "name": {{ variant.title | json }},
+        "sku": {{ variant.sku | json }},
+        "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price": {{ variant.price | divided_by: 100.0 | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "url": {{ shop.url | append: product.url | append: '?variant=' | append: variant.id | json }},
+        "itemCondition": "https://schema.org/NewCondition",
+        "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+        "seller": { "@type": "Organization", "name": {{ shop.name | json }} },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "FR",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": {{ settings.returns_days | default: 90 }},
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Breadcrumbs mirror the visible trail exactly. {%- endcomment -%}
+{%- if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'page' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": {{ 'general.breadcrumb.home' | t | json }}, "item": {{ shop.url | json }} }
+      {%- if request.page_type == 'product' -%}
+        {%- if collection %},
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} },
+        { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- else -%},
+        { "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- endif -%}
+      {%- elsif request.page_type == 'collection' -%},
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }
+      {%- elsif request.page_type == 'page' -%},
+        { "@type": "ListItem", "position": 2, "name": {{ page.title | json }}, "item": {{ shop.url | append: page.url | json }} }
+      {%- endif -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'index' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    {%- if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 512 | prepend: 'https:' | json }},
+    {%- endif %}
+    "description": {{ shop.description | default: settings.brand_tagline | json }},
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": {{ settings.contact_email | default: 'contact@velluno.fr' | json }},
+      "availableLanguage": ["fr"],
+      "areaServed": "FR"
+    }
+    {%- if settings.social_instagram != blank or settings.social_facebook != blank %},
+    "sameAs": [
+      {%- assign socials = '' | split: ',' -%}
+      {%- if settings.social_instagram != blank %}{{ settings.social_instagram | json }}{% if settings.social_facebook != blank %},{% endif %}{% endif %}
+      {%- if settings.social_facebook != blank %}{{ settings.social_facebook | json }}{% endif %}
+    ]
+    {%- endif %}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": { "@type": "EntryPoint", "urlTemplate": {{ shop.url | append: '/search?q={search_term_string}' | json }} },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+{%- endif -%}

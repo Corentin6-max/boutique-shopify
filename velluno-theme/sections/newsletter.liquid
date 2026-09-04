@@ -1,0 +1,71 @@
+{%- comment -%}
+  Newsletter. Designed, not an afterthought: one field, an explicit consent
+  line, and a real success state. Tagged so the flow can be segmented later.
+{%- endcomment -%}
+<section class="section{% if section.settings.background == 'ink' %} section--ink{% elsif section.settings.background == 'sand' %} section--sand{% endif %}"
+         aria-labelledby="newsletter-{{ section.id }}">
+  <div class="container">
+    <div class="split" data-reveal>
+      <div class="split__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="h3" id="newsletter-{{ section.id }}">{{ section.settings.title }}</h2>
+        <p class="mt-4 muted">{{ section.settings.text }}</p>
+      </div>
+
+      <div>
+        {%- form 'customer', class: 'newsletter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="visually-hidden" for="newsletter-{{ section.id }}-email">
+            {{ 'general.newsletter.email_label' | t }}
+          </label>
+          <input
+            id="newsletter-{{ section.id }}-email"
+            class="input"
+            type="email"
+            name="contact[email]"
+            autocomplete="email"
+            required
+            placeholder="{{ 'general.newsletter.email_placeholder' | t }}">
+          <button type="submit" class="btn btn--primary">{{ 'general.newsletter.submit' | t }}</button>
+
+          {%- if form.posted_successfully? -%}
+            <p class="form-status form-status--success mt-4" role="status">
+              {% render 'icon', name: 'check-circle' %} {{ 'general.newsletter.success' | t }}
+            </p>
+          {%- elsif form.errors -%}
+            <p class="form-status form-status--error mt-4" role="alert">
+              {% render 'icon', name: 'alert' %} {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+        {%- endform -%}
+        <p class="caption mt-4">{{ 'general.newsletter.consent' | t }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Newsletter" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Un e-mail par mois, pas davantage" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Conseils d'entretien, rappels de changement de filtre et nouveautés. Désinscription en un clic." },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "bone", "label": "Ivoire" },
+        { "value": "sand", "label": "Sable" },
+        { "value": "ink", "label": "Encre" }
+      ],
+      "default": "ink"
+    }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

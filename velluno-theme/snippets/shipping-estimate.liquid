@@ -1,0 +1,20 @@
+{%- comment -%}
+  Estimated delivery window, computed client-side from today's date so it is
+  never stale. Server-rendered fallback: the plain "5 to 12 business days"
+  range, so the block still says something useful without JS.
+
+  All copy lives in locales/fr.default.json under shipping.* — never hardcode
+  a delay or a price here, it must match the cart, the footer and /pages/livraison.
+
+  Accepts:
+  - class {String}
+{%- endcomment -%}
+<p class="eta{% if class %} {{ class }}{% endif %}"
+   data-shipping-estimate
+   data-min-days="{{ settings.shipping_min_days | default: 5 }}"
+   data-max-days="{{ settings.shipping_max_days | default: 12 }}"
+   data-cutoff-hour="{{ settings.shipping_cutoff_hour | default: 14 }}"
+   data-template="{{ 'shipping.estimate_range_html' | t: from: '{{ from }}', to: '{{ to }}' | escape }}">
+  <span data-estimate-range>{{ 'shipping.estimate_fallback' | t: min: settings.shipping_min_days, max: settings.shipping_max_days }}</span>
+</p>
+<span class="caption">{{ 'shipping.estimate_disclaimer' | t }}</span>

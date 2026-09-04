@@ -1,0 +1,48 @@
+{%- comment -%}
+  Centred editorial text block. Used for the brand statement on the homepage
+  and as a lead-in above dense sections.
+{%- endcomment -%}
+<section class="section{% if section.settings.background == 'sand' %} section--sand{% elsif section.settings.background == 'ink' %} section--ink{% endif %}">
+  <div class="container container--narrow">
+    <div class="section__head section__head--center" style="margin-bottom: 0;" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="h2">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte lede mt-5" style="margin-inline: auto;">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="btn btn--secondary mt-6" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texte enrichi",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "cta_label", "label": "Bouton" },
+    { "type": "url", "id": "cta_link", "label": "Lien du bouton" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "bone", "label": "Ivoire" },
+        { "value": "sand", "label": "Sable" },
+        { "value": "ink", "label": "Encre" }
+      ],
+      "default": "bone"
+    }
+  ],
+  "presets": [{ "name": "Texte enrichi" }]
+}
+{% endschema %}

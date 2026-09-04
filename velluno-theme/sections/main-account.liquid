@@ -1,0 +1,57 @@
+<div class="container section">
+  <header class="page-header" style="padding-top:0">
+    <h1 class="page-header__title">{{ 'customer.account.title' | t }}</h1>
+  </header>
+
+  <div class="account-grid">
+    <div>
+      <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
+      {%- paginate customer.orders by 20 -%}
+        {%- if customer.orders.size > 0 -%}
+          <table class="order-table mt-5">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.number_heading' | t }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                <th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr>
+                  <td><a class="link" href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: '%d/%m/%Y' }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}<a class="pagination__item" href="{{ part.url }}">{{ part.title }}</a>
+                {%- else -%}<span class="pagination__item" aria-current="page">{{ part.title }}</span>{%- endif -%}
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+        {%- else -%}
+          <p class="muted mt-4">{{ 'customer.orders.none' | t }}</p>
+          <a class="btn btn--primary mt-5" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+
+    <aside class="contact-aside">
+      <h2 class="h4">{{ 'customer.account.details' | t }}</h2>
+      <div class="rte mt-4 small">{{ customer.default_address | format_address }}</div>
+      <a class="btn btn--ghost btn--full mt-5" href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }}</a>
+      <a class="link small mt-5" href="{{ routes.account_logout_url }}" style="display:inline-block">{{ 'customer.account.log_out' | t }}</a>
+    </aside>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Compte client", "settings": [] }
+{% endschema %}

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": { "type": "main-cart", "settings": {} },
+    "cross-sell": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "rechanges",
+        "eyebrow": "Ajoutez avant de valider",
+        "title": "On y pense rarement, on en manque toujours",
+        "products_to_show": 4,
+        "show_view_all": false,
+        "align": "left",
+        "background": "sand"
+      }
+    }
+  },
+  "order": ["main", "cross-sell"]
+}

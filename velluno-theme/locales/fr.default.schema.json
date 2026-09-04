@@ -1,0 +1,24 @@
+{
+  "settings_schema": {
+    "colors": { "name": "Couleurs" },
+    "typography": { "name": "Typographie" },
+    "brand": { "name": "Marque" },
+    "shipping": { "name": "Livraison & garanties" },
+    "support": { "name": "Service client" },
+    "privacy": { "name": "Confidentialité" },
+    "cart": { "name": "Panier" }
+  },
+  "sections": {
+    "announcement": { "name": "Barre d'annonce" },
+    "header": { "name": "En-tête" },
+    "footer": { "name": "Pied de page" },
+    "hero": { "name": "Héro éditorial" },
+    "usp": { "name": "Bandeau garanties" },
+    "product": { "name": "Fiche produit" },
+    "bundle": { "name": "Achetez ensemble" },
+    "comparison": { "name": "Tableau comparatif" },
+    "faq": { "name": "FAQ produit" },
+    "reviews": { "name": "Avis clients" },
+    "newsletter": { "name": "Newsletter" }
+  }
+}

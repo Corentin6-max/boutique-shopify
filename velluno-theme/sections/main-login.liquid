@@ -1,0 +1,53 @@
+{%- comment -%} Login + password recovery + guest order lookup. {%- endcomment -%}
+<div class="container auth-card">
+  <div id="recover-password" style="display:none">
+    <h1 class="h3">{{ 'customer.recover_password.title' | t }}</h1>
+    <p class="muted mt-4">{{ 'customer.recover_password.text' | t }}</p>
+    {%- form 'recover_customer_password', class: 'stack mt-5' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-status form-status--success" role="status">{{ 'customer.recover_password.success' | t }}</p>
+      {%- endif -%}
+      <div class="field">
+        <label class="field__label" for="recover-email">{{ 'customer.login.email' | t }}</label>
+        <input class="input" id="recover-email" type="email" name="email" autocomplete="email" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full">{{ 'customer.recover_password.submit' | t }}</button>
+      <a class="link small" href="{{ routes.account_login_url }}">{{ 'customer.recover_password.cancel' | t }}</a>
+    {%- endform -%}
+  </div>
+
+  <div id="customer-login">
+    <h1 class="h3">{{ 'customer.login.title' | t }}</h1>
+    {%- form 'customer_login', class: 'stack mt-5' -%}
+      {{ form.errors | default_errors }}
+      <div class="field">
+        <label class="field__label" for="login-email">{{ 'customer.login.email' | t }}</label>
+        <input class="input" id="login-email" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label class="field__label" for="login-password">{{ 'customer.login.password' | t }}</label>
+        <input class="input" id="login-password" type="password" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full">{{ 'customer.login.submit' | t }}</button>
+      <a class="link small" href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot_password' | t }}</a>
+    {%- endform -%}
+
+    <p class="mt-6 small">
+      {{ 'customer.login.no_account' | t }}
+      <a class="link" href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
+    </p>
+  </div>
+
+  {%- if shop.checkout.guest_login -%}
+    <div class="mt-8">
+      <h2 class="h4">{{ 'customer.login.guest_title' | t }}</h2>
+      {%- form 'guest_login', class: 'mt-4' -%}
+        <button type="submit" class="btn btn--secondary btn--full">{{ 'customer.login.guest_submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Connexion", "settings": [] }
+{% endschema %}

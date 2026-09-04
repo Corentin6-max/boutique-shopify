@@ -1,0 +1,33 @@
+{%- comment -%}
+  Standard content page (À propos, Livraison, CGV…). Narrow measure for
+  readability; the rich-text styles carry the typographic rhythm.
+{%- endcomment -%}
+<div class="container container--narrow">
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" style="padding-top: var(--sp-5);">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+      <li aria-hidden="true" class="breadcrumb__sep">/</li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-header__title">{{ page.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="lede mt-4">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="page-body rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "Sous-titre (facultatif)" }
+  ]
+}
+{% endschema %}

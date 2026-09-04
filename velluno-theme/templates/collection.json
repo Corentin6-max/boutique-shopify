@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": { "type": "main-collection", "settings": { "show_sorting": true } },
+    "usp": {
+      "type": "usp-bar",
+      "blocks": {
+        "u1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte dès 39 €", "text": "4,90 € en Colissimo, 3,90 € en point relais en dessous." } },
+        "u2": { "type": "item", "settings": { "icon": "return", "title": "Retours gratuits sous 90 jours", "text": "Remboursement sous 14 jours après réception du retour." } },
+        "u3": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, Visa, Mastercard, PayPal, Apple Pay." } },
+        "u4": { "type": "item", "settings": { "icon": "chat", "title": "Service client français", "text": "Réponse sous 24 h ouvrées." } }
+      },
+      "block_order": ["u1", "u2", "u3", "u4"],
+      "settings": {}
+    }
+  },
+  "order": ["main", "usp"]
+}

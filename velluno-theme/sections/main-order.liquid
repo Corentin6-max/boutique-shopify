@@ -1,0 +1,56 @@
+<div class="container section">
+  <a class="link small" href="{{ routes.account_url }}">← {{ 'customer.account.return' | t }}</a>
+  <header class="page-header">
+    <h1 class="page-header__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    {%- assign order_date = order.created_at | date: '%d/%m/%Y' -%}
+    <p class="muted mt-4">{{ 'customer.order.date_html' | t: date: order_date }}</p>
+    {%- if order.cancelled -%}
+      {%- assign cancelled_date = order.cancelled_at | date: '%d/%m/%Y' -%}
+      <p class="form-status form-status--error mt-4">{{ 'customer.order.cancelled_html' | t: date: cancelled_date }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="account-grid">
+    <div>
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'customer.order.product' | t }}</th>
+            <th scope="col">{{ 'customer.order.quantity' | t }}</th>
+            <th scope="col">{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for line in order.line_items -%}
+            <tr>
+              <td>
+                <a class="link" href="{{ line.product.url }}">{{ line.title }}</a>
+                {%- if line.sku != blank -%}<div class="caption">{{ line.sku }}</div>{%- endif -%}
+              </td>
+              <td>{{ line.quantity }}</td>
+              <td>{{ line.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">{{ 'customer.order.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          <tr><td colspan="2">{{ 'customer.order.shipping' | t }}</td><td>{{ order.shipping_price | money }}</td></tr>
+          <tr><td colspan="2"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <aside class="contact-aside">
+      <h2 class="h4">{{ 'customer.order.shipping_address' | t }}</h2>
+      <div class="rte small mt-4">{{ order.shipping_address | format_address }}</div>
+      <h2 class="h4 mt-6">{{ 'customer.order.billing_address' | t }}</h2>
+      <div class="rte small mt-4">{{ order.billing_address | format_address }}</div>
+      <p class="small mt-6">{{ 'customer.order.payment_status' | t }} : {{ order.financial_status_label }}</p>
+      <p class="small">{{ 'customer.order.fulfillment_status' | t }} : {{ order.fulfillment_status_label }}</p>
+    </aside>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Commande", "settings": [] }
+{% endschema %}

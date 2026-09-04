@@ -1,0 +1,353 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged {{ tags }}",
+      "page": "Page {{ page }}"
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "menu": "Menu",
+      "open_menu": "Open menu",
+      "search": "Search",
+      "cart": "Cart",
+      "cart_count": "{{ count }} item(s) in cart",
+      "account": "Account",
+      "previous": "Previous",
+      "next": "Next",
+      "go_to_slide": "Go to image {{ index }}",
+      "loading": "Loading"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "aria_label": "Breadcrumb"
+    },
+    "newsletter": {
+      "email_label": "Your email address",
+      "email_placeholder": "you@example.com",
+      "submit": "Sign up",
+      "success": "Thank you. Your subscription is confirmed.",
+      "consent": "By signing up you agree to receive our emails. Unsubscribe in one click, any time."
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {{ number }}"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Fountain, filters, mat…",
+      "submit": "Search",
+      "results_for": "Results for “{{ terms }}”",
+      "no_results_title": "No results for “{{ terms }}”",
+      "no_results_text": "Check the spelling or try a broader term, such as “fountain” or “filter”.",
+      "results_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      },
+      "suggestions": "Suggestions",
+      "view_all": "View all results"
+    },
+    "share": {
+      "label": "Share"
+    }
+  },
+  "shipping": {
+    "free_threshold_amount": "€39",
+    "free_threshold_html": "Free shipping on orders over €39 within mainland France",
+    "paid_colissimo": "Colissimo: €4.90",
+    "paid_pickup": "Pickup point: €3.90",
+    "rates_summary": "Free shipping over €39. Below that: €4.90 by Colissimo, €3.90 to a pickup point.",
+    "fountain_always_free": "Source 7L fountain: shipping is always free, whatever the order value.",
+    "free_item_in_cart": "Free shipping: your cart contains the Source 7L fountain.",
+    "free_shipping_remaining_html": "Only <strong>{{ amount }}</strong> away from free shipping.",
+    "free_shipping_reached": "Free shipping unlocked.",
+    "delay_summary": "Dispatched within 24–48 h, estimated delivery in 5 to 12 business days.",
+    "estimate_fallback": "Estimated delivery in {{ min }} to {{ max }} business days.",
+    "estimate_range_html": "Order today, estimated delivery between {{ from }} and {{ to }}.",
+    "estimate_disclaimer": "Estimate in business days, not contractual.",
+    "carriers": "Colissimo, Mondial Relay, Colis Privé — pickup point chosen at checkout.",
+    "carriers_short": "Colissimo · Mondial Relay · Colis Privé",
+    "returns_title": "Free returns within 90 days",
+    "returns_summary": "Free returns within 90 days, unused or defective. Refunded within 14 days of receiving the return.",
+    "returns_legal_note": "These 90 days are a VELLUNO commercial commitment on top of your statutory 14-day right of withdrawal.",
+    "parcel_guarantee": "Lost or damaged parcel: reshipped or refunded. Not delivered after 35 days: full refund on request.",
+    "vat_included": "Prices include 20% French VAT. No customs fees for you.",
+    "payment_label": "Secure payment",
+    "payment_methods": "CB, Visa, Mastercard, PayPal, Apple Pay.",
+    "installment_available": "Pay in 4 interest-free instalments available.",
+    "support_title": "French customer service",
+    "support_summary": "A question? We reply within 24 business hours, by email.",
+    "support_email": "contact@velluno.fr"
+  },
+  "products": {
+    "card": {
+      "sold_out": "Sold out",
+      "on_sale": "Sale",
+      "from_price": "From"
+    },
+    "price": {
+      "from_html": "From {{ price }}",
+      "regular_price": "Price",
+      "sale_price": "Sale price",
+      "compare_at": "Recommended price",
+      "tax_included": "VAT included",
+      "installment_html": "or 4 × {{ amount }} interest-free",
+      "unit_price": "Unit price"
+    },
+    "product": {
+      "vendor": "Brand",
+      "sku": "SKU: {{ sku }}",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "added_to_cart": "Product added to cart.",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "buy_now": "Buy it now",
+      "choose_pack": "Choose your pack",
+      "choose_option": "Choose: {{ name }}",
+      "selected": "Selected:",
+      "view_details": "View product",
+      "media_gallery": "Product gallery",
+      "thumbnail": "View image {{ index }}",
+      "description": "Description",
+      "specs": "Technical specifications",
+      "in_the_box": "In the box",
+      "maintenance": "Care & filters",
+      "shipping_returns": "Shipping & returns",
+      "safety_notice": "Safety notice",
+      "error_generic": "This product could not be added to the cart. Please try again.",
+      "pack_savings": "Save {{ amount }}",
+      "price_per_filter": "that is {{ amount }} per filter"
+    },
+    "reviews": {
+      "title": "Customer reviews",
+      "empty_title": "Be the first to leave a review",
+      "empty_text": "No reviews yet. We publish reviews exactly as they reach us — the first ones will arrive with the first deliveries.",
+      "empty_cta": "Write a review",
+      "count": {
+        "one": "{{ count }} review",
+        "other": "{{ count }} reviews"
+      },
+      "read_reviews": "Read reviews",
+      "rating_label": "Rated {{ rating }} out of 5"
+    },
+    "bundle": {
+      "title": "Buy together",
+      "subtitle": "Everything you need to set up the hydration corner in one go.",
+      "this_item": "This item",
+      "total": "Total",
+      "instead_of": "instead of",
+      "saving_html": "You save {{ amount }}",
+      "add_selection": "Add selection ({{ count }})",
+      "add_selection_empty": "Select at least one product"
+    },
+    "comparison": {
+      "title": "VELLUNO stainless steel or an entry-level plastic fountain?",
+      "column_velluno": "VELLUNO Source 7L",
+      "column_generic": "Entry-level plastic fountain"
+    },
+    "cross_sell": {
+      "title": "Complete your setup",
+      "reorder_title": "Plan your refills",
+      "reorder_text": "One filter lasts 3 to 4 weeks. Stay ahead: a 10-pack covers about 6 months."
+    },
+    "faq": {
+      "title": "Frequently asked questions"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "drawer_title": "Your cart",
+    "empty_title": "Your cart is empty",
+    "empty_text": "Nothing here yet. Start with the Source 7L fountain or a pack of filters.",
+    "empty_cta": "Browse the shop",
+    "continue_shopping": "Continue shopping",
+    "checkout": "Checkout",
+    "view_cart": "View cart",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_calculated": "Calculated at the next step",
+    "total": "Total",
+    "taxes_note": "VAT included. Shipping calculated at checkout.",
+    "quantity": "Quantity",
+    "quantity_decrease": "Remove one unit of {{ title }}",
+    "quantity_increase": "Add one unit of {{ title }}",
+    "remove": "Remove {{ title }} from cart",
+    "product": "Product",
+    "price": "Price",
+    "line_total": "Total",
+    "note_label": "Add a note to my order",
+    "update_error": "Updating the cart failed. Please try again.",
+    "items_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "remove_short": "Remove",
+    "update": "Update cart"
+  },
+  "sections": {
+    "header": {
+      "announcement": "Announcement"
+    },
+    "footer": {
+      "newsletter_title": "Stay in the loop",
+      "newsletter_text": "Care tips, new products and offers. One email a month, no more.",
+      "shop": "Shop",
+      "help": "Help",
+      "about": "The brand",
+      "legal": "Legal",
+      "copyright": "© {{ year }} {{ name }}. All rights reserved.",
+      "payment_note": "Secure payment"
+    },
+    "collection": {
+      "empty_title": "This collection is empty",
+      "empty_text": "Products are on their way. In the meantime, browse the rest of the shop.",
+      "product_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      },
+      "sort_by": "Sort by",
+      "view_all": "View all"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My account",
+      "details": "My details",
+      "view_addresses": "View addresses",
+      "return": "Back to my account",
+      "log_out": "Log out"
+    },
+    "orders": {
+      "title": "My orders",
+      "order_number": "Order {{ number }}",
+      "date": "Date",
+      "payment_status": "Payment",
+      "fulfillment_status": "Fulfilment",
+      "total": "Total",
+      "none": "You have not placed an order yet.",
+      "number_heading": "Order"
+    },
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password?",
+      "submit": "Log in",
+      "no_account": "No account yet?",
+      "create_account": "Create an account",
+      "guest_title": "Continue without an account",
+      "guest_submit": "Track my order"
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "text": "Enter your email and we will send you a reset link.",
+      "submit": "Send the link",
+      "success": "If an account exists for this address, an email is on its way.",
+      "cancel": "Cancel"
+    },
+    "register": {
+      "title": "Create an account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create my account",
+      "has_account": "Already have an account?",
+      "login": "Log in"
+    },
+    "addresses": {
+      "title": "My addresses",
+      "add_new": "Add an address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Permanently delete this address?",
+      "default": "Default address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company (optional)",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc. (optional)",
+      "city": "City",
+      "zip": "Postcode",
+      "country": "Country",
+      "phone": "Phone",
+      "set_default": "Use as my default address",
+      "save": "Save",
+      "cancel": "Cancel",
+      "none": "No saved address."
+    },
+    "activate_account": {
+      "title": "Activate my account",
+      "text": "Choose a password to activate your account.",
+      "submit": "Activate my account",
+      "decline": "Decline invitation"
+    },
+    "reset_password": {
+      "title": "New password",
+      "text": "Choose a new password.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Save"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date_html": "Placed on {{ date }}",
+      "cancelled_html": "Order cancelled on {{ date }}",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "VAT",
+      "billing_address": "Billing address",
+      "shipping_address": "Shipping address",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfilment status",
+      "tracking_company": "Carrier",
+      "tracking_number": "Tracking number"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "phone": "Phone (optional)",
+      "order_number": "Order number (optional)",
+      "message": "Your message",
+      "send": "Send message",
+      "success": "Message sent. We reply within 24 business hours.",
+      "error": "The message could not be sent. Check the highlighted fields."
+    }
+  },
+  "errors": {
+    "404_code": "404",
+    "404_title": "This page ran off",
+    "404_text": "The link may be old, or the address has a typo. Here is how to find your way back.",
+    "404_cta": "Back to home",
+    "404_popular": "Most visited pages",
+    "form_generic": "Something went wrong. Please try again.",
+    "field_required": "This field is required.",
+    "email_invalid": "This email address does not look valid."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "text": "We use cookies to measure traffic and improve the shop. You can decline: the site works exactly the same.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "learn_more": "Learn more"
+  },
+  "password_page": {
+    "title": "Opening soon",
+    "text": "VELLUNO opens very soon. Leave your email to hear about the launch.",
+    "password_label": "Have the password?",
+    "password_placeholder": "Store password",
+    "enter": "Enter",
+    "error": "Wrong password. Please try again.",
+    "powered_by": "Shop powered by Shopify"
+  }
+}

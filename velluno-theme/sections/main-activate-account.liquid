@@ -1,0 +1,21 @@
+<div class="container auth-card">
+  <h1 class="h3">{{ 'customer.activate_account.title' | t }}</h1>
+  <p class="muted mt-4">{{ 'customer.activate_account.text' | t }}</p>
+  {%- form 'activate_customer_password', class: 'stack mt-5' -%}
+    {{ form.errors | default_errors }}
+    <div class="field">
+      <label class="field__label" for="activate-password">{{ 'customer.reset_password.password' | t }}</label>
+      <input class="input" id="activate-password" type="password" name="customer[password]" autocomplete="new-password">
+    </div>
+    <div class="field">
+      <label class="field__label" for="activate-confirm">{{ 'customer.reset_password.password_confirm' | t }}</label>
+      <input class="input" id="activate-confirm" type="password" name="customer[password_confirmation]" autocomplete="new-password">
+    </div>
+    <button type="submit" class="btn btn--primary btn--full">{{ 'customer.activate_account.submit' | t }}</button>
+    <button type="submit" name="decline" class="btn btn--ghost btn--full">{{ 'customer.activate_account.decline' | t }}</button>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{ "name": "Activation du compte", "settings": [] }
+{% endschema %}

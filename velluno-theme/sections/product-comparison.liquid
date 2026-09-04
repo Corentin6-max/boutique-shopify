@@ -1,0 +1,92 @@
+{%- comment -%}
+  OBJECTION ANSWERED: "I can find a fountain for €25 on a marketplace."
+  Rather than attacking competitors, the table makes the trade-offs explicit
+  and lets the buyer conclude. Claims must stay factual and verifiable —
+  material, noise, capacity — never a health promise.
+{%- endcomment -%}
+<section class="section section--sand" aria-labelledby="comparison-title">
+  <div class="container">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- capture default_title %}{{ 'products.comparison.title' | t }}{% endcapture -%}
+      <h2 class="h2" id="comparison-title">{{ section.settings.title | default: default_title }}</h2>
+    </div>
+
+    <div class="compare" data-reveal>
+      <table>
+        <caption class="visually-hidden">{{ section.settings.title }}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{{ section.settings.criterion_label }}</th>
+            {%- capture default_col_a %}{{ 'products.comparison.column_velluno' | t }}{% endcapture -%}
+            {%- capture default_col_b %}{{ 'products.comparison.column_generic' | t }}{% endcapture -%}
+            <th scope="col">{{ section.settings.column_a | default: default_col_a }}</th>
+            <th scope="col">{{ section.settings.column_b | default: default_col_b }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.criterion }}</th>
+              <td>
+                <span class="compare__mark compare__mark--yes">
+                  {% render 'icon', name: 'check-circle' %}
+                  <span>{{ block.settings.value_a }}</span>
+                </span>
+              </td>
+              <td>
+                <span class="compare__mark compare__mark--no">
+                  {% render 'icon', name: 'cross-circle' %}
+                  <span>{{ block.settings.value_b }}</span>
+                </span>
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if section.settings.footnote != blank -%}
+      <p class="caption mt-5">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tableau comparatif",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Comparatif" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Inox VELLUNO ou plastique premier prix ?" },
+    { "type": "text", "id": "criterion_label", "label": "Libellé de la colonne critères", "default": "Critère" },
+    { "type": "text", "id": "column_a", "label": "Colonne 1", "default": "VELLUNO Source 7L" },
+    { "type": "text", "id": "column_b", "label": "Colonne 2", "default": "Fontaine plastique d'entrée de gamme" },
+    { "type": "text", "id": "footnote", "label": "Note de bas de tableau", "default": "Comparaison établie sur les fontaines plastiques 1,5 à 2,5 L les plus vendues en ligne, à partir de leurs fiches techniques publiques." }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Ligne",
+      "settings": [
+        { "type": "text", "id": "criterion", "label": "Critère" },
+        { "type": "text", "id": "value_a", "label": "Colonne 1" },
+        { "type": "text", "id": "value_b", "label": "Colonne 2" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tableau comparatif",
+      "blocks": [
+        { "type": "row", "settings": { "criterion": "Matériau", "value_a": "Inox 304, ne retient ni odeurs ni bactéries", "value_b": "Plastique ABS, se raye et se colonise" } },
+        { "type": "row", "settings": { "criterion": "Capacité", "value_a": "7 litres", "value_b": "1,5 à 2,5 litres" } },
+        { "type": "row", "settings": { "criterion": "Autonomie", "value_a": "Jusqu'à 2 semaines pour un chat", "value_b": "2 à 4 jours" } },
+        { "type": "row", "settings": { "criterion": "Bruit", "value_a": "Moins de 30 dB", "value_b": "Souvent 40 dB et plus" } },
+        { "type": "row", "settings": { "criterion": "Câble", "value_a": "Module magnétique sans fil dans le bac", "value_b": "Câble qui plonge dans l'eau" } },
+        { "type": "row", "settings": { "criterion": "Filtration", "value_a": "4 étages : coton, charbon actif, résine, mousse", "value_b": "1 à 2 étages" } },
+        { "type": "row", "settings": { "criterion": "Lave-vaisselle", "value_a": "Cuve compatible", "value_b": "Rarement compatible" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

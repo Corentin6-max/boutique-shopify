@@ -1,0 +1,523 @@
+{%- comment -%}
+  ============================================================================
+  MAIN PRODUCT
+  Left: sticky gallery. Right: the buying column, composed of blocks so the
+  hero product (templates/product.fontaine.json) can order them differently
+  from the rest of the catalogue.
+
+  CONVERSION ARCHITECTURE — each block answers one objection:
+    vendor/title .... "what exactly is this?"
+    rating .......... "has anyone else bought it?"  (honest: empty until real)
+    price ........... "can I afford it?" → instalments defuse the €99.90
+    variant_picker .. "which version do I need?"    → savings made explicit
+    buy_buttons ..... "how do I get it?"
+    shipping ........ "when will it arrive, and what if it goes wrong?"
+    accordions ...... "is it the right size / how do I maintain it?"
+    safety .......... legal duty of care, and it builds trust rather than costing sales
+  ============================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="product container" data-variant-picker data-money-format="{{ shop.money_format | escape }}">
+  <div class="product__grid">
+
+    {%- comment -%} ---------------- GALLERY ---------------- {%- endcomment -%}
+    <div class="product__gallery">
+      <div class="gallery" data-gallery>
+        <div class="gallery__stage">
+          <div class="gallery__badges">
+            {%- if on_sale -%}
+              {%- assign pct = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}
+              <span class="badge badge--clay">-{{ pct }} %</span>
+            {%- endif -%}
+          </div>
+
+          <div class="gallery__slides" data-gallery-slides
+               aria-label="{{ 'products.product.media_gallery' | t }}">
+            {%- for media in product.media -%}
+              <div class="gallery__slide" data-gallery-slide data-media-id="{{ media.id }}">
+                <div class="media">
+                  <img
+                    src="{{ media | image_url: width: 1200 }}"
+                    srcset="{{ media | image_url: width: 600 }} 600w,
+                            {{ media | image_url: width: 900 }} 900w,
+                            {{ media | image_url: width: 1200 }} 1200w,
+                            {{ media | image_url: width: 1600 }} 1600w"
+                    sizes="(min-width: 1024px) 52vw, 100vw"
+                    alt="{{ media.alt | escape }}"
+                    width="{{ media.width }}"
+                    height="{{ media.height }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    {% if forloop.first %}fetchpriority="high"{% endif %}
+                    decoding="async">
+                </div>
+              </div>
+            {%- else -%}
+              <div class="gallery__slide" data-gallery-slide>
+                <div class="media">
+                  <img src="{{ 'product-placeholder.svg' | asset_url }}" alt=""
+                       width="800" height="800" loading="eager" decoding="async">
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="gallery__thumbs" role="group" aria-label="{{ 'products.product.media_gallery' | t }}">
+            {%- for media in product.media -%}
+              <button type="button" class="gallery__thumb" data-gallery-thumb
+                      aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                      aria-label="{{ 'products.product.thumbnail' | t: index: forloop.index }}">
+                <span class="media">
+                  <img src="{{ media | image_url: width: 200 }}" alt=""
+                       width="84" height="84" loading="lazy" decoding="async">
+                </span>
+              </button>
+            {%- endfor -%}
+          </div>
+
+          <div class="gallery__dots" role="group" aria-label="{{ 'products.product.media_gallery' | t }}">
+            {%- for media in product.media -%}
+              <button type="button" class="gallery__dot" data-gallery-dot
+                      aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                      aria-label="{{ 'general.accessibility.go_to_slide' | t: index: forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ---------------- BUYING COLUMN ---------------- {%- endcomment -%}
+    <div class="product__info">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {%- when 'breadcrumb' -%}
+            <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.aria_label' | t }}" {{ block.shopify_attributes }}>
+              <ol>
+                <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a></li>
+                {%- if collection -%}
+                  <li aria-hidden="true" class="breadcrumb__sep">/</li>
+                  <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+                {%- endif -%}
+                <li aria-hidden="true" class="breadcrumb__sep">/</li>
+                <li aria-current="page">{{ product.title }}</li>
+              </ol>
+            </nav>
+
+          {%- when 'vendor' -%}
+            <p class="product__vendor" {{ block.shopify_attributes }}>{{ product.vendor }}</p>
+
+          {%- when 'title' -%}
+            <h1 class="product__title" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+
+          {%- comment -%}
+            OBJECTION: "nobody has tried it". Answered honestly — we link to the
+            review section and show its real state. No invented star average.
+          {%- endcomment -%}
+          {%- when 'rating' -%}
+            {%- assign rating_count = product.metafields.reviews.rating_count | default: 0 -%}
+            <a class="rating-link" href="#reviews" {{ block.shopify_attributes }}>
+              {%- if rating_count > 0 -%}
+                {%- assign rating_value = product.metafields.reviews.rating.value.rating -%}
+                <span class="stars" aria-hidden="true">
+                  {%- for i in (1..5) -%}
+                    {% if i <= rating_value %}{% render 'icon', name: 'star' %}{% else %}{% render 'icon', name: 'star-outline' %}{% endif %}
+                  {%- endfor -%}
+                </span>
+                <span>{{ 'products.reviews.count' | t: count: rating_count }}</span>
+              {%- else -%}
+                <span class="stars stars--empty" aria-hidden="true">
+                  {%- for i in (1..5) -%}{% render 'icon', name: 'star-outline' %}{%- endfor -%}
+                </span>
+                <span>{{ 'products.reviews.empty_title' | t }}</span>
+              {%- endif -%}
+            </a>
+
+          {%- comment -%}
+            OBJECTION: "99,90 € is a lot for a bowl". The instalment line reframes
+            it as 4 × 24,98 €, and the struck-through price is the launch price
+            (see the Omnibus note in NOTES.md).
+          {%- endcomment -%}
+          {%- when 'price' -%}
+            <div class="product__price-block" {{ block.shopify_attributes }}>
+              {% render 'price', variant: current_variant, size: 'large', show_saving: true, show_installment: settings.show_installments %}
+            </div>
+
+          {%- comment -%}
+            OBJECTION: "which pack do I actually need?" Radio cards, never a
+            <select>: the price, the per-filter cost and the saving are visible
+            without opening anything.
+          {%- endcomment -%}
+          {%- when 'variant_picker' -%}
+            {%- unless product.has_only_default_variant -%}
+              <div class="variant-picker" {{ block.shopify_attributes }}>
+                {%- for option in product.options_with_values -%}
+                  <fieldset class="variant-picker__fieldset">
+                    <legend class="variant-picker__legend">
+                      {{ option.name }}
+                      <span data-selected-option-{{ option.position }}>— {{ option.selected_value }}</span>
+                    </legend>
+
+                    {%- if block.settings.style == 'swatch' and option.name == 'Couleur' -%}
+                      <div class="swatches">
+                        {%- for value in option.values -%}
+                          <label class="swatch">
+                            <input type="radio"
+                                   name="option-{{ option.position }}-{{ section.id }}"
+                                   value="{{ value | escape }}"
+                                   data-option-input
+                                   data-option-position="{{ option.position }}"
+                                   {% if option.selected_value == value %}checked{% endif %}>
+                            {%- capture swatch_hex %}{% render 'swatch-color', value: value %}{% endcapture -%}
+                            <span class="swatch__dot" style="--swatch: {{ swatch_hex | strip }};"
+                                  title="{{ value | escape }}"></span>
+                            <span class="visually-hidden">{{ value }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    {%- else -%}
+                      <div class="variant-cards">
+                        {%- for value in option.values -%}
+                          {%- comment -%}
+                            Find the variant this value maps to, so the card can
+                            price itself. For multi-option products we use the
+                            first matching variant as the reference price.
+                          {%- endcomment -%}
+                          {%- assign card_variant = false -%}
+                          {%- assign option_index = option.position | minus: 1 -%}
+                          {%- for variant in product.variants -%}
+                            {%- if variant.options[option_index] == value -%}
+                              {%- assign card_variant = variant -%}
+                              {%- break -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+
+                          <label class="variant-card">
+                            <input type="radio"
+                                   name="option-{{ option.position }}-{{ section.id }}"
+                                   value="{{ value | escape }}"
+                                   data-option-input
+                                   data-option-position="{{ option.position }}"
+                                   {% if option.selected_value == value %}checked{% endif %}>
+                            <span class="variant-card__inner">
+                              <span class="variant-card__radio" aria-hidden="true"></span>
+                              <span>
+                                <span class="variant-card__name">{{ value }}</span>
+                                {%- assign note_key = 'pack_note_' | append: forloop.index -%}
+                                {%- assign note = block.settings[note_key] -%}
+                                {%- if note != blank -%}
+                                  <span class="variant-card__note">{{ note }}</span>
+                                {%- endif -%}
+                              </span>
+                              {%- if card_variant -%}
+                                <span class="variant-card__price">
+                                  {{ card_variant.price | money }}
+                                  {%- if card_variant.compare_at_price > card_variant.price -%}
+                                    <s class="variant-card__was">{{ card_variant.compare_at_price | money }}</s>
+                                  {%- endif -%}
+                                </span>
+                              {%- endif -%}
+                            </span>
+                            {%- assign badge_key = 'pack_badge_' | append: forloop.index -%}
+                            {%- assign badge = block.settings[badge_key] -%}
+                            {%- if badge != blank -%}
+                              <span class="badge badge--sage variant-card__badge">{{ badge }}</span>
+                            {%- endif -%}
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </fieldset>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            {%- comment -%} Variant data for the client-side picker. {%- endcomment -%}
+            <script type="application/json" data-variants-json>
+              [
+                {%- for variant in product.variants -%}
+                  {
+                    "id": {{ variant.id }},
+                    "title": {{ variant.title | json }},
+                    "options": {{ variant.options | json }},
+                    "price": {{ variant.price }},
+                    "compare_at_price": {{ variant.compare_at_price | default: 0 }},
+                    "available": {{ variant.available }},
+                    "sku": {{ variant.sku | json }},
+                    "featured_media_id": {{ variant.featured_media.id | default: 0 }}
+                  }{% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            </script>
+
+          {%- comment -%}
+            OBJECTION: "I want to buy without thinking about it". One dominant
+            action; the dynamic checkout button stays secondary so the cart
+            drawer (with its cross-sell) is the default path.
+          {%- endcomment -%}
+          {%- when 'buy_buttons' -%}
+            <div data-sticky-anchor {{ block.shopify_attributes }}>
+              {%- assign added_message = 'products.product.added_to_cart' | t -%}
+              {%- assign product_form_id = 'product-form-' | append: section.id -%}
+              {%- form 'product', product, id: product_form_id, class: 'product-form', data-product-form: 'true', data-added-message: added_message -%}
+                <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+                <input type="hidden" name="quantity" value="1">
+
+                <p class="form-status form-status--error product-form__error" data-form-error role="alert">
+                  {% render 'icon', name: 'alert' %}<span data-form-error-text></span>
+                </p>
+
+                <button type="submit"
+                        class="btn btn--primary btn--full btn--lg"
+                        data-add-to-cart
+                        data-label-available="{{ 'products.product.add_to_cart' | t }}"
+                        data-label-sold-out="{{ 'products.product.sold_out' | t }}"
+                        {% unless current_variant.available %}disabled{% endunless %}>
+                  <span class="btn__label">
+                    {%- if current_variant.available -%}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </span>
+                  <span class="btn__spinner"><span class="spinner"></span></span>
+                </button>
+
+                {%- if block.settings.show_dynamic_checkout -%}
+                  {{ form | payment_button }}
+                {%- endif -%}
+
+                <p class="visually-hidden" data-atc-status role="status" aria-live="polite"></p>
+              {%- endform -%}
+
+              {%- if current_variant.sku != blank -%}
+                <p class="product__sku"><span data-variant-sku>{{ current_variant.sku }}</span></p>
+              {%- endif -%}
+            </div>
+
+          {%- comment -%}
+            OBJECTION: "when does it arrive, and what if it breaks?" The single
+            biggest source of hesitation on a €100 first purchase. Every value
+            here comes from locales/fr.default.json → shipping.*
+          {%- endcomment -%}
+          {%- when 'shipping' -%}
+            <div class="shipping-block" {{ block.shopify_attributes }}>
+              <div class="shipping-block__list">
+                <div class="shipping-block__item">
+                  {% render 'icon', name: 'clock' %}
+                  <div>{% render 'shipping-estimate' %}</div>
+                </div>
+                <div class="shipping-block__item">
+                  {% render 'icon', name: 'truck' %}
+                  <div>
+                    {%- if block.settings.always_free_shipping -%}
+                      <strong>{{ 'shipping.fountain_always_free' | t }}</strong>
+                    {%- else -%}
+                      <strong>{{ 'shipping.free_threshold_html' | t }}</strong><br>
+                      <span class="small muted">{{ 'shipping.rates_summary' | t }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <div class="shipping-block__item">
+                  {% render 'icon', name: 'return' %}
+                  <div>
+                    <strong>{{ 'shipping.returns_title' | t }}</strong><br>
+                    <span class="small muted">{{ 'shipping.returns_summary' | t }}</span>
+                  </div>
+                </div>
+                <div class="shipping-block__item">
+                  {% render 'icon', name: 'shield' %}
+                  <div><span class="small">{{ 'shipping.parcel_guarantee' | t }}</span></div>
+                </div>
+              </div>
+              <div class="mt-5">
+                {% render 'trust-badges', show_label: true %}
+              </div>
+            </div>
+
+          {%- when 'text' -%}
+            <div class="rte mt-5" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+          {%- comment -%}
+            OBJECTION: "is it safe for my dog?" Legally required for the chew
+            toy, and a trust signal rather than a cost.
+          {%- endcomment -%}
+          {%- when 'safety_notice' -%}
+            <div class="form-status form-status--error mt-5" {{ block.shopify_attributes }}>
+              {% render 'icon', name: 'alert' %}
+              <span>
+                <strong>{{ 'products.product.safety_notice' | t }}</strong><br>
+                {{ block.settings.text }}
+              </span>
+            </div>
+
+          {%- comment -%}
+            OBJECTION: the long tail — dimensions, noise, cleaning, filter
+            frequency. Collapsed so the page stays scannable, present so nobody
+            has to email to find out.
+          {%- endcomment -%}
+          {%- when 'accordions' -%}
+            <div class="accordion mt-5" data-accordion {{ block.shopify_attributes }}>
+              {%- assign labels = 'description,specs,in_the_box,maintenance,shipping_returns' | split: ',' -%}
+              {%- for label in labels -%}
+                {%- assign content_key = 'content_' | append: forloop.index -%}
+                {%- assign content = block.settings[content_key] -%}
+                {%- if label == 'description' and content == blank -%}
+                  {%- assign content = product.description -%}
+                {%- endif -%}
+                {%- if label == 'shipping_returns' and content == blank -%}
+                  {%- capture content -%}
+                    <p>{{ 'shipping.delay_summary' | t }}</p>
+                    <p>{{ 'shipping.carriers' | t }}</p>
+                    <p>{{ 'shipping.returns_summary' | t }} {{ 'shipping.returns_legal_note' | t }}</p>
+                  {%- endcapture -%}
+                {%- endif -%}
+                {%- if content != blank -%}
+                  {%- assign panel_id = section.id | append: '-acc-' | append: forloop.index -%}
+                  <div class="accordion__item">
+                    <h2>
+                      <button type="button" class="accordion__trigger" data-accordion-trigger
+                              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                              aria-controls="{{ panel_id }}">
+                        {%- assign label_key = 'products.product.' | append: label -%}
+                        {{ label_key | t }}
+                        {% render 'icon', name: 'plus', class: 'accordion__icon' %}
+                      </button>
+                    </h2>
+                    <div class="accordion__panel" id="{{ panel_id }}"
+                         data-open="{% if forloop.first %}true{% else %}false{% endif %}">
+                      <div><div class="accordion__content rte">{{ content }}</div></div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+          {%- when '@app' -%}
+            {% render block %}
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%}
+  Sticky mobile buy bar — reappears once the main CTA has scrolled away.
+  Hidden on desktop in CSS, not rendered twice.
+{%- endcomment -%}
+<div class="sticky-buy" data-sticky-buy>
+  <div class="sticky-buy__info">
+    <p class="sticky-buy__title">{{ product.title }}</p>
+    <p class="sticky-buy__price" data-sticky-price>{{ current_variant.price | money }}</p>
+  </div>
+  <button type="submit" form="product-form-{{ section.id }}" class="btn btn--primary">
+    {{ 'products.product.add_to_cart' | t }}
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "tag": "section",
+  "class": "section-main-product",
+  "blocks": [
+    { "type": "breadcrumb", "name": "Fil d'ariane", "limit": 1 },
+    { "type": "vendor", "name": "Marque", "limit": 1 },
+    { "type": "title", "name": "Titre", "limit": 1 },
+    { "type": "rating", "name": "Note & avis", "limit": 1 },
+    { "type": "price", "name": "Prix", "limit": 1 },
+    {
+      "type": "variant_picker",
+      "name": "Sélecteur de variante",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Présentation",
+          "options": [
+            { "value": "cards", "label": "Cartes radio" },
+            { "value": "swatch", "label": "Pastilles de couleur" }
+          ],
+          "default": "cards"
+        },
+        { "type": "header", "content": "Mentions par option (dans l'ordre des valeurs)" },
+        { "type": "text", "id": "pack_note_1", "label": "Mention 1" },
+        { "type": "text", "id": "pack_badge_1", "label": "Badge 1" },
+        { "type": "text", "id": "pack_note_2", "label": "Mention 2" },
+        { "type": "text", "id": "pack_badge_2", "label": "Badge 2" },
+        { "type": "text", "id": "pack_note_3", "label": "Mention 3" },
+        { "type": "text", "id": "pack_badge_3", "label": "Badge 3" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Boutons d'achat",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Afficher « Acheter maintenant »",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "shipping",
+      "name": "Livraison & garanties",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "always_free_shipping",
+          "label": "Livraison toujours offerte pour ce produit",
+          "default": false,
+          "info": "À activer uniquement pour la fontaine Source 7L."
+        }
+      ]
+    },
+    {
+      "type": "accordions",
+      "name": "Accordéons",
+      "limit": 1,
+      "settings": [
+        { "type": "richtext", "id": "content_1", "label": "Description", "info": "Vide = description du produit." },
+        { "type": "richtext", "id": "content_2", "label": "Caractéristiques techniques" },
+        { "type": "richtext", "id": "content_3", "label": "Contenu de la boîte" },
+        { "type": "richtext", "id": "content_4", "label": "Entretien & filtres" },
+        { "type": "richtext", "id": "content_5", "label": "Livraison & retours", "info": "Vide = texte standard de la boutique." }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte libre",
+      "settings": [{ "type": "richtext", "id": "text", "label": "Texte" }]
+    },
+    {
+      "type": "safety_notice",
+      "name": "Consigne de sécurité",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texte",
+          "default": "Surveillez votre chien pendant le jeu. Remplacez le jouet dès qu'il est endommagé. Ne remplace pas un détartrage vétérinaire."
+        }
+      ]
+    },
+    { "type": "@app" }
+  ]
+}
+{% endschema %}

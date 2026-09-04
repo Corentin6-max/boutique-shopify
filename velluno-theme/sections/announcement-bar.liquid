@@ -1,0 +1,82 @@
+{%- comment -%}
+  Announcement bar. Cross-fades between blocks; a single block renders static.
+  Default copy states the real shipping promise — it must match shipping.* in
+  the locale file and the rates configured in Shopify.
+{%- endcomment -%}
+<div class="announcement" data-announcement data-interval="{{ section.settings.interval | times: 1000 }}"
+     role="region" aria-label="{{ 'sections.header.announcement' | t }}">
+  <div class="announcement__viewport">
+    <div class="announcement__track">
+      {%- for block in section.blocks -%}
+        <p class="announcement__item{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}
+            {% render 'icon', name: block.settings.icon, class: 'announcement__icon' %}
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+          {%- else -%}
+            {{ block.settings.text }}
+          {%- endif -%}
+        </p>
+      {%- else -%}
+        <p class="announcement__item is-active">{{ 'shipping.free_threshold_html' | t }}</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barre d'annonce",
+  "settings": [
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Défilement",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Livraison offerte dès 39 € d'achat"
+        },
+        { "type": "url", "id": "link", "label": "Lien (facultatif)" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "none", "label": "Aucune" },
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "shield", "label": "Garantie" },
+            { "value": "leaf", "label": "Végétal" },
+            { "value": "chat", "label": "Service client" },
+            { "value": "sparkle", "label": "Nouveauté" }
+          ],
+          "default": "truck"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "message", "settings": { "text": "Livraison offerte dès 39 € d'achat en France métropolitaine", "icon": "truck" } },
+      { "type": "message", "settings": { "text": "Retours gratuits sous 90 jours", "icon": "return" } },
+      { "type": "message", "settings": { "text": "Service client français — réponse sous 24 h ouvrées", "icon": "chat" } }
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "blocks": {
+        "l1": { "type": "link", "settings": { "title": "Fontaine Source 7L", "link": "/products/fontaine-eau-velluno-7l-inox" } },
+        "l2": { "type": "link", "settings": { "title": "Filtres de rechange", "link": "/products/filtres-rechange-velluno-source" } },
+        "l3": { "type": "link", "settings": { "title": "Livraison & suivi", "link": "/pages/livraison" } },
+        "l4": { "type": "link", "settings": { "title": "Nous contacter", "link": "/pages/contact" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

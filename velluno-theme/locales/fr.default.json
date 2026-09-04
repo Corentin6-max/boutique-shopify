@@ -1,0 +1,353 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Étiquetés {{ tags }}",
+      "page": "Page {{ page }}"
+    },
+    "accessibility": {
+      "skip_to_content": "Aller au contenu principal",
+      "close": "Fermer",
+      "menu": "Menu",
+      "open_menu": "Ouvrir le menu",
+      "search": "Rechercher",
+      "cart": "Panier",
+      "cart_count": "{{ count }} article(s) dans le panier",
+      "account": "Mon compte",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "go_to_slide": "Aller à l'image {{ index }}",
+      "loading": "Chargement en cours"
+    },
+    "breadcrumb": {
+      "home": "Accueil",
+      "aria_label": "Fil d'ariane"
+    },
+    "newsletter": {
+      "email_label": "Votre adresse e-mail",
+      "email_placeholder": "prenom@exemple.fr",
+      "submit": "Je m'inscris",
+      "success": "Merci. Votre inscription est confirmée.",
+      "consent": "En vous inscrivant, vous acceptez de recevoir nos e-mails. Désinscription en un clic, à tout moment."
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "page": "Page {{ number }}"
+    },
+    "search": {
+      "title": "Rechercher",
+      "placeholder": "Fontaine, filtres, tapis…",
+      "submit": "Rechercher",
+      "results_for": "Résultats pour « {{ terms }} »",
+      "no_results_title": "Aucun résultat pour « {{ terms }} »",
+      "no_results_text": "Vérifiez l'orthographe ou essayez un terme plus général, comme « fontaine » ou « filtre ».",
+      "results_count": {
+        "one": "{{ count }} résultat",
+        "other": "{{ count }} résultats"
+      },
+      "suggestions": "Suggestions",
+      "view_all": "Voir tous les résultats"
+    },
+    "share": {
+      "label": "Partager"
+    }
+  },
+  "shipping": {
+    "free_threshold_amount": "39 €",
+    "free_threshold_html": "Livraison offerte dès 39 € d'achat en France métropolitaine",
+    "paid_colissimo": "Colissimo : 4,90 €",
+    "paid_pickup": "Point relais : 3,90 €",
+    "rates_summary": "Livraison offerte dès 39 €. En dessous : 4,90 € en Colissimo, 3,90 € en point relais.",
+    "fountain_always_free": "Fontaine Source 7L : livraison toujours offerte, quel que soit le montant de la commande.",
+    "free_item_in_cart": "Livraison offerte : votre panier contient la fontaine Source 7L.",
+    "free_shipping_remaining_html": "Plus que <strong>{{ amount }}</strong> pour la livraison offerte.",
+    "free_shipping_reached": "Livraison offerte, c'est acquis.",
+    "delay_summary": "Expédition sous 24 à 48 h, réception estimée sous 5 à 12 jours ouvrés.",
+    "estimate_fallback": "Réception estimée sous {{ min }} à {{ max }} jours ouvrés.",
+    "estimate_range_html": "Commandez aujourd'hui, réception estimée entre le {{ from }} et le {{ to }}.",
+    "estimate_disclaimer": "Estimation calculée en jours ouvrés, non contractuelle.",
+    "carriers": "Colissimo, Mondial Relay, Colis Privé — point relais au choix lors du paiement.",
+    "carriers_short": "Colissimo · Mondial Relay · Colis Privé",
+    "returns_title": "Retours gratuits sous 90 jours",
+    "returns_summary": "Retours gratuits sous 90 jours, produit non utilisé ou défectueux. Remboursement sous 14 jours après réception du retour.",
+    "returns_legal_note": "Ces 90 jours sont un engagement commercial VELLUNO qui s'ajoute à votre droit de rétractation légal de 14 jours.",
+    "parcel_guarantee": "Colis perdu ou endommagé : réexpédié ou remboursé. Non livré après 35 jours : remboursement intégral sur simple demande.",
+    "vat_included": "Prix TTC, TVA française 20 % incluse. Aucun frais de douane à votre charge.",
+    "payment_label": "Paiement sécurisé",
+    "payment_methods": "CB, Visa, Mastercard, PayPal, Apple Pay.",
+    "installment_available": "Paiement en 4 fois sans frais disponible.",
+    "support_title": "Service client français",
+    "support_summary": "Une question ? Réponse sous 24 h ouvrées, par e-mail, en français.",
+    "support_email": "contact@velluno.fr"
+  },
+  "products": {
+    "card": {
+      "sold_out": "Épuisé",
+      "on_sale": "Promotion",
+      "from_price": "À partir de"
+    },
+    "price": {
+      "from_html": "À partir de {{ price }}",
+      "regular_price": "Prix",
+      "sale_price": "Prix promotionnel",
+      "compare_at": "Prix conseillé",
+      "tax_included": "TVA incluse",
+      "installment_html": "ou 4 × {{ amount }} sans frais",
+      "unit_price": "Prix unitaire"
+    },
+    "product": {
+      "vendor": "Marque",
+      "sku": "Référence : {{ sku }}",
+      "quantity": "Quantité",
+      "add_to_cart": "Ajouter au panier",
+      "added_to_cart": "Produit ajouté au panier.",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "buy_now": "Acheter maintenant",
+      "choose_pack": "Choisissez votre pack",
+      "choose_option": "Choisissez : {{ name }}",
+      "selected": "Sélectionné :",
+      "view_details": "Voir le produit",
+      "media_gallery": "Galerie du produit",
+      "thumbnail": "Voir l'image {{ index }}",
+      "description": "Description",
+      "specs": "Caractéristiques techniques",
+      "in_the_box": "Contenu de la boîte",
+      "maintenance": "Entretien & filtres",
+      "shipping_returns": "Livraison & retours",
+      "safety_notice": "Consigne de sécurité",
+      "error_generic": "Ce produit n'a pas pu être ajouté au panier. Réessayez dans un instant.",
+      "pack_savings": "Économisez {{ amount }}",
+      "price_per_filter": "soit {{ amount }} le filtre"
+    },
+    "reviews": {
+      "title": "Avis clients",
+      "empty_title": "Soyez le premier à donner votre avis",
+      "empty_text": "Aucun avis pour le moment. Nous publions les avis tels qu'ils nous parviennent, sans tri ni retouche — les premiers arriveront dès les premières livraisons.",
+      "empty_cta": "Écrire un avis",
+      "count": {
+        "one": "{{ count }} avis",
+        "other": "{{ count }} avis"
+      },
+      "read_reviews": "Lire les avis",
+      "rating_label": "Note : {{ rating }} sur 5"
+    },
+    "bundle": {
+      "title": "Achetez ensemble",
+      "subtitle": "Tout ce qu'il faut pour installer le coin hydratation d'un seul coup.",
+      "this_item": "Ce produit",
+      "total": "Total",
+      "instead_of": "au lieu de",
+      "saving_html": "Vous économisez {{ amount }}",
+      "add_selection": "Ajouter la sélection ({{ count }})",
+      "add_selection_empty": "Sélectionnez au moins un produit"
+    },
+    "comparison": {
+      "title": "Inox VELLUNO ou plastique premier prix ?",
+      "column_velluno": "VELLUNO Source 7L",
+      "column_generic": "Fontaine plastique d'entrée de gamme"
+    },
+    "cross_sell": {
+      "title": "Complétez votre installation",
+      "reorder_title": "Pensez au rechange",
+      "reorder_text": "Un filtre tient 3 à 4 semaines. Prenez de l'avance : un lot de 10 couvre environ 6 mois."
+    },
+    "faq": {
+      "title": "Questions fréquentes"
+    }
+  },
+  "cart": {
+    "title": "Panier",
+    "drawer_title": "Votre panier",
+    "empty_title": "Votre panier est vide",
+    "empty_text": "Il n'y a rien ici pour l'instant. Commencez par la fontaine Source 7L ou par un lot de filtres.",
+    "empty_cta": "Découvrir la boutique",
+    "continue_shopping": "Poursuivre mes achats",
+    "checkout": "Passer commande",
+    "view_cart": "Voir le panier",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "shipping_calculated": "Calculée à l'étape suivante",
+    "total": "Total",
+    "taxes_note": "TVA incluse. Frais de livraison calculés au paiement.",
+    "quantity": "Quantité",
+    "quantity_decrease": "Retirer une unité de {{ title }}",
+    "quantity_increase": "Ajouter une unité de {{ title }}",
+    "remove": "Retirer {{ title }} du panier",
+    "product": "Produit",
+    "price": "Prix",
+    "line_total": "Total",
+    "note_label": "Ajouter une note à ma commande",
+    "update_error": "La mise à jour du panier a échoué. Réessayez.",
+    "items_count": {
+      "one": "{{ count }} article",
+      "other": "{{ count }} articles"
+    },
+    "remove_short": "Retirer",
+    "update": "Mettre à jour le panier"
+  },
+  "sections": {
+    "header": {
+      "announcement": "Annonce"
+    },
+    "footer": {
+      "newsletter_title": "Restez informé",
+      "newsletter_text": "Conseils d'entretien, nouveautés et offres. Un e-mail par mois, pas davantage.",
+      "shop": "Boutique",
+      "help": "Aide",
+      "about": "La marque",
+      "legal": "Informations légales",
+      "copyright": "© {{ year }} {{ name }}. Tous droits réservés.",
+      "payment_note": "Paiement sécurisé"
+    },
+    "collection": {
+      "empty_title": "Cette collection est vide",
+      "empty_text": "Les produits arrivent bientôt. En attendant, parcourez le reste de la boutique.",
+      "product_count": {
+        "one": "{{ count }} produit",
+        "other": "{{ count }} produits"
+      },
+      "sort_by": "Trier par",
+      "view_all": "Tout voir"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Mon compte",
+      "details": "Mes informations",
+      "view_addresses": "Voir mes adresses",
+      "return": "Retour à mon compte",
+      "log_out": "Se déconnecter"
+    },
+    "orders": {
+      "title": "Mes commandes",
+      "order_number": "Commande {{ number }}",
+      "date": "Date",
+      "payment_status": "Paiement",
+      "fulfillment_status": "Expédition",
+      "total": "Total",
+      "none": "Vous n'avez pas encore passé commande.",
+      "number_heading": "Commande"
+    },
+    "login": {
+      "title": "Connexion",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "forgot_password": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "no_account": "Pas encore de compte ?",
+      "create_account": "Créer un compte",
+      "guest_title": "Continuer sans compte",
+      "guest_submit": "Suivre ma commande"
+    },
+    "recover_password": {
+      "title": "Réinitialiser le mot de passe",
+      "text": "Indiquez votre e-mail, nous vous envoyons un lien de réinitialisation.",
+      "submit": "Envoyer le lien",
+      "success": "Si un compte existe pour cette adresse, un e-mail vient de partir.",
+      "cancel": "Annuler"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Créer mon compte",
+      "has_account": "Vous avez déjà un compte ?",
+      "login": "Se connecter"
+    },
+    "addresses": {
+      "title": "Mes adresses",
+      "add_new": "Ajouter une adresse",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "delete_confirm": "Supprimer définitivement cette adresse ?",
+      "default": "Adresse par défaut",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "company": "Société (facultatif)",
+      "address1": "Adresse",
+      "address2": "Complément (facultatif)",
+      "city": "Ville",
+      "zip": "Code postal",
+      "country": "Pays",
+      "phone": "Téléphone",
+      "set_default": "Utiliser comme adresse par défaut",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "none": "Aucune adresse enregistrée."
+    },
+    "activate_account": {
+      "title": "Activer mon compte",
+      "text": "Choisissez un mot de passe pour activer votre compte.",
+      "submit": "Activer mon compte",
+      "decline": "Refuser l'invitation"
+    },
+    "reset_password": {
+      "title": "Nouveau mot de passe",
+      "text": "Choisissez un nouveau mot de passe.",
+      "password": "Mot de passe",
+      "password_confirm": "Confirmer le mot de passe",
+      "submit": "Enregistrer"
+    },
+    "order": {
+      "title": "Commande {{ name }}",
+      "date_html": "Passée le {{ date }}",
+      "cancelled_html": "Commande annulée le {{ date }}",
+      "product": "Produit",
+      "sku": "Référence",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "total": "Total",
+      "subtotal": "Sous-total",
+      "shipping": "Livraison",
+      "tax": "TVA",
+      "billing_address": "Adresse de facturation",
+      "shipping_address": "Adresse de livraison",
+      "payment_status": "Statut du paiement",
+      "fulfillment_status": "Statut de l'expédition",
+      "tracking_company": "Transporteur",
+      "tracking_number": "Numéro de suivi"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre e-mail",
+      "phone": "Téléphone (facultatif)",
+      "order_number": "Numéro de commande (facultatif)",
+      "message": "Votre message",
+      "send": "Envoyer le message",
+      "success": "Message envoyé. Nous répondons sous 24 h ouvrées.",
+      "error": "Le message n'a pas pu être envoyé. Vérifiez les champs signalés."
+    }
+  },
+  "errors": {
+    "404_code": "404",
+    "404_title": "Cette page s'est échappée",
+    "404_text": "Le lien est peut-être ancien, ou l'adresse comporte une coquille. Voici de quoi retrouver votre chemin.",
+    "404_cta": "Retour à l'accueil",
+    "404_popular": "Pages les plus consultées",
+    "form_generic": "Une erreur est survenue. Réessayez dans un instant.",
+    "field_required": "Ce champ est obligatoire.",
+    "email_invalid": "Cette adresse e-mail ne semble pas valide."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "text": "Nous utilisons des cookies pour mesurer l'audience et améliorer la boutique. Vous pouvez refuser : le site fonctionne exactement pareil.",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "learn_more": "En savoir plus"
+  },
+  "password_page": {
+    "title": "Bientôt ouvert",
+    "text": "VELLUNO ouvre très prochainement. Laissez votre e-mail pour être prévenu du lancement.",
+    "password_label": "Vous avez le mot de passe ?",
+    "password_placeholder": "Mot de passe de la boutique",
+    "enter": "Entrer",
+    "error": "Mot de passe incorrect. Réessayez.",
+    "powered_by": "Boutique propulsée par Shopify"
+  }
+}

@@ -1,0 +1,69 @@
+{%- comment -%}
+  Two-column editorial block. Also serves as the "benefit band" on the product
+  page when repeated three times with alternating sides.
+{%- endcomment -%}
+<section class="section{% if section.settings.background == 'sand' %} section--sand{% endif %}">
+  <div class="container">
+    <div class="split{% if section.settings.media_position == 'right' %} split--reverse{% endif %}" data-reveal>
+      <div class="split__media media" style="--ratio: {{ section.settings.ratio }}%">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 900 }} 900w,
+                    {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(min-width: 900px) 46vw, 100vw"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy" decoding="async">
+        {%- else -%}
+          <img src="{{ 'placeholder-square.svg' | asset_url }}" alt=""
+               width="900" height="900" loading="lazy" decoding="async">
+        {%- endif -%}
+      </div>
+
+      <div class="split__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="h3">{{ section.settings.title }}</h2>
+        <div class="rte mt-4 muted">{{ section.settings.text }}</div>
+        {%- if section.settings.cta_label != blank -%}
+          <a class="btn btn--secondary mt-6" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image et texte",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Position de l'image",
+      "options": [{ "value": "left", "label": "À gauche" }, { "value": "right", "label": "À droite" }],
+      "default": "left"
+    },
+    { "type": "range", "id": "ratio", "label": "Format de l'image", "min": 60, "max": 130, "step": 5, "unit": "%", "default": 100 },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "L'inox, parce que le plastique retient tout" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Le plastique se raye, et chaque rayure devient un refuge à bactéries. L'inox 304 ne retient ni odeur ni dépôt, passe au lave-vaisselle, et vieillit sans jaunir.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Bouton" },
+    { "type": "url", "id": "cta_link", "label": "Lien du bouton" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [{ "value": "bone", "label": "Ivoire" }, { "value": "sand", "label": "Sable" }],
+      "default": "bone"
+    }
+  ],
+  "presets": [{ "name": "Image et texte" }]
+}
+{% endschema %}

@@ -1,0 +1,57 @@
+{%- comment -%}
+  404. A designed page, not a dead end: a search field and the three routes a
+  lost visitor most often wants.
+{%- endcomment -%}
+<div class="container container--narrow error-404">
+  <p class="error-404__code" aria-hidden="true">{{ 'errors.404_code' | t }}</p>
+  <h1 class="error-404__title">{{ 'errors.404_title' | t }}</h1>
+  <p class="error-404__text">{{ 'errors.404_text' | t }}</p>
+
+  <form class="search-panel__form" action="{{ routes.search_url }}" method="get" role="search"
+        style="max-width: 420px; margin-inline: auto;">
+    <label class="visually-hidden" for="error-search">{{ 'general.search.title' | t }}</label>
+    <input id="error-search" class="input" type="search" name="q"
+           placeholder="{{ 'general.search.placeholder' | t }}">
+    <button type="submit" class="btn btn--primary">{{ 'general.search.submit' | t }}</button>
+  </form>
+
+  <p class="mt-6"><a class="btn btn--secondary" href="{{ routes.root_url }}">{{ 'errors.404_cta' | t }}</a></p>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="error-404__links">
+      <p class="eyebrow">{{ 'errors.404_popular' | t }}</p>
+      <ul class="cluster" style="justify-content: center;">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <a class="btn btn--ghost btn--sm" href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Page 404",
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Lien",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "url", "id": "link", "label": "Lien" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "link", "settings": { "title": "Fontaine Source 7L" } },
+      { "type": "link", "settings": { "title": "Filtres de rechange" } },
+      { "type": "link", "settings": { "title": "Livraison & suivi" } },
+      { "type": "link", "settings": { "title": "Nous contacter" } }
+    ]
+  }
+}
+{% endschema %}

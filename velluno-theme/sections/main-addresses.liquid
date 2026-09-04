@@ -1,0 +1,83 @@
+<div class="container section">
+  <a class="link small" href="{{ routes.account_url }}">← {{ 'customer.account.return' | t }}</a>
+  <header class="page-header">
+    <h1 class="page-header__title">{{ 'customer.addresses.title' | t }}</h1>
+  </header>
+
+  {%- paginate customer.addresses by 10 -%}
+    {%- if customer.addresses.size > 0 -%}
+      <div class="grid grid--2">
+        {%- for address in customer.addresses -%}
+          <div class="contact-aside">
+            {%- if address == customer.default_address -%}
+              <span class="badge badge--sand mb-4">{{ 'customer.addresses.default' | t }}</span>
+            {%- endif -%}
+            <div class="rte small">{{ address | format_address }}</div>
+            <div class="cluster mt-4">
+              <a class="btn btn--ghost btn--sm" href="{{ routes.account_addresses_url }}#edit-{{ address.id }}">
+                {{ 'customer.addresses.edit' | t }}
+              </a>
+              {%- form 'customer_address', address -%}
+                <button type="submit" class="btn btn--ghost btn--sm" name="_method" value="delete"
+                        onclick="return confirm('{{ 'customer.addresses.delete_confirm' | t }}')">
+                  {{ 'customer.addresses.delete' | t }}
+                </button>
+              {%- endform -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="muted">{{ 'customer.addresses.none' | t }}</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+  <div class="mt-8" style="max-width: 560px;">
+    <h2 class="h4">{{ 'customer.addresses.add_new' | t }}</h2>
+    {%- form 'customer_address', customer.new_address, class: 'stack mt-5' -%}
+      <div class="grid grid--2">
+        <div class="field">
+          <label class="field__label" for="addr-first">{{ 'customer.addresses.first_name' | t }}</label>
+          <input class="input" id="addr-first" type="text" name="address[first_name]" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label class="field__label" for="addr-last">{{ 'customer.addresses.last_name' | t }}</label>
+          <input class="input" id="addr-last" type="text" name="address[last_name]" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="addr-1">{{ 'customer.addresses.address1' | t }}</label>
+        <input class="input" id="addr-1" type="text" name="address[address1]" autocomplete="address-line1">
+      </div>
+      <div class="field">
+        <label class="field__label" for="addr-2">{{ 'customer.addresses.address2' | t }}</label>
+        <input class="input" id="addr-2" type="text" name="address[address2]" autocomplete="address-line2">
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label class="field__label" for="addr-zip">{{ 'customer.addresses.zip' | t }}</label>
+          <input class="input" id="addr-zip" type="text" name="address[zip]" autocomplete="postal-code">
+        </div>
+        <div class="field">
+          <label class="field__label" for="addr-city">{{ 'customer.addresses.city' | t }}</label>
+          <input class="input" id="addr-city" type="text" name="address[city]" autocomplete="address-level2">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="addr-country">{{ 'customer.addresses.country' | t }}</label>
+        <select class="select" id="addr-country" name="address[country]" data-default="France">
+          {{ country_option_tags }}
+        </select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="addr-phone">{{ 'customer.addresses.phone' | t }}</label>
+        <input class="input" id="addr-phone" type="tel" name="address[phone]" autocomplete="tel">
+      </div>
+      <button type="submit" class="btn btn--primary">{{ 'customer.addresses.save' | t }}</button>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Adresses", "settings": [] }
+{% endschema %}

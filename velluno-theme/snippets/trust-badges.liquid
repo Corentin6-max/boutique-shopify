@@ -1,0 +1,21 @@
+{%- comment -%}
+  Payment marks as monochrome inline SVG — no external image, no logo file.
+  Deliberately abstract wordmarks: they signal the accepted methods without
+  reproducing brand artwork we have no licence to bundle.
+
+  Accepts:
+  - class {String}
+  - show_label {Boolean}
+{%- endcomment -%}
+<div class="trust-badges{% if class %} {{ class }}{% endif %}">
+  {%- if show_label -%}
+    <span class="trust-badges__label">{{ 'shipping.payment_label' | t }}</span>
+  {%- endif -%}
+  {%- assign marks = 'CB,VISA,Mastercard,PayPal,Apple Pay' | split: ',' -%}
+  {%- for mark in marks -%}
+    <svg viewBox="0 0 62 24" role="img" aria-label="{{ mark }}" width="62" height="24">
+      <rect x="0.6" y="0.6" width="60.8" height="22.8" rx="3" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"/>
+      <text x="31" y="15.6" text-anchor="middle" font-family="-apple-system, Segoe UI, Roboto, sans-serif" font-size="8.5" font-weight="600" letter-spacing=".3" fill="currentColor">{{ mark }}</text>
+    </svg>
+  {%- endfor -%}
+</div>

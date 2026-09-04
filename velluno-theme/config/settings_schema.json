@@ -1,0 +1,220 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "VELLUNO",
+    "theme_version": "1.0.0",
+    "theme_author": "VELLUNO",
+    "theme_documentation_url": "https://velluno.fr",
+    "theme_support_url": "https://velluno.fr/pages/contact"
+  },
+  {
+    "name": "Marque",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Identité"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (facultatif)",
+        "info": "Laissez vide pour utiliser le monogramme VELLUNO intégré au thème (SVG, aucun chargement réseau)."
+      },
+      {
+        "type": "select",
+        "id": "logo_variant",
+        "label": "Variante du logo intégré",
+        "options": [
+          { "value": "wordmark", "label": "Mot-symbole seul" },
+          { "value": "mark", "label": "Goutte d'eau + mot-symbole" }
+        ],
+        "default": "wordmark"
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Hauteur du logo",
+        "min": 16,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "default": 26
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Signature de marque",
+        "default": "L'essentiel, pensé pour eux."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "PNG carré, 512 × 512 px minimum."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image de partage par défaut (Open Graph)",
+        "info": "1200 × 630 px. Utilisée quand la page n'a pas d'image propre."
+      }
+    ]
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Ces valeurs alimentent les variables CSS du thème. Vérifiez le contraste (AA minimum) après toute modification."
+      },
+      { "type": "color", "id": "color_ink", "label": "Encre — texte principal", "default": "#1C1C1A" },
+      { "type": "color", "id": "color_bone", "label": "Ivoire — fond principal", "default": "#FAF8F4" },
+      { "type": "color", "id": "color_sand", "label": "Sable — surfaces secondaires", "default": "#EDE6DA" },
+      { "type": "color", "id": "color_sage", "label": "Sauge — accent botanique", "default": "#6E7F6B" },
+      { "type": "color", "id": "color_clay", "label": "Argile — accent chaud, badges promo", "default": "#C08457" },
+      { "type": "color", "id": "color_steel", "label": "Acier — gris technique", "default": "#8A9299" },
+      { "type": "color", "id": "color_success", "label": "Succès", "default": "#2F7D5C" },
+      { "type": "color", "id": "color_error", "label": "Erreur", "default": "#B3261E" }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Titres",
+        "default": "georgia",
+        "info": "Une serif éditoriale. Fraunces ou Instrument Serif si votre plan Shopify les propose."
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Texte courant",
+        "default": "system",
+        "info": "Une sans neutre. Inter si disponible, sinon la pile système (aucun téléchargement)."
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "label": "Échelle du texte courant",
+        "min": 90,
+        "max": 115,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "font_heading_weight",
+        "label": "Graisse des titres",
+        "min": 400,
+        "max": 700,
+        "step": 100,
+        "default": 500
+      }
+    ]
+  },
+  {
+    "name": "Livraison & garanties",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Ces valeurs sont affichées sur la fiche produit, dans le panier, dans le pied de page et sur /pages/livraison. Elles doivent correspondre exactement à vos conditions réelles et à vos tarifs Shopify (Paramètres → Livraison)."
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Seuil de livraison offerte (€)",
+        "default": 39
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_product_handle",
+        "label": "Handle du produit toujours livré gratuitement",
+        "default": "fontaine-eau-velluno-7l-inox",
+        "info": "Ce produit déclenche la livraison offerte quel que soit le montant du panier."
+      },
+      {
+        "type": "number",
+        "id": "shipping_min_days",
+        "label": "Délai de réception minimum (jours ouvrés)",
+        "default": 5
+      },
+      {
+        "type": "number",
+        "id": "shipping_max_days",
+        "label": "Délai de réception maximum (jours ouvrés)",
+        "default": 12
+      },
+      {
+        "type": "number",
+        "id": "shipping_cutoff_hour",
+        "label": "Heure limite de traitement (0–23)",
+        "default": 14,
+        "info": "Au-delà, l'estimation part du jour ouvré suivant."
+      },
+      {
+        "type": "number",
+        "id": "returns_days",
+        "label": "Durée de retour offerte (jours)",
+        "default": 90
+      },
+      {
+        "type": "checkbox",
+        "id": "show_installments",
+        "label": "Afficher le paiement en 4 fois sous le prix",
+        "default": true,
+        "info": "N'activez que si PayPal Pay ou Klarna est réellement actif sur votre boutique."
+      }
+    ]
+  },
+  {
+    "name": "Service client",
+    "settings": [
+      { "type": "text", "id": "contact_email", "label": "E-mail du service client", "default": "contact@velluno.fr" },
+      { "type": "text", "id": "support_hours", "label": "Disponibilité affichée", "default": "Réponse sous 24 h ouvrées, du lundi au vendredi." },
+      { "type": "header", "content": "Réseaux sociaux" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" }
+    ]
+  },
+  {
+    "name": "Confidentialité",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_cookie_banner",
+        "label": "Afficher la bannière cookies",
+        "default": true,
+        "info": "Refuser doit rester aussi simple qu'accepter (CNIL). Le thème n'active aucun script tiers avant consentement."
+      },
+      {
+        "type": "url",
+        "id": "cookie_policy_url",
+        "label": "Lien vers la page Cookies"
+      }
+    ]
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Comportement du panier",
+        "options": [
+          { "value": "drawer", "label": "Tiroir latéral" },
+          { "value": "page", "label": "Page panier" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Autoriser une note de commande",
+        "default": false
+      }
+    ]
+  }
+]

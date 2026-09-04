@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Visuel à venir">
+  <rect width="900" height="900" fill="#EDE6DA"/>
+  <circle cx="450" cy="430" r="180" fill="none" stroke="#CBBFA9" stroke-width="5"/>
+  <path d="M450 320s54 60 54 96a54 54 0 0 1-108 0c0-36 54-96 54-96z" fill="none" stroke="#B9AB93" stroke-width="5" stroke-linejoin="round"/>
+  <text x="450" y="720" text-anchor="middle" font-family="Georgia, serif" font-size="22" letter-spacing="5" fill="#A2937C">VELLUNO</text>
+</svg>

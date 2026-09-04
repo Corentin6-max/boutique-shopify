@@ -1,0 +1,21 @@
+{%- comment -%}
+  Maps a French colour option value to a hex swatch.
+  Kept as a snippet so the catalogue and the theme editor never drift apart.
+  An unknown value falls back to the sand surface rather than rendering black.
+
+  Accepts:
+  - value {String} the option value, e.g. "Vert sauge"
+{%- endcomment -%}
+{%- case value -%}
+  {%- when 'Vert sauge' -%}#6E7F6B
+  {%- when 'Gris ardoise' -%}#5A6169
+  {%- when 'Rose argile' -%}#C89A8E
+  {%- when 'Noir' -%}#1C1C1A
+  {%- when 'Bleu ciel' -%}#A8C4D8
+  {%- when 'Bleu' -%}#4A7BA7
+  {%- when 'Vert' -%}#5B8C5A
+  {%- when 'Rose' -%}#D98BA5
+  {%- when 'Rouge' -%}#B3413A
+  {%- when 'Jaune' -%}#E0B450
+  {%- else -%}#EDE6DA
+{%- endcase -%}
