@@ -17,7 +17,7 @@
       </button>
 
       <nav class="header__nav" aria-label="{{ linklists[section.settings.menu].title | default: 'Menu' }}">
-        {%- for link in linklists[section.settings.menu].links limit: 5 -%}
+        {%- for link in linklists[section.settings.menu].links limit: 4 -%}
           <a class="nav-link" href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
         {%- endfor -%}
       </nav>
