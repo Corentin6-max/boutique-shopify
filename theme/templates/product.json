@@ -154,32 +154,40 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "q01": {
           "type": "question",
           "settings": {
-            "question": "Comment choisir la bonne taille ?",
-            "answer": "<p>Les dimensions exactes sont indiquées dans la description. En cas de doute, écrivez-nous le gabarit de votre animal, on vous oriente.</p>"
+            "question": "À quelle fréquence dois-je changer les filtres ?",
+            "answer": "<p>Comptez <strong>deux à trois semaines</strong> par filtre, selon le nombre d'animaux et la dureté de votre eau. Un filtre saturé ne retient plus rien : c'est ce qui fait la différence entre une eau claire et une eau qui stagne. Nos recharges existent en lots de 10, 20 ou 30 filtres, de quoi tenir plusieurs mois sans y penser.</p>"
           }
         },
-        "q2": {
+        "q02": {
           "type": "question",
           "settings": {
-            "question": "Est-ce lavable au lave-vaisselle ?",
-            "answer": "<p>Les pièces en silicone et en acier inoxydable oui, panier supérieur. Les parties électroniques se nettoient à la main.</p>"
+            "question": "Est-ce difficile à nettoyer ?",
+            "answer": "<p>Le nettoyage prend <strong>moins de 5 minutes</strong>. Tout se démonte sans outil et les pièces en acier inoxydable passent au lave-vaisselle, panier supérieur. Pas de recoins inaccessibles ni de micro-pièces à récupérer.</p>"
           }
         },
-        "q3": {
+        "q03": {
           "type": "question",
           "settings": {
-            "question": "Et si le produit ne convient pas ?",
-            "answer": "<p>Vous avez 30 jours pour nous le renvoyer et être remboursé, même utilisé.</p>"
+            "question": "Et si mon chien n'aime pas ça ?",
+            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>30 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
+          }
+        },
+        "q04": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps prend la livraison ?",
+            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 3 à 6 pour la Belgique et le Luxembourg. Livraison offerte dès 49€, sinon 4,90€ en suivi.</p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3"
+        "q01",
+        "q02",
+        "q03",
+        "q04"
       ],
       "settings": {
         "eyebrow": "",
@@ -190,7 +198,12 @@
         "color_scheme": "default",
         "padding_top": 40,
         "padding_bottom": 80,
-        "show_help_card": false
+        "show_help_card": false,
+        "item_style": "card",
+        "card_background": "#f6ecd9",
+        "card_border_open": "#d9a441",
+        "question_color": "#12233f",
+        "answer_color": "#2b4a7d"
       }
     }
   },

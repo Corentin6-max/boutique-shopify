@@ -335,64 +335,126 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "q01": {
           "type": "question",
           "settings": {
-            "question": "Quels sont les délais de livraison ?",
-            "answer": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 4 à 8 jours pour la Belgique et la Suisse.</p>"
+            "question": "À quelle fréquence dois-je changer les filtres ?",
+            "answer": "<p>Comptez <strong>deux à trois semaines</strong> par filtre, selon le nombre d'animaux et la dureté de votre eau. Un filtre saturé ne retient plus rien : c'est ce qui fait la différence entre une eau claire et une eau qui stagne. Nos recharges existent en lots de 10, 20 ou 30 filtres, de quoi tenir plusieurs mois sans y penser.</p>"
           }
         },
-        "q2": {
+        "q02": {
           "type": "question",
           "settings": {
-            "question": "La livraison est-elle offerte ?",
-            "answer": "<p>Oui, dès 49€ d'achat. En dessous, la livraison suivie est à 4,90€.</p>"
+            "question": "La fontaine Velluno est-elle sans danger pour les chiens ?",
+            "answer": "<p>Oui. Le bassin est en <strong>acier inoxydable 304</strong>, sans BPA, et la partie électrique reste hors de l'eau grâce à la recharge sans fil. Aucune petite pièce détachable qu'un chien pourrait avaler.</p>"
           }
         },
-        "q3": {
+        "q03": {
           "type": "question",
           "settings": {
-            "question": "Puis-je retourner un produit ?",
-            "answer": "<p>Vous avez 30 jours après réception. Écrivez-nous, nous vous envoyons une étiquette de retour et vous remboursons dès réception du colis.</p>"
+            "question": "Mon chien va-t-il vraiment boire plus d'eau ?",
+            "answer": "<p>La plupart des chiens et des chats préfèrent <strong>l'eau en mouvement</strong> : elle reste fraîche, oxygénée et sans odeur, là où une gamelle stagne en quelques heures. C'est tout le principe de la fontaine. Si votre animal reste indifférent, vous avez 30 jours pour nous la renvoyer.</p>"
           }
         },
-        "q4": {
+        "q04": {
           "type": "question",
           "settings": {
-            "question": "Les matériaux sont-ils sans danger ?",
-            "answer": "<p>Oui. Silicone alimentaire, acier inoxydable 304 et caoutchouc non toxique, sans BPA. Les détails figurent sur chaque fiche produit.</p>"
+            "question": "La fontaine est-elle bruyante ?",
+            "answer": "<p>Non. La pompe tourne <strong>sous 30 dB</strong>, soit moins qu'un réfrigérateur. Tant que le niveau d'eau reste au-dessus du minimum, vous ne l'entendez pas, y compris la nuit dans une chambre.</p>"
           }
         },
-        "q5": {
+        "q05": {
           "type": "question",
           "settings": {
-            "question": "À quelle fréquence changer le filtre de la fontaine ?",
-            "answer": "<p>Toutes les 2 à 4 semaines selon le nombre d'animaux. Nos lots de 10, 20 ou 30 filtres couvrent facilement une année.</p>"
+            "question": "Quelle est l'autonomie de la batterie ?",
+            "answer": "<p>Le capteur ne déclenche le débit que lorsqu'un animal s'approche, ce qui économise beaucoup d'énergie. Comptez <strong>plusieurs semaines</strong> entre deux recharges pour un foyer d'un à deux animaux. La recharge est sans fil : aucun câble dans le bassin.</p>"
+          }
+        },
+        "q06": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je la placer n'importe où ?",
+            "answer": "<p>Oui, sur une surface plane et stable. Pas besoin de prise à proximité puisqu'elle fonctionne sur batterie. Évitez simplement le plein soleil, qui favorise les algues. Un tapis en silicone dessous garde le sol sec.</p>"
+          }
+        },
+        "q07": {
+          "type": "question",
+          "settings": {
+            "question": "Que faire si j'ai des questions ou si j'ai besoin d'aide ?",
+            "answer": "<p>Écrivez à <strong>bonjour@velluno.fr</strong>. Une vraie personne vous répond sous 24 h ouvrées, du lundi au vendredi de 9h à 18h. Une photo ou une courte vidéo nous aide à répondre du premier coup.</p>"
+          }
+        },
+        "q08": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce difficile à nettoyer ?",
+            "answer": "<p>Le nettoyage prend <strong>moins de 5 minutes</strong>. Tout se démonte sans outil et les pièces en acier inoxydable passent au lave-vaisselle, panier supérieur. Pas de recoins inaccessibles ni de micro-pièces à récupérer.</p>"
+          }
+        },
+        "q09": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle quantité d'eau peut-elle contenir ?",
+            "answer": "<p><strong>7 litres</strong>, soit environ une semaine d'autonomie pour un ou deux animaux. Une fenêtre de niveau sur le côté indique quand remplir, et l'arrêt automatique protège la pompe si le bassin se vide.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "La fontaine convient-elle à plusieurs chiens ?",
+            "answer": "<p>Oui. Le bassin est assez large pour que deux animaux boivent en même temps, et les 7 litres sont justement pensés pour les foyers multi-animaux. Prévoyez simplement de changer le filtre un peu plus souvent.</p>"
+          }
+        },
+        "q11": {
+          "type": "question",
+          "settings": {
+            "question": "Et si mon chien n'aime pas ça ?",
+            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>30 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
+          }
+        },
+        "q12": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps prend la livraison ?",
+            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 3 à 6 pour la Belgique et le Luxembourg. Livraison offerte dès 49€, sinon 4,90€ en suivi.</p>"
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5"
+        "q01",
+        "q02",
+        "q03",
+        "q04",
+        "q05",
+        "q06",
+        "q07",
+        "q08",
+        "q09",
+        "q10",
+        "q11",
+        "q12"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "Questions fréquentes",
+        "text": "",
         "footer_text": "",
-        "open_first": true,
+        "open_first": false,
         "enable_schema": true,
-        "color_scheme": "default",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "show_help_card": true,
+        "show_help_card": false,
         "help_heading": "Besoin d'aide ?",
         "help_text": "<p>Une question sur une taille, une commande ou un produit ? Écrivez-nous, une vraie personne vous répond sous 24 h ouvrées.</p>",
         "help_button_label": "Nous contacter",
         "help_button_link": "",
-        "help_note": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h"
+        "help_note": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h",
+        "item_style": "card",
+        "card_background": "#f6ecd9",
+        "card_border_open": "#d9a441",
+        "question_color": "#12233f",
+        "answer_color": "#2b4a7d",
+        "color_scheme": "default",
+        "padding_top": 72,
+        "padding_bottom": 96
       }
     },
     "ritual": {

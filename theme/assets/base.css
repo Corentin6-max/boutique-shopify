@@ -1193,7 +1193,7 @@ textarea { min-height: 12rem; resize: vertical; }
   gap: 5rem;
   align-items: start;
 }
-.faq__layout--single { grid-template-columns: minmax(0, 1fr); max-width: 78rem; margin: 0 auto; }
+.faq__layout--single { grid-template-columns: minmax(0, 1fr); max-width: 94rem; margin: 0 auto; }
 @media screen and (max-width: 989px) {
   .faq__layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
 }
@@ -1224,3 +1224,51 @@ textarea { min-height: 12rem; resize: vertical; }
 .faq__layout--single .faq__heading { margin-bottom: 3.6rem; }
 .faq__intro { text-align: center; color: var(--color-text-muted); margin-bottom: 2.4rem; }
 .faq__footer { margin-top: 2.4rem; font-size: 1.35rem; }
+
+/* --- FAQ: pill cards ------------------------------------------------------- */
+.accordion--card {
+  border-top: 0;
+  display: grid;
+  gap: 1.2rem;
+}
+.accordion--card .accordion__item {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--faq-card, #f6ecd9);
+  padding-inline: 2.2rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.accordion--card .accordion__item[open] {
+  border-color: var(--faq-card-border, #d9a441);
+}
+.accordion--card .accordion__summary {
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1.9rem 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--faq-question, #12233f);
+}
+.accordion--card .accordion__icon {
+  color: var(--faq-question, #12233f);
+  transform: none;
+  margin-top: 0.1rem;
+}
+.accordion--card .accordion__item[open] .accordion__icon { transform: none; }
+.accordion__icon-open { display: none; }
+.accordion--card .accordion__item[open] .accordion__icon-closed { display: none; }
+.accordion--card .accordion__item[open] .accordion__icon-open { display: block; }
+.accordion--card .accordion__content {
+  padding: 0 5rem 2.1rem 0;
+  color: var(--faq-answer, #2b4a7d);
+  font-size: 1.45rem;
+  line-height: 1.6;
+}
+.accordion--card .accordion__content strong { color: var(--faq-question, #12233f); font-weight: 700; }
+.accordion--card .accordion__content a { color: inherit; }
+@media screen and (max-width: 749px) {
+  .accordion--card .accordion__item { padding-inline: 1.6rem; }
+  .accordion--card .accordion__summary { font-size: 1.45rem; gap: 1.2rem; padding: 1.6rem 0; }
+  .accordion--card .accordion__content { padding-right: 0; font-size: 1.4rem; }
+}

@@ -1,4 +1,13 @@
-<section class="section faq scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+<section
+  class="section faq scheme-{{ section.settings.color_scheme }}"
+  style="
+    --pt: {{ section.settings.padding_top }}px;
+    --pb: {{ section.settings.padding_bottom }}px;
+    --faq-card: {{ section.settings.card_background }};
+    --faq-card-border: {{ section.settings.card_border_open }};
+    --faq-question: {{ section.settings.question_color }};
+    --faq-answer: {{ section.settings.answer_color }};
+  ">
   <div class="page-width">
     <div class="faq__layout{% unless section.settings.show_help_card %} faq__layout--single{% endunless %}">
       {%- if section.settings.show_help_card -%}
@@ -33,12 +42,19 @@
           <div class="rte faq__intro">{{ section.settings.text }}</div>
         {%- endif -%}
 
-        <div class="accordion">
+        <div class="accordion accordion--{{ section.settings.item_style }}">
           {%- for block in section.blocks -%}
             <details class="accordion__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
               <summary class="accordion__summary">
                 {{ block.settings.question }}
-                <span class="accordion__icon">{% render 'icon', icon: 'plus', size: 20 %}</span>
+                <span class="accordion__icon">
+                  {%- if section.settings.item_style == 'card' -%}
+                    <span class="accordion__icon-closed">{% render 'icon', icon: 'circle-plus', size: 26 %}</span>
+                    <span class="accordion__icon-open">{% render 'icon', icon: 'circle-minus', size: 26 %}</span>
+                  {%- else -%}
+                    {% render 'icon', icon: 'plus', size: 20 %}
+                  {%- endif -%}
+                </span>
               </summary>
               <div class="accordion__content rte">{{ block.settings.answer }}</div>
             </details>
@@ -92,6 +108,14 @@
     { "type": "text", "id": "help_note", "label": "Note sous le bouton", "default": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h" },
 
     { "type": "header", "content": "Style" },
+    { "type": "select", "id": "item_style", "label": "Style des questions", "options": [
+      { "value": "row", "label": "Lignes séparées par un filet" },
+      { "value": "card", "label": "Pastilles beiges" }
+    ], "default": "card" },
+    { "type": "color", "id": "card_background", "label": "Fond des pastilles", "default": "#f6ecd9" },
+    { "type": "color", "id": "card_border_open", "label": "Bordure de la pastille ouverte", "default": "#d9a441" },
+    { "type": "color", "id": "question_color", "label": "Couleur des questions", "default": "#12233f" },
+    { "type": "color", "id": "answer_color", "label": "Couleur des réponses", "default": "#2b4a7d" },
     { "type": "select", "id": "color_scheme", "label": "Palette", "options": [
       { "value": "default", "label": "Par défaut" }, { "value": "surface", "label": "Blanc" },
       { "value": "soft", "label": "Vert clair" }, { "value": "band", "label": "Gris clair" }, { "value": "accent", "label": "Vert foncé" }
