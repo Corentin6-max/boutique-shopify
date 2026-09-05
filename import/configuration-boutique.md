@@ -84,7 +84,7 @@ et `footer` pour le pied de page.
 <li><strong>Les pièces de rechange.</strong> Un filtre, un joint ou une pompe doivent pouvoir se remplacer sans racheter tout l'appareil.</li>
 </ul>
 <h2>Nos engagements</h2>
-<p>Livraison offerte dès 49€, expédition sous 24 h ouvrées, et 30 jours pour changer d'avis — même si le produit a servi. Si votre animal boude, ce n'est pas à vous de payer l'essai.</p>
+<p>Livraison offerte sur toutes les commandes, expédition sous 24 h ouvrées, et 90 jours pour changer d'avis — même si le produit a servi. Si votre animal boude, ce n'est pas à vous de payer l'essai.</p>
 <p>Une question ? Écrivez à <a href="mailto:bonjour@velluno.fr">bonjour@velluno.fr</a>. C'est une vraie personne qui répond, sous 24 h ouvrées.</p>
 ```
 
@@ -95,13 +95,13 @@ et `footer` pour le pied de page.
 <p>Toutes les commandes passées avant 14 h (du lundi au vendredi) partent le jour même. Les autres partent le jour ouvré suivant.</p>
 <table>
 <tr><th>Destination</th><th>Délai</th><th>Tarif</th></tr>
-<tr><td>France métropolitaine</td><td>2 à 5 jours ouvrés</td><td>4,90€ — offert dès 49€</td></tr>
-<tr><td>Belgique, Luxembourg</td><td>3 à 6 jours ouvrés</td><td>6,90€ — offert dès 69€</td></tr>
-<tr><td>Suisse</td><td>4 à 8 jours ouvrés</td><td>9,90€</td></tr>
+<tr><td>France métropolitaine</td><td>2 à 5 jours ouvrés</td><td>Offerte</td></tr>
+<tr><td>Belgique, Luxembourg</td><td>3 à 6 jours ouvrés</td><td>Offerte</td></tr>
+<tr><td>Suisse</td><td>4 à 8 jours ouvrés</td><td>Offerte</td></tr>
 </table>
 <p>Un numéro de suivi vous est envoyé par e-mail dès la prise en charge du colis.</p>
 <h2>Retours</h2>
-<p>Vous disposez de <strong>30 jours après réception</strong> pour nous retourner un article, même utilisé. Écrivez-nous à <a href="mailto:bonjour@velluno.fr">bonjour@velluno.fr</a> avec votre numéro de commande : nous vous envoyons une étiquette de retour.</p>
+<p>Vous disposez de <strong>90 jours après réception</strong> pour nous retourner un article, même utilisé. Écrivez-nous à <a href="mailto:bonjour@velluno.fr">bonjour@velluno.fr</a> avec votre numéro de commande : nous vous envoyons une étiquette de retour.</p>
 <p>Le remboursement est effectué sur le moyen de paiement d'origine sous 5 jours ouvrés après réception du colis.</p>
 <p>Pour des raisons d'hygiène, les filtres déjà ouverts ne peuvent pas être repris, sauf défaut de fabrication.</p>
 <h2>Commande abîmée ou incomplète</h2>
@@ -120,8 +120,11 @@ Laissez une phrase d'accueil : le formulaire est ajouté automatiquement par le 
 
 ## 5. Réglages à vérifier
 
-- **Paramètres → Livraison** : créer un palier « offert à partir de 49€ », pour rester cohérent
-  avec la barre de progression du panier (réglée sur 49 dans le thème).
+- **Paramètres → Livraison** : créer un tarif « Livraison offerte » à 0€ sur toutes les zones
+  desservies. Le thème annonce la livraison gratuite sans minimum à cinq endroits (barre
+  d'annonce, garanties sous la FAQ, fiche produit, FAQ, page Livraison) : si vous préférez
+  un seuil, il faut modifier ces cinq textes et réactiver la barre de progression du panier
+  (**Personnaliser → Paramètres du thème → Panier**).
 - **Paramètres → Politiques** : générer remboursement, confidentialité, CGV, expédition,
   mentions légales, puis les relire.
 - **Boutique en ligne → Préférences** : titre et méta-description de la boutique.

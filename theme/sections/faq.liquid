@@ -1,3 +1,7 @@
+{%- liquid
+  assign questions = section.blocks | where: 'type', 'question'
+  assign guarantees = section.blocks | where: 'type', 'guarantee'
+-%}
 <section
   class="section faq scheme-{{ section.settings.color_scheme }}"
   style="
@@ -20,7 +24,10 @@
               <div class="help-card__text rte">{{ section.settings.help_text }}</div>
             {%- endif -%}
             {%- if section.settings.help_button_label != blank -%}
-              <a class="button" href="{{ section.settings.help_button_link | default: routes.root_url }}">
+              <a
+                class="button button--full help-card__button"
+                href="{{ section.settings.help_button_link | default: routes.root_url }}"
+                style="background: {{ section.settings.help_button_background }}; border-color: {{ section.settings.help_button_background }}; color: {{ section.settings.help_button_text_color }};">
                 {{ section.settings.help_button_label }}
               </a>
             {%- endif -%}
@@ -36,14 +43,14 @@
           <p class="eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="faq__heading">{{ section.settings.heading }}</h2>
+          <h2 class="faq__heading faq__heading--{{ section.settings.heading_alignment }}">{{ section.settings.heading }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
           <div class="rte faq__intro">{{ section.settings.text }}</div>
         {%- endif -%}
 
         <div class="accordion accordion--{{ section.settings.item_style }}">
-          {%- for block in section.blocks -%}
+          {%- for block in questions -%}
             <details class="accordion__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
               <summary class="accordion__summary">
                 {{ block.settings.question }}
@@ -52,7 +59,7 @@
                     <span class="accordion__icon-closed">{% render 'icon', icon: 'circle-plus', size: 26 %}</span>
                     <span class="accordion__icon-open">{% render 'icon', icon: 'circle-minus', size: 26 %}</span>
                   {%- else -%}
-                    {% render 'icon', icon: 'plus', size: 20 %}
+                    {% render 'icon', icon: 'chevron-down', size: 20 %}
                   {%- endif -%}
                 </span>
               </summary>
@@ -66,16 +73,32 @@
         {%- endif -%}
       </div>
     </div>
+
+    {%- if guarantees.size > 0 -%}
+      <div class="faq__guarantees" style="--guarantee-columns: {{ guarantees.size | at_least: 1 | at_most: 4 }};">
+        {%- for block in guarantees -%}
+          <div class="guarantee" {{ block.shopify_attributes }}>
+            <span class="guarantee__icon">{% render 'icon', icon: block.settings.icon, size: 30 %}</span>
+            <div>
+              <h3 class="guarantee__title">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="guarantee__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
-{%- if section.settings.enable_schema and section.blocks.size > 0 -%}
+{%- if section.settings.enable_schema and questions.size > 0 -%}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {%- for block in section.blocks -%}
+        {%- for block in questions -%}
           {
             "@type": "Question",
             "name": {{ block.settings.question | json }},
@@ -94,31 +117,38 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
     { "type": "text", "id": "heading", "label": "Titre", "default": "Questions fréquentes" },
+    { "type": "select", "id": "heading_alignment", "label": "Alignement du titre", "options": [
+      { "value": "left", "label": "À gauche" },
+      { "value": "center", "label": "Centré" }
+    ], "default": "left" },
     { "type": "richtext", "id": "text", "label": "Texte d'introduction" },
     { "type": "text", "id": "footer_text", "label": "Texte de bas de section" },
-    { "type": "checkbox", "id": "open_first", "label": "Ouvrir la première question", "default": true },
+    { "type": "checkbox", "id": "open_first", "label": "Ouvrir la première question", "default": false },
     { "type": "checkbox", "id": "enable_schema", "label": "Ajouter les données structurées FAQ", "default": true },
 
     { "type": "header", "content": "Encadré d'aide" },
-    { "type": "checkbox", "id": "show_help_card", "label": "Afficher l'encadré « Besoin d'aide ? »", "default": true },
+    { "type": "checkbox", "id": "show_help_card", "label": "Afficher l'encadré", "default": true },
     { "type": "text", "id": "help_heading", "label": "Titre de l'encadré", "default": "Besoin d'aide ?" },
-    { "type": "richtext", "id": "help_text", "label": "Texte", "default": "<p>Une question sur une taille, une commande ou un produit ? Écrivez-nous, une vraie personne vous répond sous 24 h ouvrées.</p>" },
-    { "type": "text", "id": "help_button_label", "label": "Bouton", "default": "Nous contacter" },
+    { "type": "richtext", "id": "help_text", "label": "Texte" },
+    { "type": "text", "id": "help_button_label", "label": "Bouton", "default": "Contacter notre équipe" },
     { "type": "url", "id": "help_button_link", "label": "Lien du bouton" },
-    { "type": "text", "id": "help_note", "label": "Note sous le bouton", "default": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h" },
+    { "type": "color", "id": "help_button_background", "label": "Fond du bouton", "default": "#111111" },
+    { "type": "color", "id": "help_button_text_color", "label": "Texte du bouton", "default": "#ffffff" },
+    { "type": "text", "id": "help_note", "label": "Note sous le bouton" },
 
     { "type": "header", "content": "Style" },
     { "type": "select", "id": "item_style", "label": "Style des questions", "options": [
-      { "value": "row", "label": "Lignes séparées par un filet" },
+      { "value": "row", "label": "Lignes avec chevron" },
       { "value": "card", "label": "Pastilles beiges" }
-    ], "default": "card" },
+    ], "default": "row" },
     { "type": "color", "id": "card_background", "label": "Fond des pastilles", "default": "#f6ecd9" },
     { "type": "color", "id": "card_border_open", "label": "Bordure de la pastille ouverte", "default": "#d9a441" },
     { "type": "color", "id": "question_color", "label": "Couleur des questions", "default": "#12233f" },
     { "type": "color", "id": "answer_color", "label": "Couleur des réponses", "default": "#2b4a7d" },
     { "type": "select", "id": "color_scheme", "label": "Palette", "options": [
       { "value": "default", "label": "Par défaut" }, { "value": "surface", "label": "Blanc" },
-      { "value": "soft", "label": "Vert clair" }, { "value": "band", "label": "Gris clair" }, { "value": "accent", "label": "Vert foncé" }
+      { "value": "soft", "label": "Vert clair" }, { "value": "band", "label": "Gris clair" },
+      { "value": "accent", "label": "Vert foncé" }
     ], "default": "default" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Marge haute", "default": 88 },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Marge basse", "default": 88 }
@@ -129,7 +159,21 @@
       "name": "Question",
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "Quels sont les délais de livraison ?" },
-        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine.</p>" }
+        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Nous expédions sous 24 h ouvrées.</p>" }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Garantie",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icône", "options": [
+          { "value": "truck-solid", "label": "Livraison" }, { "value": "rotate-back", "label": "Retours" },
+          { "value": "lock", "label": "Paiement sécurisé" }, { "value": "badge-check", "label": "Garantie" },
+          { "value": "headset", "label": "Service client" }, { "value": "leaf-badge", "label": "Naturel" },
+          { "value": "recycle", "label": "Éco" }, { "value": "check-square", "label": "Coche" }
+        ], "default": "truck-solid" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Livraison gratuite" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Expédiée sous 24 h ouvrées et suivie jusqu'à votre porte." }
       ]
     }
   ],
@@ -137,10 +181,8 @@
     {
       "name": "FAQ",
       "blocks": [
-        { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine.</p>" } },
-        { "type": "question", "settings": { "question": "La livraison est-elle offerte ?", "answer": "<p>Oui, dès 49€ d'achat. En dessous, la livraison suivie est à 4,90€.</p>" } },
-        { "type": "question", "settings": { "question": "Puis-je retourner un produit ?", "answer": "<p>Vous avez 30 jours après réception, même si le produit a servi.</p>" } },
-        { "type": "question", "settings": { "question": "Les matériaux sont-ils sans danger ?", "answer": "<p>Silicone alimentaire, acier inoxydable 304 et caoutchouc non toxique, sans BPA.</p>" } }
+        { "type": "question" }, { "type": "question" }, { "type": "question" },
+        { "type": "guarantee" }
       ]
     }
   ]

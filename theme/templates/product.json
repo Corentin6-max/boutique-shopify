@@ -26,7 +26,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Livraison offerte dès 49€ · Expédié sous 24 h · 30 jours pour changer d'avis.</p>"
+            "text": "<p>Livraison offerte · Expédié sous 24 h · 90 jours pour changer d'avis.</p>"
           }
         },
         "variants": {
@@ -46,7 +46,7 @@
         "benefits": {
           "type": "icon_list",
           "settings": {
-            "items": "Matériaux sans BPA, contrôlés en laboratoire\nExpédition sous 24 h ouvrées\nRetour gratuit sous 30 jours",
+            "items": "Matériaux sans BPA, contrôlés en laboratoire\nExpédition sous 24 h ouvrées\nRetour gratuit sous 90 jours",
             "icon": "sparkle"
           }
         },
@@ -57,7 +57,7 @@
           "type": "accordion",
           "settings": {
             "heading": "Livraison et retours",
-            "content": "<p>Expédition sous 24 h ouvrées. Livraison suivie en 2 à 5 jours en France métropolitaine, offerte dès 49€. Retour possible pendant 30 jours après réception.</p>"
+            "content": "<p>Expédition sous 24 h ouvrées. Livraison offerte et suivie, en 2 à 5 jours en France métropolitaine. Retour possible pendant 90 jours après réception.</p>"
           }
         },
         "care": {
@@ -105,7 +105,7 @@
           "type": "column",
           "settings": {
             "icon": "refresh",
-            "title": "30 jours pour essayer",
+            "title": "Retours sous 90 jours",
             "text": "Retour simple et remboursé."
           }
         },
@@ -172,14 +172,38 @@
           "type": "question",
           "settings": {
             "question": "Et si mon chien n'aime pas ça ?",
-            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>30 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
+            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>90 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
           }
         },
         "q04": {
           "type": "question",
           "settings": {
             "question": "Combien de temps prend la livraison ?",
-            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 3 à 6 pour la Belgique et le Luxembourg. Livraison offerte dès 49€, sinon 4,90€ en suivi.</p>"
+            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>, livraison offerte sur toutes les commandes. Comptez 2 à 5 jours ouvrés pour la France métropolitaine et 3 à 6 jours pour la Belgique, le Luxembourg et la Suisse.</p>"
+          }
+        },
+        "g1": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "truck-solid",
+            "title": "Livraison gratuite",
+            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées et suivie jusqu'à votre porte."
+          }
+        },
+        "g2": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "rotate-back",
+            "title": "Retours sous 90 jours",
+            "text": "90 jours pour changer d'avis, même produit utilisé. Retour simple et remboursement sous 5 jours ouvrés."
+          }
+        },
+        "g3": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "lock",
+            "title": "Paiements sécurisés",
+            "text": "Carte bancaire, PayPal et Apple Pay via Shopify Payments. Vos données bancaires ne transitent jamais par nous."
           }
         }
       },
@@ -187,23 +211,35 @@
         "q01",
         "q02",
         "q03",
-        "q04"
+        "q04",
+        "g1",
+        "g2",
+        "g3"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "Questions fréquentes",
+        "heading_alignment": "left",
+        "text": "",
         "footer_text": "",
         "open_first": false,
         "enable_schema": false,
-        "color_scheme": "default",
-        "padding_top": 40,
-        "padding_bottom": 80,
-        "show_help_card": false,
-        "item_style": "card",
+        "show_help_card": true,
+        "help_heading": "Besoin d'aide ?",
+        "help_text": "",
+        "help_button_label": "Contacter notre équipe",
+        "help_button_link": "",
+        "help_button_background": "#111111",
+        "help_button_text_color": "#ffffff",
+        "help_note": "",
+        "item_style": "row",
         "card_background": "#f6ecd9",
         "card_border_open": "#d9a441",
         "question_color": "#12233f",
-        "answer_color": "#2b4a7d"
+        "answer_color": "#2b4a7d",
+        "color_scheme": "default",
+        "padding_top": 40,
+        "padding_bottom": 88
       }
     }
   },

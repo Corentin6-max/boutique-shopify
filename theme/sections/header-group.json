@@ -8,13 +8,13 @@
         "announcement-1": {
           "type": "announcement",
           "settings": {
-            "text": "Livraison offerte dès 49€"
+            "text": "Livraison offerte, sans minimum"
           }
         },
         "announcement-2": {
           "type": "announcement",
           "settings": {
-            "text": "30 jours pour changer d’avis"
+            "text": "90 jours pour changer d’avis"
           }
         }
       },

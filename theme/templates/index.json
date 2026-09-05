@@ -28,14 +28,14 @@
         "m1": {
           "type": "item",
           "settings": {
-            "text": "Livraison offerte dès 49€",
+            "text": "Livraison offerte, sans minimum",
             "icon": "truck"
           }
         },
         "m2": {
           "type": "item",
           "settings": {
-            "text": "Retours 30 jours",
+            "text": "Retours sous 90 jours",
             "icon": "refresh"
           }
         },
@@ -105,7 +105,7 @@
           "type": "column",
           "settings": {
             "icon": "check-square",
-            "title": "30 jours pour essayer",
+            "title": "Retours sous 90 jours",
             "text": ""
           }
         },
@@ -264,7 +264,7 @@
         "s3": {
           "type": "step",
           "settings": {
-            "title": "Vous testez 30 jours",
+            "title": "Vous testez 90 jours",
             "text": "Si votre animal boude, on reprend le produit et on vous rembourse."
           }
         }
@@ -353,7 +353,7 @@
           "type": "question",
           "settings": {
             "question": "Mon chien va-t-il vraiment boire plus d'eau ?",
-            "answer": "<p>La plupart des chiens et des chats préfèrent <strong>l'eau en mouvement</strong> : elle reste fraîche, oxygénée et sans odeur, là où une gamelle stagne en quelques heures. C'est tout le principe de la fontaine. Si votre animal reste indifférent, vous avez 30 jours pour nous la renvoyer.</p>"
+            "answer": "<p>La plupart des chiens et des chats préfèrent <strong>l'eau en mouvement</strong> : elle reste fraîche, oxygénée et sans odeur, là où une gamelle stagne en quelques heures. C'est tout le principe de la fontaine. Si votre animal reste indifférent, vous avez 90 jours pour nous la renvoyer.</p>"
           }
         },
         "q04": {
@@ -409,14 +409,38 @@
           "type": "question",
           "settings": {
             "question": "Et si mon chien n'aime pas ça ?",
-            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>30 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
+            "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>90 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
           }
         },
         "q12": {
           "type": "question",
           "settings": {
             "question": "Combien de temps prend la livraison ?",
-            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 3 à 6 pour la Belgique et le Luxembourg. Livraison offerte dès 49€, sinon 4,90€ en suivi.</p>"
+            "answer": "<p>Expédition sous <strong>24 h ouvrées</strong>, livraison offerte sur toutes les commandes. Comptez 2 à 5 jours ouvrés pour la France métropolitaine et 3 à 6 jours pour la Belgique, le Luxembourg et la Suisse.</p>"
+          }
+        },
+        "g1": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "truck-solid",
+            "title": "Livraison gratuite",
+            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées et suivie jusqu'à votre porte."
+          }
+        },
+        "g2": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "rotate-back",
+            "title": "Retours sous 90 jours",
+            "text": "90 jours pour changer d'avis, même produit utilisé. Retour simple et remboursement sous 5 jours ouvrés."
+          }
+        },
+        "g3": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "lock",
+            "title": "Paiements sécurisés",
+            "text": "Carte bancaire, PayPal et Apple Pay via Shopify Payments. Vos données bancaires ne transitent jamais par nous."
           }
         }
       },
@@ -432,29 +456,35 @@
         "q09",
         "q10",
         "q11",
-        "q12"
+        "q12",
+        "g1",
+        "g2",
+        "g3"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "Questions fréquentes",
+        "heading_alignment": "left",
         "text": "",
         "footer_text": "",
         "open_first": false,
         "enable_schema": true,
-        "show_help_card": false,
+        "show_help_card": true,
         "help_heading": "Besoin d'aide ?",
-        "help_text": "<p>Une question sur une taille, une commande ou un produit ? Écrivez-nous, une vraie personne vous répond sous 24 h ouvrées.</p>",
-        "help_button_label": "Nous contacter",
+        "help_text": "",
+        "help_button_label": "Contacter notre équipe",
         "help_button_link": "",
-        "help_note": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h",
-        "item_style": "card",
+        "help_button_background": "#111111",
+        "help_button_text_color": "#ffffff",
+        "help_note": "",
+        "item_style": "row",
         "card_background": "#f6ecd9",
         "card_border_open": "#d9a441",
         "question_color": "#12233f",
         "answer_color": "#2b4a7d",
         "color_scheme": "default",
         "padding_top": 72,
-        "padding_bottom": 96
+        "padding_bottom": 88
       }
     },
     "ritual": {

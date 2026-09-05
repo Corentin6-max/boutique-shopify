@@ -1201,15 +1201,24 @@ textarea { min-height: 12rem; resize: vertical; }
 @media screen and (max-width: 989px) { .faq__aside { position: static; } }
 
 .help-card {
-  padding: 3.6rem 3rem;
+  padding: 3rem 2.6rem;
   background: var(--color-help-card, #f3ead9);
-  border-radius: 12px;
+  border-radius: 10px;
+  text-align: center;
 }
 .help-card__heading {
-  font-size: calc(2.6rem * var(--font-heading-scale));
-  margin-bottom: 1.4rem;
+  font-size: calc(2.4rem * var(--font-heading-scale));
+  font-weight: 400;
+  margin-bottom: 2rem;
 }
-.help-card__text { font-size: 1.5rem; margin-bottom: 2.4rem; color: var(--color-text); }
+.help-card__text { font-size: 1.5rem; margin-bottom: 2rem; color: var(--color-text); }
+.help-card__button {
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
 .help-card__note {
   margin-top: 1.6rem;
   font-size: 1.3rem;
@@ -1217,11 +1226,12 @@ textarea { min-height: 12rem; resize: vertical; }
 }
 
 .faq__heading {
-  text-align: center;
-  font-size: calc(clamp(2.6rem, 1.4rem + 2vw, 3.6rem) * var(--font-heading-scale));
-  margin-bottom: 2.8rem;
+  font-size: calc(clamp(2.6rem, 1.4rem + 2vw, 3.4rem) * var(--font-heading-scale));
+  margin-bottom: 2.4rem;
 }
-.faq__layout--single .faq__heading { margin-bottom: 3.6rem; }
+.faq__heading--left { text-align: left; }
+.faq__heading--center { text-align: center; }
+.faq__layout--single .faq__heading { margin-bottom: 3.2rem; }
 .faq__intro { text-align: center; color: var(--color-text-muted); margin-bottom: 2.4rem; }
 .faq__footer { margin-top: 2.4rem; font-size: 1.35rem; }
 
@@ -1271,4 +1281,59 @@ textarea { min-height: 12rem; resize: vertical; }
   .accordion--card .accordion__item { padding-inline: 1.6rem; }
   .accordion--card .accordion__summary { font-size: 1.45rem; gap: 1.2rem; padding: 1.6rem 0; }
   .accordion--card .accordion__content { padding-right: 0; font-size: 1.4rem; }
+}
+
+/* --- FAQ: chevron rows ----------------------------------------------------- */
+.accordion--row { border-top: 0; }
+.accordion--row .accordion__item {
+  border-bottom: 1px solid var(--color-border);
+}
+.accordion--row .accordion__summary {
+  padding: 1.4rem 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+.accordion--row .accordion__icon { transform: none; color: var(--color-text); }
+.accordion--row .accordion__item[open] .accordion__icon { transform: rotate(180deg); }
+.accordion--row .accordion__content {
+  padding: 0 4rem 1.8rem 0;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* --- Guarantee row --------------------------------------------------------- */
+.faq__guarantees {
+  display: grid;
+  grid-template-columns: repeat(var(--guarantee-columns, 3), minmax(0, 1fr));
+  gap: 2.4rem;
+  margin-top: 5.6rem;
+}
+@media screen and (max-width: 749px) {
+  .faq__guarantees { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; margin-top: 3.6rem; }
+}
+.guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+  padding: 2.2rem 2.4rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.guarantee__icon { flex: 0 0 auto; line-height: 0; color: var(--color-text); margin-top: 0.2rem; }
+.guarantee__title {
+  font-family: var(--font-body-family);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0 0 0.6rem;
+}
+.guarantee__text {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--color-text-warm, #8a6a55);
 }

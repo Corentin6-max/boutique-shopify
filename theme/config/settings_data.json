@@ -33,7 +33,7 @@
     "card_cta_label": "Voir plus",
     "cart_type": "drawer",
     "cart_show_note": true,
-    "cart_free_shipping_bar": true,
+    "cart_free_shipping_bar": false,
     "cart_free_shipping_threshold": 49,
     "social_instagram_link": "",
     "social_tiktok_link": "",
