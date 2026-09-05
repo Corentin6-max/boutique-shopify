@@ -267,26 +267,6 @@
     if (variantInput && option.dataset.bundleVariant) variantInput.value = option.dataset.bundleVariant;
   });
 
-  /* ------------------------------------------------------------- Quick add */
-  on(document, 'click', async (event) => {
-    const button = event.target.closest('[data-quick-add]');
-    if (!button) return;
-    event.preventDefault();
-    button.classList.add('is-loading');
-    try {
-      await cartRequest(`${window.Shopify && window.Shopify.routes ? window.Shopify.routes.root : '/'}cart/add.js`, {
-        items: [{ id: button.getAttribute('data-quick-add'), quantity: 1 }]
-      });
-      await refreshCart();
-      if (document.body.dataset.cartType === 'drawer') Drawer.open('CartDrawer', button);
-      else toast(button.dataset.addedText || 'Added to cart');
-    } catch (error) {
-      toast(error.message);
-    } finally {
-      button.classList.remove('is-loading');
-    }
-  });
-
   /* ------------------------------------------------------ Announcement bar */
   function initAnnouncement(root) {
     const slides = $$('.announcement-bar__slide', root);

@@ -529,11 +529,9 @@ textarea { min-height: 12rem; resize: vertical; }
 .card__title a { text-decoration: none; }
 .card__title a::after { content: ''; position: absolute; inset: 0; }
 .card__price { margin-top: auto; padding-top: 0.4rem; }
-.card__quick-add { margin-top: 1.2rem; position: relative; z-index: 3; }
-@media screen and (min-width: 990px) {
-  .card__quick-add { opacity: 0; transform: translateY(6px); transition: opacity 0.2s ease, transform 0.2s ease; }
-  .card:hover .card__quick-add, .card:focus-within .card__quick-add { opacity: 1; transform: translateY(0); }
-}
+.card__cta { margin-top: 1.4rem; position: relative; z-index: 3; }
+.card__cta .button { gap: 0.6rem; }
+.card:hover .card__cta .button { background: var(--color-accent); color: var(--color-button-text); }
 
 .product-grid { display: grid; grid-template-columns: repeat(var(--columns, 4), minmax(0, 1fr)); gap: 3rem 2.4rem; }
 @media screen and (max-width: 989px) { .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

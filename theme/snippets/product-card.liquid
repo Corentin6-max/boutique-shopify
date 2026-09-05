@@ -1,6 +1,6 @@
 {%- comment -%}
   Renders a product card.
-  Accepts: product (object), show_vendor (bool), image_ratio (string), quick_add (bool)
+  Accepts: product (object), show_vendor (bool), image_ratio (string), show_cta (bool)
 {%- endcomment -%}
 {%- liquid
   assign ratio_class = 'media--square'
@@ -9,6 +9,11 @@
     assign ratio_class = 'media--portrait'
   elsif ratio == 'adapt'
     assign ratio_class = ''
+  endif
+
+  assign cta_label = settings.card_cta_label
+  if cta_label == blank
+    assign cta_label = 'products.product.view_details' | t
   endif
 -%}
 {%- if product == blank -%}
@@ -19,6 +24,9 @@
     <div class="card__content">
       <h3 class="card__title">{{ 'onboarding.product_title' | t }}</h3>
       <div class="price"><span class="price__regular">{{ 1999 | money }}</span></div>
+      <div class="card__cta">
+        <span class="button button--soft button--small button--full">{{ cta_label }}</span>
+      </div>
     </div>
   </div>
 {%- else -%}
@@ -73,25 +81,12 @@
         {% render 'price', product: product, show_badges: true %}
       </div>
 
-      {%- if quick_add != false and settings.card_quick_add -%}
-        <div class="card__quick-add">
-          {%- if product.variants.size > 1 -%}
-            <a class="button button--soft button--small button--full" href="{{ product.url }}">
-              {{ 'products.product.choose_options' | t }}
-            </a>
-          {%- elsif product.available -%}
-            <button
-              type="button"
-              class="button button--soft button--small button--full"
-              data-quick-add="{{ product.selected_or_first_available_variant.id }}">
-              <span class="loading-spinner"></span>
-              {{ 'products.product.quick_add' | t }}
-            </button>
-          {%- else -%}
-            <span class="button button--soft button--small button--full" aria-disabled="true">
-              {{ 'products.product.sold_out' | t }}
-            </span>
-          {%- endif -%}
+      {%- if show_cta != false and settings.card_show_cta -%}
+        <div class="card__cta">
+          <a class="button button--soft button--small button--full" href="{{ product.url }}">
+            {{ cta_label }}
+            <span class="visually-hidden">— {{ product.title | escape }}</span>
+          </a>
         </div>
       {%- endif -%}
     </div>

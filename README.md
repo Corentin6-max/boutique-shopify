@@ -1,67 +1,47 @@
-# Velluno — thème Shopify + catalogue de démarrage
+# Velluno — thème Shopify
 
-Boutique complète prête à importer dans Shopify : un thème **Online Store 2.0** (Velluno)
-et un fichier d'import produits contenant les 4 articles demandés.
-
-Aucun compte Shopify n'a été utilisé pour construire ce dépôt — tout se fait par import de fichiers.
+Thème **Online Store 2.0** pour la boutique Velluno (velluno.fr), déjà branché sur les
+produits et les collections présents dans le magasin.
 
 ---
 
 ## Contenu du dépôt
 
 ```
-theme/                        le thème Shopify (à zipper et importer)
-dist/velluno-theme.zip        le ZIP prêt à importer (généré par build.sh)
-import/velluno-produits.csv   les 4 produits + leurs 24 variantes
-import/pages-collections-menus.md   collections, menus et pages à créer (contenu prêt à coller)
-build.sh                      régénère le ZIP après modification du thème
+theme/                            le thème Shopify (source)
+dist/velluno-theme.zip            le ZIP prêt à importer (généré par build.sh)
+import/configuration-boutique.md  menus, pages et réglages restant à faire dans l'admin
+build.sh                          régénère le ZIP après modification du thème
 ```
 
 ---
 
-## Installation en 4 étapes
+## Installation en 2 étapes
 
 ### 1. Importer le thème
 `dist/velluno-theme.zip` → **Boutique en ligne → Thèmes → Ajouter un thème → Importer un fichier ZIP**,
 puis **Publier**.
 
-### 2. Importer les produits
-`import/velluno-produits.csv` → **Produits → Importer → Ajouter le fichier**.
-Cochez « Remplacer les produits ayant le même handle » si vous réimportez.
-
-Les 4 produits arrivent avec leurs variantes, prix, prix barrés, SKU, poids, tags, catégories
-Google et descriptions HTML complètes.
-
-> **Les images ne sont pas incluses** (le CSV ne contient pas de colonne `Image Src`) :
-> ajoutez-les depuis la fiche produit, ou remplissez la colonne `Image Src` avec des URLs
-> publiques avant l'import. Comptez 5 à 7 photos par produit.
-
-### 3. Créer collections, menus et pages
-Suivez `import/pages-collections-menus.md` — tout le texte est prêt à copier-coller.
-
-### 4. Régler le thème
-**Personnaliser** → assignez les collections aux sections *Nos best-sellers*, *Trouvez ce qu'il
-vous faut* et *Le coup de cœur*, puis ajoutez vos images dans les sections *Bannière*
-et *Image avec texte*.
+### 2. Créer les menus et les pages
+Suivez `import/configuration-boutique.md` — tout le texte est prêt à copier-coller.
 
 Le logo Velluno est intégré en SVG (il s'affiche sans réglage). Pour le remplacer :
 **Personnaliser → Paramètres du thème → Logo**.
 
 ---
 
-## Les 4 produits importés
+## Produits et collections déjà branchés
 
-| Produit | Variantes | Prix |
-|---|---|---|
-| Jouet à mâcher os en caoutchouc | 6 couleurs × 2 lots = 12 | 1,99€ / 4,99€ |
-| Filtres de rechange pour fontaine | 3 lots (10/20/30) | 6,49€ → 16,49€ |
-| Fontaine à eau 7 L acier inoxydable | 4 packs | 53,99€ → 68,99€ |
-| Tapis de gamelle en silicone | 5 couleurs | 5,69€ |
+Aucun réglage à faire : la page d'accueil pointe directement sur le catalogue existant.
 
-**Prix** : les tarifs des lots 20 et 30 filtres, ainsi que les packs « fontaine + filtres »,
-sont des extrapolations cohérentes — ajustez-les à vos marges avant de publier.
-Les prix repris des captures sont des prix fournisseur : pensez à définir votre marge
-(colonne `Cost per item` du CSV, laissée vide) avant de mettre la boutique en ligne.
+| Section de la page d'accueil | Ressource liée |
+|---|---|
+| Nos best-sellers | collection `frontpage` (les 4 produits) |
+| Le coup de cœur | *Fontaine à Eau 7L pour Chat & Chien* |
+| Trouvez ce qu'il vous faut | `fontaines-hydratation`, `repas-gamelles`, `jouets-hygiene-dentaire` |
+
+Sous chaque produit d'une grille, un bouton **« Voir plus »** mène à la fiche de ce produit.
+Le libellé se change dans **Personnaliser → Paramètres du thème → Fiches produit**.
 
 ---
 
@@ -78,9 +58,9 @@ image avec texte, avant/après avec curseur, avis clients, étapes, tableau comp
 newsletter, formulaire de contact, et une section « Apps » pour les blocs d'applications.
 
 **Fonctionnalités** : tiroir de panier en AJAX, barre de progression « livraison offerte »,
-offres par quantité (1/2/3), ajout rapide depuis les grilles, sélecteur de variantes sans
-rechargement, bouton d'achat collant sur mobile, galerie produit à miniatures,
-données structurées Produit / FAQ / Article / Organisation.
+offres par quantité (1/2/3), bouton « Voir plus » vers la fiche sous chaque produit des grilles,
+sélecteur de variantes sans rechargement, bouton d'achat collant sur mobile,
+galerie produit à miniatures, données structurées Produit / FAQ / Article / Organisation.
 
 **Réglages** : couleurs, typographies (Playfair Display + Assistant), largeur de page,
 arrondis, animations, format des fiches produit, type de panier, réseaux sociaux.
