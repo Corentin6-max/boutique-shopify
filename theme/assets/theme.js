@@ -267,6 +267,69 @@
     if (variantInput && option.dataset.bundleVariant) variantInput.value = option.dataset.bundleVariant;
   });
 
+  /* ----------------------------------------------------------- Countdown */
+  function initCountdown(root) {
+    const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
+    const daysEl = $('[data-countdown-days]', root);
+    const hoursEl = $('[data-countdown-hours]', root);
+    const minutesEl = $('[data-countdown-minutes]', root);
+    const secondsEl = $('[data-countdown-seconds]', root);
+    const evergreen = root.dataset.evergreen === 'true';
+    const cycleMs = Math.max(1, Number(root.dataset.hours || 24)) * 3600 * 1000;
+
+    // "2026-12-24 23:59" is read in the visitor's own time zone, like a shop-wide
+    // deadline would be; an invalid or past date falls back to the evergreen cycle.
+    const parseEnd = () => {
+      const raw = (root.dataset.end || '').trim().replace(' ', 'T');
+      const parsed = raw ? Date.parse(raw.length === 16 ? `${raw}:00` : raw) : NaN;
+      return Number.isNaN(parsed) ? null : parsed;
+    };
+
+    let target = parseEnd();
+    if (target === null || target <= Date.now()) {
+      if (!evergreen) { root.hidden = true; return; }
+      target = null;
+    }
+
+    // Evergreen mode anchors the cycle to the visitor's first visit so the timer
+    // stays consistent for them instead of resetting on every page view.
+    const anchorKey = 'velluno:countdown';
+    const evergreenTarget = () => {
+      let anchor;
+      try { anchor = Number(localStorage.getItem(anchorKey)); } catch (error) { anchor = 0; }
+      if (!anchor || Number.isNaN(anchor) || anchor <= Date.now()) {
+        anchor = Date.now() + cycleMs;
+        try { localStorage.setItem(anchorKey, String(anchor)); } catch (error) { /* private mode */ }
+      }
+      return anchor;
+    };
+
+    const tick = () => {
+      const end = target !== null ? target : evergreenTarget();
+      let remaining = end - Date.now();
+      if (remaining <= 0) {
+        if (!evergreen) { root.hidden = true; return; }
+        try { localStorage.removeItem(anchorKey); } catch (error) { /* private mode */ }
+        target = null;
+        remaining = cycleMs;
+      }
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      if (daysEl) {
+        daysEl.textContent = pad(days);
+        if (hoursEl) hoursEl.textContent = pad(hours);
+      } else if (hoursEl) {
+        hoursEl.textContent = pad(days * 24 + hours);
+      }
+      if (minutesEl) minutesEl.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+      if (secondsEl) secondsEl.textContent = pad(totalSeconds % 60);
+    };
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
   /* ------------------------------------------------------ Announcement bar */
   function initAnnouncement(root) {
     const slides = $$('.announcement-bar__slide', root);
@@ -381,6 +444,7 @@
   /* ----------------------------------------------------------------- Init */
   function init(scope) {
     $$('[data-announcement]', scope).forEach(initAnnouncement);
+    $$('[data-countdown]', scope).forEach(initCountdown);
     $$('[data-compare]', scope).forEach(initCompare);
     $$('[data-variant-picker]', scope).forEach((el) => new VariantPicker(el));
     initStickyAtc();

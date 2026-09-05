@@ -1,0 +1,22 @@
+{%- comment -%}
+  Renders a flag emoji for an ISO 3166-1 alpha-2 country code.
+  Liquid cannot build regional-indicator pairs from a code, so the main markets
+  are mapped explicitly and anything else falls back to the code itself.
+  Usage: {% render 'flag', code: localization.country.iso_code %}
+{%- endcomment -%}
+{%- liquid
+  assign map = 'FR:🇫🇷,BE:🇧🇪,CH:🇨🇭,LU:🇱🇺,MC:🇲🇨,CA:🇨🇦,US:🇺🇸,GB:🇬🇧,IE:🇮🇪,DE:🇩🇪,AT:🇦🇹,ES:🇪🇸,PT:🇵🇹,IT:🇮🇹,NL:🇳🇱,DK:🇩🇰,SE:🇸🇪,NO:🇳🇴,FI:🇫🇮,PL:🇵🇱,CZ:🇨🇿,GR:🇬🇷,RO:🇷🇴,HU:🇭🇺,BG:🇧🇬,HR:🇭🇷,SK:🇸🇰,SI:🇸🇮,EE:🇪🇪,LV:🇱🇻,LT:🇱🇹,MT:🇲🇹,CY:🇨🇾,AU:🇦🇺,NZ:🇳🇿,JP:🇯🇵,KR:🇰🇷,SG:🇸🇬,HK:🇭🇰,AE:🇦🇪,IL:🇮🇱,MA:🇲🇦,TN:🇹🇳,DZ:🇩🇿,SN:🇸🇳,CI:🇨🇮,BR:🇧🇷,MX:🇲🇽,AR:🇦🇷,CL:🇨🇱,ZA:🇿🇦,IN:🇮🇳,TR:🇹🇷,RE:🇷🇪,GP:🇬🇵,MQ:🇲🇶,GF:🇬🇫,YT:🇾🇹,NC:🇳🇨,PF:🇵🇫' | split: ','
+  assign needle = code | upcase | append: ':'
+  assign flag = ''
+  for pair in map
+    if pair contains needle
+      assign flag = pair | remove: needle
+      break
+    endif
+  endfor
+-%}
+{%- if flag != blank -%}
+  <span class="flag" aria-hidden="true">{{ flag }}</span>
+{%- else -%}
+  <span class="flag flag--text" aria-hidden="true">{{ code | upcase }}</span>
+{%- endif -%}

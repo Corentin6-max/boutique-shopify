@@ -5,12 +5,42 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-1": { "type": "announcement", "settings": { "text": "Livraison offerte dès 49€ — expédié sous 24 h" } },
-        "announcement-2": { "type": "announcement", "settings": { "text": "30 jours pour changer d'avis, retour simple" } },
-        "announcement-3": { "type": "announcement", "settings": { "text": "Matériaux sans BPA · Service client en français" } }
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Livraison offerte dès 49€"
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "30 jours pour changer d’avis"
+          }
+        }
       },
-      "block_order": ["announcement-1", "announcement-2", "announcement-3"],
-      "settings": { "background": "#2f4c3a", "text_color": "#ffffff", "rotate_speed": 5 }
+      "block_order": [
+        "announcement-1",
+        "announcement-2"
+      ],
+      "settings": {
+        "promo_text": "OFFRE DE LANCEMENT",
+        "promo_highlight": "-20%",
+        "promo_emoji": "💚",
+        "promo_link": "",
+        "show_countdown": true,
+        "countdown_end": "2026-12-24 23:59",
+        "countdown_evergreen": false,
+        "countdown_hours": 24,
+        "countdown_show_days": false,
+        "label_days": "JOURS",
+        "label_hours": "HRS",
+        "label_minutes": "MIN",
+        "label_seconds": "SEC",
+        "gradient_from": "#2c5138",
+        "gradient_to": "#c2a63c",
+        "text_color": "#ffffff",
+        "rotate_speed": 5
+      }
     },
     "header": {
       "type": "header",
@@ -18,9 +48,13 @@
         "menu": "main-menu",
         "sticky": true,
         "drawer_cta_text": "Voir la boutique",
-        "drawer_cta_link": "shopify://collections/all"
+        "drawer_cta_link": "shopify://collections/all",
+        "show_currency_selector": true
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

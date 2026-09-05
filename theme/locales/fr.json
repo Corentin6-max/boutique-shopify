@@ -47,7 +47,8 @@
     "close": "Fermer",
     "breadcrumbs": {
       "home": "Accueil"
-    }
+    },
+    "currency": "Pays et devise"
   },
   "accessibility": {
     "skip_to_text": "Aller au contenu",

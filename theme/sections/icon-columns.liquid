@@ -8,14 +8,14 @@
       </div>
     {%- endif -%}
 
-    <div class="trust-bar">
+    <div class="trust-bar" style="--trust-columns: {{ section.blocks.size | at_least: 1 | at_most: 6 }};">
       {%- for block in section.blocks -%}
         <div class="trust-bar__item" {{ block.shopify_attributes }}>
           <div class="trust-bar__icon">
             {%- if block.settings.image != blank -%}
               <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.image.alt | escape }}" width="44" height="44" loading="lazy">
             {%- else -%}
-              {% render 'icon', icon: block.settings.icon, size: 44 %}
+              {% render 'icon', icon: block.settings.icon, size: 34 %}
             {%- endif -%}
           </div>
           <h3 class="trust-bar__title">{{ block.settings.title }}</h3>
@@ -39,7 +39,7 @@
     { "type": "richtext", "id": "text", "label": "Text" },
     { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
       { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
-      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+      { "value": "soft", "label": "Soft accent" }, { "value": "band", "label": "Neutral band" }, { "value": "accent", "label": "Accent" }
     ], "default": "default" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }

@@ -1,6 +1,6 @@
 <div class="header-wrapper{% if section.settings.sticky %} header-wrapper--sticky{% endif %}">
   <header class="header" style="--logo-width: {{ settings.logo_width }}px;">
-    <div class="header__icons">
+    <div class="header__icons header__icons--start">
       <button
         type="button"
         class="header__icon header__menu-toggle"
@@ -53,6 +53,34 @@
     {%- endif -%}
 
     <div class="header__icons">
+      {%- if section.settings.show_currency_selector and localization.available_countries.size > 1 -%}
+        {%- form 'localization', class: 'localization small-hide' -%}
+          <details class="localization__details">
+            <summary class="localization__toggle" aria-label="{{ 'general.currency' | t }}">
+              {% render 'flag', code: localization.country.iso_code %}
+              <span class="localization__code">{{ localization.country.currency.iso_code }}</span>
+              {% render 'icon', icon: 'chevron-down', size: 14 %}
+            </summary>
+            <ul class="localization__list">
+              {%- for country in localization.available_countries -%}
+                <li>
+                  <button
+                    type="submit"
+                    name="country_code"
+                    value="{{ country.iso_code }}"
+                    class="localization__option"
+                    {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>
+                    {% render 'flag', code: country.iso_code %}
+                    <span>{{ country.name }}</span>
+                    <span class="localization__currency">{{ country.currency.iso_code }}</span>
+                  </button>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- endform -%}
+      {%- endif -%}
+
       <button type="button" class="header__icon" id="SearchToggle" data-drawer-open="SearchDrawer" aria-label="{{ 'general.search.search' | t }}">
         {% render 'icon', icon: 'search', size: 20 %}
       </button>
@@ -163,6 +191,7 @@
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
+    { "type": "checkbox", "id": "show_currency_selector", "label": "Show country and currency selector", "info": "Needs more than one country in Settings → Markets.", "default": true },
     { "type": "header", "content": "Mobile drawer call to action" },
     { "type": "text", "id": "drawer_cta_text", "label": "Button label", "default": "Voir la boutique" },
     { "type": "url", "id": "drawer_cta_link", "label": "Button link" }

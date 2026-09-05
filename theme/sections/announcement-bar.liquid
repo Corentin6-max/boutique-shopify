@@ -1,17 +1,69 @@
-{%- if section.blocks.size > 0 -%}
-  <div
-    class="announcement-bar"
-    data-announcement
-    data-speed="{{ section.settings.rotate_speed }}"
-    style="--announcement-bg: {{ section.settings.background }}; --announcement-text: {{ section.settings.text_color }};">
-    <div class="announcement-bar__inner">
-      {%- if section.blocks.size > 1 -%}
-        <button type="button" class="announcement-bar__nav" data-announcement-nav="-1" aria-label="{{ 'sections.announcements.previous_announcement' | t }}">
-          {% render 'icon', icon: 'chevron-left', size: 16 %}
-        </button>
-      {%- endif -%}
+{%- liquid
+  assign has_promo = false
+  if section.settings.promo_text != blank or section.settings.promo_highlight != blank
+    assign has_promo = true
+  endif
+-%}
+<div
+  class="announcement-bar"
+  data-announcement
+  data-speed="{{ section.settings.rotate_speed }}"
+  style="--announcement-from: {{ section.settings.gradient_from }}; --announcement-to: {{ section.settings.gradient_to }}; --announcement-text: {{ section.settings.text_color }};">
+  <div class="announcement-bar__inner page-width">
+    {%- if has_promo -%}
+      <div class="announcement-bar__promo">
+        {%- if section.settings.promo_link != blank -%}<a href="{{ section.settings.promo_link }}">{%- endif -%}
+          {%- if section.settings.promo_text != blank -%}
+            <span class="announcement-bar__promo-title">{{ section.settings.promo_text }}</span>
+          {%- endif -%}
+          {%- if section.settings.promo_text != blank and section.settings.promo_highlight != blank -%}
+            <span class="announcement-bar__divider" aria-hidden="true">|</span>
+          {%- endif -%}
+          {%- if section.settings.promo_highlight != blank -%}
+            <span class="announcement-bar__promo-highlight">{{ section.settings.promo_highlight }}</span>
+          {%- endif -%}
+          {%- if section.settings.promo_emoji != blank -%}
+            <span class="announcement-bar__emoji" aria-hidden="true">{{ section.settings.promo_emoji }}</span>
+          {%- endif -%}
+        {%- if section.settings.promo_link != blank -%}</a>{%- endif -%}
+      </div>
+    {%- endif -%}
 
-      <div>
+    {%- if section.settings.show_countdown -%}
+      <div
+        class="countdown"
+        data-countdown
+        data-end="{{ section.settings.countdown_end }}"
+        data-evergreen="{{ section.settings.countdown_evergreen }}"
+        data-hours="{{ section.settings.countdown_hours }}"
+        role="timer"
+        aria-live="off">
+        {%- if section.settings.countdown_show_days -%}
+          <span class="countdown__unit">
+            <span class="countdown__value" data-countdown-days>00</span>
+            <span class="countdown__label">{{ section.settings.label_days }}</span>
+          </span>
+          <span class="countdown__sep" aria-hidden="true">:</span>
+        {%- endif -%}
+        <span class="countdown__unit">
+          <span class="countdown__value" data-countdown-hours>00</span>
+          <span class="countdown__label">{{ section.settings.label_hours }}</span>
+        </span>
+        <span class="countdown__sep" aria-hidden="true">:</span>
+        <span class="countdown__unit">
+          <span class="countdown__value" data-countdown-minutes>00</span>
+          <span class="countdown__label">{{ section.settings.label_minutes }}</span>
+        </span>
+        <span class="countdown__sep" aria-hidden="true">:</span>
+        <span class="countdown__unit">
+          <span class="countdown__value" data-countdown-seconds>00</span>
+          <span class="countdown__label">{{ section.settings.label_seconds }}</span>
+        </span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="announcement-bar__rotator{% if has_promo or section.settings.show_countdown %} announcement-bar__rotator--secondary{% endif %}">
         {%- for block in section.blocks -%}
           <div class="announcement-bar__slide {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>
             {%- if block.settings.link != blank -%}
@@ -22,15 +74,9 @@
           </div>
         {%- endfor -%}
       </div>
-
-      {%- if section.blocks.size > 1 -%}
-        <button type="button" class="announcement-bar__nav" data-announcement-nav="1" aria-label="{{ 'sections.announcements.next_announcement' | t }}">
-          {% render 'icon', icon: 'chevron-right', size: 16 %}
-        </button>
-      {%- endif -%}
-    </div>
+    {%- endif -%}
   </div>
-{%- endif -%}
+</div>
 
 {% schema %}
 {
@@ -38,29 +84,39 @@
   "class": "announcement-bar-section",
   "max_blocks": 5,
   "settings": [
-    { "type": "color", "id": "background", "label": "Background", "default": "#2f4c3a" },
+    { "type": "header", "content": "Promotion" },
+    { "type": "text", "id": "promo_text", "label": "Promo name", "default": "SOLDES DE RENTRÉE" },
+    { "type": "text", "id": "promo_highlight", "label": "Highlighted offer", "default": "-60%" },
+    { "type": "text", "id": "promo_emoji", "label": "Emoji", "default": "💚" },
+    { "type": "url", "id": "promo_link", "label": "Link" },
+
+    { "type": "header", "content": "Countdown" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "countdown_end", "label": "End date and time", "info": "Format: 2026-12-24 23:59. Uses the visitor's own time zone.", "default": "2026-12-24 23:59" },
+    { "type": "checkbox", "id": "countdown_evergreen", "label": "Restart automatically when it reaches zero", "info": "A timer that never really ends can count as a misleading commercial practice in the EU. Prefer a real end date.", "default": false },
+    { "type": "range", "id": "countdown_hours", "min": 1, "max": 72, "step": 1, "unit": "h", "label": "Restart duration", "default": 24 },
+    { "type": "checkbox", "id": "countdown_show_days", "label": "Show days", "default": false },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "JOURS" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "HRS" },
+    { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "MIN" },
+    { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "SEC" },
+
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "gradient_from", "label": "Gradient start", "default": "#2c5138" },
+    { "type": "color", "id": "gradient_to", "label": "Gradient end", "default": "#c2a63c" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" },
-    { "type": "range", "id": "rotate_speed", "min": 3, "max": 12, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 }
+    { "type": "range", "id": "rotate_speed", "min": 3, "max": 12, "step": 1, "unit": "s", "label": "Rotation speed of secondary messages", "default": 5 }
   ],
   "blocks": [
     {
       "type": "announcement",
-      "name": "Announcement",
+      "name": "Secondary message",
       "settings": [
         { "type": "text", "id": "text", "label": "Text", "default": "Livraison offerte dès 49€" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Announcement bar",
-      "blocks": [
-        { "type": "announcement", "settings": { "text": "Livraison offerte dès 49€" } },
-        { "type": "announcement", "settings": { "text": "30 jours pour changer d'avis" } },
-        { "type": "announcement", "settings": { "text": "Matériaux sans BPA, sans danger" } }
-      ]
-    }
-  ]
+  "presets": [{ "name": "Announcement bar" }]
 }
 {% endschema %}

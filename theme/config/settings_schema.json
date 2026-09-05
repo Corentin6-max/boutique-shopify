@@ -70,6 +70,24 @@
         "default": "#e5ddd1"
       },
       {
+        "type": "color",
+        "id": "color_band",
+        "label": "Neutral band background",
+        "default": "#f4f4f2"
+      },
+      {
+        "type": "color",
+        "id": "color_help_card",
+        "label": "Help card background",
+        "default": "#f3ead9"
+      },
+      {
+        "type": "color",
+        "id": "color_text_warm",
+        "label": "Card body text",
+        "default": "#8a6a55"
+      },
+      {
         "type": "header",
         "content": "Accents"
       },

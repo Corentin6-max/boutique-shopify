@@ -4,17 +4,17 @@
       "type": "hero-banner",
       "settings": {
         "layout": "overlay",
-        "eyebrow": "Nouveau — la sélection Velluno",
-        "heading": "Tout ce qui rend leur quotidien plus doux",
-        "text": "<p>Fontaines à eau, gamelles, jouets et accessoires choisis un par un. Testés par nos chiens et nos chats avant d'arriver chez vous.</p>",
-        "show_rating": true,
+        "eyebrow": "SOINS SIMPLES, RÉSULTATS VISIBLES",
+        "heading": "Un quotidien plus sain. Pour eux.",
+        "text": "<p>Des accessoires choisis un par un, testés avec nos propres chiens et chats — pour qu'ils boivent assez, mangent proprement et jouent plus longtemps.</p>",
+        "show_rating": false,
         "rating_text": "4,8/5 — plus de 3 000 clients",
-        "button_label": "Découvrir la boutique",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "Nos best-sellers",
+        "button_label": "DÉCOUVRIR LA ROUTINE",
+        "button_link": "shopify://collections/frontpage",
+        "button_label_2": "",
         "text_position": "left",
         "text_color": "#ffffff",
-        "overlay_opacity": 35,
+        "overlay_opacity": 25,
         "height": 660,
         "height_mobile": 500,
         "color_scheme": "default",
@@ -74,56 +74,47 @@
         "speed": 30
       }
     },
-    "best-sellers": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Les préférés",
-        "heading": "Nos best-sellers",
-        "text": "<p>Les quatre produits qui font tourner la boutique. Cliquez pour voir la fiche complète.</p>",
-        "products_to_show": 4,
-        "columns": 4,
-        "columns_mobile": "2",
-        "image_ratio": "square",
-        "button_label": "",
-        "color_scheme": "default",
-        "padding_top": 80,
-        "padding_bottom": 60,
-        "collection": "frontpage"
-      }
-    },
     "benefits": {
       "type": "icon-columns",
       "blocks": {
         "b1": {
           "type": "column",
           "settings": {
-            "icon": "shield",
+            "icon": "leaf-badge",
             "title": "Sans BPA",
-            "text": "Acier inoxydable et silicone alimentaire uniquement."
+            "text": ""
           }
         },
         "b2": {
           "type": "column",
           "settings": {
-            "icon": "truck",
-            "title": "Expédié sous 24 h",
-            "text": "Livraison en 2 à 5 jours ouvrés en France."
+            "icon": "badge-check",
+            "title": "Testé par notre équipe",
+            "text": ""
           }
         },
         "b3": {
           "type": "column",
           "settings": {
-            "icon": "refresh",
-            "title": "30 jours pour changer d'avis",
-            "text": "Retour simple, remboursement rapide."
+            "icon": "recycle",
+            "title": "Éco-responsable",
+            "text": ""
           }
         },
         "b4": {
           "type": "column",
           "settings": {
-            "icon": "sparkle",
-            "title": "Conseils par de vrais humains",
-            "text": "Une question ? On répond sous 24 h."
+            "icon": "check-square",
+            "title": "30 jours pour essayer",
+            "text": ""
+          }
+        },
+        "b5": {
+          "type": "column",
+          "settings": {
+            "icon": "dna",
+            "title": "Acier inoxydable 304",
+            "text": ""
           }
         }
       },
@@ -131,14 +122,16 @@
         "b1",
         "b2",
         "b3",
-        "b4"
+        "b4",
+        "b5"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "",
-        "color_scheme": "surface",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "text": "",
+        "color_scheme": "band",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "hero-product": {
@@ -153,7 +146,7 @@
         "show_quantity": false,
         "show_dynamic_checkout": true,
         "show_view_link": true,
-        "color_scheme": "soft",
+        "color_scheme": "default",
         "padding_top": 80,
         "padding_bottom": 80,
         "product": "7l-stainless-steel-wireless-recharging-sensor-cat-water-fountain-auto-drinking-fountain-for-cats-dog-drinker-pet-dispenser-bowl"
@@ -196,7 +189,7 @@
         "eyebrow": "Par catégorie",
         "heading": "Trouvez ce qu'il vous faut",
         "columns": 3,
-        "color_scheme": "default",
+        "color_scheme": "band",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -284,7 +277,7 @@
       "settings": {
         "eyebrow": "Comment ça marche",
         "heading": "Simple, du panier à la gamelle",
-        "color_scheme": "surface",
+        "color_scheme": "band",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -386,22 +379,87 @@
         "q5"
       ],
       "settings": {
-        "eyebrow": "Questions",
-        "heading": "Tout ce qu'on nous demande",
-        "footer_text": "Une autre question ? Écrivez à bonjour@velluno.com — un humain vous répond.",
+        "eyebrow": "",
+        "heading": "Questions fréquentes",
+        "footer_text": "",
         "open_first": true,
         "enable_schema": true,
         "color_scheme": "default",
         "padding_top": 80,
-        "padding_bottom": 80
+        "padding_bottom": 80,
+        "show_help_card": true,
+        "help_heading": "Besoin d'aide ?",
+        "help_text": "<p>Une question sur une taille, une commande ou un produit ? Écrivez-nous, une vraie personne vous répond sous 24 h ouvrées.</p>",
+        "help_button_label": "Nous contacter",
+        "help_button_link": "",
+        "help_note": "bonjour@velluno.fr · du lundi au vendredi, 9h–18h"
+      }
+    },
+    "ritual": {
+      "type": "ritual-steps",
+      "blocks": {
+        "r1": {
+          "type": "step",
+          "settings": {
+            "product": "7l-stainless-steel-wireless-recharging-sensor-cat-water-fountain-auto-drinking-fountain-for-cats-dog-drinker-pet-dispenser-bowl",
+            "step_label": "HYDRATER",
+            "title": "Fontaine à eau 7 L",
+            "text": "Une eau filtrée en continu, fraîche et oxygénée — vos animaux boivent enfin assez.",
+            "link_label": ""
+          }
+        },
+        "r2": {
+          "type": "step",
+          "settings": {
+            "product": "10-20-30-pack-replacement-filters-for-cat-water-fountains-compatible-with-2-2l-stainless-steel-dog-cat-water-dispensers",
+            "step_label": "FILTRER",
+            "title": "Filtres charbon actif",
+            "text": "Retiennent poils, calcaire et mauvais goûts. À changer toutes les trois semaines.",
+            "link_label": ""
+          }
+        },
+        "r3": {
+          "type": "step",
+          "settings": {
+            "product": "waterproof-pet-mat-dog-cat-solid-color-silicone-pet-food-pad-pet-bowl-drinking-mat-dog-feeding-placemat-easy-washing",
+            "step_label": "NOURRIR",
+            "title": "Tapis de gamelle silicone",
+            "text": "Rebords relevés et surface antidérapante : plus d'eau ni de croquettes au sol.",
+            "link_label": ""
+          }
+        },
+        "r4": {
+          "type": "step",
+          "settings": {
+            "product": "1-3pcs-pet-bone-shaped-dog-chew-toys-teeth-cleaning-chew-toys-dog-rubber-toothbrush-stick-chew-toys-for-training-1",
+            "step_label": "JOUER",
+            "title": "Os à mâcher caoutchouc",
+            "text": "Des picots qui nettoient les dents pendant qu'il joue. Souple et flottant.",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "heading": "LA ROUTINE VELLUNO",
+        "subheading": "4 essentiels pour un animal hydraté, propre et bien occupé",
+        "link_label": "VOIR PLUS",
+        "number_steps": true,
+        "color_scheme": "default",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
   "order": [
     "hero",
-    "marquee",
-    "best-sellers",
     "benefits",
+    "ritual",
     "hero-product",
     "categories",
     "story",
