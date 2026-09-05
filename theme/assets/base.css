@@ -370,21 +370,31 @@ textarea { min-height: 12rem; resize: vertical; }
 
 .header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* minmax(0, …) lets the side columns shrink so the logo column keeps its width. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 2rem;
   padding: 1.6rem 2rem;
   max-width: var(--page-width);
   margin: 0 auto;
 }
-.header__heading { margin: 0; font-size: 2.2rem; letter-spacing: 0.06em; }
+.header__heading { margin: 0; font-size: 2.2rem; letter-spacing: 0.06em; justify-self: center; }
 .header__heading-link { text-decoration: none; display: inline-block; }
-.header__logo { width: var(--logo-width, 150px); height: auto; }
+.header__logo { width: var(--logo-width, 150px); max-width: none; height: auto; }
 
 .header__icons.header__icons--start { justify-content: flex-start; }
-.header__inline-menu { display: flex; justify-content: flex-start; gap: 2.8rem; }
+.header__inline-menu {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2.4rem;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.header__inline-menu::-webkit-scrollbar { display: none; }
 .header__menu-item {
   display: inline-flex; align-items: center; gap: 0.4rem;
+  white-space: nowrap;
   padding: 0.6rem 0;
   font-size: 1.45rem;
   font-weight: 500;
@@ -426,8 +436,8 @@ textarea { min-height: 12rem; resize: vertical; }
 }
 
 .header__menu-toggle { display: none; }
-@media screen and (max-width: 989px) {
-  .header { grid-template-columns: auto 1fr auto; padding: 1.2rem 1.6rem; }
+@media screen and (max-width: 1149px) {
+  .header { grid-template-columns: auto minmax(0, 1fr) auto; padding: 1.2rem 1.6rem; }
   .header__inline-menu { display: none; }
   .header__menu-toggle { display: inline-flex; }
   .header__heading { justify-self: center; }

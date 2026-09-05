@@ -4,24 +4,8 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement-1": {
-          "type": "announcement",
-          "settings": {
-            "text": "Livraison offerte, sans minimum"
-          }
-        },
-        "announcement-2": {
-          "type": "announcement",
-          "settings": {
-            "text": "90 jours pour changer d’avis"
-          }
-        }
-      },
-      "block_order": [
-        "announcement-1",
-        "announcement-2"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "promo_text": "OFFRE DE LANCEMENT",
         "promo_highlight": "-20%",
@@ -31,7 +15,6 @@
         "countdown_end": "2026-12-24 23:59",
         "countdown_evergreen": false,
         "countdown_hours": 24,
-        "countdown_show_days": false,
         "label_days": "JOURS",
         "label_hours": "HRS",
         "label_minutes": "MIN",

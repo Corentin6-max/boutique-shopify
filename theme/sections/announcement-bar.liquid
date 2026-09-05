@@ -38,13 +38,11 @@
         data-hours="{{ section.settings.countdown_hours }}"
         role="timer"
         aria-live="off">
-        {%- if section.settings.countdown_show_days -%}
-          <span class="countdown__unit">
-            <span class="countdown__value" data-countdown-days>00</span>
-            <span class="countdown__label">{{ section.settings.label_days }}</span>
-          </span>
-          <span class="countdown__sep" aria-hidden="true">:</span>
-        {%- endif -%}
+        <span class="countdown__unit" data-countdown-days-unit hidden>
+          <span class="countdown__value" data-countdown-days>00</span>
+          <span class="countdown__label">{{ section.settings.label_days }}</span>
+        </span>
+        <span class="countdown__sep" data-countdown-days-unit hidden aria-hidden="true">:</span>
         <span class="countdown__unit">
           <span class="countdown__value" data-countdown-hours>00</span>
           <span class="countdown__label">{{ section.settings.label_hours }}</span>
@@ -95,8 +93,7 @@
     { "type": "text", "id": "countdown_end", "label": "End date and time", "info": "Format: 2026-12-24 23:59. Uses the visitor's own time zone.", "default": "2026-12-24 23:59" },
     { "type": "checkbox", "id": "countdown_evergreen", "label": "Restart automatically when it reaches zero", "info": "A timer that never really ends can count as a misleading commercial practice in the EU. Prefer a real end date.", "default": false },
     { "type": "range", "id": "countdown_hours", "min": 1, "max": 72, "step": 1, "unit": "h", "label": "Restart duration", "default": 24 },
-    { "type": "checkbox", "id": "countdown_show_days", "label": "Show days", "default": false },
-    { "type": "text", "id": "label_days", "label": "Days label", "default": "JOURS" },
+    { "type": "text", "id": "label_days", "label": "Days label", "info": "Le bloc des jours n'apparaît que s'il reste plus de 24 h.", "default": "JOURS" },
     { "type": "text", "id": "label_hours", "label": "Hours label", "default": "HRS" },
     { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "MIN" },
     { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "SEC" },

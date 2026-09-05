@@ -271,6 +271,7 @@
   function initCountdown(root) {
     const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
     const daysEl = $('[data-countdown-days]', root);
+    const dayUnits = $$('[data-countdown-days-unit]', root);
     const hoursEl = $('[data-countdown-hours]', root);
     const minutesEl = $('[data-countdown-minutes]', root);
     const secondsEl = $('[data-countdown-seconds]', root);
@@ -316,12 +317,11 @@
       const totalSeconds = Math.floor(remaining / 1000);
       const days = Math.floor(totalSeconds / 86400);
       const hours = Math.floor((totalSeconds % 86400) / 3600);
-      if (daysEl) {
-        daysEl.textContent = pad(days);
-        if (hoursEl) hoursEl.textContent = pad(hours);
-      } else if (hoursEl) {
-        hoursEl.textContent = pad(days * 24 + hours);
-      }
+      // Show the days tile only when there is more than a day left, so a distant
+      // deadline reads "04 JOURS 09 HRS" rather than "2644 HRS".
+      dayUnits.forEach((el) => { el.hidden = days === 0; });
+      if (daysEl) daysEl.textContent = pad(days);
+      if (hoursEl) hoursEl.textContent = pad(days > 0 ? hours : days * 24 + hours);
       if (minutesEl) minutesEl.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
       if (secondsEl) secondsEl.textContent = pad(totalSeconds % 60);
     };
