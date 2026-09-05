@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "vendor" },
+        "title": { "type": "title" },
+        "rating": { "type": "rating", "settings": { "fallback_rating": 5, "fallback_count": 0, "text": "Avis vérifiés" } },
+        "price": { "type": "price", "settings": { "show_tax_note": true } },
+        "text": { "type": "text", "settings": { "text": "<p>Livraison offerte dès 49€ · Expédié sous 24 h · 30 jours pour changer d'avis.</p>" } },
+        "variants": { "type": "variant_picker", "settings": { "show_quantity": true, "show_dynamic_checkout": true, "button_label": "Ajouter au panier" } },
+        "inventory": { "type": "inventory", "settings": { "threshold": 10 } },
+        "benefits": { "type": "icon_list", "settings": { "items": "Matériaux sans BPA, contrôlés en laboratoire\nExpédition sous 24 h ouvrées\nRetour gratuit sous 30 jours", "icon": "sparkle" } },
+        "description": { "type": "description" },
+        "shipping": { "type": "accordion", "settings": { "heading": "Livraison et retours", "content": "<p>Expédition sous 24 h ouvrées. Livraison suivie en 2 à 5 jours en France métropolitaine, offerte dès 49€. Retour possible pendant 30 jours après réception.</p>" } },
+        "care": { "type": "accordion", "settings": { "heading": "Entretien", "content": "<p>Rinçage à l'eau tiède savonneuse. Les pièces en silicone et en acier inoxydable passent au lave-vaisselle (panier supérieur).</p>" } },
+        "share": { "type": "share" }
+      },
+      "block_order": [
+        "vendor", "title", "rating", "price", "text", "variants",
+        "inventory", "benefits", "description", "shipping", "care", "share"
+      ],
+      "settings": { "enable_sticky_atc": true, "color_scheme": "default" }
+    },
+    "trust": {
+      "type": "icon-columns",
+      "blocks": {
+        "b1": { "type": "column", "settings": { "icon": "truck", "title": "Expédié sous 24 h", "text": "Colis suivi, 2 à 5 jours ouvrés." } },
+        "b2": { "type": "column", "settings": { "icon": "refresh", "title": "30 jours pour essayer", "text": "Retour simple et remboursé." } },
+        "b3": { "type": "column", "settings": { "icon": "shield", "title": "Sans BPA", "text": "Matériaux de qualité alimentaire." } },
+        "b4": { "type": "column", "settings": { "icon": "sparkle", "title": "Conseils humains", "text": "Réponse sous 24 h en français." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": { "heading": "", "eyebrow": "", "color_scheme": "surface", "padding_top": 48, "padding_bottom": 48 }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": { "heading": "Souvent achetés ensemble", "products_to_show": 4, "columns": 4, "color_scheme": "default", "padding_top": 60, "padding_bottom": 80 }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Comment choisir la bonne taille ?", "answer": "<p>Les dimensions exactes sont indiquées dans la description. En cas de doute, écrivez-nous le gabarit de votre animal, on vous oriente.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Est-ce lavable au lave-vaisselle ?", "answer": "<p>Les pièces en silicone et en acier inoxydable oui, panier supérieur. Les parties électroniques se nettoient à la main.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Et si le produit ne convient pas ?", "answer": "<p>Vous avez 30 jours pour nous le renvoyer et être remboursé, même utilisé.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "eyebrow": "", "heading": "Questions fréquentes", "footer_text": "", "open_first": false, "enable_schema": false, "color_scheme": "default", "padding_top": 40, "padding_bottom": 80 }
+    }
+  },
+  "order": ["main", "trust", "related", "faq"]
+}

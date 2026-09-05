@@ -1,0 +1,44 @@
+{%- comment -%}
+  Renders a price block.
+  Accepts: product (object), use_variant (bool), show_badges (bool), price_class (string)
+{%- endcomment -%}
+{%- liquid
+  if use_variant and product.selected_or_first_available_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at = target.compare_at_price
+  assign money_price = target.price | money
+  if settings.currency_code_enabled
+    assign money_price = target.price | money_with_currency
+  endif
+  assign on_sale = false
+  if compare_at > target.price
+    assign on_sale = true
+  endif
+-%}
+<div class="price {% if on_sale %}price--on-sale{% endif %} {{ price_class }}">
+  {%- if target.price_varies and use_variant != true -%}
+    <span class="price__regular">{{ 'products.product.from_price_html' | t: price: money_price }}</span>
+  {%- else -%}
+    <span class="price__regular">{{ money_price }}</span>
+  {%- endif -%}
+
+  {%- if on_sale -%}
+    <s class="price__compare">
+      {%- if settings.currency_code_enabled -%}{{ compare_at | money_with_currency }}{%- else -%}{{ compare_at | money }}{%- endif -%}
+    </s>
+    {%- if show_badges -%}
+      {%- assign saved = compare_at | minus: target.price | times: 100 | divided_by: compare_at -%}
+      <span class="badge badge--sale">{{ 'products.product.sale_percent' | t: percent: saved }}</span>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if target.unit_price_measurement -%}
+    <span class="price__unit">
+      {{ target.unit_price | money }}/{% if target.unit_price_measurement.reference_value != 1 %}{{ target.unit_price_measurement.reference_value }}{% endif %}{{ target.unit_price_measurement.reference_unit }}
+    </span>
+  {%- endif -%}
+</div>

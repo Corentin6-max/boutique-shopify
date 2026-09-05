@@ -1,0 +1,48 @@
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "newsletter-strip": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "soft",
+        "heading": "Rejoignez la newsletter Velluno",
+        "text": "<p>10% sur votre première commande, les nouveautés et les conseils qui servent vraiment. Un ou deux e-mails par mois.</p>",
+        "button_label": "Je m'inscris",
+        "disclaimer": "Désinscription en un clic. Vos données restent chez nous.",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": { "text": "<p>Velluno sélectionne des accessoires simples et durables pour le quotidien des chiens et des chats.</p>" }
+        },
+        "shop": { "type": "menu", "settings": { "heading": "Boutique", "menu": "footer" } },
+        "help": {
+          "type": "text",
+          "settings": {
+            "heading": "Aide",
+            "text": "<p>bonjour@velluno.com<br>Du lundi au vendredi, 9h–18h<br>Réponse sous 24 h ouvrées.</p>"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": { "heading": "Newsletter", "text": "<p>10% sur votre première commande et les nouveautés en avant-première.</p>" }
+        }
+      },
+      "block_order": ["brand", "shop", "help", "newsletter"],
+      "settings": {
+        "background": "#2f4c3a",
+        "text_color": "#f6f2ea",
+        "policy_menu": "footer",
+        "show_payment_icons": true,
+        "copyright_extra": "Tous droits réservés."
+      }
+    }
+  },
+  "order": ["newsletter-strip", "footer"]
+}

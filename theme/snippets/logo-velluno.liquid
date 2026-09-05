@@ -1,0 +1,16 @@
+{%- comment -%}
+  Default Velluno wordmark, used when no logo image is set in theme settings.
+  Inherits the current text colour so it works on light and dark backgrounds.
+{%- endcomment -%}
+<svg class="header__logo" viewBox="0 0 320 68" role="img" aria-label="{{ shop.name | escape }}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>{{ shop.name | escape }}</title>
+  <path d="M160 4c5.6 5.4 8.4 10.6 8.4 15.6 0 4.7-3.8 8.6-8.4 8.6s-8.4-3.9-8.4-8.6c0-5 2.8-10.2 8.4-15.6Z" fill="currentColor" opacity=".85"/>
+  <path d="M148 24c3.2 4.2 7.3 6.3 12 6.3s8.8-2.1 12-6.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+  <text
+    x="160" y="58"
+    text-anchor="middle"
+    fill="currentColor"
+    font-family="Playfair Display, Didot, 'Times New Roman', serif"
+    font-size="30"
+    letter-spacing="10">VELLUNO</text>
+</svg>

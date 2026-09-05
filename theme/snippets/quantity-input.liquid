@@ -1,0 +1,17 @@
+{%- comment -%}
+  Accepts: id (string), value (number), min (number), name (string), line (number)
+{%- endcomment -%}
+<div class="quantity">
+  <button type="button" class="quantity__button" data-action="decrease" aria-label="{{ 'accessibility.quantity_decrease' | t }}">&minus;</button>
+  <input
+    class="quantity__input"
+    type="number"
+    id="{{ id | default: 'Quantity' }}"
+    name="{{ name | default: 'quantity' }}"
+    value="{{ value | default: 1 }}"
+    min="{{ min | default: 1 }}"
+    step="1"
+    {% if line %}data-cart-quantity="{{ line }}"{% endif %}
+    aria-label="{{ 'products.product.quantity' | t }}">
+  <button type="button" class="quantity__button" data-action="increase" aria-label="{{ 'accessibility.quantity_increase' | t }}">+</button>
+</div>

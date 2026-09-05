@@ -1,0 +1,24 @@
+<div class="page-width" style="padding-block: 5rem 8rem;">
+  <h1 class="text-center" style="margin-bottom:4rem;">{{ page_title }}</h1>
+  <div class="grid grid--3 grid--2-mobile">
+    {%- for collection in collections -%}
+      <a class="card" href="{{ collection.url }}" style="text-decoration:none;">
+        <div class="card__media media media--portrait">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.featured_image.alt | escape }}" width="400" height="533" loading="lazy">
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="card__content">
+          <h2 class="card__title">{{ collection.title }}</h2>
+          <p class="text-muted" style="font-size:1.4rem;">{{ collection.all_products_count }}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collections list", "class": "section-list-collections" }
+{% endschema %}

@@ -1,0 +1,43 @@
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width page-width--narrow text-center">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'eyebrow' -%}
+          <p class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+        {%- when 'heading' -%}
+          <h2 {{ block.shopify_attributes }}>{{ block.settings.heading }}</h2>
+        {%- when 'text' -%}
+          <div class="rte" style="font-size: 1.75rem;" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- when 'button' -%}
+          <div style="margin-top:2.8rem;" {{ block.shopify_attributes }}>
+            <a class="button button--large" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.label }}</a>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "class": "section-rich-text",
+  "settings": [
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    { "type": "eyebrow", "name": "Eyebrow", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Notre promesse" }] },
+    { "type": "heading", "name": "Heading", "settings": [{ "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Des accessoires qui durent" }] },
+    { "type": "text", "name": "Text", "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>On sélectionne peu de produits, mais on les utilise vraiment avant de les vendre. Si un article ne convient pas, on le reprend.</p>" }] },
+    { "type": "button", "name": "Button", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Notre histoire" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ] }
+  ],
+  "presets": [{ "name": "Rich text", "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }, { "type": "button" }] }]
+}
+{% endschema %}

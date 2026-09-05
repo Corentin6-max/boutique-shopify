@@ -1,0 +1,59 @@
+<div class="page-width" style="padding-block: 6rem 10rem;">
+  <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p class="text-muted">{{ 'customer.order.date_html' | t: date: order.created_at | date: format: 'date' }}</p>
+
+  {%- if order.cancelled -%}
+    <p class="form__message">{{ 'customer.order.cancelled_html' | t: date: order.cancelled_at | date: format: 'date' }}</p>
+  {%- endif -%}
+
+  <table class="cart-items" style="margin-top:3rem;">
+    <thead>
+      <tr>
+        <th>{{ 'customer.order.product' | t }}</th>
+        <th>{{ 'customer.order.price' | t }}</th>
+        <th>{{ 'customer.order.quantity' | t }}</th>
+        <th>{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr class="cart-item">
+          <td>
+            <span class="cart-item__name">{{ line_item.title }}</span>
+            {%- if line_item.sku != blank -%}
+              <div class="cart-item__options">{{ 'customer.order.sku' | t }}: {{ line_item.sku }}</div>
+            {%- endif -%}
+          </td>
+          <td>{{ line_item.price | money }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3">{{ 'customer.order.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+      {%- for shipping_method in order.shipping_methods -%}
+        <tr><td colspan="3">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td><td>{{ shipping_method.price | money }}</td></tr>
+      {%- endfor -%}
+      {%- for tax_line in order.tax_lines -%}
+        <tr><td colspan="3">{{ 'customer.order.tax' | t }} ({{ tax_line.title }})</td><td>{{ tax_line.price | money }}</td></tr>
+      {%- endfor -%}
+      <tr><td colspan="3"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money_with_currency }}</strong></td></tr>
+    </tfoot>
+  </table>
+
+  <div class="grid grid--2" style="margin-top:4rem;">
+    <div>
+      <h2 class="h4">{{ 'customer.order.billing_address' | t }}</h2>
+      <p class="text-muted">{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
+      {{ order.billing_address | format_address }}
+    </div>
+    <div>
+      <h2 class="h4">{{ 'customer.order.shipping_address' | t }}</h2>
+      <p class="text-muted">{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
+      {{ order.shipping_address | format_address }}
+    </div>
+  </div>
+
+  <p style="margin-top:3rem;"><a class="link" href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a></p>
+</div>

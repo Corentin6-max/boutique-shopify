@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": { "type": "main-page" },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Écrivez-nous",
+        "text": "<p>Une question sur une taille, une commande, un produit ? On répond sous 24 h ouvrées.</p>",
+        "color_scheme": "surface",
+        "padding_top": 60,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": ["main", "form"]
+}

@@ -1,0 +1,99 @@
+{%- comment -%}
+  Renders a product card.
+  Accepts: product (object), show_vendor (bool), image_ratio (string), quick_add (bool)
+{%- endcomment -%}
+{%- liquid
+  assign ratio_class = 'media--square'
+  assign ratio = image_ratio | default: settings.card_image_ratio
+  if ratio == 'portrait'
+    assign ratio_class = 'media--portrait'
+  elsif ratio == 'adapt'
+    assign ratio_class = ''
+  endif
+-%}
+{%- if product == blank -%}
+  <div class="card">
+    <div class="card__media media {{ ratio_class }}">
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="card__content">
+      <h3 class="card__title">{{ 'onboarding.product_title' | t }}</h3>
+      <div class="price"><span class="price__regular">{{ 1999 | money }}</span></div>
+    </div>
+  </div>
+{%- else -%}
+  <div class="card">
+    <div class="card__media media {{ ratio_class }}">
+      {%- if product.featured_media -%}
+        <img
+          class="card__image--primary"
+          src="{{ product.featured_media | image_url: width: 720 }}"
+          srcset="{{ product.featured_media | image_url: width: 360 }} 360w, {{ product.featured_media | image_url: width: 540 }} 540w, {{ product.featured_media | image_url: width: 720 }} 720w, {{ product.featured_media | image_url: width: 1080 }} 1080w"
+          sizes="(min-width: 990px) 25vw, (min-width: 750px) 33vw, 45vw"
+          alt="{{ product.featured_media.alt | escape }}"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+          loading="lazy">
+        {%- if settings.card_second_image and product.media[1] != blank -%}
+          <img
+            class="card__image--secondary"
+            src="{{ product.media[1] | image_url: width: 720 }}"
+            alt=""
+            width="{{ product.media[1].width }}"
+            height="{{ product.media[1].height }}"
+            loading="lazy">
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+
+      <div class="card__badges">
+        {%- if product.available == false -%}
+          <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+        {%- elsif product.compare_at_price > product.price -%}
+          <span class="badge badge--sale">{{ 'products.product.on_sale' | t }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="card__content">
+      {%- if show_vendor or settings.card_show_vendor -%}
+        <span class="card__vendor">{{ product.vendor }}</span>
+      {%- endif -%}
+
+      <h3 class="card__title">
+        <a href="{{ product.url }}">{{ product.title | escape }}</a>
+      </h3>
+
+      {%- if settings.card_show_rating -%}
+        {% render 'rating', product: product, show_count: true, fallback_rating: 5, fallback_count: 0 %}
+      {%- endif -%}
+
+      <div class="card__price">
+        {% render 'price', product: product, show_badges: true %}
+      </div>
+
+      {%- if quick_add != false and settings.card_quick_add -%}
+        <div class="card__quick-add">
+          {%- if product.variants.size > 1 -%}
+            <a class="button button--soft button--small button--full" href="{{ product.url }}">
+              {{ 'products.product.choose_options' | t }}
+            </a>
+          {%- elsif product.available -%}
+            <button
+              type="button"
+              class="button button--soft button--small button--full"
+              data-quick-add="{{ product.selected_or_first_available_variant.id }}">
+              <span class="loading-spinner"></span>
+              {{ 'products.product.quick_add' | t }}
+            </button>
+          {%- else -%}
+            <span class="button button--soft button--small button--full" aria-disabled="true">
+              {{ 'products.product.sold_out' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

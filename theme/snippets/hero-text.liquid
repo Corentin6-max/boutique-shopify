@@ -1,0 +1,32 @@
+{%- comment -%} Shared hero copy block. Accepts: section (object) {%- endcomment -%}
+{%- if section.settings.eyebrow != blank -%}
+  <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+{%- endif -%}
+
+{%- if section.settings.show_rating -%}
+  <div class="hero__stars">
+    <span class="rating">
+      <span class="rating__stars" aria-hidden="true">★★★★★</span>
+      <span>{{ section.settings.rating_text }}</span>
+    </span>
+  </div>
+{%- endif -%}
+
+{%- if section.settings.heading != blank -%}
+  <h2 class="hero__title h0">{{ section.settings.heading }}</h2>
+{%- endif -%}
+
+{%- if section.settings.text != blank -%}
+  <div class="hero__text rte">{{ section.settings.text }}</div>
+{%- endif -%}
+
+{%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+  <div class="hero__buttons">
+    {%- if section.settings.button_label != blank -%}
+      <a class="button button--large" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+    {%- if section.settings.button_label_2 != blank -%}
+      <a class="button button--secondary button--large" href="{{ section.settings.button_link_2 | default: '#' }}">{{ section.settings.button_label_2 }}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

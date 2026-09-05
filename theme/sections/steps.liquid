@@ -1,0 +1,71 @@
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <div class="steps grid grid--{{ section.blocks.size | at_most: 4 }}">
+      {%- for block in section.blocks -%}
+        <div class="step" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="media media--landscape" style="margin-bottom:1.6rem;">
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | escape }}" width="400" height="300" loading="lazy">
+            </div>
+          {%- endif -%}
+          <h3 class="step__title h4">{{ block.settings.title }}</h3>
+          <p class="text-muted">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="text-center" style="margin-top:4rem;">
+        <a class="button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comment ça marche",
+  "class": "section-steps",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Comment ça marche" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Simple, du panier à la gamelle" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "surface" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Choisissez" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Filtrez par animal et par besoin. Chaque fiche indique les dimensions et les matériaux." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comment ça marche",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Choisissez", "text": "Filtrez par animal et par besoin. Chaque fiche indique les dimensions et les matériaux." } },
+        { "type": "step", "settings": { "title": "On expédie sous 24 h", "text": "Colis suivi, livré en 2 à 5 jours ouvrés partout en France." } },
+        { "type": "step", "settings": { "title": "Vous testez 30 jours", "text": "Si votre animal boude, on reprend le produit et on vous rembourse." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

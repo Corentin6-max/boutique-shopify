@@ -1,0 +1,40 @@
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="product-grid" style="--columns: {{ section.settings.columns }};">
+      {%- assign shown = 0 -%}
+      {%- for related in recommendations.products limit: section.settings.products_to_show -%}
+        {% render 'product-card', product: related %}
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endfor -%}
+
+      {%- if shown == 0 -%}
+        {%- for other in collections.all.products limit: section.settings.products_to_show -%}
+          {%- unless other.id == product.id -%}
+            {% render 'product-card', product: other %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "You may also like",
+  "class": "section-related",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Souvent achetés ensemble" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "label": "Products to show", "default": 4 },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns", "default": 4 },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ]
+}
+{% endschema %}

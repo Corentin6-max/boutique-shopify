@@ -1,0 +1,76 @@
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="trust-bar">
+      {%- for block in section.blocks -%}
+        <div class="trust-bar__item" {{ block.shopify_attributes }}>
+          <div class="trust-bar__icon">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.image.alt | escape }}" width="44" height="44" loading="lazy">
+            {%- else -%}
+              {% render 'icon', icon: block.settings.icon, size: 44 %}
+            {%- endif -%}
+          </div>
+          <h3 class="trust-bar__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}
+            <p class="trust-bar__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon columns",
+  "class": "section-icons",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pourquoi nous choisir" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Custom icon" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "leaf", "label": "Leaf" }, { "value": "drop", "label": "Drop" },
+          { "value": "shield", "label": "Shield" }, { "value": "rabbit", "label": "Retours sous 30 jours" },
+          { "value": "sparkle", "label": "Sparkle" }, { "value": "truck", "label": "Shipping" },
+          { "value": "refresh", "label": "Refresh" }
+        ], "default": "leaf" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Sans BPA" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Silicone alimentaire et acier inoxydable uniquement." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon columns",
+      "blocks": [
+        { "type": "column", "settings": { "icon": "leaf", "title": "Sans BPA", "text": "No sulfates, silicones or parabens." } },
+        { "type": "column", "settings": { "icon": "shield", "title": "Matériaux contrôlés", "text": "Testés en laboratoire, sans substance toxique." } },
+        { "type": "column", "settings": { "icon": "truck", "title": "Expédié sous 24 h", "text": "Colis suivi, livré en 2 à 5 jours ouvrés." } },
+        { "type": "column", "settings": { "icon": "refresh", "title": "30 jours pour essayer", "text": "Votre animal boude ? On rembourse, simplement." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

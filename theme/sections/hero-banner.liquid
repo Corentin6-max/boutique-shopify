@@ -1,0 +1,103 @@
+{%- liquid
+  assign layout = section.settings.layout
+-%}
+{%- if layout == 'split' -%}
+  <section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+    <div class="page-width">
+      <div class="hero hero--split">
+        <div class="hero__content" style="padding: 0;">
+          <div class="hero__media media {{ section.settings.image_ratio }}">
+            {%- if section.settings.image != blank -%}
+              <img
+                src="{{ section.settings.image | image_url: width: 1200 }}"
+                srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+                sizes="(min-width: 750px) 50vw, 100vw"
+                alt="{{ section.settings.image.alt | escape }}"
+                width="{{ section.settings.image.width }}"
+                height="{{ section.settings.image.height }}"
+                fetchpriority="high">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="hero__inner">
+            {% render 'hero-text', section: section %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- else -%}
+  <section
+    class="hero hero--{{ section.settings.text_position }}"
+    style="--hero-height: {{ section.settings.height }}px; --hero-height-mobile: {{ section.settings.height_mobile }}px; --hero-overlay: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }});">
+    <div class="hero__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 2000 }}"
+          srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1400 }} 1400w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
+          sizes="100vw"
+          alt="{{ section.settings.image.alt | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          fetchpriority="high">
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content" style="color: {{ section.settings.text_color }};">
+      <div class="hero__inner">
+        {% render 'hero-text', section: section %}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "class": "section-hero",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "options": [
+      { "value": "overlay", "label": "Full-width image with overlay" },
+      { "value": "split", "label": "Image beside text" }
+    ], "default": "overlay" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "image_ratio", "label": "Split image ratio", "options": [
+      { "value": "media--square", "label": "Square" },
+      { "value": "media--portrait", "label": "Portrait" },
+      { "value": "media--landscape", "label": "Landscape" }
+    ], "default": "media--landscape" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Nouveau chez Velluno" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Tout pour le confort de votre animal" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Fontaines à eau, gamelles, jouets et accessoires choisis un par un pour les chiens et les chats.</p>" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating line", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "4,8/5 — plus de 3 000 clients" },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Découvrir la boutique" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "button_label_2", "label": "Secondary button", "default": "Comment ça marche" },
+    { "type": "url", "id": "button_link_2", "label": "Secondary button link" },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "text_position", "label": "Text position", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "left" },
+    { "type": "color", "id": "text_color", "label": "Text colour (overlay layout)", "default": "#ffffff" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Image overlay", "default": 30 },
+    { "type": "range", "id": "height", "min": 400, "max": 900, "step": 20, "unit": "px", "label": "Desktop height", "default": 640 },
+    { "type": "range", "id": "height_mobile", "min": 320, "max": 700, "step": 20, "unit": "px", "label": "Mobile height", "default": 480 },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme (split layout)", "options": [
+      { "value": "default", "label": "Default" },
+      { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" },
+      { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 72 }
+  ],
+  "presets": [{ "name": "Hero banner" }]
+}
+{% endschema %}

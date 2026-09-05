@@ -1,0 +1,56 @@
+<div class="marquee" style="--marquee-speed: {{ section.settings.speed }}s; background: {{ section.settings.background }};">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="marquee__item" style="color: {{ section.settings.text_color }};" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}{% render 'icon', icon: block.settings.icon, size: 18 %}{%- endif -%}
+          {{ block.settings.text }}
+        </span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling bar",
+  "class": "section-marquee",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#eef1e9" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#2f4c3a" },
+    { "type": "range", "id": "speed", "min": 10, "max": 60, "step": 2, "unit": "s", "label": "Scroll duration", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Sans BPA" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "none", "label": "None" },
+          { "value": "leaf", "label": "Leaf" },
+          { "value": "drop", "label": "Drop" },
+          { "value": "shield", "label": "Shield" },
+          { "value": "rabbit", "label": "Retours sous 30 jours" },
+          { "value": "sparkle", "label": "Sparkle" },
+          { "value": "truck", "label": "Shipping" },
+          { "value": "refresh", "label": "Refresh" }
+        ], "default": "leaf" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Sans BPA", "icon": "drop" } },
+        { "type": "item", "settings": { "text": "Livraison offerte dès 49€", "icon": "leaf" } },
+        { "type": "item", "settings": { "text": "Retours sous 30 jours", "icon": "rabbit" } },
+        { "type": "item", "settings": { "text": "Matériaux contrôlés", "icon": "shield" } },
+        { "type": "item", "settings": { "text": "Paiement sécurisé", "icon": "refresh" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

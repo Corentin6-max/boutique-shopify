@@ -1,0 +1,110 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Velluno",
+    "theme_version": "1.0.0",
+    "theme_author": "Velluno",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image" },
+      { "type": "range", "id": "logo_width", "min": 60, "max": 320, "step": 10, "unit": "px", "label": "Logo width", "default": 150 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon (32 x 32px)" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Base" },
+      { "type": "color", "id": "color_background", "label": "Page background", "default": "#faf6f0" },
+      { "type": "color", "id": "color_surface", "label": "Card / surface", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#1d2a24" },
+      { "type": "color", "id": "color_text_muted", "label": "Muted text", "default": "#6b7770" },
+      { "type": "color", "id": "color_border", "label": "Borders", "default": "#e5ddd1" },
+      { "type": "header", "content": "Accents" },
+      { "type": "color", "id": "color_accent", "label": "Primary accent", "default": "#2f4c3a" },
+      { "type": "color", "id": "color_accent_soft", "label": "Soft accent background", "default": "#eef1e9" },
+      { "type": "color", "id": "color_gold", "label": "Highlight / stars", "default": "#c39a4d" },
+      { "type": "color", "id": "color_sale", "label": "Sale / urgency", "default": "#b4472f" },
+      { "type": "header", "content": "Buttons" },
+      { "type": "color", "id": "color_button", "label": "Button background", "default": "#2f4c3a" },
+      { "type": "color", "id": "color_button_text", "label": "Button text", "default": "#ffffff" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "header", "content": "Headings" },
+      { "type": "font_picker", "id": "type_heading_font", "label": "Heading font", "default": "playfair_display_n4" },
+      { "type": "range", "id": "heading_scale", "min": 90, "max": 130, "step": 5, "unit": "%", "label": "Heading size scale", "default": 100 },
+      { "type": "checkbox", "id": "heading_uppercase", "label": "Uppercase headings", "default": false },
+      { "type": "header", "content": "Body" },
+      { "type": "font_picker", "id": "type_body_font", "label": "Body font", "default": "assistant_n4" },
+      { "type": "range", "id": "body_scale", "min": 90, "max": 120, "step": 5, "unit": "%", "label": "Body size scale", "default": 100 }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "min": 1000, "max": 1600, "step": 20, "unit": "px", "label": "Page width", "default": 1280 },
+      { "type": "range", "id": "spacing_sections", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Space between sections", "default": 0 },
+      { "type": "range", "id": "corner_radius", "min": 0, "max": 32, "step": 2, "unit": "px", "label": "Corner radius", "default": 14 },
+      { "type": "range", "id": "button_radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Button corner radius", "default": 40 },
+      { "type": "checkbox", "id": "animations_enabled", "label": "Reveal sections on scroll", "default": true }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      { "type": "checkbox", "id": "card_show_vendor", "label": "Show vendor", "default": false },
+      { "type": "checkbox", "id": "card_show_rating", "label": "Show star rating", "default": true },
+      { "type": "checkbox", "id": "card_second_image", "label": "Show second image on hover", "default": true },
+      { "type": "select", "id": "card_image_ratio", "label": "Image ratio", "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" }
+      ], "default": "square" },
+      { "type": "checkbox", "id": "card_quick_add", "label": "Enable quick add", "default": true }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "select", "id": "cart_type", "label": "Cart type", "options": [
+        { "value": "drawer", "label": "Drawer" },
+        { "value": "page", "label": "Page" }
+      ], "default": "drawer" },
+      { "type": "checkbox", "id": "cart_show_note", "label": "Enable order notes", "default": true },
+      { "type": "checkbox", "id": "cart_free_shipping_bar", "label": "Show free shipping progress bar", "default": true },
+      { "type": "number", "id": "cart_free_shipping_threshold", "label": "Free shipping threshold (in currency units)", "default": 50 }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/shop" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "text", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest" }
+    ]
+  },
+  {
+    "name": "Social sharing",
+    "settings": [
+      { "type": "image_picker", "id": "share_image", "label": "Default sharing image", "info": "1200 x 628px recommended" },
+      { "type": "checkbox", "id": "share_facebook", "label": "Share on Facebook", "default": true },
+      { "type": "checkbox", "id": "share_pinterest", "label": "Pin on Pinterest", "default": true },
+      { "type": "checkbox", "id": "share_twitter", "label": "Share on X", "default": true }
+    ]
+  },
+  {
+    "name": "Currency format",
+    "settings": [
+      { "type": "checkbox", "id": "currency_code_enabled", "label": "Show currency codes", "default": false }
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+<ul class="social-list">
+  {%- if settings.social_instagram_link != blank -%}
+    <li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', icon: 'instagram', size: 18 %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    <li><a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon', icon: 'tiktok', size: 18 %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}
+    <li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'icon', icon: 'facebook', size: 18 %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="YouTube">{% render 'icon', icon: 'youtube', size: 18 %}</a></li>
+  {%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}
+    <li><a href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon', icon: 'pinterest', size: 18 %}</a></li>
+  {%- endif -%}
+</ul>

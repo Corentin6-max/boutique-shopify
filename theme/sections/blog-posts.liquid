@@ -1,0 +1,55 @@
+{%- assign blog = blogs[section.settings.blog] -%}
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+
+    <div class="grid grid--{{ section.settings.columns }}">
+      {%- for article in blog.articles limit: section.settings.post_limit -%}
+        <article class="card">
+          <a href="{{ article.url }}" class="card__media media media--landscape">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}" width="400" height="300" loading="lazy">
+            {%- else -%}
+              {{ 'blog-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </a>
+          <div class="card__content">
+            <span class="card__vendor">{{ article.published_at | date: format: 'date' }}</span>
+            <h3 class="card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            {%- if section.settings.show_excerpt -%}
+              <p class="text-muted" style="font-size:1.45rem;">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+            {%- endif -%}
+            <span class="link">{{ 'sections.blog.read_more' | t }}</span>
+          </div>
+        </article>
+      {%- else -%}
+        <p class="text-muted">{{ 'sections.blog.back_to_blog' | t }}</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "section-blog-posts",
+  "settings": [
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "À lire avant d'acheter" },
+    { "type": "range", "id": "post_limit", "min": 2, "max": 6, "step": 1, "label": "Posts to show", "default": 3 },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns", "default": 3 },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "presets": [{ "name": "Blog posts" }]
+}
+{% endschema %}

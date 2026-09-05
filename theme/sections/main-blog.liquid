@@ -1,0 +1,40 @@
+{% paginate blog.articles by section.settings.posts_per_page %}
+  <div class="page-width" style="padding-block: 5rem 8rem;">
+    <div class="section-header">
+      <h1>{{ blog.title }}</h1>
+    </div>
+
+    <div class="grid grid--{{ section.settings.columns }}">
+      {%- for article in blog.articles -%}
+        <article class="card">
+          <a class="card__media media media--landscape" href="{{ article.url }}">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}" width="400" height="300" loading="lazy">
+            {%- else -%}
+              {{ 'blog-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </a>
+          <div class="card__content">
+            <span class="card__vendor">{{ article.published_at | date: format: 'date' }}</span>
+            <h2 class="card__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p class="text-muted" style="font-size:1.45rem;">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+            <span class="link">{{ 'sections.blog.read_more' | t }}</span>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {% render 'pagination', paginate: paginate %}
+  </div>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "class": "section-main-blog",
+  "settings": [
+    { "type": "range", "id": "posts_per_page", "min": 3, "max": 24, "step": 3, "label": "Posts per page", "default": 9 },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Columns", "default": 3 }
+  ]
+}
+{% endschema %}

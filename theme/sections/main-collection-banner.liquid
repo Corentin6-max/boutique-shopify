@@ -1,0 +1,32 @@
+<div class="page-width">
+  <div class="collection-hero">
+    <nav aria-label="Breadcrumb" style="font-size:1.3rem;margin-bottom:1.6rem;">
+      <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+      <span aria-hidden="true"> / </span>
+      <span>{{ collection.title }}</span>
+    </nav>
+
+    <h1>{{ collection.title }}</h1>
+
+    {%- if section.settings.show_description and collection.description != blank -%}
+      <div class="rte page-width--narrow" style="margin:0 auto;">{{ collection.description }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.show_image and collection.image -%}
+      <div class="media media--wide" style="margin-top:3rem;">
+        <img src="{{ collection.image | image_url: width: 2000 }}" alt="{{ collection.image.alt | escape }}" width="{{ collection.image.width }}" height="{{ collection.image.height }}" fetchpriority="high">
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "class": "section-collection-banner",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Show collection description", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Show collection image", "default": false }
+  ]
+}
+{% endschema %}

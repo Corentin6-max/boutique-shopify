@@ -1,0 +1,112 @@
+{% paginate collection.products by section.settings.products_per_page %}
+  <div class="page-width" style="padding-bottom: 8rem;">
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+      <form class="facets" data-facet-form method="get" action="{{ collection.url }}">
+        {%- if section.settings.enable_filtering -%}
+          {%- for filter in collection.filters -%}
+            <details>
+              <summary>
+                {{ filter.label }}
+                {%- if filter.active_values.size > 0 -%}({{ filter.active_values.size }}){%- endif -%}
+                {% render 'icon', icon: 'chevron-down', size: 14 %}
+              </summary>
+              <div class="facets__panel">
+                {%- case filter.type -%}
+                  {%- when 'price_range' -%}
+                    <div style="display:flex;gap:1rem;">
+                      <label class="field" style="flex:1;">
+                        <span class="field__label">{{ 'general.search.search' | t }} min</span>
+                        <input class="field__input" name="{{ filter.min_value.param_name }}" type="number" min="0" max="{{ filter.range_max | divided_by: 100 }}" value="{{ filter.min_value.value | divided_by: 100 }}">
+                      </label>
+                      <label class="field" style="flex:1;">
+                        <span class="field__label">max</span>
+                        <input class="field__input" name="{{ filter.max_value.param_name }}" type="number" min="0" max="{{ filter.range_max | divided_by: 100 }}" value="{{ filter.max_value.value | divided_by: 100 }}">
+                      </label>
+                    </div>
+                  {%- else -%}
+                    {%- for value in filter.values -%}
+                      <label class="facets__item">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        <span>{{ value.label }} ({{ value.count }})</span>
+                      </label>
+                    {%- endfor -%}
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if section.settings.enable_sorting -%}
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <label class="field" style="margin:0;">
+            <span class="visually-hidden">{{ 'products.facets.sort_by_label' | t }}</span>
+            <select class="select__select" name="sort_by" style="min-height:4.4rem;">
+              {%- for option in collection.sort_options -%}
+                <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+              {%- endfor -%}
+            </select>
+          </label>
+        {%- endif -%}
+
+        <span class="facets__count">{{ 'products.facets.product_count' | t: count: collection.products_count }}</span>
+        <noscript><button type="submit" class="button button--small">{{ 'products.facets.apply' | t }}</button></noscript>
+      </form>
+
+      {%- assign active_count = 0 -%}
+      {%- for filter in collection.filters -%}
+        {%- assign active_count = active_count | plus: filter.active_values.size -%}
+      {%- endfor -%}
+      {%- if active_count > 0 -%}
+        <div class="active-facets">
+          {%- for filter in collection.filters -%}
+            {%- for value in filter.active_values -%}
+              <a class="active-facet" href="{{ value.url_to_remove }}">
+                {{ value.label }} {% render 'icon', icon: 'close', size: 14 %}
+              </a>
+            {%- endfor -%}
+          {%- endfor -%}
+          <a class="active-facet" href="{{ collection.url }}">{{ 'products.facets.clear_all' | t }}</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if collection.products.size > 0 -%}
+      <div class="product-grid" style="--columns: {{ section.settings.columns }}; --columns-mobile: {{ section.settings.columns_mobile }};">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, image_ratio: section.settings.image_ratio %}
+        {%- endfor -%}
+      </div>
+
+      {% render 'pagination', paginate: paginate %}
+    {%- else -%}
+      <div class="text-center" style="padding:8rem 0;">
+        <h2>{{ 'sections.collection_template.empty' | t }}</h2>
+        <p class="text-muted">{{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Product grid",
+  "class": "section-collection-grid",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "min": 8, "max": 48, "step": 4, "label": "Products per page", "default": 16 },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "select", "id": "columns_mobile", "label": "Columns on mobile", "options": [
+      { "value": "1", "label": "1" }, { "value": "2", "label": "2" }
+    ], "default": "2" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "options": [
+      { "value": "adapt", "label": "Adapt" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait" }
+    ], "default": "square" },
+    { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true }
+  ]
+}
+{% endschema %}

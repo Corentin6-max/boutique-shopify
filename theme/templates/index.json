@@ -1,0 +1,191 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "layout": "overlay",
+        "eyebrow": "Nouveau — la sélection Velluno",
+        "heading": "Tout ce qui rend leur quotidien plus doux",
+        "text": "<p>Fontaines à eau, gamelles, jouets et accessoires choisis un par un. Testés par nos chiens et nos chats avant d'arriver chez vous.</p>",
+        "show_rating": true,
+        "rating_text": "4,8/5 — plus de 3 000 clients",
+        "button_label": "Découvrir la boutique",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "Nos best-sellers",
+        "text_position": "left",
+        "text_color": "#ffffff",
+        "overlay_opacity": 35,
+        "height": 660,
+        "height_mobile": 500,
+        "color_scheme": "default",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "Livraison offerte dès 49€", "icon": "truck" } },
+        "m2": { "type": "item", "settings": { "text": "Retours 30 jours", "icon": "refresh" } },
+        "m3": { "type": "item", "settings": { "text": "Matériaux sans BPA", "icon": "shield" } },
+        "m4": { "type": "item", "settings": { "text": "Paiement sécurisé", "icon": "shield" } },
+        "m5": { "type": "item", "settings": { "text": "Service client en français", "icon": "sparkle" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5"],
+      "settings": { "background": "#eef1e9", "text_color": "#2f4c3a", "speed": 30 }
+    },
+    "best-sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Les préférés",
+        "heading": "Nos best-sellers",
+        "text": "<p>Les produits que nos clients recommandent le plus souvent.</p>",
+        "products_to_show": 4,
+        "columns": 4,
+        "columns_mobile": "2",
+        "image_ratio": "square",
+        "button_label": "Voir toute la boutique",
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
+    "benefits": {
+      "type": "icon-columns",
+      "blocks": {
+        "b1": { "type": "column", "settings": { "icon": "shield", "title": "Sans BPA", "text": "Acier inoxydable et silicone alimentaire uniquement." } },
+        "b2": { "type": "column", "settings": { "icon": "truck", "title": "Expédié sous 24 h", "text": "Livraison en 2 à 5 jours ouvrés en France." } },
+        "b3": { "type": "column", "settings": { "icon": "refresh", "title": "30 jours pour changer d'avis", "text": "Retour simple, remboursement rapide." } },
+        "b4": { "type": "column", "settings": { "icon": "sparkle", "title": "Conseils par de vrais humains", "text": "Une question ? On répond sous 24 h." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "color_scheme": "surface",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "hero-product": {
+      "type": "featured-product",
+      "settings": {
+        "eyebrow": "Le coup de cœur",
+        "heading": "Fontaine à eau 7 L",
+        "text": "<p>Une eau qui reste fraîche et filtrée toute la journée, un moteur silencieux, et un capteur qui déclenche le débit quand votre animal s'approche.</p>",
+        "benefits": "Grande capacité 7 L : jusqu'à une semaine d'autonomie\nAcier inoxydable, facile à nettoyer\nPompe silencieuse, moins de 30 dB\nCapteur de présence et recharge sans fil",
+        "show_rating": true,
+        "rating_text": "23 avis vérifiés",
+        "show_quantity": false,
+        "show_dynamic_checkout": true,
+        "show_view_link": true,
+        "color_scheme": "soft",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": { "type": "collection", "settings": { "title": "Chiens", "text": "Jouets, tapis, gamelles" } },
+        "c2": { "type": "collection", "settings": { "title": "Chats", "text": "Fontaines, filtres, repas" } },
+        "c3": { "type": "collection", "settings": { "title": "Accessoires", "text": "Tout le reste du quotidien" } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "eyebrow": "Par catégorie",
+        "heading": "Trouvez ce qu'il vous faut",
+        "columns": 3,
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "e": { "type": "eyebrow", "settings": { "text": "Notre sélection" } },
+        "h": { "type": "heading", "settings": { "heading": "On teste avant de vendre" } },
+        "t": { "type": "text", "settings": { "text": "<p>Chaque produit passe par nos propres animaux pendant plusieurs semaines. Si ça casse, si ça glisse, si ça fait du bruit la nuit — ça ne rentre pas au catalogue.</p>" } },
+        "l": { "type": "list", "settings": { "items": "Matériaux contrôlés : silicone alimentaire, acier inoxydable, caoutchouc non toxique\nDes tailles pensées pour les petits comme les grands gabarits\nDes pièces de rechange disponibles, pas de produit jetable" } },
+        "b": { "type": "button", "settings": { "label": "Voir la boutique", "link": "shopify://collections/all" } }
+      },
+      "block_order": ["e", "h", "t", "l", "b"],
+      "settings": {
+        "image_position": "left",
+        "image_ratio": "media--square",
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Choisissez", "text": "Filtrez par animal et par besoin. Chaque fiche indique les dimensions et les matériaux." } },
+        "s2": { "type": "step", "settings": { "title": "On expédie sous 24 h", "text": "Colis suivi, livré en 2 à 5 jours ouvrés partout en France." } },
+        "s3": { "type": "step", "settings": { "title": "Vous testez 30 jours", "text": "Si votre animal boude, on reprend le produit et on vous rembourse." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {
+        "eyebrow": "Comment ça marche",
+        "heading": "Simple, du panier à la gamelle",
+        "color_scheme": "surface",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "rating": 5, "title": "Ma chatte boit enfin assez", "quote": "La fontaine tourne depuis deux mois, aucun bruit la nuit et l'eau reste claire. Le filtre se change en dix secondes.", "name": "Camille R.", "role": "Cliente vérifiée" } },
+        "t2": { "type": "testimonial", "settings": { "rating": 5, "title": "Fini les gamelles qui glissent", "quote": "Le tapis en silicone ne bouge plus d'un millimètre et tout se nettoie d'un coup d'éponge. J'en ai repris un deuxième.", "name": "Julien M.", "role": "Client vérifié" } },
+        "t3": { "type": "testimonial", "settings": { "rating": 4, "title": "Solide pour un jouet à mâcher", "quote": "Mon golden le mordille tous les jours depuis un mois, il est encore intact. Bon rapport qualité-prix.", "name": "Sophie D.", "role": "Cliente vérifiée" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "eyebrow": "Avis",
+        "heading": "Ce que disent nos clients",
+        "subheading": "4,8 de moyenne sur les avis vérifiés",
+        "layout": "grid",
+        "columns": 3,
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine, 4 à 8 jours pour la Belgique et la Suisse.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "La livraison est-elle offerte ?", "answer": "<p>Oui, dès 49€ d'achat. En dessous, la livraison suivie est à 4,90€.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Puis-je retourner un produit ?", "answer": "<p>Vous avez 30 jours après réception. Écrivez-nous, nous vous envoyons une étiquette de retour et vous remboursons dès réception du colis.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Les matériaux sont-ils sans danger ?", "answer": "<p>Oui. Silicone alimentaire, acier inoxydable 304 et caoutchouc non toxique, sans BPA. Les détails figurent sur chaque fiche produit.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "À quelle fréquence changer le filtre de la fontaine ?", "answer": "<p>Toutes les 2 à 4 semaines selon le nombre d'animaux. Nos lots de 10, 20 ou 30 filtres couvrent facilement une année.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Tout ce qu'on nous demande",
+        "footer_text": "Une autre question ? Écrivez à bonjour@velluno.com — un humain vous répond.",
+        "open_first": true,
+        "enable_schema": true,
+        "color_scheme": "default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "best-sellers",
+    "benefits",
+    "hero-product",
+    "categories",
+    "story",
+    "steps",
+    "testimonials",
+    "faq"
+  ]
+}

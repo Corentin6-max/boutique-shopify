@@ -1,0 +1,34 @@
+{%- comment -%}
+  Maps theme settings onto CSS custom properties consumed by assets/base.css.
+{%- endcomment -%}
+<style>
+  :root {
+    --color-bg: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-text: {{ settings.color_text }};
+    --color-text-muted: {{ settings.color_text_muted }};
+    --color-border: {{ settings.color_border }};
+    --color-accent: {{ settings.color_accent }};
+    --color-accent-soft: {{ settings.color_accent_soft }};
+    --color-gold: {{ settings.color_gold }};
+    --color-sale: {{ settings.color_sale }};
+    --color-button: {{ settings.color_button }};
+    --color-button-text: {{ settings.color_button_text }};
+
+    --font-heading-family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --font-heading-style: {{ settings.type_heading_font.style }};
+    --font-heading-weight: {{ settings.type_heading_font.weight }};
+    --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body-style: {{ settings.type_body_font.style }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+    --font-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+    --heading-transform: {% if settings.heading_uppercase %}uppercase{% else %}none{% endif %};
+
+    --page-width: {{ settings.page_width }}px;
+    --section-gap: {{ settings.spacing_sections }}px;
+    --radius: {{ settings.corner_radius }}px;
+    --radius-sm: {{ settings.corner_radius | divided_by: 2 }}px;
+    --radius-button: {{ settings.button_radius }}px;
+  }
+</style>

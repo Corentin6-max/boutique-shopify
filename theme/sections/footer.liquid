@@ -1,0 +1,126 @@
+<footer class="footer" style="--footer-bg: {{ section.settings.background }}; --footer-text: {{ section.settings.text_color }};">
+  <div class="page-width">
+    <div class="footer__top">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'brand' -%}
+              {%- if section.settings.logo != blank -%}
+                <img class="footer__logo" src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name | escape }}" width="160" height="34" loading="lazy">
+              {%- else -%}
+                <img class="footer__logo" src="{{ 'logo-velluno-light.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="160" height="34" loading="lazy">
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="rte" style="font-size:1.45rem;max-width:34rem;">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {% render 'social-icons' %}
+
+            {%- when 'menu' -%}
+              <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              <ul class="footer__list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+
+            {%- when 'text' -%}
+              <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              <div class="rte" style="font-size:1.45rem;">{{ block.settings.text }}</div>
+
+            {%- when 'newsletter' -%}
+              <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+              {%- if block.settings.text != blank -%}
+                <div class="rte" style="font-size:1.45rem;margin-bottom:1.6rem;">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- form 'customer', class: 'newsletter__form', style: 'margin:0;max-width:none;' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="field">
+                  <label class="visually-hidden" for="FooterNewsletter">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                  <input
+                    class="field__input"
+                    id="FooterNewsletter"
+                    type="email"
+                    name="contact[email]"
+                    placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                    autocomplete="email"
+                    required>
+                </div>
+                <button type="submit" class="button">{{ 'general.newsletter_form.button_label' | t }}</button>
+                {%- if form.posted_successfully? -%}
+                  <p class="form__message form__message--success" style="margin-top:1rem;">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                {%- endif -%}
+              {%- endform -%}
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_extra }}</span>
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <div class="payment-icons">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.policy_menu != blank -%}
+        <ul style="display:flex;gap:1.6rem;flex-wrap:wrap;">
+          {%- for link in section.settings.policy_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#2f4c3a" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#f6f2ea" },
+    { "type": "image_picker", "id": "logo", "label": "Footer logo" },
+    { "type": "link_list", "id": "policy_menu", "label": "Legal menu", "default": "footer" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "text", "id": "copyright_extra", "label": "Extra copyright text", "default": "Tous droits réservés." }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Velluno sélectionne des accessoires simples et durables pour les chiens et les chats.</p>" }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Boutique" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Aide" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Une question ? Écrivez à bonjour@velluno.com, réponse sous 24 h.</p>" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Newsletter" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>10% sur votre première commande et les nouveautés en avant-première.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width page-width--narrow">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <div class="accordion">
+      {%- for block in section.blocks -%}
+        <details class="accordion__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="accordion__summary">
+            {{ block.settings.question }}
+            <span class="accordion__icon">{% render 'icon', icon: 'plus', size: 20 %}</span>
+          </summary>
+          <div class="accordion__content rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footer_text != blank -%}
+      <p class="text-center text-muted" style="margin-top:3rem;">{{ section.settings.footer_text }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- if section.settings.enable_schema and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "class": "section-faq",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tout ce qu'on nous demande" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "footer_text", "label": "Footer text", "default": "Une autre question ? Écrivez à bonjour@velluno.com — un humain vous répond." },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true },
+    { "type": "checkbox", "id": "enable_schema", "label": "Add FAQ structured data", "default": true },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Quels sont les délais de livraison ?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Nous expédions sous 24 h ouvrées. Comptez 2 à 5 jours ouvrés pour la France métropolitaine.</p>" } },
+        { "type": "question", "settings": { "question": "La livraison est-elle offerte ?", "answer": "<p>Oui, dès 49€ d'achat. En dessous, la livraison suivie est à 4,90€.</p>" } },
+        { "type": "question", "settings": { "question": "Puis-je retourner un produit ?", "answer": "<p>Vous avez 30 jours après réception. On vous envoie une étiquette de retour et on vous rembourse.</p>" } },
+        { "type": "question", "settings": { "question": "Les matériaux sont-ils sans danger ?", "answer": "<p>Oui : silicone alimentaire, acier inoxydable 304 et caoutchouc non toxique, sans BPA.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

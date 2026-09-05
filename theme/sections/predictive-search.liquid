@@ -1,0 +1,50 @@
+{%- if predictive_search.performed -%}
+  <div class="predictive">
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <p class="predictive__heading">{{ 'general.search.products' | t }}</p>
+      <ul>
+        {%- for product in predictive_search.resources.products -%}
+          <li>
+            <a class="predictive__item" href="{{ product.url }}">
+              <span class="predictive__media media">
+                {%- if product.featured_media -%}
+                  <img src="{{ product.featured_media | image_url: width: 120 }}" alt="" width="48" height="48" loading="lazy">
+                {%- endif -%}
+              </span>
+              <span>
+                <span class="predictive__title">{{ product.title }}</span>
+                {% render 'price', product: product %}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.collections.size > 0 -%}
+      <p class="predictive__heading">{{ 'general.search.collections' | t }}</p>
+      <ul>
+        {%- for collection in predictive_search.resources.collections -%}
+          <li><a class="predictive__item" href="{{ collection.url }}">{{ collection.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.articles.size > 0 -%}
+      <p class="predictive__heading">{{ 'general.search.articles' | t }}</p>
+      <ul>
+        {%- for article in predictive_search.resources.articles -%}
+          <li><a class="predictive__item" href="{{ article.url }}">{{ article.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.products.size == 0 and predictive_search.resources.collections.size == 0 and predictive_search.resources.articles.size == 0 -%}
+      <p class="predictive__heading">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Predictive search" }
+{% endschema %}

@@ -1,0 +1,88 @@
+{%- comment -%} Us vs. them comparison table, a staple of DTC landing pages. {%- endcomment -%}
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width page-width--medium">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="comparison__ours">{{ section.settings.column_ours }}</th>
+            <th>{{ section.settings.column_theirs }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">{{ block.settings.label }}</th>
+              <td class="comparison__ours">
+                {%- if block.settings.ours -%}
+                  <span class="comparison__yes" aria-label="Yes">✓</span>
+                {%- else -%}
+                  <span class="comparison__no" aria-label="No">✕</span>
+                {%- endif -%}
+                {%- if block.settings.ours_text != blank -%}<span class="comparison__note">{{ block.settings.ours_text }}</span>{%- endif -%}
+              </td>
+              <td>
+                {%- if block.settings.theirs -%}
+                  <span class="comparison__yes" aria-label="Yes">✓</span>
+                {%- else -%}
+                  <span class="comparison__no" aria-label="No">✕</span>
+                {%- endif -%}
+                {%- if block.settings.theirs_text != blank -%}<span class="comparison__note">{{ block.settings.theirs_text }}</span>{%- endif -%}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "class": "section-comparison",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La différence" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Velluno vs. une grande surface" },
+    { "type": "text", "id": "column_ours", "label": "Your column", "default": "Velluno" },
+    { "type": "text", "id": "column_theirs", "label": "Their column", "default": "Grande surface" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Feature", "default": "Sans BPA" },
+        { "type": "checkbox", "id": "ours", "label": "Yours has it", "default": true },
+        { "type": "text", "id": "ours_text", "label": "Your note" },
+        { "type": "checkbox", "id": "theirs", "label": "Theirs has it", "default": false },
+        { "type": "text", "id": "theirs_text", "label": "Their note" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Sans BPA", "ours": true, "theirs": false } },
+        { "type": "row", "settings": { "label": "Acier inoxydable 304", "ours": true, "theirs": false } },
+        { "type": "row", "settings": { "label": "Pièces de rechange disponibles", "ours": true, "theirs": false } },
+        { "type": "row", "settings": { "label": "Testé par notre équipe", "ours": true, "theirs": false } },
+        { "type": "row", "settings": { "label": "Service client en français", "ours": true, "theirs": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

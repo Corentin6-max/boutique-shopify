@@ -1,0 +1,14 @@
+<div class="page-width page-width--narrow text-center" style="padding-block: 8rem;">
+  {%- assign gift_card_value = gift_card.initial_value | money -%}
+  <h1>{{ 'gift_cards.issued.title' | t: value: gift_card_value, shop: shop.name }}</h1>
+  {%- if gift_card.expired -%}
+    <p class="form__message">{{ 'gift_cards.issued.expired' | t }}</p>
+  {%- endif -%}
+
+  <div class="testimonial" style="align-items:center;">
+    <p class="h2" style="letter-spacing:0.1em;">{{ gift_card.code | format_code }}</p>
+    <p class="text-muted">{{ 'gift_cards.issued.redeem' | t }}</p>
+  </div>
+
+  <a class="button" href="{{ shop.url }}" style="margin-top:3rem;">{{ 'gift_cards.issued.shop_link' | t }}</a>
+</div>

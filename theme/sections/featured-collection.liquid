@@ -1,0 +1,62 @@
+{%- liquid
+  assign products = section.settings.collection.products
+  assign limit = section.settings.products_to_show
+-%}
+<section class="section scheme-{{ section.settings.color_scheme }}" style="--pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <div class="product-grid" style="--columns: {{ section.settings.columns }}; --columns-mobile: {{ section.settings.columns_mobile }};">
+      {%- if products.size > 0 -%}
+        {%- for product in products limit: limit -%}
+          {% render 'product-card', product: product, image_ratio: section.settings.image_ratio %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          {% render 'product-card' %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="text-center" style="margin-top: 4rem;">
+        <a class="button button--secondary" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "section-featured-collection",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Nos best-sellers" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 16, "step": 1, "label": "Products to show", "default": 4 },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "select", "id": "columns_mobile", "label": "Columns on mobile", "options": [
+      { "value": "1", "label": "1" }, { "value": "2", "label": "2" }
+    ], "default": "2" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "options": [
+      { "value": "adapt", "label": "Adapt" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait" }
+    ], "default": "square" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Voir toute la boutique" },
+    { "type": "select", "id": "color_scheme", "label": "Colour scheme", "options": [
+      { "value": "default", "label": "Default" }, { "value": "surface", "label": "Surface" },
+      { "value": "soft", "label": "Soft accent" }, { "value": "accent", "label": "Accent" }
+    ], "default": "default" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Padding bottom", "default": 80 }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}
