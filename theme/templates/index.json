@@ -373,46 +373,18 @@
         "q06": {
           "type": "question",
           "settings": {
-            "question": "Puis-je la placer n'importe où ?",
-            "answer": "<p>Oui, sur une surface plane et stable. Pas besoin de prise à proximité puisqu'elle fonctionne sur batterie. Évitez simplement le plein soleil, qui favorise les algues. Un tapis en silicone dessous garde le sol sec.</p>"
-          }
-        },
-        "q07": {
-          "type": "question",
-          "settings": {
-            "question": "Que faire si j'ai des questions ou si j'ai besoin d'aide ?",
-            "answer": "<p>Écrivez à <strong>bonjour@velluno.fr</strong>. Une vraie personne vous répond sous 24 h ouvrées, du lundi au vendredi de 9h à 18h. Une photo ou une courte vidéo nous aide à répondre du premier coup.</p>"
-          }
-        },
-        "q08": {
-          "type": "question",
-          "settings": {
             "question": "Est-ce difficile à nettoyer ?",
             "answer": "<p>Le nettoyage prend <strong>moins de 5 minutes</strong>. Tout se démonte sans outil et les pièces en acier inoxydable passent au lave-vaisselle, panier supérieur. Pas de recoins inaccessibles ni de micro-pièces à récupérer.</p>"
           }
         },
-        "q09": {
-          "type": "question",
-          "settings": {
-            "question": "Quelle quantité d'eau peut-elle contenir ?",
-            "answer": "<p><strong>7 litres</strong>, soit environ une semaine d'autonomie pour un ou deux animaux. Une fenêtre de niveau sur le côté indique quand remplir, et l'arrêt automatique protège la pompe si le bassin se vide.</p>"
-          }
-        },
-        "q10": {
-          "type": "question",
-          "settings": {
-            "question": "La fontaine convient-elle à plusieurs chiens ?",
-            "answer": "<p>Oui. Le bassin est assez large pour que deux animaux boivent en même temps, et les 7 litres sont justement pensés pour les foyers multi-animaux. Prévoyez simplement de changer le filtre un peu plus souvent.</p>"
-          }
-        },
-        "q11": {
+        "q07": {
           "type": "question",
           "settings": {
             "question": "Et si mon chien n'aime pas ça ?",
             "answer": "<p>Certains animaux mettent quelques jours à s'habituer : laissez l'ancienne gamelle à côté la première semaine, puis retirez-la. Si ça ne prend toujours pas, vous avez <strong>90 jours</strong> pour nous renvoyer la fontaine et être remboursé, même utilisée.</p>"
           }
         },
-        "q12": {
+        "q08": {
           "type": "question",
           "settings": {
             "question": "Combien de temps prend la livraison ?",
@@ -424,7 +396,7 @@
           "settings": {
             "icon": "truck-solid",
             "title": "Livraison gratuite",
-            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées et suivie jusqu'à votre porte."
+            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées."
           }
         },
         "g2": {
@@ -432,7 +404,7 @@
           "settings": {
             "icon": "rotate-back",
             "title": "Retours sous 90 jours",
-            "text": "90 jours pour changer d'avis, même produit utilisé. Retour simple et remboursement sous 5 jours ouvrés."
+            "text": "90 jours pour changer d'avis, même produit utilisé. Remboursement sous 5 jours."
           }
         },
         "g3": {
@@ -440,7 +412,7 @@
           "settings": {
             "icon": "lock",
             "title": "Paiements sécurisés",
-            "text": "Carte bancaire, PayPal et Apple Pay via Shopify Payments. Vos données bancaires ne transitent jamais par nous."
+            "text": "CB, PayPal et Apple Pay via Shopify Payments. Vos données ne transitent jamais par nous."
           }
         }
       },
@@ -453,10 +425,6 @@
         "q06",
         "q07",
         "q08",
-        "q09",
-        "q10",
-        "q11",
-        "q12",
         "g1",
         "g2",
         "g3"
@@ -477,6 +445,7 @@
         "help_button_background": "#111111",
         "help_button_text_color": "#ffffff",
         "help_note": "",
+        "guarantee_position": "aside",
         "item_style": "row",
         "card_background": "#f6ecd9",
         "card_border_open": "#d9a441",

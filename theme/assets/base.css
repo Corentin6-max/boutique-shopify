@@ -1189,7 +1189,7 @@ textarea { min-height: 12rem; resize: vertical; }
 /* --- FAQ ------------------------------------------------------------------- */
 .faq__layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
   gap: 5rem;
   align-items: start;
 }
@@ -1198,6 +1198,7 @@ textarea { min-height: 12rem; resize: vertical; }
   .faq__layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
 }
 .faq__aside { position: sticky; top: 12rem; }
+.faq__aside--filled { position: static; }
 @media screen and (max-width: 989px) { .faq__aside { position: static; } }
 
 .help-card {
@@ -1310,8 +1311,11 @@ textarea { min-height: 12rem; resize: vertical; }
   gap: 2.4rem;
   margin-top: 5.6rem;
 }
+/* Stacked inside the left column, they sit tight under the help card. */
+.faq__aside .faq__guarantees { gap: 1.2rem; margin-top: 1.2rem; }
 @media screen and (max-width: 749px) {
   .faq__guarantees { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; margin-top: 3.6rem; }
+  .faq__aside .faq__guarantees { margin-top: 1.2rem; }
 }
 .guarantee {
   display: flex;

@@ -1,6 +1,20 @@
 {%- liquid
   assign questions = section.blocks | where: 'type', 'question'
   assign guarantees = section.blocks | where: 'type', 'guarantee'
+
+  comment
+    Guarantees can sit under the help card so the left column keeps up with a
+    long list of questions, instead of leaving a tall gap beside it.
+  endcomment
+  assign aside_guarantees = false
+  if section.settings.guarantee_position == 'aside' and section.settings.show_help_card
+    assign aside_guarantees = true
+  endif
+
+  assign guarantee_columns = guarantees.size | at_least: 1 | at_most: 4
+  if aside_guarantees
+    assign guarantee_columns = 1
+  endif
 -%}
 <section
   class="section faq scheme-{{ section.settings.color_scheme }}"
@@ -15,7 +29,7 @@
   <div class="page-width">
     <div class="faq__layout{% unless section.settings.show_help_card %} faq__layout--single{% endunless %}">
       {%- if section.settings.show_help_card -%}
-        <aside class="faq__aside">
+        <aside class="faq__aside{% if aside_guarantees %} faq__aside--filled{% endif %}">
           <div class="help-card">
             {%- if section.settings.help_heading != blank -%}
               <h2 class="help-card__heading">{{ section.settings.help_heading }}</h2>
@@ -35,6 +49,14 @@
               <p class="help-card__note">{{ section.settings.help_note }}</p>
             {%- endif -%}
           </div>
+
+          {%- if aside_guarantees and guarantees.size > 0 -%}
+            <div class="faq__guarantees" style="--guarantee-columns: {{ guarantee_columns }};">
+              {%- for block in guarantees -%}
+                {% render 'guarantee-card', block: block %}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
         </aside>
       {%- endif -%}
 
@@ -74,21 +96,15 @@
       </div>
     </div>
 
-    {%- if guarantees.size > 0 -%}
-      <div class="faq__guarantees" style="--guarantee-columns: {{ guarantees.size | at_least: 1 | at_most: 4 }};">
-        {%- for block in guarantees -%}
-          <div class="guarantee" {{ block.shopify_attributes }}>
-            <span class="guarantee__icon">{% render 'icon', icon: block.settings.icon, size: 30 %}</span>
-            <div>
-              <h3 class="guarantee__title">{{ block.settings.title }}</h3>
-              {%- if block.settings.text != blank -%}
-                <p class="guarantee__text">{{ block.settings.text }}</p>
-              {%- endif -%}
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    {%- unless aside_guarantees -%}
+      {%- if guarantees.size > 0 -%}
+        <div class="faq__guarantees" style="--guarantee-columns: {{ guarantee_columns }};">
+          {%- for block in guarantees -%}
+            {% render 'guarantee-card', block: block %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endunless -%}
   </div>
 </section>
 
@@ -135,6 +151,10 @@
     { "type": "color", "id": "help_button_background", "label": "Fond du bouton", "default": "#111111" },
     { "type": "color", "id": "help_button_text_color", "label": "Texte du bouton", "default": "#ffffff" },
     { "type": "text", "id": "help_note", "label": "Note sous le bouton" },
+    { "type": "select", "id": "guarantee_position", "label": "Position des garanties", "info": "Sous l'encadré d'aide, elles comblent la colonne de gauche.", "options": [
+      { "value": "aside", "label": "Sous l'encadré d'aide" },
+      { "value": "below", "label": "En rangée sous les questions" }
+    ], "default": "aside" },
 
     { "type": "header", "content": "Style" },
     { "type": "select", "id": "item_style", "label": "Style des questions", "options": [

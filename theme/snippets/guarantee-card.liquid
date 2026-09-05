@@ -1,0 +1,10 @@
+{%- comment -%} Accepts: block (object) with icon, title and text settings. {%- endcomment -%}
+<div class="guarantee" {{ block.shopify_attributes }}>
+  <span class="guarantee__icon">{% render 'icon', icon: block.settings.icon, size: 30 %}</span>
+  <div>
+    <h3 class="guarantee__title">{{ block.settings.title }}</h3>
+    {%- if block.settings.text != blank -%}
+      <p class="guarantee__text">{{ block.settings.text }}</p>
+    {%- endif -%}
+  </div>
+</div>

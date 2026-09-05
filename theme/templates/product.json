@@ -187,7 +187,7 @@
           "settings": {
             "icon": "truck-solid",
             "title": "Livraison gratuite",
-            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées et suivie jusqu'à votre porte."
+            "text": "Offerte sur toutes les commandes, sans minimum. Expédiée sous 24 h ouvrées."
           }
         },
         "g2": {
@@ -195,7 +195,7 @@
           "settings": {
             "icon": "rotate-back",
             "title": "Retours sous 90 jours",
-            "text": "90 jours pour changer d'avis, même produit utilisé. Retour simple et remboursement sous 5 jours ouvrés."
+            "text": "90 jours pour changer d'avis, même produit utilisé. Remboursement sous 5 jours."
           }
         },
         "g3": {
@@ -203,7 +203,7 @@
           "settings": {
             "icon": "lock",
             "title": "Paiements sécurisés",
-            "text": "Carte bancaire, PayPal et Apple Pay via Shopify Payments. Vos données bancaires ne transitent jamais par nous."
+            "text": "CB, PayPal et Apple Pay via Shopify Payments. Vos données ne transitent jamais par nous."
           }
         }
       },
@@ -232,6 +232,7 @@
         "help_button_background": "#111111",
         "help_button_text_color": "#ffffff",
         "help_note": "",
+        "guarantee_position": "aside",
         "item_style": "row",
         "card_background": "#f6ecd9",
         "card_border_open": "#d9a441",
