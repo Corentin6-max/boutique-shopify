@@ -1,43 +1,44 @@
 /* Velluno — Shapewear
-   Logique de la fiche produit : sélection pack / couleur / taille, prix dynamique,
-   guide des tailles, accordéons. L'ajout au panier et la barre collante sont
-   déjà gérés globalement par theme.js (form[data-product-form], [data-sticky-atc]),
-   on se contente de tenir le champ « id » et l'affichage à jour. */
+   Fiche produit : coloris, taille, et packs multi-exemplaires.
+
+   Un pack n'est pas une variante Shopify : chaque exemplaire ayant son propre
+   couple couleur/taille, on ajoute N lignes de panier en une seule requête.
+   L'ajout au panier est donc géré ici et non par le handler générique de
+   theme.js — la section ne porte volontairement pas data-product-form. */
 (function () {
   'use strict';
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  /* ------------------------------------------------------------------ Money */
+  function routeRoot() {
+    return (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+  }
 
   function formatter(currency) {
     try {
       return new Intl.NumberFormat(document.documentElement.lang || 'fr-FR', {
         style: 'currency',
         currency: currency || 'EUR'
-      });
+      }).format;
     } catch (error) {
-      return { format: function (value) { return value.toFixed(2) + ' ' + (currency || 'EUR'); } };
+      return function (value) { return value.toFixed(2) + ' ' + (currency || 'EUR'); };
     }
   }
 
-  /* -------------------------------------------------------- Fiche produit */
+  /* ------------------------------------------------------------- Produit */
 
   function ShapewearProduct(root) {
-    this.root = root;
     var payload = $('[data-sw-variants]', root);
     if (!payload) return;
 
+    this.root = root;
     this.variants = JSON.parse(payload.textContent);
-    this.money = formatter(root.dataset.swCurrency).format;
-    this.optionIndex = {
-      pack: Number(root.dataset.swPackIndex),
-      color: Number(root.dataset.swColorIndex),
-      size: Number(root.dataset.swSizeIndex)
-    };
+    this.money = formatter(root.dataset.swCurrency);
+    this.colorIndex = Number(root.dataset.swColorIndex);
+    this.sizeIndex = Number(root.dataset.swSizeIndex);
 
-    this.idInput = $('[data-sw-id]', root);
+    this.form = $('[data-sw-form]', root);
     this.priceEl = $('[data-sw-price]', root);
     this.compareEl = $('[data-sw-compare]', root);
     this.saveEl = $('[data-sw-save]', root);
@@ -45,171 +46,302 @@
     this.button = $('[data-sw-add]', root);
     this.buttonText = $('[data-sw-add-text]', root);
     this.errorEl = $('[data-sw-error]', root);
-
     this.stickyPrice = $('[data-sw-sticky-price]');
     this.stickyMeta = $('[data-sw-sticky-meta]');
 
-    this.bindInputs();
-    this.bindSizeGuide();
+    this.bind();
+    this.syncUnitRows();
     this.update();
   }
 
-  ShapewearProduct.prototype.bindInputs = function () {
+  ShapewearProduct.prototype.bind = function () {
     var self = this;
+
     this.root.addEventListener('change', function (event) {
-      if (event.target.matches('[data-sw-option]')) self.update();
+      var target = event.target;
+
+      /* Le choix principal pilote la galerie et réamorce les lignes du pack. */
+      if (target.matches('[data-sw-option]')) {
+        self.syncUnitRows();
+        self.update();
+        return;
+      }
+      if (target.matches('[data-sw-tier]')) {
+        self.syncUnitRows();
+        self.update();
+        return;
+      }
+      if (target.matches('[data-sw-unit-color]')) {
+        self.refreshRowSizes(target.closest('[data-sw-unit-row]'));
+      }
     });
+
+    if (this.form) {
+      this.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        self.addToCart();
+      });
+    }
+
+    this.bindSizeGuide();
   };
 
-  ShapewearProduct.prototype.selection = function () {
-    var root = this.root;
-    var read = function (group) {
-      var checked = $('[data-sw-option][data-sw-group="' + group + '"]:checked', root);
-      return checked ? checked.value : null;
+  /* ----------------------------------------------------------- Sélection */
+
+  ShapewearProduct.prototype.topSelection = function () {
+    var color = $('[data-sw-option][data-sw-group="color"]:checked', this.root);
+    var size = $('[data-sw-option][data-sw-group="size"]:checked', this.root);
+    return { color: color ? color.value : null, size: size ? size.value : null };
+  };
+
+  ShapewearProduct.prototype.activeTier = function () {
+    var tier = $('[data-sw-tier]:checked', this.root);
+    return {
+      units: tier ? Number(tier.value) : 1,
+      panel: tier ? $('[data-sw-tier-units="' + tier.value + '"]', this.root) : null
     };
-    return { pack: read('pack'), color: read('color'), size: read('size') };
   };
 
-  ShapewearProduct.prototype.find = function (selection) {
-    var idx = this.optionIndex;
+  ShapewearProduct.prototype.find = function (color, size) {
     for (var i = 0; i < this.variants.length; i++) {
       var v = this.variants[i];
-      if (v.options[idx.pack] === selection.pack &&
-          v.options[idx.color] === selection.color &&
-          v.options[idx.size] === selection.size) {
-        return v;
-      }
+      if (v.options[this.colorIndex] === color && v.options[this.sizeIndex] === size) return v;
     }
     return null;
   };
 
-  /* Une combinaison est proposée seulement si elle correspond à une variante
-     existante et disponible — évite d'envoyer le client dans un cul-de-sac. */
-  ShapewearProduct.prototype.refreshAvailability = function (selection) {
+  ShapewearProduct.prototype.exists = function (color, size) {
+    var v = this.find(color, size);
+    return !!v && v.available;
+  };
+
+  /* Les lignes du pack repartent du choix principal à chaque changement :
+     comportement prévisible plutôt qu'un état partiel difficile à relire. */
+  ShapewearProduct.prototype.syncUnitRows = function () {
     var self = this;
-    var idx = this.optionIndex;
+    var top = this.topSelection();
+    var tier = this.activeTier();
+    if (!tier.panel) return;
 
-    $$('[data-sw-option][data-sw-group="size"]', this.root).forEach(function (input) {
-      var candidate = { pack: selection.pack, color: selection.color, size: input.value };
-      var variant = self.find(candidate);
-      input.disabled = !variant || !variant.available;
-    });
-
-    $$('[data-sw-option][data-sw-group="color"]', this.root).forEach(function (input) {
-      var exists = self.variants.some(function (v) {
-        return v.options[idx.pack] === selection.pack &&
-               v.options[idx.color] === input.value &&
-               v.available;
-      });
-      input.disabled = !exists;
+    $$('[data-sw-unit-row]', tier.panel).forEach(function (row) {
+      var colorSelect = $('[data-sw-unit-color]', row);
+      var sizeSelect = $('[data-sw-unit-size]', row);
+      if (colorSelect && top.color) colorSelect.value = top.color;
+      if (sizeSelect && top.size) sizeSelect.value = top.size;
+      self.refreshRowSizes(row);
     });
   };
 
+  /* Grise les tailles indisponibles dans la couleur retenue pour cette ligne. */
+  ShapewearProduct.prototype.refreshRowSizes = function (row) {
+    if (!row) return;
+    var self = this;
+    var colorSelect = $('[data-sw-unit-color]', row);
+    var sizeSelect = $('[data-sw-unit-size]', row);
+    if (!colorSelect || !sizeSelect) return;
+
+    var color = colorSelect.value;
+    var firstAvailable = null;
+
+    $$('option', sizeSelect).forEach(function (option) {
+      var ok = self.exists(color, option.value);
+      option.disabled = !ok;
+      if (ok && firstAvailable === null) firstAvailable = option.value;
+    });
+
+    if (sizeSelect.selectedOptions[0] && sizeSelect.selectedOptions[0].disabled && firstAvailable) {
+      sizeSelect.value = firstAvailable;
+    }
+  };
+
+  /* -------------------------------------------------------- Rafraîchissement */
+
   ShapewearProduct.prototype.update = function () {
-    var selection = this.selection();
-    this.refreshAvailability(selection);
+    var self = this;
+    var top = this.topSelection();
 
-    var variant = this.find(selection);
+    /* Coloris et tailles impossibles désactivés en amont du clic. */
+    $$('[data-sw-option][data-sw-group="size"]', this.root).forEach(function (input) {
+      input.disabled = !self.exists(top.color, input.value);
+    });
+    $$('[data-sw-option][data-sw-group="color"]', this.root).forEach(function (input) {
+      input.disabled = !self.variants.some(function (v) {
+        return v.options[self.colorIndex] === input.value && v.available;
+      });
+    });
 
-    /* Si la taille retenue n'existe pas dans le pack choisi, on bascule sur la
-       première taille disponible plutôt que de bloquer le bouton. */
-    if (!variant || !variant.available) {
+    var variant = this.find(top.color, top.size);
+    if ((!variant || !variant.available)) {
       var fallback = $('[data-sw-option][data-sw-group="size"]:not(:disabled)', this.root);
       if (fallback && !fallback.checked) {
         fallback.checked = true;
-        selection = this.selection();
-        variant = this.find(selection);
+        top = this.topSelection();
+        variant = this.find(top.color, top.size);
       }
     }
 
     $$('[data-sw-selected-label]', this.root).forEach(function (el) {
       var group = el.getAttribute('data-sw-selected-label');
-      if (selection[group]) el.textContent = selection[group];
+      if (top[group]) el.textContent = top[group];
     });
 
     if (!variant) {
-      this.setUnavailable();
+      if (this.button) this.button.setAttribute('aria-disabled', 'true');
+      if (this.buttonText) this.buttonText.textContent = this.root.dataset.swSoldOutText || 'Indisponible';
       return;
     }
 
-    if (this.idInput) this.idInput.value = variant.id;
+    var units = this.activeTier().units;
+    var total = variant.price * units;
+    var compare = (variant.compare_at_price || 0) * units;
 
-    var price = this.money(variant.price / 100);
-    if (this.priceEl) this.priceEl.textContent = price;
+    /* Chaque palier affiche son propre prix, calculé sur la variante courante. */
+    $$('[data-sw-tier]', this.root).forEach(function (tier) {
+      var n = Number(tier.value);
+      var box = tier.nextElementSibling;
+      if (!box) return;
+      var totalEl = $('[data-sw-tier-total]', box);
+      var wasEl = $('[data-sw-tier-was]', box);
+      var subEl = $('[data-sw-tier-sub]', box);
+      if (totalEl) totalEl.textContent = self.money((variant.price * n) / 100);
+      if (wasEl && variant.compare_at_price > variant.price) {
+        wasEl.textContent = self.money((variant.compare_at_price * n) / 100);
+        wasEl.hidden = false;
+      } else if (wasEl) {
+        wasEl.hidden = true;
+      }
+      if (subEl && variant.compare_at_price > variant.price) {
+        var saved = (variant.compare_at_price - variant.price) * n;
+        subEl.textContent = 'Vous économisez ' + self.money(saved / 100);
+      }
+    });
 
-    var hasCompare = variant.compare_at_price && variant.compare_at_price > variant.price;
+    if (this.priceEl) this.priceEl.textContent = this.money(total / 100);
+
+    var onSale = compare > total;
     if (this.compareEl) {
-      this.compareEl.textContent = hasCompare ? this.money(variant.compare_at_price / 100) : '';
-      this.compareEl.hidden = !hasCompare;
+      this.compareEl.textContent = onSale ? this.money(compare / 100) : '';
+      this.compareEl.hidden = !onSale;
     }
     if (this.saveEl) {
-      if (hasCompare) {
-        var saved = Math.round(((variant.compare_at_price - variant.price) / variant.compare_at_price) * 100);
-        this.saveEl.textContent = '−' + saved + ' %';
-        this.saveEl.hidden = false;
-      } else {
-        this.saveEl.hidden = true;
-      }
+      this.saveEl.hidden = !onSale;
+      if (onSale) this.saveEl.textContent = '−' + Math.round(((compare - total) / compare) * 100) + ' %';
     }
-
-    var units = Number(variant.units || 1);
     if (this.unitEl) {
-      this.unitEl.textContent = units > 1
-        ? 'Soit ' + this.money(variant.price / units / 100) + ' le débardeur'
-        : '';
       this.unitEl.hidden = units <= 1;
+      this.unitEl.textContent = units > 1 ? 'Soit ' + this.money(variant.price / 100) + ' le débardeur' : '';
     }
 
-    if (this.button) {
-      this.button.removeAttribute('aria-disabled');
-      if (this.buttonText) this.buttonText.textContent = this.root.dataset.swAddText || 'Ajouter au panier';
-    }
+    if (this.button) this.button.removeAttribute('aria-disabled');
+    if (this.buttonText) this.buttonText.textContent = this.root.dataset.swAddText || 'Ajouter au panier';
     if (this.errorEl) this.errorEl.textContent = '';
 
-    if (this.stickyPrice) this.stickyPrice.textContent = price;
+    if (this.stickyPrice) this.stickyPrice.textContent = this.money(total / 100);
     if (this.stickyMeta) {
-      this.stickyMeta.textContent = [selection.pack, selection.color, 'Taille ' + selection.size]
-        .filter(Boolean).join(' · ');
+      this.stickyMeta.textContent = units > 1
+        ? units + ' débardeurs'
+        : [top.color, 'Taille ' + top.size].filter(Boolean).join(' · ');
     }
 
-    this.syncUrl(variant.id);
     this.syncMedia(variant);
   };
 
-  ShapewearProduct.prototype.setUnavailable = function () {
-    if (this.button) this.button.setAttribute('aria-disabled', 'true');
-    if (this.buttonText) this.buttonText.textContent = this.root.dataset.swSoldOutText || 'Rupture de stock';
-  };
-
-  ShapewearProduct.prototype.syncUrl = function (id) {
-    if (!window.history || !window.history.replaceState) return;
-    try {
-      var url = new URL(window.location.href);
-      url.searchParams.set('variant', id);
-      window.history.replaceState({}, '', url.toString());
-    } catch (error) { /* URL indisponible sur navigateurs anciens */ }
-  };
-
-  /* Si la variante porte une image dédiée (utile dès que les photos couleur
-     seront en ligne), on affiche la vignette correspondante. */
   ShapewearProduct.prototype.syncMedia = function (variant) {
     if (!variant.featured_media_id) return;
     var thumb = $('[data-sw-thumb="' + variant.featured_media_id + '"]');
     if (thumb) thumb.click();
   };
 
+  /* ------------------------------------------------------------- Panier */
+
+  /* Un même couple couleur/taille choisi deux fois doit produire une ligne de
+     quantité 2, pas deux lignes identiques. */
+  ShapewearProduct.prototype.collectItems = function () {
+    var tier = this.activeTier();
+    var top = this.topSelection();
+    var pairs = [];
+
+    if (tier.units <= 1 || !tier.panel) {
+      pairs.push({ color: top.color, size: top.size });
+    } else {
+      $$('[data-sw-unit-row]', tier.panel).forEach(function (row) {
+        var colorSelect = $('[data-sw-unit-color]', row);
+        var sizeSelect = $('[data-sw-unit-size]', row);
+        pairs.push({ color: colorSelect.value, size: sizeSelect.value });
+      });
+    }
+
+    var byId = {};
+    var order = [];
+    for (var i = 0; i < pairs.length; i++) {
+      var variant = this.find(pairs[i].color, pairs[i].size);
+      if (!variant || !variant.available) {
+        return { error: 'La combinaison ' + pairs[i].color + ' / ' + pairs[i].size + ' n’est pas disponible.' };
+      }
+      if (!byId[variant.id]) {
+        byId[variant.id] = { id: variant.id, quantity: 0 };
+        order.push(variant.id);
+      }
+      byId[variant.id].quantity += 1;
+    }
+
+    return { items: order.map(function (id) { return byId[id]; }) };
+  };
+
+  ShapewearProduct.prototype.addToCart = function () {
+    var self = this;
+    var collected = this.collectItems();
+
+    if (collected.error) {
+      if (this.errorEl) this.errorEl.textContent = collected.error;
+      return;
+    }
+
+    if (this.button) {
+      this.button.classList.add('is-loading');
+      this.button.setAttribute('aria-disabled', 'true');
+    }
+    if (this.errorEl) this.errorEl.textContent = '';
+
+    fetch(routeRoot() + 'cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ items: collected.items })
+    })
+      .then(function (response) {
+        return response.json().then(function (data) {
+          if (!response.ok) throw new Error(data.description || data.message || 'Ajout impossible');
+          return data;
+        });
+      })
+      .then(function () {
+        if (typeof window.VellunoRefreshCart === 'function') return window.VellunoRefreshCart();
+        return null;
+      })
+      .then(function () {
+        if (document.body.dataset.cartType === 'drawer' && window.VellunoDrawer) {
+          window.VellunoDrawer.open('CartDrawer', self.button);
+        } else {
+          window.location.href = routeRoot() + 'cart';
+        }
+      })
+      .catch(function (error) {
+        if (self.errorEl) self.errorEl.textContent = error.message;
+      })
+      .finally(function () {
+        if (self.button) {
+          self.button.classList.remove('is-loading');
+          self.button.removeAttribute('aria-disabled');
+        }
+      });
+  };
+
+  /* ------------------------------------------------- Guide des tailles */
+
   ShapewearProduct.prototype.bindSizeGuide = function () {
     var modal = $('[data-sw-modal]');
     if (!modal) return;
     var lastFocus = null;
-
-    var open = function (opener) {
-      lastFocus = opener;
-      modal.hidden = false;
-      document.body.style.overflow = 'hidden';
-      var close = $('[data-sw-modal-close]', modal);
-      if (close) close.focus();
-    };
 
     var close = function () {
       modal.hidden = true;
@@ -218,7 +350,13 @@
     };
 
     $$('[data-sw-modal-open]').forEach(function (button) {
-      button.addEventListener('click', function () { open(button); });
+      button.addEventListener('click', function () {
+        lastFocus = button;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        var closer = $('[data-sw-modal-close]', modal);
+        if (closer) closer.focus();
+      });
     });
 
     modal.addEventListener('click', function (event) {
@@ -232,8 +370,8 @@
 
   /* ---------------------------------------------------------- Accordéons */
 
-  /* Les panneaux sont ouverts dans le HTML puis repliés ici : sans JS, le
-     contenu reste lisible au lieu de disparaître. */
+  /* Panneaux ouverts dans le HTML puis repliés ici : sans JavaScript le
+     contenu reste lisible et indexable. */
   function initAccordions(scope) {
     $$('[data-sw-accordion]', scope).forEach(function (group) {
       var openFirst = group.hasAttribute('data-sw-accordion-open-first');
@@ -243,7 +381,6 @@
         var expanded = openFirst && index === 0;
         trigger.setAttribute('aria-expanded', String(expanded));
         panel.hidden = !expanded;
-
         trigger.addEventListener('click', function () {
           var isOpen = trigger.getAttribute('aria-expanded') === 'true';
           trigger.setAttribute('aria-expanded', String(!isOpen));
@@ -253,9 +390,28 @@
     });
   }
 
-  /* ----------------------------------------------------------------- Init */
+  /* --------------------------------------------------------------- Galerie */
+
+  function initGallery(scope) {
+    $$('[data-sw-gallery]', scope).forEach(function (gallery) {
+      var main = $('[data-sw-gallery-main]', gallery);
+      if (!main) return;
+      $$('[data-sw-thumb]', gallery).forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+          var full = thumb.getAttribute('data-sw-full');
+          if (full) main.src = full;
+          $$('[data-sw-thumb]', gallery).forEach(function (other) {
+            other.setAttribute('aria-current', String(other === thumb));
+          });
+        });
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------ Init */
 
   function init(scope) {
+    initGallery(scope);
     $$('[data-sw-product]', scope).forEach(function (root) { new ShapewearProduct(root); });
     initAccordions(scope);
   }

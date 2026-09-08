@@ -1190,3 +1190,161 @@
   .sw *, .sw *::before, .sw *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .sw-sticky { transition: none; }
 }
+
+/* ==========================================================================
+   FICHE PRODUIT — packs multi-exemplaires
+   Chaque exemplaire d'un pack a son propre couple couleur/taille, donc un pack
+   n'est pas une variante : c'est N lignes de panier ajoutées en une fois.
+   ========================================================================== */
+
+.sw-crumbs {
+  font-size: .8rem;
+  color: var(--sw-muted);
+  padding: 14px 0 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sw-crumbs a { color: inherit; text-decoration: none; }
+.sw-crumbs a:hover { color: var(--sw-ink); text-decoration: underline; }
+.sw-crumbs span[aria-current] { color: var(--sw-ink); font-weight: 600; }
+
+.sw-pdp__tagline {
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--sw-ink);
+  margin: 14px 0 0;
+}
+
+/* Séparateur typé « BUY MORE, SAVE MORE » */
+
+.sw-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 14px;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sw-ink);
+}
+
+.sw-divider::before,
+.sw-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--sw-line);
+}
+
+/* Prix des paliers */
+
+.sw-bundle__total { color: var(--sw-accent); }
+
+.sw-bundle__was {
+  text-decoration: line-through;
+  color: var(--sw-muted);
+}
+
+.sw-bundle__box { align-items: flex-start; }
+
+.sw-bundle__main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Lignes « exemplaire n° » dépliées sous le palier sélectionné */
+
+.sw-bundle__units {
+  width: 100%;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--sw-line);
+  display: grid;
+  gap: 8px;
+}
+
+.sw-bundle input:not(:checked) + .sw-bundle__box .sw-bundle__units { display: none; }
+
+.sw-bundle__units-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--sw-muted);
+}
+
+.sw-unit-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.sw-unit-row__num {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--sw-muted);
+}
+
+.sw-unit-row select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 30px 8px 11px;
+  border: 1px solid var(--sw-line-strong);
+  border-radius: var(--sw-radius-sm);
+  background-color: var(--sw-paper);
+  font: inherit;
+  font-size: .87rem;
+  color: var(--sw-ink);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7482' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  background-size: 15px;
+}
+
+.sw-unit-row select:focus-visible { outline: 2px solid var(--sw-accent); outline-offset: 1px; }
+
+/* Galerie : bandeau de vignettes défilant plutôt qu'une grille figée */
+
+.sw-gallery__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-bottom: 4px;
+  scroll-snap-type: x proximity;
+}
+
+.sw-gallery__thumbs .sw-gallery__thumb {
+  flex: 0 0 clamp(58px, 13%, 84px);
+  scroll-snap-align: start;
+}
+
+/* Bandeau livraison sous l'en-tête */
+
+.sw-shipbar {
+  background: var(--sw-band);
+  border-bottom: 1px solid var(--sw-line);
+  padding: 9px 16px;
+  text-align: center;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--sw-ink-soft);
+}
+
+.sw-shipbar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-ink); }
