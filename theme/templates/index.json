@@ -128,9 +128,9 @@
     "guarantee": {
       "type": "shapewear-guarantee",
       "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison suivie offerte", "text": "6 à 10 jours ouvrés, Colissimo ou Mondial Relay." } },
+        "g1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison suivie offerte", "text": "8 à 12 jours, Colissimo ou Mondial Relay." } },
         "g2": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
-        "g3": { "type": "item", "settings": { "icon": "eye-off", "title": "Colis neutre", "text": "Emballage discret, sans mention du contenu." } }
+        "g3": { "type": "item", "settings": { "icon": "ruler", "title": "Du S au 3XL", "text": "Six tailles, pour couvrir toutes les morphologies." } }
       },
       "block_order": ["g1", "g2", "g3"],
       "settings": { "band": false }

@@ -28,7 +28,7 @@
           "type": "accordion",
           "settings": {
             "heading": "Livraison et retours",
-            "content": "<p>Livraison suivie offerte, <strong>6 à 10 jours ouvrés</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>30 jours pour changer de taille. Colis neutre, sans mention du contenu.</p>"
+            "content": "<p>Livraison suivie offerte, <strong>8 à 12 jours</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>30 jours pour changer de taille : écrivez-nous et on vous renvoie la bonne.</p>"
           }
         }
       },
@@ -50,7 +50,7 @@
         "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4",
         "add_label": "Ajouter au panier",
         "stock_note": "En stock",
-        "reassurance": "truck|Livraison suivie offerte, 6 à 10 jours\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay",
+        "reassurance": "truck|Livraison suivie offerte, 8 à 12 jours\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé par Shopify",
         "size_intro": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine : c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal.</p>",
         "size_chart": "S|79–84 cm|89–94 cm|55 cm\nM|84–89 cm|94–99 cm|56 cm\nL|89–94 cm|99–104 cm|57 cm\nXL|94–102 cm|104–112 cm|61 cm\n2XL|102–109 cm|112–119 cm|61 cm\n3XL|109–117 cm|119–127 cm|64 cm",
         "size_note": "<p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction. La longueur est mesurée à plat, le vêtement s'étire au porté.</p>"
@@ -60,8 +60,8 @@
       "type": "shapewear-guarantee",
       "blocks": {
         "g1": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
-        "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, PayPal et Apple Pay via Shopify." } },
-        "g3": { "type": "item", "settings": { "icon": "eye-off", "title": "Colis neutre", "text": "Emballage discret, sans mention du contenu." } }
+        "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "Vos données bancaires ne transitent jamais par nous." } },
+        "g3": { "type": "item", "settings": { "icon": "ruler", "title": "Du S au 3XL", "text": "Six tailles, pour couvrir toutes les morphologies." } }
       },
       "block_order": ["g1", "g2", "g3"],
       "settings": { "band": true }
@@ -74,7 +74,7 @@
         "q3": { "type": "question", "settings": { "question": "Est-ce confortable toute une journée ?", "answer": "<p>La compression se fait oublier au bout de deux à trois heures. La maille évacue l'humidité, ce qui change tout sur un vêtement porté à même la peau.</p>" } },
         "q4": { "type": "question", "settings": { "question": "Comment l'entretenir ?", "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>" } },
         "q5": { "type": "question", "settings": { "question": "Pourquoi en prendre plusieurs ?", "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. À partir de deux exemplaires, la remise de 20 % s'applique automatiquement au panier.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "En combien de temps suis-je livré ?", "answer": "<p>Comptez <strong>6 à 10 jours ouvrés</strong>, livraison suivie et offerte, par Colissimo, Colis Privé ou Mondial Relay selon la destination.</p>" } }
+        "q6": { "type": "question", "settings": { "question": "En combien de temps suis-je livré ?", "answer": "<p>Comptez <strong>8 à 12 jours</strong>, livraison suivie et offerte, par Colissimo, Colis Privé ou Mondial Relay selon la destination.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
       "settings": { "eyebrow": "Vos questions", "heading": "Questions fréquentes", "centered": true, "band": false, "open_first": true }
