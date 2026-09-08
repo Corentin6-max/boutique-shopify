@@ -1,0 +1,71 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo_width": 150,
+    "color_background": "#ffffff",
+    "color_surface": "#ffffff",
+    "color_text": "#0e1116",
+    "color_text_muted": "#6b7482",
+    "color_border": "#e4e7ec",
+    "color_band": "#f6f7f9",
+    "color_help_card": "#eef1f5",
+    "color_text_warm": "#3d4552",
+    "color_accent": "#d1462f",
+    "color_accent_soft": "#eef1f5",
+    "color_gold": "#e0a531",
+    "color_sale": "#d1462f",
+    "color_button": "#0e1116",
+    "color_button_text": "#ffffff",
+    "type_heading_font": "dm_sans_n7",
+    "heading_scale": 100,
+    "heading_uppercase": false,
+    "type_body_font": "dm_sans_n4",
+    "body_scale": 100,
+    "page_width": 1280,
+    "spacing_sections": 0,
+    "corner_radius": 14,
+    "button_radius": 40,
+    "animations_enabled": true,
+    "card_show_vendor": false,
+    "card_show_rating": false,
+    "card_second_image": true,
+    "card_image_ratio": "square",
+    "card_show_cta": true,
+    "card_cta_label": "Voir le produit",
+    "cart_type": "drawer",
+    "cart_show_note": false,
+    "cart_free_shipping_bar": false,
+    "cart_free_shipping_threshold": 49,
+    "social_instagram_link": "",
+    "social_tiktok_link": "",
+    "social_facebook_link": "",
+    "social_youtube_link": "",
+    "social_pinterest_link": "",
+    "share_facebook": true,
+    "share_pinterest": false,
+    "share_twitter": true,
+    "currency_code_enabled": false,
+    "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "5134484470793087125": {
+        "type": "shopify://apps/vitals/blocks/app-embed/aeb48102-2a5a-4f39-bdbd-d8d49f4e20b8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}

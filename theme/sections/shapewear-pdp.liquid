@@ -1,0 +1,496 @@
+{%- comment -%}
+  Fiche produit Shapewear.
+
+  Attend un produit à trois options : Pack / Couleur / Taille. Les index sont
+  détectés par nom, pas par position, pour que la section survive à un
+  réordonnancement des options dans l'admin. Si l'une manque, on retombe sur le
+  sélecteur de variantes standard du thème plutôt que d'afficher une page cassée.
+{%- endcomment -%}
+
+{%- comment -%}
+  base_unit_price : prix d'une unité seule. Sert à calculer l'économie réelle de
+  chaque pack plutôt qu'un pourcentage inventé.
+{%- endcomment -%}
+{%- liquid
+  assign pack_index = -1
+  assign color_index = -1
+  assign size_index = -1
+
+  for opt in product.options_with_values
+    assign n = opt.name | downcase
+    if n contains 'pack' or n contains 'lot'
+      assign pack_index = forloop.index0
+    elsif n contains 'couleur' or n contains 'color'
+      assign color_index = forloop.index0
+    elsif n contains 'taille' or n contains 'size'
+      assign size_index = forloop.index0
+    endif
+  endfor
+
+  assign is_bundle_product = false
+  if pack_index >= 0 and color_index >= 0 and size_index >= 0
+    assign is_bundle_product = true
+  endif
+
+  assign form_id = 'SwProductForm-' | append: section.id
+  assign current = product.selected_or_first_available_variant
+
+  assign base_unit_price = 0
+  if is_bundle_product
+    for v in product.variants
+      assign u = v.options[pack_index] | split: ' ' | first | plus: 0
+      if u == 1
+        assign base_unit_price = v.price
+        break
+      endif
+    endfor
+  endif
+-%}
+
+<div
+  class="sw sw-pdp"
+  data-sw-product
+  data-sw-currency="{{ cart.currency.iso_code }}"
+  data-sw-pack-index="{{ pack_index }}"
+  data-sw-color-index="{{ color_index }}"
+  data-sw-size-index="{{ size_index }}"
+  data-sw-add-text="{{ section.settings.add_label | escape }}"
+  data-sw-sold-out-text="{{ 'products.product.sold_out' | t | escape }}">
+
+  <div class="sw__wrap">
+    <div class="sw-pdp__grid">
+
+      {%- comment -%} ---------------------------------------- Galerie {%- endcomment -%}
+      <div class="sw-pdp__col sw-pdp__col--media">
+        <div class="sw-gallery" data-product-gallery>
+          <div class="sw-gallery__main">
+            {%- if section.settings.flag_text != blank -%}
+              <span class="sw-gallery__flag">{{ section.settings.flag_text }}</span>
+            {%- endif -%}
+
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media limit: 1 -%}
+                <img
+                  src="{{ media | image_url: width: 1200 }}"
+                  alt="{{ media.alt | default: product.title | escape }}"
+                  width="1200" height="1200"
+                  loading="eager" fetchpriority="high">
+              {%- endfor -%}
+            {%- else -%}
+              <div class="sw__ph">
+                {% render 'sw-icon', icon: 'image' %}
+                <span>Photo à venir</span>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if product.media.size > 1 -%}
+            <div class="sw-gallery__thumbs">
+              {%- for media in product.media limit: 5 -%}
+                <button
+                  type="button"
+                  class="sw-gallery__thumb"
+                  data-media-id="{{ media.id }}"
+                  data-sw-thumb="{{ media.id }}"
+                  aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-label="Voir l'image {{ forloop.index }}">
+                  <img src="{{ media | image_url: width: 240 }}" alt="" width="240" height="240" loading="lazy">
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ------------------------------------------- Infos {%- endcomment -%}
+      <div class="sw-pdp__col sw-pdp__col--info">
+
+        <p class="sw-pdp__brand">{{ product.vendor | default: shop.name }}</p>
+        <h1 class="sw-pdp__title">{{ product.title }}</h1>
+
+        {%- if section.settings.rating_count > 0 -%}
+          <div class="sw__rating">
+            <span class="sw__stars" role="img" aria-label="Noté {{ section.settings.rating_value }} sur 5">
+              {%- for i in (1..5) -%}{% render 'sw-icon', icon: 'star' %}{%- endfor -%}
+            </span>
+            <span><strong>{{ section.settings.rating_value }}</strong>/5 · {{ section.settings.rating_count }} avis vérifiés</span>
+          </div>
+        {%- endif -%}
+
+        <div class="sw-pdp__price-row">
+          <span class="sw-pdp__price" data-sw-price>{{ current.price | money }}</span>
+          <s class="sw-pdp__compare" data-sw-compare {% unless current.compare_at_price > current.price %}hidden{% endunless %}>
+            {{ current.compare_at_price | money }}
+          </s>
+          <span class="sw-pdp__save" data-sw-save {% unless current.compare_at_price > current.price %}hidden{% endunless %}></span>
+        </div>
+        <p class="sw-pdp__unit" data-sw-unit hidden></p>
+        {%- if section.settings.tax_note != blank -%}
+          <p class="sw-pdp__tax">{{ section.settings.tax_note }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.pitch != blank -%}
+          <ul class="sw-pdp__pitch">
+            {%- assign pitch_lines = section.settings.pitch | strip | newline_to_br | split: '<br />' -%}
+            {%- for line in pitch_lines -%}
+              {%- assign clean = line | strip -%}
+              {%- if clean != blank -%}
+                <li>{% render 'sw-icon', icon: 'check-circle' %}<span>{{ clean }}</span></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-product-form: 'true' -%}
+          <input type="hidden" name="id" value="{{ current.id }}" data-sw-id>
+          <input type="hidden" name="quantity" value="1">
+
+          {%- if is_bundle_product -%}
+            {%- assign pack_option = product.options_with_values[pack_index] -%}
+            {%- assign color_option = product.options_with_values[color_index] -%}
+            {%- assign size_option = product.options_with_values[size_index] -%}
+
+            {%- comment -%} ------------------------------- Packs {%- endcomment -%}
+            <fieldset class="sw-select">
+              <legend class="sw-select__head">
+                <span class="sw-select__label">1 · Choisissez votre pack</span>
+              </legend>
+
+              <div class="sw-bundles">
+                {%- for value in pack_option.values -%}
+                  {%- liquid
+                    assign units = value | split: ' ' | first | plus: 0
+                    if units < 1
+                      assign units = 1
+                    endif
+
+                    assign card_variant = nil
+                    for v in product.variants
+                      if v.options[pack_index] == value
+                        assign card_variant = v
+                        break
+                      endif
+                    endfor
+
+                    assign reference = base_unit_price | times: units
+                    assign saved = reference | minus: card_variant.price
+                    assign per_unit = card_variant.price | divided_by: units
+                  -%}
+
+                  <label class="sw-bundle">
+                    <input
+                      type="radio"
+                      name="sw-pack-{{ section.id }}"
+                      value="{{ value | escape }}"
+                      data-sw-option
+                      data-sw-group="pack"
+                      {% if pack_option.selected_value == value %}checked{% endif %}>
+                    <span class="sw-bundle__box">
+                      <span class="sw-bundle__radio" aria-hidden="true"></span>
+                      <span class="sw-bundle__body">
+                        <span class="sw-bundle__name">
+                          {{ value }}
+                          {%- if units == 2 and section.settings.tag_pack_2 != blank -%}
+                            <span class="sw-bundle__tag">{{ section.settings.tag_pack_2 }}</span>
+                          {%- elsif units >= 3 and section.settings.tag_pack_3 != blank -%}
+                            <span class="sw-bundle__tag sw-bundle__tag--value">{{ section.settings.tag_pack_3 }}</span>
+                          {%- endif -%}
+                        </span>
+                        <span class="sw-bundle__sub">
+                          {%- if units > 1 -%}
+                            {{ per_unit | money }} l'unité{% if saved > 0 %} · vous économisez {{ saved | money }}{% endif %}
+                          {%- else -%}
+                            {{ section.settings.pack_1_note | default: 'Pour tester' }}
+                          {%- endif -%}
+                        </span>
+                      </span>
+                      <span class="sw-bundle__prices">
+                        <span class="sw-bundle__total">{{ card_variant.price | money }}</span>
+                        {%- if saved > 0 -%}
+                          <s class="sw-bundle__was">{{ reference | money }}</s>
+                        {%- endif -%}
+                      </span>
+                    </span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+
+            {%- comment -%} ----------------------------- Couleurs {%- endcomment -%}
+            {%- assign swatch_lines = section.settings.swatch_map | strip | newline_to_br | split: '<br />' -%}
+            <fieldset class="sw-select">
+              <legend class="sw-select__head">
+                <span class="sw-select__label">
+                  2 · Couleur — <span class="sw-select__value" data-sw-selected-label="color">{{ color_option.selected_value }}</span>
+                </span>
+              </legend>
+              <div class="sw-swatches">
+                {%- for value in color_option.values -%}
+                  {%- assign hex = '#cccccc' -%}
+                  {%- liquid
+                    for line in swatch_lines
+                      assign pair = line | strip | split: ':'
+                      assign key = pair[0] | strip | downcase
+                      assign candidate = value | downcase
+                      if key == candidate
+                        assign hex = pair[1] | strip
+                        break
+                      endif
+                    endfor
+                  -%}
+                  <label class="sw-swatch">
+                    <input
+                      type="radio"
+                      name="sw-color-{{ section.id }}"
+                      value="{{ value | escape }}"
+                      data-sw-option
+                      data-sw-group="color"
+                      {% if color_option.selected_value == value %}checked{% endif %}>
+                    <span class="sw-swatch__dot" style="--sw-swatch: {{ hex }};" title="{{ value | escape }}"></span>
+                    <span class="visually-hidden">{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+
+            {%- comment -%} ------------------------------- Tailles {%- endcomment -%}
+            <fieldset class="sw-select">
+              <legend class="sw-select__head">
+                <span class="sw-select__label">
+                  3 · Taille — <span class="sw-select__value" data-sw-selected-label="size">{{ size_option.selected_value }}</span>
+                </span>
+                <button type="button" class="sw-select__link" data-sw-modal-open>Guide des tailles</button>
+              </legend>
+              <div class="sw-sizes">
+                {%- for value in size_option.values -%}
+                  <label class="sw-size">
+                    <input
+                      type="radio"
+                      name="sw-size-{{ section.id }}"
+                      value="{{ value | escape }}"
+                      data-sw-option
+                      data-sw-group="size"
+                      {% if size_option.selected_value == value %}checked{% endif %}>
+                    <span class="sw-size__box">{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- else -%}
+            {%- comment -%}
+              Produit sans les trois options attendues : on rend le sélecteur
+              standard du thème pour rester fonctionnel.
+            {%- endcomment -%}
+            {% render 'product-variant-picker', product: product, section_id: section.id %}
+          {%- endif -%}
+
+          {%- if section.settings.stock_note != blank -%}
+            <p class="sw-pdp__stock">{{ section.settings.stock_note }}</p>
+          {%- endif -%}
+
+          <div class="sw-pdp__atc" data-sticky-trigger>
+            <button type="submit" name="add" class="sw__btn sw__btn--primary sw__btn--block" data-sw-add>
+              <span data-sw-add-text>{{ section.settings.add_label }}</span>
+            </button>
+            {%- if section.settings.show_dynamic_checkout -%}
+              {{ form | payment_button }}
+            {%- endif -%}
+            <p class="sw-pdp__error" data-sw-error data-form-error role="alert"></p>
+          </div>
+        {%- endform -%}
+
+        {%- if section.settings.reassurance != blank -%}
+          {%- assign reassure_lines = section.settings.reassurance | strip | newline_to_br | split: '<br />' -%}
+          <ul class="sw-pdp__reassure">
+            {%- for line in reassure_lines -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              {%- if parts[1] != blank -%}
+                {%- assign reassure_icon = parts[0] | strip -%}
+                <li>{% render 'sw-icon', icon: reassure_icon %}<span>{{ parts[1] | strip }}</span></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%} --------------------------------- Accordéons {%- endcomment -%}
+        <div class="sw-acc" data-sw-accordion>
+          {%- assign has_description = false -%}
+          {%- if product.description != blank -%}{%- assign has_description = true -%}{%- endif -%}
+
+          {%- if has_description -%}
+            <div class="sw-acc__item">
+              <h2>
+                <button
+                  type="button"
+                  class="sw-acc__q"
+                  data-sw-acc-trigger
+                  aria-expanded="true"
+                  aria-controls="SwAccDesc-{{ section.id }}">
+                  <span>Description complète</span>
+                  <span class="sw-faq__icon" aria-hidden="true"></span>
+                </button>
+              </h2>
+              <div class="sw-acc__a" id="SwAccDesc-{{ section.id }}">{{ product.description }}</div>
+            </div>
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'accordion' -%}
+              <div class="sw-acc__item" {{ block.shopify_attributes }}>
+                <h2>
+                  <button
+                    type="button"
+                    class="sw-acc__q"
+                    data-sw-acc-trigger
+                    aria-expanded="true"
+                    aria-controls="SwAcc-{{ block.id }}">
+                    <span>{{ block.settings.heading }}</span>
+                    <span class="sw-faq__icon" aria-hidden="true"></span>
+                  </button>
+                </h2>
+                <div class="sw-acc__a" id="SwAcc-{{ block.id }}">{{ block.settings.content }}</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  {%- comment -%}
+    Charge utile lue par shapewear.js. « units » permet d'afficher le prix à
+    l'unité sans le recalculer en JS à partir du libellé du pack.
+  {%- endcomment -%}
+  <script type="application/json" data-sw-variants>
+    [
+      {%- for variant in product.variants -%}
+        {%- liquid
+          assign units = 1
+          if pack_index >= 0
+            assign units = variant.options[pack_index] | split: ' ' | first | plus: 0
+            if units < 1
+              assign units = 1
+            endif
+          endif
+        -%}
+        {
+          "id": {{ variant.id }},
+          "options": {{ variant.options | json }},
+          "price": {{ variant.price }},
+          "compare_at_price": {{ variant.compare_at_price | default: 0 }},
+          "available": {{ variant.available }},
+          "units": {{ units }},
+          "featured_media_id": {{ variant.featured_media.id | default: 0 }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  </script>
+
+  {%- comment -%} ------------------------------------ Barre collante {%- endcomment -%}
+  <div class="sw-sticky" data-sticky-atc>
+    <div class="sw-sticky__inner">
+      <div class="sw-sticky__info">
+        <div class="sw-sticky__name">{{ product.title }}</div>
+        <div class="sw-sticky__meta">
+          <strong data-sw-sticky-price>{{ current.price | money }}</strong>
+          <span data-sw-sticky-meta></span>
+        </div>
+      </div>
+      <button type="submit" form="{{ form_id }}" class="sw__btn sw__btn--primary">
+        {{ section.settings.add_label }}
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} --------------------------------- Guide des tailles {%- endcomment -%}
+  <div class="sw-modal" data-sw-modal hidden role="dialog" aria-modal="true" aria-label="Guide des tailles">
+    <button type="button" class="sw-modal__veil" data-sw-modal-veil tabindex="-1" aria-hidden="true"></button>
+    <div class="sw-modal__panel">
+      <button type="button" class="sw-modal__close" data-sw-modal-close aria-label="Fermer">
+        {% render 'sw-icon', icon: 'close' %}
+      </button>
+      <h2 class="sw__h3">Guide des tailles</h2>
+      <p class="sw__lede" style="font-size:.92rem;margin-top:8px;">
+        Mesurez-vous à même la peau, sans serrer le mètre ruban.
+      </p>
+
+      <table class="sw-size-table">
+        <thead>
+          <tr>
+            <th scope="col">Taille</th>
+            <th scope="col">Tour de poitrine</th>
+            <th scope="col">Tour de taille</th>
+            <th scope="col">Poids indicatif</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- assign rows = section.settings.size_chart | strip | newline_to_br | split: '<br />' -%}
+          {%- for row in rows -%}
+            {%- assign cells = row | strip | split: '|' -%}
+            {%- if cells.size >= 4 -%}
+              <tr>
+                <th scope="row">{{ cells[0] | strip }}</th>
+                <td>{{ cells[1] | strip }}</td>
+                <td>{{ cells[2] | strip }}</td>
+                <td>{{ cells[3] | strip }}</td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      {%- if section.settings.size_note != blank -%}
+        <p class="sw-modal__note">{{ section.settings.size_note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Fiche produit Shapewear",
+  "tag": "section",
+  "class": "section-shapewear-pdp",
+  "settings": [
+    { "type": "header", "content": "Bandeau image" },
+    { "type": "text", "id": "flag_text", "label": "Pastille sur l'image", "default": "Best-seller" },
+
+    { "type": "header", "content": "Note" },
+    { "type": "text", "id": "rating_value", "label": "Note affichée", "default": "4,8" },
+    { "type": "number", "id": "rating_count", "label": "Nombre d'avis (0 pour masquer)", "default": 0 },
+
+    { "type": "header", "content": "Argumentaire" },
+    { "type": "textarea", "id": "pitch", "label": "Points clés (un par ligne)", "default": "Compression abdominale ciblée, effet visible dès l'enfilage\nCoupe longue : il reste rentré dans le pantalon\nSans coutures, invisible sous une chemise ajustée" },
+    { "type": "text", "id": "tax_note", "label": "Mention sous le prix", "default": "TVA incluse. Livraison calculée au paiement." },
+
+    { "type": "header", "content": "Packs" },
+    { "type": "text", "id": "tag_pack_2", "label": "Étiquette pack de 2", "default": "Le plus choisi" },
+    { "type": "text", "id": "tag_pack_3", "label": "Étiquette pack de 3", "default": "Meilleure valeur" },
+    { "type": "text", "id": "pack_1_note", "label": "Mention pack de 1", "default": "Pour tester" },
+    { "type": "textarea", "id": "swatch_map", "label": "Couleurs (Nom:#hex, une par ligne)", "default": "Noir:#16181d\nBlanc:#f2f1ec\nBeige:#d9c2a4" },
+
+    { "type": "header", "content": "Ajout au panier" },
+    { "type": "text", "id": "add_label", "label": "Libellé du bouton", "default": "Ajouter au panier" },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Afficher les paiements express", "default": true },
+    { "type": "text", "id": "stock_note", "label": "Mention de stock", "default": "En stock" },
+    { "type": "textarea", "id": "reassurance", "label": "Réassurance (icone|texte, une par ligne)", "default": "truck|Livraison suivie offerte\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay" },
+
+    { "type": "header", "content": "Guide des tailles" },
+    { "type": "textarea", "id": "size_chart", "label": "Lignes (Taille|Poitrine|Taille|Poids)", "default": "S|86–94 cm|71–79 cm|55–65 kg\nM|94–102 cm|79–87 cm|65–75 kg\nL|102–110 cm|87–95 cm|75–87 kg\nXL|110–118 cm|95–104 cm|87–99 kg\n2XL|118–128 cm|104–114 cm|99–112 kg" },
+    { "type": "richtext", "id": "size_note", "label": "Note du guide", "default": "<p>Entre deux tailles : prenez la plus petite pour un effet gainant maximal, la plus grande si vous le portez plus de 8 heures d'affilée.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordéon",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Livraison et retours" },
+        { "type": "richtext", "id": "content", "label": "Contenu", "default": "<p>Expédition sous 24 h ouvrées, livraison offerte et suivie.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Fiche produit Shapewear" }]
+}
+{% endschema %}

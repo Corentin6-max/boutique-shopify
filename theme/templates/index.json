@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "hero": {
+      "type": "shapewear-hero",
+      "settings": {
+        "eyebrow": "Shapewear homme",
+        "heading": "Moins deux tailles, en enfilant un débardeur.",
+        "text": "<p>La chemise qui tire entre les boutons. Le ventre qu'on rentre en passant devant un miroir. Trois secondes pour régler ça — sous les vêtements, sans que personne ne le sache.</p>",
+        "chips": "Invisible sous la chemise\nReste rentré toute la journée\n30 jours pour changer de taille",
+        "product": "debardeur-gainant-homme-compression-ventre-sans-coutures",
+        "cta_label": "Découvrir le débardeur",
+        "rating_value": "4,8",
+        "rating_count": 0,
+        "badge": "30 jours pour changer de taille",
+        "background": "#ffffff"
+      }
+    },
+    "stats": {
+      "type": "shapewear-stats",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "−2", "label": "tailles apparentes dès l'enfilage" } },
+        "s2": { "type": "stat", "settings": { "value": "0", "label": "couture visible sous la chemise" } },
+        "s3": { "type": "stat", "settings": { "value": "8 h+", "label": "de port sans gêne" } },
+        "s4": { "type": "stat", "settings": { "value": "30 j", "label": "pour changer de taille" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "problem": {
+      "type": "shapewear-cards",
+      "blocks": {
+        "p1": { "type": "card", "settings": { "icon": "eye-off", "title": "Le bourrelet de ceinture", "text": "<p>Il apparaît dès qu'on s'assoit, et c'est exactement là que la chemise se tend. Aucun régime ne le règle en une journée — un vêtement, si.</p>" } },
+        "p2": { "type": "card", "settings": { "icon": "arrows-in", "title": "La gaine qui remonte", "text": "<p>La plupart des gaines pour homme sont trop courtes : elles roulent au-dessus du nombril au bout d'une heure et forment un bourrelet supplémentaire. Le contraire de l'effet recherché.</p>" } },
+        "p3": { "type": "card", "settings": { "icon": "spine", "title": "Le dos voûté", "text": "<p>On rentre le ventre, on creuse les épaules, et la silhouette y perd davantage qu'elle n'y gagne. Le maintien lombaire fait le travail à votre place.</p>" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "eyebrow": "Le vrai problème",
+        "heading": "Ce n'est pas votre ventre. C'est ce que vous mettez par-dessus.",
+        "text": "<p>Trois situations que tous les hommes connaissent, et que le bon vêtement règle immédiatement.</p>",
+        "centered": true,
+        "band": false
+      }
+    },
+    "features": {
+      "type": "shapewear-cards",
+      "blocks": {
+        "f1": { "type": "card", "settings": { "icon": "arrows-in", "title": "Compression ciblée", "text": "<p>Le panneau abdominal est tricoté plus dense que le reste du vêtement. Il resserre la taille et lisse le ventre, au lieu de simplement le repousser vers le haut.</p>" } },
+        "f2": { "type": "card", "settings": { "icon": "ruler", "title": "Coupe longue", "text": "<p>Nettement plus long qu'un débardeur gainant standard : il se rentre dans le pantalon et il y reste. Assis, debout, en voiture, toute la journée.</p>" } },
+        "f3": { "type": "card", "settings": { "icon": "eye-off", "title": "Sans coutures", "text": "<p>Tricotage circulaire, aucune couture latérale. Rien ne se dessine sous une chemise ajustée ou un t-shirt fin.</p>" } },
+        "f4": { "type": "card", "settings": { "icon": "wind", "title": "Respirant", "text": "<p>Maille nylon / élasthanne extensible dans les deux sens. Il se porte à même la peau comme un sous-vêtement classique, sans gratter ni tenir chaud.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {
+        "eyebrow": "Conception",
+        "heading": "Quatre détails qui font toute la différence",
+        "centered": true,
+        "band": true
+      }
+    },
+    "compare": {
+      "type": "shapewear-compare",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "label": "Effet gainant sur le ventre", "us": "oui", "a": "non", "b": "oui" } },
+        "r2": { "type": "row", "settings": { "label": "Reste rentré dans le pantalon", "us": "oui", "a": "non", "b": "non" } },
+        "r3": { "type": "row", "settings": { "label": "Coutures invisibles sous la chemise", "us": "oui", "a": "non", "b": "non" } },
+        "r4": { "type": "row", "settings": { "label": "Maintien du dos", "us": "oui", "a": "non", "b": "non" } },
+        "r5": { "type": "row", "settings": { "label": "Supportable plus de 8 heures", "us": "oui", "a": "oui", "b": "non" } },
+        "r6": { "type": "row", "settings": { "label": "Coloris invisible sous chemise blanche", "us": "oui", "a": "non", "b": "non" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"],
+      "settings": {
+        "eyebrow": "Comparatif",
+        "heading": "Pourquoi pas un simple débardeur ?",
+        "text": "<p>Un débardeur classique cache la peau — il ne change rien à la silhouette. Une gaine premier prix comprime, mais roule, se voit, et devient insupportable au bout de deux heures.</p>",
+        "centered": true,
+        "band": false,
+        "col_us": "Velluno",
+        "col_a": "Débardeur classique",
+        "col_b": "Gaine premier prix"
+      }
+    },
+    "offer": {
+      "type": "shapewear-offer",
+      "settings": {
+        "product": "debardeur-gainant-homme-compression-ventre-sans-coutures",
+        "eyebrow": "Offres",
+        "heading": "Un seul, ou de quoi tenir la semaine",
+        "text": "<p>Il se porte à même la peau : il se lave après chaque journée. C'est la seule raison pour laquelle la plupart de nos clients en prennent deux ou trois.</p>",
+        "ribbon": "Le plus choisi",
+        "cta_label": "Choisir ce pack",
+        "band": true
+      }
+    },
+    "reviews": {
+      "type": "shapewear-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } },
+        "r2": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } },
+        "r3": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "eyebrow": "Avis clients",
+        "heading": "Ce qu'en disent nos clients",
+        "text": "<p>Remplissez ces blocs avec de vrais avis dès vos premières commandes. Tant qu'ils sont vides, la section ne s'affiche pas.</p>",
+        "centered": true,
+        "band": false
+      }
+    },
+    "faq": {
+      "type": "shapewear-faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Est-ce que ça se voit sous une chemise ?", "answer": "<p>Non, et c'est tout l'intérêt du tricotage sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Quelle taille prendre ?", "answer": "<p>Votre taille habituelle de t-shirt. Le vêtement comprime déjà par construction : descendre d'une taille ne donne pas plus d'effet, seulement moins de confort.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Est-ce confortable toute une journée ?", "answer": "<p>La compression se fait oublier au bout de deux à trois heures. Au-delà de huit heures de port, prenez la taille au-dessus en cas d'hésitation.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Comment l'entretenir ?", "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur détruit l'élasthanne et le vêtement cesse de gainer.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "eyebrow": "Vos questions", "heading": "Questions fréquentes", "centered": true, "band": true, "open_first": true }
+    },
+    "guarantee": {
+      "type": "shapewear-guarantee",
+      "blocks": {
+        "g1": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
+        "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, PayPal et Apple Pay via Shopify." } },
+        "g3": { "type": "item", "settings": { "icon": "eye-off", "title": "Colis neutre", "text": "Emballage discret, sans mention du contenu." } }
+      },
+      "block_order": ["g1", "g2", "g3"],
+      "settings": { "band": false }
+    }
+  },
+  "order": ["hero", "stats", "problem", "features", "compare", "offer", "reviews", "faq", "guarantee"]
+}

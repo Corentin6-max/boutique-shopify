@@ -1,0 +1,48 @@
+{%- comment -%}
+  Jeu d'icônes des sections Shapewear.
+  Usage : {% render 'sw-icon', icon: 'check' %}
+  Traits à 1.7px, viewBox 24 — cohérent quelle que soit la taille appliquée en CSS.
+{%- endcomment -%}
+{%- liquid
+  assign s = 'stroke="currentColor" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"'
+-%}
+{%- case icon -%}
+  {%- when 'check' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="m4.5 12.5 5 5 10-11"/></svg>
+  {%- when 'check-circle' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.5"/></svg>
+  {%- when 'cross' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M17 7 7 17M7 7l10 10"/></svg>
+  {%- when 'close' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M18 6 6 18M6 6l12 12"/></svg>
+  {%- when 'star' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>
+  {%- when 'truck' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 10h4l3 3v2.5h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+  {%- when 'rotate' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg>
+  {%- when 'lock' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/></svg>
+  {%- when 'shield' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M12 3 5 5.8v5.6c0 4.2 2.9 7.6 7 9.1 4.1-1.5 7-4.9 7-9.1V5.8z"/><path d="m9.2 12 2 2 3.6-3.8"/></svg>
+  {%- when 'ruler' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><rect x="2.5" y="8" width="19" height="8" rx="1.6"/><path d="M7 8v3M11 8v4.5M15 8v3M19 8v4.5"/></svg>
+  {%- when 'eye-off' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M3 3l18 18"/><path d="M10.6 6.3A9 9 0 0 1 12 6.2c5 0 8.5 5.8 8.5 5.8a15 15 0 0 1-3 3.6M6.4 7.9A15 15 0 0 0 3.5 12S7 17.8 12 17.8a8.6 8.6 0 0 0 3.4-.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+  {%- when 'wind' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M3 8h11a2.8 2.8 0 1 0-2.8-2.8"/><path d="M3 12h15a2.8 2.8 0 1 1-2.8 2.8"/><path d="M3 16h7.5a2.4 2.4 0 1 1-2.4 2.4"/></svg>
+  {%- when 'arrows-in' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M4 8h5V3M20 8h-5V3M4 16h5v5M20 16h-5v5"/><path d="M9 8 3.5 2.5M15 8l5.5-5.5M9 16l-5.5 5.5M15 16l5.5 5.5"/></svg>
+  {%- when 'spine' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M12 3v18"/><path d="M8.5 6h7M8 10h8M8 14h8M8.5 18h7"/></svg>
+  {%- when 'layers' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="m12 3 8.5 4.5L12 12 3.5 7.5z"/><path d="m3.5 12.5 8.5 4.5 8.5-4.5"/></svg>
+  {%- when 'sparkle' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><path d="M12 3.5 13.8 9 19 10.8 13.8 12.6 12 18l-1.8-5.4L5 10.8 10.2 9z"/></svg>
+  {%- when 'clock' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.3l3.2 1.9"/></svg>
+  {%- when 'image' -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="9.8" r="1.6"/><path d="m4.5 17 4.8-4.6 3.4 3.2 2.6-2.3 4.2 3.9"/></svg>
+  {%- else -%}
+    <svg viewBox="0 0 24 24" aria-hidden="true" {{ s }}><circle cx="12" cy="12" r="8.5"/></svg>
+{%- endcase -%}
