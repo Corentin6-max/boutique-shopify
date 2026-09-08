@@ -1,108 +1,101 @@
 {%- comment -%}
   Fiche produit Shapewear.
 
-  Attend un produit à trois options : Pack / Couleur / Taille. Les index sont
-  détectés par nom, pas par position, pour que la section survive à un
-  réordonnancement des options dans l'admin. Si l'une manque, on retombe sur le
-  sélecteur de variantes standard du thème plutôt que d'afficher une page cassée.
+  Attend un produit à deux options : Couleur et Taille. Les packs ne sont PAS
+  des variantes — chaque exemplaire ayant son propre couple couleur/taille, un
+  pack est ajouté au panier sous forme de N lignes distinctes. C'est aussi la
+  seule forme que DSers sait honorer correctement.
+
+  La dégressivité vient d'une remise automatique Shopify (quantité minimum).
+  Les réglages « remise » ci-dessous ne font que reproduire son calcul à
+  l'affichage : ils doivent rester alignés sur la remise réelle, sinon le prix
+  annoncé ne sera pas celui facturé.
 {%- endcomment -%}
 
-{%- comment -%}
-  base_unit_price : prix d'une unité seule. Sert à calculer l'économie réelle de
-  chaque pack plutôt qu'un pourcentage inventé.
-{%- endcomment -%}
 {%- liquid
-  assign pack_index = -1
   assign color_index = -1
   assign size_index = -1
 
   for opt in product.options_with_values
     assign n = opt.name | downcase
-    if n contains 'pack' or n contains 'lot'
-      assign pack_index = forloop.index0
-    elsif n contains 'couleur' or n contains 'color'
+    if n contains 'couleur' or n contains 'color'
       assign color_index = forloop.index0
     elsif n contains 'taille' or n contains 'size'
       assign size_index = forloop.index0
     endif
   endfor
 
-  assign is_bundle_product = false
-  if pack_index >= 0 and color_index >= 0 and size_index >= 0
-    assign is_bundle_product = true
+  assign ready = false
+  if color_index >= 0 and size_index >= 0
+    assign ready = true
   endif
 
-  assign form_id = 'SwProductForm-' | append: section.id
+  assign form_id = 'SwForm-' | append: section.id
   assign current = product.selected_or_first_available_variant
-
-  assign base_unit_price = 0
-  if is_bundle_product
-    for v in product.variants
-      assign u = v.options[pack_index] | split: ' ' | first | plus: 0
-      if u == 1
-        assign base_unit_price = v.price
-        break
-      endif
-    endfor
-  endif
+  assign tiers = section.settings.tiers | split: ','
 -%}
 
 <div
   class="sw sw-pdp"
   data-sw-product
   data-sw-currency="{{ cart.currency.iso_code }}"
-  data-sw-pack-index="{{ pack_index }}"
   data-sw-color-index="{{ color_index }}"
   data-sw-size-index="{{ size_index }}"
+  data-sw-discount-percent="{{ section.settings.discount_percent }}"
+  data-sw-discount-min="{{ section.settings.discount_min }}"
+  data-sw-pack-one-note="{{ section.settings.pack_one_note | escape }}"
   data-sw-add-text="{{ section.settings.add_label | escape }}"
   data-sw-sold-out-text="{{ 'products.product.sold_out' | t | escape }}">
 
   <div class="sw__wrap">
+    <p class="sw-crumbs">
+      <a href="{{ routes.root_url }}">Accueil</a> /
+      <span aria-current="page">{{ product.title }}</span>
+    </p>
+
     <div class="sw-pdp__grid">
 
-      {%- comment -%} ---------------------------------------- Galerie {%- endcomment -%}
-      <div class="sw-pdp__col sw-pdp__col--media">
-        <div class="sw-gallery" data-product-gallery>
-          <div class="sw-gallery__main">
-            {%- if section.settings.flag_text != blank -%}
-              <span class="sw-gallery__flag">{{ section.settings.flag_text }}</span>
-            {%- endif -%}
+      {%- comment -%} -------------------------------------- Galerie {%- endcomment -%}
+      <div class="sw-pdp__col sw-pdp__col--media" data-sw-gallery>
+        <div class="sw-gallery__main">
+          {%- if section.settings.flag_text != blank -%}
+            <span class="sw-gallery__flag">{{ section.settings.flag_text }}</span>
+          {%- endif -%}
 
-            {%- if product.media.size > 0 -%}
-              {%- for media in product.media limit: 1 -%}
-                <img
-                  src="{{ media | image_url: width: 1200 }}"
-                  alt="{{ media.alt | default: product.title | escape }}"
-                  width="1200" height="1200"
-                  loading="eager" fetchpriority="high">
-              {%- endfor -%}
-            {%- else -%}
-              <div class="sw__ph">
-                {% render 'sw-icon', icon: 'image' %}
-                <span>Photo à venir</span>
-              </div>
-            {%- endif -%}
-          </div>
-
-          {%- if product.media.size > 1 -%}
-            <div class="sw-gallery__thumbs">
-              {%- for media in product.media limit: 5 -%}
-                <button
-                  type="button"
-                  class="sw-gallery__thumb"
-                  data-media-id="{{ media.id }}"
-                  data-sw-thumb="{{ media.id }}"
-                  aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
-                  aria-label="Voir l'image {{ forloop.index }}">
-                  <img src="{{ media | image_url: width: 240 }}" alt="" width="240" height="240" loading="lazy">
-                </button>
-              {%- endfor -%}
+          {%- if product.media.size > 0 -%}
+            {%- assign first_media = product.media | first -%}
+            <img
+              src="{{ first_media | image_url: width: 1200 }}"
+              alt="{{ first_media.alt | default: product.title | escape }}"
+              width="1200" height="1200"
+              loading="eager" fetchpriority="high"
+              data-sw-gallery-main>
+          {%- else -%}
+            <div class="sw__ph">
+              {% render 'sw-icon', icon: 'image' %}
+              <span>Photo à venir</span>
             </div>
           {%- endif -%}
         </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="sw-gallery__thumbs">
+            {%- for media in product.media limit: 8 -%}
+              <button
+                type="button"
+                class="sw-gallery__thumb"
+                data-sw-thumb="{{ media.id }}"
+                data-sw-full="{{ media | image_url: width: 1200 }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="Voir l'image {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 240 }}" alt="" width="240" height="240" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
 
-      {%- comment -%} ------------------------------------------- Infos {%- endcomment -%}
+      {%- comment -%} ---------------------------------------- Achat {%- endcomment -%}
       <div class="sw-pdp__col sw-pdp__col--info">
 
         <p class="sw-pdp__brand">{{ product.vendor | default: shop.name }}</p>
@@ -117,12 +110,14 @@
           </div>
         {%- endif -%}
 
+        {%- if section.settings.tagline != blank -%}
+          <p class="sw-pdp__tagline">{{ section.settings.tagline }}</p>
+        {%- endif -%}
+
         <div class="sw-pdp__price-row">
           <span class="sw-pdp__price" data-sw-price>{{ current.price | money }}</span>
-          <s class="sw-pdp__compare" data-sw-compare {% unless current.compare_at_price > current.price %}hidden{% endunless %}>
-            {{ current.compare_at_price | money }}
-          </s>
-          <span class="sw-pdp__save" data-sw-save {% unless current.compare_at_price > current.price %}hidden{% endunless %}></span>
+          <s class="sw-pdp__compare" data-sw-compare hidden></s>
+          <span class="sw-pdp__save" data-sw-save hidden></span>
         </div>
         <p class="sw-pdp__unit" data-sw-unit hidden></p>
         {%- if section.settings.tax_note != blank -%}
@@ -141,87 +136,18 @@
           </ul>
         {%- endif -%}
 
-        {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-product-form: 'true' -%}
-          <input type="hidden" name="id" value="{{ current.id }}" data-sw-id>
-          <input type="hidden" name="quantity" value="1">
+        {%- if ready -%}
+          {%- assign color_option = product.options_with_values[color_index] -%}
+          {%- assign size_option = product.options_with_values[size_index] -%}
+          {%- assign swatch_lines = section.settings.swatch_map | strip | newline_to_br | split: '<br />' -%}
 
-          {%- if is_bundle_product -%}
-            {%- assign pack_option = product.options_with_values[pack_index] -%}
-            {%- assign color_option = product.options_with_values[color_index] -%}
-            {%- assign size_option = product.options_with_values[size_index] -%}
+          <form data-sw-form id="{{ form_id }}" novalidate>
 
-            {%- comment -%} ------------------------------- Packs {%- endcomment -%}
-            <fieldset class="sw-select">
-              <legend class="sw-select__head">
-                <span class="sw-select__label">1 · Choisissez votre pack</span>
-              </legend>
-
-              <div class="sw-bundles">
-                {%- for value in pack_option.values -%}
-                  {%- liquid
-                    assign units = value | split: ' ' | first | plus: 0
-                    if units < 1
-                      assign units = 1
-                    endif
-
-                    assign card_variant = nil
-                    for v in product.variants
-                      if v.options[pack_index] == value
-                        assign card_variant = v
-                        break
-                      endif
-                    endfor
-
-                    assign reference = base_unit_price | times: units
-                    assign saved = reference | minus: card_variant.price
-                    assign per_unit = card_variant.price | divided_by: units
-                  -%}
-
-                  <label class="sw-bundle">
-                    <input
-                      type="radio"
-                      name="sw-pack-{{ section.id }}"
-                      value="{{ value | escape }}"
-                      data-sw-option
-                      data-sw-group="pack"
-                      {% if pack_option.selected_value == value %}checked{% endif %}>
-                    <span class="sw-bundle__box">
-                      <span class="sw-bundle__radio" aria-hidden="true"></span>
-                      <span class="sw-bundle__body">
-                        <span class="sw-bundle__name">
-                          {{ value }}
-                          {%- if units == 2 and section.settings.tag_pack_2 != blank -%}
-                            <span class="sw-bundle__tag">{{ section.settings.tag_pack_2 }}</span>
-                          {%- elsif units >= 3 and section.settings.tag_pack_3 != blank -%}
-                            <span class="sw-bundle__tag sw-bundle__tag--value">{{ section.settings.tag_pack_3 }}</span>
-                          {%- endif -%}
-                        </span>
-                        <span class="sw-bundle__sub">
-                          {%- if units > 1 -%}
-                            {{ per_unit | money }} l'unité{% if saved > 0 %} · vous économisez {{ saved | money }}{% endif %}
-                          {%- else -%}
-                            {{ section.settings.pack_1_note | default: 'Pour tester' }}
-                          {%- endif -%}
-                        </span>
-                      </span>
-                      <span class="sw-bundle__prices">
-                        <span class="sw-bundle__total">{{ card_variant.price | money }}</span>
-                        {%- if saved > 0 -%}
-                          <s class="sw-bundle__was">{{ reference | money }}</s>
-                        {%- endif -%}
-                      </span>
-                    </span>
-                  </label>
-                {%- endfor -%}
-              </div>
-            </fieldset>
-
-            {%- comment -%} ----------------------------- Couleurs {%- endcomment -%}
-            {%- assign swatch_lines = section.settings.swatch_map | strip | newline_to_br | split: '<br />' -%}
+            {%- comment -%} ------------------------------ Couleur {%- endcomment -%}
             <fieldset class="sw-select">
               <legend class="sw-select__head">
                 <span class="sw-select__label">
-                  2 · Couleur — <span class="sw-select__value" data-sw-selected-label="color">{{ color_option.selected_value }}</span>
+                  Couleur — <span class="sw-select__value" data-sw-selected-label="color">{{ color_option.selected_value }}</span>
                 </span>
               </legend>
               <div class="sw-swatches">
@@ -253,13 +179,13 @@
               </div>
             </fieldset>
 
-            {%- comment -%} ------------------------------- Tailles {%- endcomment -%}
+            {%- comment -%} ------------------------------- Taille {%- endcomment -%}
             <fieldset class="sw-select">
               <legend class="sw-select__head">
                 <span class="sw-select__label">
-                  3 · Taille — <span class="sw-select__value" data-sw-selected-label="size">{{ size_option.selected_value }}</span>
+                  Taille — <span class="sw-select__value" data-sw-selected-label="size">{{ size_option.selected_value }}</span>
                 </span>
-                <button type="button" class="sw-select__link" data-sw-modal-open>Guide des tailles</button>
+                <button type="button" class="sw-select__link" data-sw-modal-open>Quelle est ma taille ?</button>
               </legend>
               <div class="sw-sizes">
                 {%- for value in size_option.values -%}
@@ -276,28 +202,88 @@
                 {%- endfor -%}
               </div>
             </fieldset>
-          {%- else -%}
-            {%- comment -%}
-              Produit sans les trois options attendues : on rend le sélecteur
-              standard du thème pour rester fonctionnel.
-            {%- endcomment -%}
-            {% render 'product-variant-picker', product: product, section_id: section.id %}
-          {%- endif -%}
 
-          {%- if section.settings.stock_note != blank -%}
-            <p class="sw-pdp__stock">{{ section.settings.stock_note }}</p>
-          {%- endif -%}
-
-          <div class="sw-pdp__atc" data-sticky-trigger>
-            <button type="submit" name="add" class="sw__btn sw__btn--primary sw__btn--block" data-sw-add>
-              <span data-sw-add-text>{{ section.settings.add_label }}</span>
-            </button>
-            {%- if section.settings.show_dynamic_checkout -%}
-              {{ form | payment_button }}
+            {%- comment -%} -------------------------------- Packs {%- endcomment -%}
+            {%- if section.settings.tiers_heading != blank -%}
+              <p class="sw-divider">{{ section.settings.tiers_heading }}</p>
             {%- endif -%}
-            <p class="sw-pdp__error" data-sw-error data-form-error role="alert"></p>
-          </div>
-        {%- endform -%}
+
+            <div class="sw-bundles">
+              {%- for raw in tiers -%}
+                {%- liquid
+                  assign units = raw | strip | plus: 0
+                  if units < 1
+                    assign units = 1
+                  endif
+                -%}
+                <label class="sw-bundle">
+                  {%- if units == section.settings.badge_units and section.settings.badge_label != blank -%}
+                    <span class="sw-bundle__tag sw-bundle__tag--value" style="position:absolute;top:-10px;right:16px;z-index:2;">{{ section.settings.badge_label }}</span>
+                  {%- endif -%}
+                  <input
+                    type="radio"
+                    name="sw-tier-{{ section.id }}"
+                    value="{{ units }}"
+                    data-sw-tier
+                    {% if forloop.first %}checked{% endif %}>
+                  <span class="sw-bundle__box">
+                    <span class="sw-bundle__main">
+                      <span class="sw-bundle__radio" aria-hidden="true"></span>
+                      <span class="sw-bundle__body">
+                        <span class="sw-bundle__name">
+                          {{ units }} débardeur{% if units > 1 %}s{% endif %}
+                        </span>
+                        <span class="sw-bundle__sub" data-sw-tier-sub></span>
+                      </span>
+                      <span class="sw-bundle__prices">
+                        <span class="sw-bundle__total" data-sw-tier-total></span>
+                        <s class="sw-bundle__was" data-sw-tier-was hidden></s>
+                      </span>
+                    </span>
+
+                    {%- if units > 1 -%}
+                      <span class="sw-bundle__units" data-sw-tier-units="{{ units }}">
+                        <span class="sw-bundle__units-label">Couleur et taille de chaque exemplaire</span>
+                        {%- for i in (1..units) -%}
+                          <span class="sw-unit-row" data-sw-unit-row>
+                            <span class="sw-unit-row__num">#{{ i }}</span>
+                            <select data-sw-unit-color aria-label="Couleur exemplaire {{ i }}">
+                              {%- for value in color_option.values -%}
+                                <option value="{{ value | escape }}">{{ value }}</option>
+                              {%- endfor -%}
+                            </select>
+                            <select data-sw-unit-size aria-label="Taille exemplaire {{ i }}">
+                              {%- for value in size_option.values -%}
+                                <option value="{{ value | escape }}">{{ value }}</option>
+                              {%- endfor -%}
+                            </select>
+                          </span>
+                        {%- endfor -%}
+                      </span>
+                    {%- endif -%}
+                  </span>
+                </label>
+              {%- endfor -%}
+            </div>
+
+            {%- if section.settings.stock_note != blank -%}
+              <p class="sw-pdp__stock">{{ section.settings.stock_note }}</p>
+            {%- endif -%}
+
+            <div class="sw-pdp__atc" data-sticky-trigger>
+              <button type="submit" class="sw__btn sw__btn--primary sw__btn--block" data-sw-add>
+                <span data-sw-add-text>{{ section.settings.add_label }}</span>
+              </button>
+              <p class="sw-pdp__error" data-sw-error role="alert"></p>
+            </div>
+          </form>
+        {%- else -%}
+          {%- comment -%}
+            Produit sans les options Couleur et Taille : on rend le sélecteur
+            standard du thème plutôt qu'une page cassée.
+          {%- endcomment -%}
+          {% render 'product-form', product: product, section_id: section.id, show_quantity: true, show_dynamic_checkout: true %}
+        {%- endif -%}
 
         {%- if section.settings.reassurance != blank -%}
           {%- assign reassure_lines = section.settings.reassurance | strip | newline_to_br | split: '<br />' -%}
@@ -312,28 +298,7 @@
           </ul>
         {%- endif -%}
 
-        {%- comment -%} --------------------------------- Accordéons {%- endcomment -%}
         <div class="sw-acc" data-sw-accordion>
-          {%- assign has_description = false -%}
-          {%- if product.description != blank -%}{%- assign has_description = true -%}{%- endif -%}
-
-          {%- if has_description -%}
-            <div class="sw-acc__item">
-              <h2>
-                <button
-                  type="button"
-                  class="sw-acc__q"
-                  data-sw-acc-trigger
-                  aria-expanded="true"
-                  aria-controls="SwAccDesc-{{ section.id }}">
-                  <span>Description complète</span>
-                  <span class="sw-faq__icon" aria-hidden="true"></span>
-                </button>
-              </h2>
-              <div class="sw-acc__a" id="SwAccDesc-{{ section.id }}">{{ product.description }}</div>
-            </div>
-          {%- endif -%}
-
           {%- for block in section.blocks -%}
             {%- if block.type == 'accordion' -%}
               <div class="sw-acc__item" {{ block.shopify_attributes }}>
@@ -358,37 +323,25 @@
     </div>
   </div>
 
-
   {%- comment -%}
-    Charge utile lue par shapewear.js. « units » permet d'afficher le prix à
-    l'unité sans le recalculer en JS à partir du libellé du pack.
+    Charge utile lue par shapewear.js. Aucun prix barré n'est émis : les
+    variantes n'en portent pas, l'économie vient de la remise quantité.
   {%- endcomment -%}
   <script type="application/json" data-sw-variants>
     [
       {%- for variant in product.variants -%}
-        {%- liquid
-          assign units = 1
-          if pack_index >= 0
-            assign units = variant.options[pack_index] | split: ' ' | first | plus: 0
-            if units < 1
-              assign units = 1
-            endif
-          endif
-        -%}
         {
           "id": {{ variant.id }},
           "options": {{ variant.options | json }},
           "price": {{ variant.price }},
           "compare_at_price": {{ variant.compare_at_price | default: 0 }},
           "available": {{ variant.available }},
-          "units": {{ units }},
           "featured_media_id": {{ variant.featured_media.id | default: 0 }}
         }{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
     ]
   </script>
 
-  {%- comment -%} ------------------------------------ Barre collante {%- endcomment -%}
   <div class="sw-sticky" data-sticky-atc>
     <div class="sw-sticky__inner">
       <div class="sw-sticky__info">
@@ -404,25 +357,24 @@
     </div>
   </div>
 
-  {%- comment -%} --------------------------------- Guide des tailles {%- endcomment -%}
   <div class="sw-modal" data-sw-modal hidden role="dialog" aria-modal="true" aria-label="Guide des tailles">
     <button type="button" class="sw-modal__veil" data-sw-modal-veil tabindex="-1" aria-hidden="true"></button>
     <div class="sw-modal__panel">
       <button type="button" class="sw-modal__close" data-sw-modal-close aria-label="Fermer">
         {% render 'sw-icon', icon: 'close' %}
       </button>
-      <h2 class="sw__h3">Guide des tailles</h2>
-      <p class="sw__lede" style="font-size:.92rem;margin-top:8px;">
-        Mesurez-vous à même la peau, sans serrer le mètre ruban.
-      </p>
+      <h2 class="sw__h3">Quelle est ma taille ?</h2>
+      {%- if section.settings.size_intro != blank -%}
+        <div class="sw-modal__note" style="margin-top:12px;">{{ section.settings.size_intro }}</div>
+      {%- endif -%}
 
       <table class="sw-size-table">
         <thead>
           <tr>
             <th scope="col">Taille</th>
-            <th scope="col">Tour de poitrine</th>
             <th scope="col">Tour de taille</th>
-            <th scope="col">Poids indicatif</th>
+            <th scope="col">Tour de poitrine</th>
+            <th scope="col">Longueur</th>
           </tr>
         </thead>
         <tbody>
@@ -454,32 +406,37 @@
   "tag": "section",
   "class": "section-shapewear-pdp",
   "settings": [
-    { "type": "header", "content": "Bandeau image" },
     { "type": "text", "id": "flag_text", "label": "Pastille sur l'image", "default": "Best-seller" },
+    { "type": "text", "id": "tagline", "label": "Accroche", "default": "Double épaisseur sur le ventre. Invisible sous la chemise." },
 
     { "type": "header", "content": "Note" },
     { "type": "text", "id": "rating_value", "label": "Note affichée", "default": "4,8" },
     { "type": "number", "id": "rating_count", "label": "Nombre d'avis (0 pour masquer)", "default": 0 },
 
     { "type": "header", "content": "Argumentaire" },
-    { "type": "textarea", "id": "pitch", "label": "Points clés (un par ligne)", "default": "Compression abdominale ciblée, effet visible dès l'enfilage\nCoupe longue : il reste rentré dans le pantalon\nSans coutures, invisible sous une chemise ajustée" },
+    { "type": "textarea", "id": "pitch", "label": "Points clés (un par ligne)", "default": "Panneau abdominal en double épaisseur\nSans couture latérale : rien ne se dessine sous la chemise\nMaintien du dos qui redresse les épaules\n92 % polyamide / 8 % élasthanne, respirant" },
     { "type": "text", "id": "tax_note", "label": "Mention sous le prix", "default": "TVA incluse. Livraison calculée au paiement." },
 
-    { "type": "header", "content": "Packs" },
-    { "type": "text", "id": "tag_pack_2", "label": "Étiquette pack de 2", "default": "Le plus choisi" },
-    { "type": "text", "id": "tag_pack_3", "label": "Étiquette pack de 3", "default": "Meilleure valeur" },
-    { "type": "text", "id": "pack_1_note", "label": "Mention pack de 1", "default": "Pour tester" },
-    { "type": "textarea", "id": "swatch_map", "label": "Couleurs (Nom:#hex, une par ligne)", "default": "Noir:#16181d\nBlanc:#f2f1ec\nBeige:#d9c2a4" },
+    { "type": "header", "content": "Packs et remise" },
+    { "type": "paragraph", "content": "La remise est appliquée par Shopify (Réductions > remise automatique). Les deux réglages ci-dessous ne servent qu'à afficher le bon prix : gardez-les identiques à la remise réelle." },
+    { "type": "text", "id": "tiers", "label": "Paliers (nombre d'exemplaires, séparés par des virgules)", "default": "1,2,4,6" },
+    { "type": "text", "id": "tiers_heading", "label": "Titre au-dessus des packs", "default": "Plus vous en prenez, plus vous économisez" },
+    { "type": "number", "id": "discount_percent", "label": "Remise en % appliquée par Shopify", "default": 20 },
+    { "type": "number", "id": "discount_min", "label": "À partir de combien d'articles", "default": 2 },
+    { "type": "number", "id": "badge_units", "label": "Palier mis en avant", "default": 4 },
+    { "type": "text", "id": "badge_label", "label": "Étiquette du palier mis en avant", "default": "Le plus populaire" },
+    { "type": "text", "id": "pack_one_note", "label": "Mention du pack de 1", "default": "Pour tester la coupe" },
+    { "type": "textarea", "id": "swatch_map", "label": "Coloris (Nom:#hex, un par ligne)", "default": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4" },
 
     { "type": "header", "content": "Ajout au panier" },
     { "type": "text", "id": "add_label", "label": "Libellé du bouton", "default": "Ajouter au panier" },
-    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Afficher les paiements express", "default": true },
     { "type": "text", "id": "stock_note", "label": "Mention de stock", "default": "En stock" },
-    { "type": "textarea", "id": "reassurance", "label": "Réassurance (icone|texte, une par ligne)", "default": "truck|Livraison suivie offerte\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay" },
+    { "type": "textarea", "id": "reassurance", "label": "Réassurance (icone|texte, une par ligne)", "default": "truck|Livraison suivie offerte, 6 à 10 jours\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay" },
 
     { "type": "header", "content": "Guide des tailles" },
-    { "type": "textarea", "id": "size_chart", "label": "Lignes (Taille|Poitrine|Taille|Poids)", "default": "S|86–94 cm|71–79 cm|55–65 kg\nM|94–102 cm|79–87 cm|65–75 kg\nL|102–110 cm|87–95 cm|75–87 kg\nXL|110–118 cm|95–104 cm|87–99 kg\n2XL|118–128 cm|104–114 cm|99–112 kg" },
-    { "type": "richtext", "id": "size_note", "label": "Note du guide", "default": "<p>Entre deux tailles : prenez la plus petite pour un effet gainant maximal, la plus grande si vous le portez plus de 8 heures d'affilée.</p>" }
+    { "type": "richtext", "id": "size_intro", "label": "Introduction", "default": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine : c'est la recommandation du fabricant. Mesurez-vous à même la peau, sans serrer le mètre ruban.</p>" },
+    { "type": "textarea", "id": "size_chart", "label": "Lignes (Taille|Tour de taille|Poitrine|Longueur)", "default": "S|79–84 cm|89–94 cm|55 cm\nM|84–89 cm|94–99 cm|56 cm\nL|89–94 cm|99–104 cm|57 cm\nXL|94–102 cm|104–112 cm|61 cm\n2XL|102–109 cm|112–119 cm|61 cm\n3XL|109–117 cm|119–127 cm|64 cm" },
+    { "type": "richtext", "id": "size_note", "label": "Note du guide", "default": "<p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction. La longueur indiquée est mesurée à plat, le vêtement s'étire au porté.</p>" }
   ],
   "blocks": [
     {
@@ -487,7 +444,7 @@
       "name": "Accordéon",
       "settings": [
         { "type": "text", "id": "heading", "label": "Titre", "default": "Livraison et retours" },
-        { "type": "richtext", "id": "content", "label": "Contenu", "default": "<p>Expédition sous 24 h ouvrées, livraison offerte et suivie.</p>" }
+        { "type": "richtext", "id": "content", "label": "Contenu", "default": "<p>Livraison suivie offerte, 6 à 10 jours ouvrés.</p>" }
       ]
     }
   ],

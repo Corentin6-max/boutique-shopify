@@ -7,95 +7,78 @@
           "type": "accordion",
           "settings": {
             "heading": "Matière et entretien",
-            "content": "<p>Maille nylon / élasthanne tricotée sans couture latérale, extensible dans les deux sens. Le panneau abdominal est tricoté plus dense que le reste du vêtement.</p><p>Lavage en machine à 30°, à l'envers, dans un filet. <strong>Pas de sèche-linge</strong> : la chaleur détruit l'élasticité et le vêtement ne gaine plus. Séchage à plat ou sur cintre, il est sec en quelques heures.</p>"
+            "content": "<p>Maille <strong>92 % polyamide / 8 % élasthanne</strong>, tricotée sans couture latérale, extensible dans les deux sens. Respirante et évacuant l'humidité. Aucune substance chimique préoccupante déclarée par le fabricant.</p><p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Pas de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer. Séchage à plat ou sur cintre.</p>"
+          }
+        },
+        "construction": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Comment il est construit",
+            "content": "<p>Le panneau abdominal avant est monté en <strong>deux couches superposées</strong> : la compression est franche là où elle sert, et le reste du vêtement respire.</p><p>La compression remonte dans le dos et soutient les lombaires, ce qui redresse les épaules sans effort conscient.</p>"
           }
         },
         "port": {
           "type": "accordion",
           "settings": {
             "heading": "Comment le porter",
-            "content": "<p>À même la peau, comme un sous-vêtement, puis la chemise ou le t-shirt par-dessus. Rentrez-le dans le pantalon : la coupe longue est faite pour ça et l'empêche de remonter.</p><p>Pour les premières fois, comptez une journée d'adaptation — la compression se fait oublier au bout de deux ou trois heures.</p>"
-          }
-        },
-        "taille": {
-          "type": "accordion",
-          "settings": {
-            "heading": "Quelle taille choisir",
-            "content": "<p>Prenez votre taille habituelle de t-shirt : le vêtement est déjà conçu pour comprimer, inutile de descendre d'une taille.</p><p>Entre deux tailles, la plus petite donne l'effet gainant le plus marqué, la plus grande se porte plus confortablement au-delà de huit heures. Le guide des tailles détaillé est accessible au-dessus du sélecteur.</p>"
+            "content": "<p>À même la peau, comme un sous-vêtement, puis la chemise ou le t-shirt par-dessus.</p><p>Comptez une journée d'adaptation — la compression se fait oublier au bout de deux ou trois heures.</p>"
           }
         },
         "livraison": {
           "type": "accordion",
           "settings": {
             "heading": "Livraison et retours",
-            "content": "<p>Renseignez ici vos délais réels une fois votre fournisseur DSers configuré, ainsi que votre procédure de retour. Ne promettez pas un délai que vous ne pouvez pas tenir.</p>"
+            "content": "<p>Livraison suivie offerte, <strong>6 à 10 jours ouvrés</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>30 jours pour changer de taille. Colis neutre, sans mention du contenu.</p>"
           }
         }
       },
-      "block_order": ["matiere", "port", "taille", "livraison"],
+      "block_order": ["matiere", "construction", "port", "livraison"],
       "settings": {
         "flag_text": "Best-seller",
+        "tagline": "Double épaisseur sur le ventre. Invisible sous la chemise.",
         "rating_value": "4,8",
         "rating_count": 0,
-        "pitch": "Compression abdominale ciblée, effet visible dès l'enfilage\nCoupe longue : il reste rentré dans le pantalon\nSans coutures, invisible sous une chemise ajustée\nMaintien lombaire qui redresse la posture",
+        "pitch": "Panneau abdominal en double épaisseur\nSans couture latérale : rien ne se dessine sous la chemise\nMaintien du dos qui redresse les épaules\n92 % polyamide / 8 % élasthanne, respirant",
         "tax_note": "TVA incluse. Livraison calculée au paiement.",
-        "tag_pack_2": "Le plus choisi",
-        "tag_pack_3": "Meilleure valeur",
-        "pack_1_note": "Pour tester la coupe",
-        "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nBeige:#d9c2a4",
+        "tiers": "1,2,4,6",
+        "tiers_heading": "Plus vous en prenez, plus vous économisez",
+        "discount_percent": 20,
+        "discount_min": 2,
+        "badge_units": 4,
+        "badge_label": "Le plus populaire",
+        "pack_one_note": "Pour tester la coupe",
+        "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4",
         "add_label": "Ajouter au panier",
-        "show_dynamic_checkout": true,
         "stock_note": "En stock",
-        "reassurance": "truck|Livraison suivie offerte\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay",
-        "size_chart": "S|86–94 cm|71–79 cm|55–65 kg\nM|94–102 cm|79–87 cm|65–75 kg\nL|102–110 cm|87–95 cm|75–87 kg\nXL|110–118 cm|95–104 cm|87–99 kg\n2XL|118–128 cm|104–114 cm|99–112 kg",
-        "size_note": "<p>Entre deux tailles : prenez la plus petite pour un effet gainant maximal, la plus grande si vous le portez plus de 8 heures d'affilée. Mesurez-vous à même la peau, sans serrer le mètre ruban.</p>"
+        "reassurance": "truck|Livraison suivie offerte, 6 à 10 jours\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé CB, PayPal et Apple Pay",
+        "size_intro": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine : c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal.</p>",
+        "size_chart": "S|79–84 cm|89–94 cm|55 cm\nM|84–89 cm|94–99 cm|56 cm\nL|89–94 cm|99–104 cm|57 cm\nXL|94–102 cm|104–112 cm|61 cm\n2XL|102–109 cm|112–119 cm|61 cm\n3XL|109–117 cm|119–127 cm|64 cm",
+        "size_note": "<p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction. La longueur est mesurée à plat, le vêtement s'étire au porté.</p>"
       }
     },
     "guarantee": {
       "type": "shapewear-guarantee",
       "blocks": {
         "g1": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
-        "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, PayPal, Apple Pay via Shopify." } },
+        "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, PayPal et Apple Pay via Shopify." } },
         "g3": { "type": "item", "settings": { "icon": "eye-off", "title": "Colis neutre", "text": "Emballage discret, sans mention du contenu." } }
       },
       "block_order": ["g1", "g2", "g3"],
       "settings": { "band": true }
     },
-    "compare": {
-      "type": "shapewear-compare",
-      "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Effet gainant sur le ventre", "us": "oui", "a": "non", "b": "oui" } },
-        "r2": { "type": "row", "settings": { "label": "Reste rentré dans le pantalon", "us": "oui", "a": "non", "b": "non" } },
-        "r3": { "type": "row", "settings": { "label": "Coutures invisibles sous la chemise", "us": "oui", "a": "non", "b": "non" } },
-        "r4": { "type": "row", "settings": { "label": "Maintien du dos", "us": "oui", "a": "non", "b": "non" } },
-        "r5": { "type": "row", "settings": { "label": "Supportable plus de 8 heures", "us": "oui", "a": "oui", "b": "non" } },
-        "r6": { "type": "row", "settings": { "label": "Se porte à même la peau", "us": "oui", "a": "oui", "b": "non" } }
-      },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"],
-      "settings": {
-        "eyebrow": "Comparatif",
-        "heading": "Pourquoi pas un simple débardeur ?",
-        "text": "<p>Un débardeur classique cache la peau. Il ne change rien à la silhouette. Une gaine premier prix, elle, comprime — mais roule, se voit et devient insupportable au bout de deux heures.</p>",
-        "centered": true,
-        "band": true,
-        "col_us": "Velluno",
-        "col_a": "Débardeur classique",
-        "col_b": "Gaine premier prix"
-      }
-    },
     "faq": {
       "type": "shapewear-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Est-ce que ça se voit sous une chemise ?", "answer": "<p>Non, et c'est tout l'intérêt du tricotage sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine, là où un débardeur blanc classique se devine encore.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Est-ce que c'est confortable toute une journée ?", "answer": "<p>La compression se fait oublier au bout de deux à trois heures. Si vous prévoyez de le porter plus de huit heures d'affilée — une journée de bureau puis une soirée — prenez la taille au-dessus en cas d'hésitation.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "Quelle taille prendre ?", "answer": "<p>Votre taille habituelle de t-shirt. Le vêtement comprime déjà par construction, inutile de descendre d'une taille : vous n'auriez pas plus d'effet, seulement moins de confort. Le guide des tailles détaillé est sur la fiche produit.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Est-ce que je peux le mettre au sèche-linge ?", "answer": "<p>Non. C'est la seule vraie erreur à éviter : la chaleur du sèche-linge détruit l'élasthanne et le vêtement cesse de gainer. Lavage à 30° et séchage à l'air libre, il est sec en quelques heures.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "Pourquoi prendre plusieurs débardeurs ?", "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. Le pack de deux couvre une semaine normale, celui de trois permet d'avoir une couleur par usage.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "Comment se passe la livraison ?", "answer": "<p>À compléter avec vos délais réels une fois votre fournisseur configuré.</p>" } }
+        "q1": { "type": "question", "settings": { "question": "Est-ce que ça se voit sous une chemise ?", "answer": "<p>Non. Le tricotage est sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine, là où un débardeur blanc classique se devine encore.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Quelle taille prendre ?", "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong> — c'est la recommandation du fabricant. Le guide des tailles détaillé est accessible au-dessus du sélecteur, avec les mesures exactes en centimètres.</p><p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Est-ce confortable toute une journée ?", "answer": "<p>La compression se fait oublier au bout de deux à trois heures. La maille évacue l'humidité, ce qui change tout sur un vêtement porté à même la peau.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Comment l'entretenir ?", "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "Pourquoi en prendre plusieurs ?", "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. À partir de deux exemplaires, la remise de 20 % s'applique automatiquement au panier.</p>" } },
+        "q6": { "type": "question", "settings": { "question": "En combien de temps suis-je livré ?", "answer": "<p>Comptez <strong>6 à 10 jours ouvrés</strong>, livraison suivie et offerte, par Colissimo, Colis Privé ou Mondial Relay selon la destination.</p>" } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
       "settings": { "eyebrow": "Vos questions", "heading": "Questions fréquentes", "centered": true, "band": false, "open_first": true }
     }
   },
-  "order": ["main", "guarantee", "compare", "faq"]
+  "order": ["main", "guarantee", "faq"]
 }

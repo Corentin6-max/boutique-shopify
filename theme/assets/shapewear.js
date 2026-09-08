@@ -38,6 +38,11 @@
     this.colorIndex = Number(root.dataset.swColorIndex);
     this.sizeIndex = Number(root.dataset.swSizeIndex);
 
+    /* La remise quantité est appliquée par Shopify au panier. On la reproduit
+       ici pour l'affichage : le prix annoncé doit être celui qui sera facturé. */
+    this.discountPct = Number(root.dataset.swDiscountPercent || 0) / 100;
+    this.discountMin = Number(root.dataset.swDiscountMin || 0);
+
     this.form = $('[data-sw-form]', root);
     this.priceEl = $('[data-sw-price]', root);
     this.compareEl = $('[data-sw-compare]', root);
@@ -156,6 +161,13 @@
 
   /* -------------------------------------------------------- Rafraîchissement */
 
+  ShapewearProduct.prototype.discounted = function (subtotal, units) {
+    if (this.discountMin > 0 && units >= this.discountMin && this.discountPct > 0) {
+      return Math.round(subtotal * (1 - this.discountPct));
+    }
+    return subtotal;
+  };
+
   ShapewearProduct.prototype.update = function () {
     var self = this;
     var top = this.topSelection();
@@ -192,44 +204,50 @@
     }
 
     var units = this.activeTier().units;
-    var total = variant.price * units;
-    var compare = (variant.compare_at_price || 0) * units;
+    var gross = variant.price * units;
+    var total = this.discounted(gross, units);
 
-    /* Chaque palier affiche son propre prix, calculé sur la variante courante. */
+    /* Le prix barré d'un pack est le prix unitaire réel multiplié — jamais un
+       tarif de référence inventé. */
     $$('[data-sw-tier]', this.root).forEach(function (tier) {
       var n = Number(tier.value);
       var box = tier.nextElementSibling;
       if (!box) return;
+
+      var brut = variant.price * n;
+      var net = self.discounted(brut, n);
+      var economie = brut - net;
+
       var totalEl = $('[data-sw-tier-total]', box);
       var wasEl = $('[data-sw-tier-was]', box);
       var subEl = $('[data-sw-tier-sub]', box);
-      if (totalEl) totalEl.textContent = self.money((variant.price * n) / 100);
-      if (wasEl && variant.compare_at_price > variant.price) {
-        wasEl.textContent = self.money((variant.compare_at_price * n) / 100);
-        wasEl.hidden = false;
-      } else if (wasEl) {
-        wasEl.hidden = true;
+
+      if (totalEl) totalEl.textContent = self.money(net / 100);
+      if (wasEl) {
+        wasEl.textContent = economie > 0 ? self.money(brut / 100) : '';
+        wasEl.hidden = economie <= 0;
       }
-      if (subEl && variant.compare_at_price > variant.price) {
-        var saved = (variant.compare_at_price - variant.price) * n;
-        subEl.textContent = 'Vous économisez ' + self.money(saved / 100);
+      if (subEl) {
+        subEl.textContent = economie > 0
+          ? self.money(net / n / 100) + " l'unité · vous économisez " + self.money(economie / 100)
+          : (self.root.dataset.swPackOneNote || '');
       }
     });
 
     if (this.priceEl) this.priceEl.textContent = this.money(total / 100);
 
-    var onSale = compare > total;
+    var remise = gross > total;
     if (this.compareEl) {
-      this.compareEl.textContent = onSale ? this.money(compare / 100) : '';
-      this.compareEl.hidden = !onSale;
+      this.compareEl.textContent = remise ? this.money(gross / 100) : '';
+      this.compareEl.hidden = !remise;
     }
     if (this.saveEl) {
-      this.saveEl.hidden = !onSale;
-      if (onSale) this.saveEl.textContent = '−' + Math.round(((compare - total) / compare) * 100) + ' %';
+      this.saveEl.hidden = !remise;
+      if (remise) this.saveEl.textContent = '−' + Math.round(((gross - total) / gross) * 100) + ' %';
     }
     if (this.unitEl) {
       this.unitEl.hidden = units <= 1;
-      this.unitEl.textContent = units > 1 ? 'Soit ' + this.money(variant.price / 100) + ' le débardeur' : '';
+      this.unitEl.textContent = units > 1 ? 'Soit ' + this.money(total / units / 100) + ' le débardeur' : '';
     }
 
     if (this.button) this.button.removeAttribute('aria-disabled');

@@ -1,28 +1,14 @@
 {%- comment -%}
-  Rappel des packs en page d'accueil. Les prix sont lus sur le produit lui-même
-  — pas de tarif saisi à la main qui se désynchroniserait du catalogue.
+  Rappel des packs en page d'accueil.
+
+  Le prix unitaire est lu sur le produit et la dégressivité reproduit la remise
+  automatique Shopify — aucun tarif saisi à la main qui pourrait diverger du
+  catalogue ou de ce qui sera réellement facturé.
 {%- endcomment -%}
 {%- liquid
   assign product = section.settings.product
-
-  assign pack_index = -1
-  for opt in product.options_with_values
-    assign n = opt.name | downcase
-    if n contains 'pack' or n contains 'lot'
-      assign pack_index = forloop.index0
-    endif
-  endfor
-
-  assign base_unit_price = 0
-  if pack_index >= 0
-    for v in product.variants
-      assign u = v.options[pack_index] | split: ' ' | first | plus: 0
-      if u == 1
-        assign base_unit_price = v.price
-        break
-      endif
-    endfor
-  endif
+  assign unit = product.price_min
+  assign tiers = section.settings.tiers | split: ','
 -%}
 <div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
   <div class="sw__wrap">
@@ -36,29 +22,26 @@
       {%- endif -%}
     </div>
 
-    {%- if pack_index >= 0 -%}
+    {%- if product != blank and unit > 0 -%}
       <div class="sw-offer__grid">
-        {%- assign pack_option = product.options_with_values[pack_index] -%}
-        {%- for value in pack_option.values -%}
+        {%- for raw in tiers -%}
           {%- liquid
-            assign units = value | split: ' ' | first | plus: 0
+            assign units = raw | strip | plus: 0
             if units < 1
               assign units = 1
             endif
 
-            assign card_variant = nil
-            for v in product.variants
-              if v.options[pack_index] == value
-                assign card_variant = v
-                break
-              endif
-            endfor
+            assign brut = unit | times: units
+            assign net = brut
+            if units >= section.settings.discount_min and section.settings.discount_percent > 0
+              assign reste = 100 | minus: section.settings.discount_percent
+              assign net = brut | times: reste | divided_by: 100
+            endif
+            assign economie = brut | minus: net
+            assign par_unite = net | divided_by: units
 
-            assign reference = base_unit_price | times: units
-            assign saved = reference | minus: card_variant.price
-            assign per_unit = card_variant.price | divided_by: units
             assign featured = false
-            if units == 2
+            if units == section.settings.badge_units
               assign featured = true
             endif
           -%}
@@ -67,28 +50,26 @@
               <span class="sw-offer__ribbon">{{ section.settings.ribbon }}</span>
             {%- endif -%}
 
-            <span class="sw-offer__qty">{{ value }}</span>
-            <p class="sw-offer__price">{{ card_variant.price | money }}</p>
-            {%- if saved > 0 -%}
-              <span class="sw-offer__was">au lieu de <s>{{ reference | money }}</s></span>
-            {%- endif -%}
-            {%- if units > 1 -%}
-              <span class="sw-offer__unit">{{ per_unit | money }} l'unité</span>
+            <span class="sw-offer__qty">{{ units }} débardeur{% if units > 1 %}s{% endif %}</span>
+            <p class="sw-offer__price">{{ net | money }}</p>
+            {%- if economie > 0 -%}
+              <span class="sw-offer__was">au lieu de <s>{{ brut | money }}</s></span>
+              <span class="sw-offer__unit">{{ par_unite | money }} l'unité</span>
             {%- endif -%}
 
             <ul class="sw-offer__perks">
-              {%- if units > 1 -%}
-                <li>{% render 'sw-icon', icon: 'check' %}<span>Vous économisez {{ saved | money }}</span></li>
+              {%- if economie > 0 -%}
+                <li>{% render 'sw-icon', icon: 'check' %}<span>Vous économisez {{ economie | money }}</span></li>
                 <li>{% render 'sw-icon', icon: 'check' %}<span>Un propre pendant que l'autre est au lavage</span></li>
               {%- else -%}
-                <li>{% render 'sw-icon', icon: 'check' %}<span>Pour essayer la coupe</span></li>
+                <li>{% render 'sw-icon', icon: 'check' %}<span>{{ section.settings.pack_one_note }}</span></li>
               {%- endif -%}
-              {%- if units >= 3 -%}
+              {%- if units >= 4 -%}
                 <li>{% render 'sw-icon', icon: 'check' %}<span>Une couleur pour chaque usage</span></li>
               {%- endif -%}
             </ul>
 
-            <a href="{{ product.url }}?variant={{ card_variant.id }}" class="sw__btn {% if featured %}sw__btn--primary{% else %}sw__btn--ghost{% endif %} sw__btn--block">
+            <a href="{{ product.url }}" class="sw__btn {% if featured %}sw__btn--primary{% else %}sw__btn--ghost{% endif %} sw__btn--block">
               {{ section.settings.cta_label }}
             </a>
           </div>
@@ -96,7 +77,7 @@
       </div>
     {%- else -%}
       <p class="sw__lede" style="text-align:center;">
-        Sélectionnez un produit à trois options (Pack / Couleur / Taille) dans les réglages de cette section.
+        Sélectionnez le produit dans les réglages de cette section.
       </p>
     {%- endif -%}
   </div>
@@ -110,8 +91,13 @@
     { "type": "product", "id": "product", "label": "Produit" },
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Offres" },
     { "type": "text", "id": "heading", "label": "Titre", "default": "Un seul, ou de quoi tenir la semaine" },
-    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un débardeur se porte à même la peau : il se lave après chaque journée. C'est la seule raison pour laquelle nos clients en prennent deux ou trois.</p>" },
-    { "type": "text", "id": "ribbon", "label": "Ruban du pack mis en avant", "default": "Le plus choisi" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Il se porte à même la peau : il se lave après chaque journée. C'est la seule raison pour laquelle la plupart de nos clients en prennent plusieurs.</p>" },
+    { "type": "text", "id": "tiers", "label": "Paliers (séparés par des virgules)", "default": "1,2,4,6" },
+    { "type": "number", "id": "discount_percent", "label": "Remise en % appliquée par Shopify", "default": 20 },
+    { "type": "number", "id": "discount_min", "label": "À partir de combien d'articles", "default": 2 },
+    { "type": "number", "id": "badge_units", "label": "Palier mis en avant", "default": 4 },
+    { "type": "text", "id": "ribbon", "label": "Ruban du palier mis en avant", "default": "Le plus populaire" },
+    { "type": "text", "id": "pack_one_note", "label": "Mention du pack de 1", "default": "Pour tester la coupe" },
     { "type": "text", "id": "cta_label", "label": "Libellé du bouton", "default": "Choisir ce pack" },
     { "type": "checkbox", "id": "band", "label": "Fond gris", "default": false }
   ],
