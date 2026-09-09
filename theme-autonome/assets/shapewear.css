@@ -1450,6 +1450,9 @@
      l'image d'un bloc inversé serait plus large que celle du précédent. */
   .sw-proof__row--flip { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
   .sw-proof__row--flip .sw-proof__media { order: 2; }
+
+  /* Sans photo, le texte occupe toute la largeur au lieu de laisser un vide. */
+  .sw-proof__row--solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; margin-inline: auto; }
   .sw-proof__img,
   .sw-proof__placeholder { aspect-ratio: 1 / 1; }
 }

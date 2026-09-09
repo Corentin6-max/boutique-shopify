@@ -1,17 +1,9 @@
 {%- comment -%}
   Blocs preuve : une image, une objection levée. Rien de décoratif.
-  Un bloc sans image est masqué en boutique et signalé dans l'éditeur,
-  pour qu'une section vide ne laisse jamais de trou sur la page.
+  Le texte vaut à lui seul : un bloc sans photo s'affiche sur toute la
+  largeur plutôt que de laisser un cadre vide à côté de lui.
 {%- endcomment -%}
-{%- liquid
-  assign shown = 0
-  for block in section.blocks
-    if block.settings.image != blank
-      assign shown = shown | plus: 1
-    endif
-  endfor
--%}
-{%- if shown > 0 or request.design_mode -%}
+{%- if section.blocks.size > 0 -%}
 <div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
   <div class="sw__wrap">
     {%- if section.settings.heading != blank or section.settings.text != blank -%}
@@ -42,8 +34,14 @@
             assign flip = true
           endif
         -%}
+        {%- assign avec_media = false -%}
         {%- if block.settings.image != blank or request.design_mode -%}
-          <section class="sw-proof__row{% if flip %} sw-proof__row--flip{% endif %}" {{ block.shopify_attributes }}>
+          {%- assign avec_media = true -%}
+        {%- endif -%}
+
+        {%- if block.settings.heading != blank or block.settings.text != blank or avec_media -%}
+          <section class="sw-proof__row{% if flip and avec_media %} sw-proof__row--flip{% endif %}{% unless avec_media %} sw-proof__row--solo{% endunless %}" {{ block.shopify_attributes }}>
+            {%- if avec_media -%}
             <div class="sw-proof__media">
               {%- if block.settings.image != blank -%}
                 {{ block.settings.image | image_url: width: 1200 | image_tag:
@@ -59,6 +57,7 @@
                 <p class="sw-proof__caption">{{ block.settings.caption }}</p>
               {%- endif -%}
             </div>
+            {%- endif -%}
 
             <div class="sw-proof__body">
               {%- if block.settings.eyebrow != blank -%}
