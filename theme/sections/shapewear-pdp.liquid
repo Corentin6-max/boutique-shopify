@@ -80,7 +80,7 @@
 
         {%- if product.media.size > 1 -%}
           <div class="sw-gallery__thumbs">
-            {%- for media in product.media limit: 8 -%}
+            {%- for media in product.media limit: section.settings.max_thumbs -%}
               <button
                 type="button"
                 class="sw-gallery__thumb"
@@ -407,6 +407,7 @@
   "class": "section-shapewear-pdp",
   "settings": [
     { "type": "text", "id": "flag_text", "label": "Pastille sur l'image", "default": "Best-seller" },
+    { "type": "range", "id": "max_thumbs", "label": "Vignettes affichées", "min": 4, "max": 24, "step": 1, "default": 20 },
     { "type": "text", "id": "tagline", "label": "Accroche", "default": "Double épaisseur sur le ventre. Invisible sous la chemise." },
 
     { "type": "header", "content": "Note" },

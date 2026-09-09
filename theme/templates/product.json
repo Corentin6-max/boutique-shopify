@@ -40,6 +40,7 @@
       ],
       "settings": {
         "flag_text": "Best-seller",
+        "max_thumbs": 20,
         "tagline": "Double épaisseur sur le ventre. Invisible sous la chemise.",
         "rating_value": "4,8",
         "rating_count": 0,
