@@ -367,14 +367,23 @@
       if (lastFocus) lastFocus.focus();
     };
 
+    var open = function (trigger, event) {
+      if (event) event.preventDefault();
+      lastFocus = trigger;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var closer = $('[data-sw-modal-close]', modal);
+      if (closer) closer.focus();
+    };
+
     $$('[data-sw-modal-open]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        lastFocus = button;
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        var closer = $('[data-sw-modal-close]', modal);
-        if (closer) closer.focus();
-      });
+      button.addEventListener('click', function () { open(button); });
+    });
+
+    /* Un lien de menu pointant sur #guide-tailles ouvre la même fenêtre :
+       la navigation Shopify ne peut pas porter d'attribut de section. */
+    $$('a[href$="#guide-tailles"]').forEach(function (link) {
+      link.addEventListener('click', function (event) { open(link, event); });
     });
 
     modal.addEventListener('click', function (event) {
