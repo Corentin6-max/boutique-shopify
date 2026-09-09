@@ -34,6 +34,7 @@ theme/
 │   ├── shapewear-guarantee.liquid
 │   └── shapewear-pdp.liquid         Fiche produit complète
 ├── sections/  (suite)
+│   ├── footer.liquid                Pied de page (liens de politique automatiques)
 │   ├── shapewear-shipbar.liquid     Bandeau livraison sous l'en-tête
 │   └── header-group.json            En-tête : annonces, menu, bandeau
 ├── snippets/
