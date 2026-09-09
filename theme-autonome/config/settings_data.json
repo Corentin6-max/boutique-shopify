@@ -1,5 +1,36 @@
 {
   "current": {
-    "color_accent": "#d1462f"
+    "color_accent": "#d1462f",
+    "sections": {
+      "sw-announce": {
+        "type": "sw-announce",
+        "blocks": {
+          "a1": { "type": "message", "settings": { "text": "Garantie 15 jours — mauvaise taille, on échange" } },
+          "a2": { "type": "message", "settings": { "text": "Livraison suivie offerte, sans minimum" } },
+          "a3": { "type": "message", "settings": { "text": "Six tailles disponibles, du S au 3XL" } }
+        },
+        "block_order": ["a1", "a2", "a3"],
+        "settings": { "speed": 5 }
+      },
+      "sw-header": {
+        "type": "sw-header",
+        "settings": { "menu": "velluno-shapewear" }
+      },
+      "sw-shipbar": {
+        "type": "sw-shipbar",
+        "settings": { "text": "Livraison suivie offerte, 8 à 12 jours" }
+      },
+      "sw-footer": {
+        "type": "sw-footer",
+        "settings": {
+          "text": "<p>Le gainant masculin qui ne se voit pas sous la chemise. Du S au 3XL.</p>",
+          "email": "contact@velluno.fr",
+          "menu_title": "La boutique",
+          "menu": "velluno-shapewear",
+          "legal_title": "Informations",
+          "copyright": "Tous droits réservés."
+        }
+      }
+    }
   }
 }
