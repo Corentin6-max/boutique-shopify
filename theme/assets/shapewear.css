@@ -1548,3 +1548,10 @@
 /* En-tête : boutique mono-produit, la recherche n'a rien à chercher */
 
 .section-header #SearchToggle { display: none; }
+
+/* Ancres : l'en-tête est collant, la cible ne doit pas passer dessous */
+
+#aide,
+#sw-achat {
+  scroll-margin-top: 96px;
+}
