@@ -265,6 +265,12 @@
   };
 
   ShapewearProduct.prototype.syncMedia = function (variant) {
+    /* Au chargement, la galerie reste sur la photo d'ouverture : l'image
+       liée à la variante ne s'impose qu'après un choix du visiteur. */
+    if (!this.mediaReady) {
+      this.mediaReady = true;
+      return;
+    }
     if (!variant.featured_media_id) return;
     var thumb = $('[data-sw-thumb="' + variant.featured_media_id + '"]');
     if (thumb) thumb.click();
