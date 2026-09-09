@@ -479,10 +479,66 @@
 .sw-mark--yes { color: #4ade80; }
 .sw-mark--no { color: #f87171; }
 
+/* Sur téléphone le tableau tient dans la largeur de l'écran : plus de
+   défilement latéral, la colonne Velluno reste visible en même temps que
+   l'intitulé de la ligne. Les largeurs sont figées (table-layout: fixed)
+   parce que les trois colonnes de droite ne contiennent qu'une icône :
+   c'est la première colonne qui doit prendre la place restante, et les
+   trois autres juste de quoi loger le plus long mot d'en-tête. */
 @media (max-width: 700px) {
+  .sw-compare__scroll { overflow-x: visible; padding-top: 12px; }
+
+  .sw-compare__table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .sw-compare__table thead th:first-child,
+  .sw-compare__table tbody th { width: 38.5%; }
+
+  .sw-compare__table thead th + th,
+  .sw-compare__table td { width: 20.5%; }
+
   .sw-compare__table th,
-  .sw-compare__table td { padding: 13px 12px; }
-  .sw-compare__table tbody th { width: 44%; }
+  .sw-compare__table td { padding: 10px 4px; overflow-wrap: anywhere; }
+
+  .sw-compare__table thead th {
+    font-size: .58rem;
+    line-height: 1.25;
+    padding-bottom: 12px;
+  }
+
+  .sw-compare__table thead th:first-child {
+    font-size: .58rem;
+    letter-spacing: .07em;
+    padding-left: 0;
+  }
+
+  .sw-compare__sub { font-size: .5rem; line-height: 1.25; margin-top: 3px; }
+
+  .sw-compare__table thead th.sw-compare__col--us { padding-top: 16px; }
+  .sw-compare__table tbody tr:last-child td.sw-compare__col--us { padding-bottom: 16px; }
+
+  .sw-compare__marque { font-size: .66rem; letter-spacing: .04em; }
+
+  .sw-compare__table tbody th {
+    font-size: .84rem;
+    line-height: 1.3;
+    padding-left: 0;
+  }
+
+  .sw-compare__why { font-size: .73rem; line-height: 1.4; margin-top: 3px; }
+
+  .sw-mark { width: 20px; height: 20px; }
+  .sw-mark svg { width: 17px; height: 17px; }
+}
+
+/* Écrans les plus étroits (360 px) : on redescend les en-têtes d'un cran
+   pour que « Débardeur » et « compression » tiennent toujours sans césure. */
+@media (max-width: 400px) {
+  .sw-compare__table thead th,
+  .sw-compare__table thead th:first-child { font-size: .53rem; }
+  .sw-compare__sub { font-size: .46rem; }
 }
 
 /* ==========================================================================
