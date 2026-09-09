@@ -6,12 +6,12 @@
         "eyebrow": "Shapewear homme",
         "heading": "Moins deux tailles, en enfilant un débardeur.",
         "text": "<p>La chemise qui tire entre les boutons. Le ventre qu'on rentre en passant devant un miroir. Trois secondes pour régler ça — sous les vêtements, sans que personne ne le sache.</p>",
-        "chips": "Invisible sous la chemise\nDouble épaisseur sur le ventre\n30 jours pour changer de taille",
+        "chips": "Invisible sous la chemise\nDouble épaisseur sur le ventre\n15 jours pour changer de taille",
         "product": "debardeur-gainant-homme-sans-coutures-double-epaisseur-ventre",
         "cta_label": "Découvrir le débardeur",
         "rating_value": "4,8",
         "rating_count": 0,
-        "badge": "30 jours pour changer de taille",
+        "badge": "15 jours pour changer de taille",
         "background": "#ffffff"
       }
     },
@@ -129,7 +129,7 @@
       "type": "shapewear-guarantee",
       "blocks": {
         "g1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison suivie offerte", "text": "8 à 12 jours, Colissimo ou Mondial Relay." } },
-        "g2": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
+        "g2": { "type": "item", "settings": { "icon": "rotate", "title": "15 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
         "g3": { "type": "item", "settings": { "icon": "ruler", "title": "Du S au 3XL", "text": "Six tailles, pour couvrir toutes les morphologies." } }
       },
       "block_order": ["g1", "g2", "g3"],

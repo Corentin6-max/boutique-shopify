@@ -28,7 +28,7 @@
           "type": "accordion",
           "settings": {
             "heading": "Livraison et retours",
-            "content": "<p>Livraison suivie offerte, <strong>8 à 12 jours</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>30 jours pour changer de taille : écrivez-nous et on vous renvoie la bonne.</p>"
+            "content": "<p>Livraison suivie offerte, <strong>8 à 12 jours</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>15 jours pour changer de taille : écrivez-nous et on vous renvoie la bonne.</p>"
           }
         }
       },
@@ -50,7 +50,7 @@
         "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4",
         "add_label": "Ajouter au panier",
         "stock_note": "En stock",
-        "reassurance": "truck|Livraison suivie offerte, 8 à 12 jours\nrotate|30 jours pour changer de taille\nlock|Paiement sécurisé par Shopify",
+        "reassurance": "truck|Livraison suivie offerte, 8 à 12 jours\nrotate|15 jours pour changer de taille\nlock|Paiement sécurisé par Shopify",
         "size_intro": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine : c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal.</p>",
         "size_chart": "S|79–84 cm|89–94 cm|55 cm\nM|84–89 cm|94–99 cm|56 cm\nL|89–94 cm|99–104 cm|57 cm\nXL|94–102 cm|104–112 cm|61 cm\n2XL|102–109 cm|112–119 cm|61 cm\n3XL|109–117 cm|119–127 cm|64 cm",
         "size_note": "<p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction. La longueur est mesurée à plat, le vêtement s'étire au porté.</p>"
@@ -59,7 +59,7 @@
     "guarantee": {
       "type": "shapewear-guarantee",
       "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "rotate", "title": "30 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
+        "g1": { "type": "item", "settings": { "icon": "rotate", "title": "15 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
         "g2": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "Vos données bancaires ne transitent jamais par nous." } },
         "g3": { "type": "item", "settings": { "icon": "ruler", "title": "Du S au 3XL", "text": "Six tailles, pour couvrir toutes les morphologies." } }
       },
