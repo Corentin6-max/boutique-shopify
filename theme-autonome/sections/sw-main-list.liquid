@@ -1,0 +1,23 @@
+<div class="sw sw-block">
+  <div class="sw__wrap">
+    <div class="sw__section-head sw__section-head--center">
+      <h1 class="sw__h2">{{ section.settings.heading }}</h1>
+    </div>
+    <ul class="sw-grille">
+      {%- for product in collections.all.products limit: 24 -%}
+        <li class="sw-grille__item">
+          <a href="{{ product.url }}">
+            {%- if product.featured_image != blank -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {%- endif -%}
+            <span class="sw-grille__titre">{{ product.title }}</span>
+            <span class="sw-grille__prix">{{ product.price | money }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+{% schema %}
+{ "name": "Liste produits", "settings": [ { "type": "text", "id": "heading", "label": "Titre", "default": "La boutique" } ] }
+{% endschema %}

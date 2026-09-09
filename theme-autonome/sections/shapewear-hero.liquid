@@ -1,0 +1,99 @@
+{%- comment -%}
+  Hero de la page d'accueil : promesse, réassurance et accès direct au produit.
+  L'image est optionnelle — tant qu'aucune photo n'est en ligne, un aplat
+  hachuré tient la mise en page au lieu de laisser un trou.
+{%- endcomment -%}
+<div class="sw sw-hero" style="background: {{ section.settings.background }};">
+  <div class="sw__wrap">
+    <div class="sw-hero__grid">
+      <div class="sw-hero__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="sw__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 class="sw__h1">{{ section.settings.heading }}</h1>
+
+        {%- if section.settings.text != blank -%}
+          <div class="sw__lede">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.chips != blank -%}
+          <ul class="sw-hero__chips">
+            {%- assign chip_lines = section.settings.chips | strip | newline_to_br | split: '<br />' -%}
+            {%- for line in chip_lines -%}
+              {%- assign clean = line | strip -%}
+              {%- if clean != blank -%}
+                <li class="sw-hero__chip">{% render 'sw-icon', icon: 'check' %}{{ clean }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="sw-hero__cta">
+          {%- assign target = section.settings.product -%}
+          {%- if target != blank -%}
+            <a href="{{ target.url }}" class="sw__btn sw__btn--primary">{{ section.settings.cta_label }}</a>
+          {%- elsif section.settings.cta_link != blank -%}
+            <a href="{{ section.settings.cta_link }}" class="sw__btn sw__btn--primary">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+
+          {%- if section.settings.rating_count > 0 -%}
+            <span class="sw__rating">
+              <span class="sw__stars" role="img" aria-label="Noté {{ section.settings.rating_value }} sur 5">
+                {%- for i in (1..5) -%}{% render 'sw-icon', icon: 'star' %}{%- endfor -%}
+              </span>
+              <span><strong>{{ section.settings.rating_value }}</strong>/5 · {{ section.settings.rating_count }} avis</span>
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- if target != blank -%}
+          <p class="sw-hero__price-note">
+            À partir de <strong>{{ target.price_min | money }}</strong>
+            {%- if target.compare_at_price_max > target.price_min %} au lieu de <s>{{ target.compare_at_price_max | money }}</s>{% endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <div class="sw-hero__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1100 }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            width="1100" height="1375" loading="eager" fetchpriority="high">
+        {%- else -%}
+          <div class="sw__ph">
+            {% render 'sw-icon', icon: 'image' %}
+            <span>Visuel principal à venir</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge != blank -%}
+          <span class="sw-hero__badge">{% render 'sw-icon', icon: 'shield' %}{{ section.settings.badge }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Shapewear",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Shapewear homme" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Moins deux tailles, en enfilant un débardeur." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>La chemise qui tire entre les boutons, le ventre qu'on rentre devant le miroir. Trois secondes pour régler ça, sous les vêtements, sans que personne ne le sache.</p>" },
+    { "type": "textarea", "id": "chips", "label": "Pastilles (une par ligne)", "default": "Invisible sous la chemise\nDouble épaisseur sur le ventre\n15 jours pour changer de taille" },
+    { "type": "product", "id": "product", "label": "Produit mis en avant" },
+    { "type": "text", "id": "cta_label", "label": "Libellé du bouton", "default": "Découvrir le débardeur" },
+    { "type": "url", "id": "cta_link", "label": "Lien de secours" },
+    { "type": "text", "id": "rating_value", "label": "Note", "default": "4,8" },
+    { "type": "number", "id": "rating_count", "label": "Nombre d'avis (0 pour masquer)", "default": 0 },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "badge", "label": "Badge sur l'image", "default": "15 jours pour changer de taille" },
+    { "type": "color", "id": "background", "label": "Fond", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Hero Shapewear" }]
+}
+{% endschema %}

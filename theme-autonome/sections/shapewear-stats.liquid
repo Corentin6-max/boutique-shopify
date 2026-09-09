@@ -1,0 +1,46 @@
+{%- comment -%}
+  Bandeau chiffré sur fond sombre : coupe la page et pose la crédibilité juste
+  après le hero. Les valeurs sont éditables — ne laissez pas de chiffre que vous
+  ne pouvez pas justifier.
+{%- endcomment -%}
+<div class="sw sw-stats">
+  <div class="sw__wrap">
+    <div class="sw-stats__grid">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <span class="sw-stats__num">{{ block.settings.value }}</span>
+          <span class="sw-stats__label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Chiffres Shapewear",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Chiffre",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Valeur", "default": "4,8/5" },
+        { "type": "text", "id": "label", "label": "Légende", "default": "Note moyenne" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chiffres Shapewear",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "−2", "label": "tailles apparentes dès l'enfilage" } },
+        { "type": "stat", "settings": { "value": "24 h", "label": "pour préparer votre commande" } },
+        { "type": "stat", "settings": { "value": "15 j", "label": "pour changer de taille" } },
+        { "type": "stat", "settings": { "value": "0", "label": "couture visible sous la chemise" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

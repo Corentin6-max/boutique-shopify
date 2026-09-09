@@ -1,0 +1,8 @@
+{
+  "general": {
+    "meta": { "tags": "Étiqueté « {{ tags }} »", "page": "Page {{ page }}" },
+    "search": { "search": "Rechercher", "placeholder": "Rechercher" },
+    "cart": { "title": "Panier" }
+  },
+  "products": { "product": { "add_to_cart": "Ajouter au panier", "sold_out": "Épuisé" } }
+}

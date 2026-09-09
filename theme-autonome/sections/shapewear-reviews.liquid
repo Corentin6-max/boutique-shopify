@@ -1,0 +1,72 @@
+{%- comment -%}
+  Avis clients.
+
+  IMPORTANT : les blocs livrés sont des gabarits vides, à remplacer par de vrais
+  avis. Publier des témoignages inventés est une pratique commerciale trompeuse
+  (art. L121-2 du code de la consommation) — la section est volontairement
+  inutilisable tant qu'elle n'est pas remplie.
+{%- endcomment -%}
+<div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
+  <div class="sw__wrap">
+    <div class="sw__section-head{% if section.settings.centered %} sw__section-head--center{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="sw__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="sw__h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="sw__lede">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="sw-reviews__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.quote != blank -%}
+          <figure class="sw-review" {{ block.shopify_attributes }}>
+            <span class="sw__stars" role="img" aria-label="Noté {{ block.settings.stars }} sur 5">
+              {%- assign stars = block.settings.stars | plus: 0 -%}
+              {%- for i in (1..stars) -%}{% render 'sw-icon', icon: 'star' %}{%- endfor -%}
+            </span>
+            <blockquote class="sw-review__text">{{ block.settings.quote }}</blockquote>
+            <figcaption class="sw-review__foot">
+              <span class="sw-review__avatar" aria-hidden="true">{{ block.settings.name | slice: 0, 1 | upcase }}</span>
+              <span>
+                <span class="sw-review__name">{{ block.settings.name }}</span>
+                {%- if block.settings.verified -%}
+                  <span class="sw-review__meta">{% render 'sw-icon', icon: 'check-circle' %} Achat vérifié</span>
+                {%- endif -%}
+              </span>
+            </figcaption>
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Avis Shapewear",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "N'ajoutez ici que de vrais avis de vos clients. Un avis inventé est une pratique commerciale trompeuse." },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Ce qu'en disent nos clients" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "checkbox", "id": "centered", "label": "Titre centré", "default": true },
+    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Avis (laisser vide pour masquer)" },
+        { "type": "text", "id": "name", "label": "Prénom" },
+        { "type": "range", "id": "stars", "label": "Étoiles", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "checkbox", "id": "verified", "label": "Achat vérifié", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avis Shapewear" }]
+}
+{% endschema %}

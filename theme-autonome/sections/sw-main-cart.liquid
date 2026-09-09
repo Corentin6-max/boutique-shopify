@@ -1,0 +1,36 @@
+<div class="sw sw-block">
+  <div class="sw__wrap sw__wrap--narrow">
+    <div class="sw__section-head"><h1 class="sw__h2">Votre panier</h1></div>
+
+    {%- if cart.item_count == 0 -%}
+      <p class="sw__lede">Votre panier est vide.</p>
+      <p><a class="sw__btn sw__btn--primary" href="{{ routes.all_products_collection_url }}">Voir le débardeur</a></p>
+    {%- else -%}
+      {%- form 'cart', cart -%}
+        <ul class="sw-cart">
+          {%- for item in cart.items -%}
+            <li class="sw-cart__ligne">
+              {%- if item.image != blank -%}
+                <img class="sw-cart__img" src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="88" height="110" loading="lazy">
+              {%- endif -%}
+              <div class="sw-cart__info">
+                <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a>
+                <span class="sw-cart__var">{{ item.variant.title }}</span>
+                <span class="sw-cart__prix">{{ item.final_line_price | money }}</span>
+              </div>
+              <input class="sw-cart__qte" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantité">
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="sw-cart__pied">
+          <p class="sw-cart__total">Total <strong>{{ cart.total_price | money }}</strong></p>
+          <p class="sw-cart__note">Taxes incluses. Livraison calculée au paiement.</p>
+          <button type="submit" name="update" class="sw__btn sw__btn--ghost">Mettre à jour</button>
+          <button type="submit" name="checkout" class="sw__btn sw__btn--primary">Passer commande</button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</div>
+{% schema %}{ "name": "Panier" }{% endschema %}

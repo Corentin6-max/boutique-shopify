@@ -1,0 +1,8 @@
+{
+  "general": {
+    "meta": { "tags": "Tagged \"{{ tags }}\"", "page": "Page {{ page }}" },
+    "search": { "search": "Search", "placeholder": "Search" },
+    "cart": { "title": "Cart" }
+  },
+  "products": { "product": { "add_to_cart": "Add to cart", "sold_out": "Sold out" } }
+}

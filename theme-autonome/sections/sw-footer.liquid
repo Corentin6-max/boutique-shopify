@@ -1,0 +1,58 @@
+<footer class="sw-footer">
+  <div class="sw-footer__in">
+    <div class="sw-footer__brand">
+      <p class="sw-footer__logo">{{ shop.name }}</p>
+      {%- if section.settings.text != blank -%}<div class="sw-footer__txt">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.email != blank -%}
+        <p class="sw-footer__mail"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="sw-footer__nav">
+        <h2>{{ section.settings.menu_title }}</h2>
+        <ul>
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    {%- if shop.policies.size > 0 -%}
+      <nav class="sw-footer__nav">
+        <h2>{{ section.settings.legal_title }}</h2>
+        <ul>
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}<li><a href="{{ policy.url }}">{{ policy.title }}</a></li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+
+  <div class="sw-footer__bas">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright }}</span>
+    {%- if shop.enabled_payment_types.size > 0 -%}
+      <div class="sw-footer__paiement">
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'sw-footer__carte' }}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    { "type": "richtext", "id": "text", "label": "Texte de marque", "default": "<p>Le gainant masculin qui ne se voit pas sous la chemise.</p>" },
+    { "type": "text", "id": "email", "label": "Adresse e-mail", "default": "contact@velluno.fr" },
+    { "type": "text", "id": "menu_title", "label": "Titre du menu", "default": "La boutique" },
+    { "type": "link_list", "id": "menu", "label": "Menu" },
+    { "type": "text", "id": "legal_title", "label": "Titre des mentions", "default": "Informations" },
+    { "type": "text", "id": "copyright", "label": "Mention finale", "default": "Tous droits réservés." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="sw-announce" data-sw-announce data-speed="{{ section.settings.speed }}">
+    {%- for block in section.blocks -%}
+      <span class="sw-announce__msg{% if forloop.first %} is-on{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barre d'annonces",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "range", "id": "speed", "min": 3, "max": 12, "step": 1, "unit": "s", "label": "Vitesse de rotation", "default": 5 }
+  ],
+  "blocks": [
+    { "type": "message", "name": "Message", "settings": [
+      { "type": "text", "id": "text", "label": "Texte", "default": "Livraison suivie offerte, sans minimum" }
+    ]}
+  ],
+  "presets": [{ "name": "Barre d'annonces" }]
+}
+{% endschema %}

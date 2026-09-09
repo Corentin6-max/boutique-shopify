@@ -1,0 +1,54 @@
+{%- comment -%}
+  Les deux photos sont superposées ; celle du dessus est découpée à la
+  position du curseur. Elles doivent donc avoir exactement le même cadrage.
+{%- endcomment -%}
+<div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
+  <div class="sw__wrap sw__wrap--narrow">
+    <div class="sw__section-head sw__section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<p class="sw__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="sw__h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+
+    <div class="sw-avap" data-sw-avap tabindex="0" role="slider"
+         aria-label="Comparer avant et après" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <div class="sw-avap__couche">
+        {%- if section.settings.image_before != blank -%}
+          <img src="{{ section.settings.image_before | image_url: width: 1400 }}" alt="{{ section.settings.label_before | escape }}" loading="lazy">
+        {%- else -%}
+          <p class="sw-avap__vide">Image « {{ section.settings.label_before }} » à ajouter</p>
+        {%- endif -%}
+      </div>
+      <div class="sw-avap__couche sw-avap__couche--apres">
+        {%- if section.settings.image_after != blank -%}
+          <img src="{{ section.settings.image_after | image_url: width: 1400 }}" alt="{{ section.settings.label_after | escape }}" loading="lazy">
+        {%- else -%}
+          <p class="sw-avap__vide">Image « {{ section.settings.label_after }} » à ajouter</p>
+        {%- endif -%}
+      </div>
+      <span class="sw-avap__etiq sw-avap__etiq--avant">{{ section.settings.label_before }}</span>
+      <span class="sw-avap__etiq sw-avap__etiq--apres">{{ section.settings.label_after }}</span>
+      <span class="sw-avap__poignee" aria-hidden="true"></span>
+    </div>
+
+    {%- if section.settings.caption != blank -%}
+      <p class="sw-avap__note">{{ section.settings.caption }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Avant / après",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Avant / après" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "La même chemise, à trente secondes d'intervalle." },
+    { "type": "image_picker", "id": "image_before", "label": "Image avant (sans)" },
+    { "type": "image_picker", "id": "image_after", "label": "Image après (avec)" },
+    { "type": "text", "id": "label_before", "label": "Libellé avant", "default": "Sans" },
+    { "type": "text", "id": "label_after", "label": "Libellé après", "default": "Avec" },
+    { "type": "text", "id": "caption", "label": "Légende", "default": "Faites glisser le curseur — visuel d'illustration." },
+    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": true }
+  ],
+  "presets": [{ "name": "Avant / après" }]
+}
+{% endschema %}

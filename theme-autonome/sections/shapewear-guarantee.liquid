@@ -1,0 +1,51 @@
+{%- comment -%}
+  Bandeau de garanties. Ne renseignez ici que des engagements que vous tenez
+  réellement — c'est ce que le client vous opposera en cas de litige.
+{%- endcomment -%}
+<div class="sw sw-guarantee{% if section.settings.band %} sw-block--band{% endif %}">
+  <div class="sw__wrap">
+    <div class="sw-guarantee__grid">
+      {%- for block in section.blocks -%}
+        <div class="sw-guarantee__item" {{ block.shopify_attributes }}>
+          {% render 'sw-icon', icon: block.settings.icon %}
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Garanties Shapewear",
+  "tag": "section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Garantie",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icône", "default": "truck",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "rotate", "label": "Retour" },
+            { "value": "lock", "label": "Paiement" },
+            { "value": "shield", "label": "Garantie" },
+            { "value": "clock", "label": "Délai" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Texte" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Garanties Shapewear" }]
+}
+{% endschema %}

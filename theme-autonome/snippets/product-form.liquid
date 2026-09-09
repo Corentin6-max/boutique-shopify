@@ -1,0 +1,26 @@
+{%- comment -%} Repli : sélecteur standard quand les options attendues manquent. {%- endcomment -%}
+{%- form 'product', product, class: 'sw-basic-form' -%}
+  {%- unless product.has_only_default_variant -%}
+    {%- for option in product.options_with_values -%}
+      <label class="sw-basic-form__label" for="Opt-{{ forloop.index }}">{{ option.name }}</label>
+      <select class="sw-basic-form__select" id="Opt-{{ forloop.index }}" data-sw-basic-option>
+        {%- for value in option.values -%}
+          <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+        {%- endfor -%}
+      </select>
+    {%- endfor -%}
+  {%- endunless -%}
+
+  <select name="id" class="sw-basic-form__select" aria-label="Variante">
+    {%- for variant in product.variants -%}
+      <option value="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
+        {{ variant.title }} — {{ variant.price | money }}
+      </option>
+    {%- endfor -%}
+  </select>
+
+  <input type="hidden" name="quantity" value="1">
+  <button type="submit" class="sw__btn sw__btn--primary" {% unless product.available %}disabled{% endunless %}>
+    {%- if product.available -%}Ajouter au panier{%- else -%}Épuisé{%- endif -%}
+  </button>
+{%- endform -%}

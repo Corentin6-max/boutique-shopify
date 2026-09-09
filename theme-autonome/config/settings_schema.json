@@ -1,0 +1,17 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Velluno — Shapewear",
+    "theme_version": "1.0.0",
+    "theme_author": "Velluno",
+    "theme_documentation_url": "https://velluno.fr",
+    "theme_support_url": "https://velluno.fr"
+  },
+  {
+    "name": "Identité",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "color", "id": "color_accent", "label": "Couleur d'accent", "default": "#d1462f" }
+    ]
+  }
+]
