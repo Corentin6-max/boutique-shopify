@@ -474,6 +474,20 @@
   color: #fff;
 }
 
+/* Texte réservé aux lecteurs d'écran. Sans cette règle, les « Oui » et
+   « Non » qui doublent les icônes du comparatif s'affichent à l'écran et
+   élargissent les colonnes. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .sw-mark { display: inline-grid; place-items: center; width: 26px; height: 26px; }
 .sw-mark svg { width: 20px; height: 20px; }
 .sw-mark--yes { color: #4ade80; }
@@ -500,7 +514,7 @@
   .sw-compare__table td { width: 20.5%; }
 
   .sw-compare__table th,
-  .sw-compare__table td { padding: 10px 4px; overflow-wrap: anywhere; }
+  .sw-compare__table td { padding: 15px 4px; overflow-wrap: anywhere; }
 
   .sw-compare__table thead th {
     font-size: .58rem;
@@ -522,25 +536,37 @@
   .sw-compare__marque { font-size: .66rem; letter-spacing: .04em; }
 
   .sw-compare__table tbody th {
-    font-size: .84rem;
-    line-height: 1.3;
+    font-size: .88rem;
+    line-height: 1.35;
     padding-left: 0;
   }
 
-  .sw-compare__why { font-size: .73rem; line-height: 1.4; margin-top: 3px; }
+  /* Colonne de gauche allégée : seuls les intitulés en gras restent, les
+     phrases de mécanisme sont réservées à l'affichage large. */
+  .sw-compare__why { display: none; }
 
   .sw-mark { width: 20px; height: 20px; }
   .sw-mark svg { width: 17px; height: 17px; }
 }
 
-/* Écrans les plus étroits (360 px) : on redescend les en-têtes d'un cran
-   pour que « Débardeur » et « compression » tiennent toujours sans césure. */
-@media (max-width: 400px) {
+/* Écrans les plus étroits (360 et 375 px) : les en-têtes descendent d'un
+   cran et la colonne de gauche gagne quelques points de largeur, pour que
+   « gynécomastie » et « morphologies » tiennent sur une ligne — sans quoi
+   la césure automatique les couperait en plein milieu. */
+@media (max-width: 385px) {
+  .sw-compare__table thead th:first-child,
+  .sw-compare__table tbody th { width: 41.5%; }
+
+  .sw-compare__table thead th + th,
+  .sw-compare__table td { width: 19.5%; }
+
   .sw-compare__table thead th,
   .sw-compare__table thead th:first-child { font-size: .53rem; }
-  .sw-compare__sub { font-size: .46rem; }
-}
 
+  .sw-compare__sub { font-size: .44rem; }
+
+  .sw-compare__table tbody th { font-size: .84rem; }
+}
 
 /* ==========================================================================
    AVIS CLIENTS
