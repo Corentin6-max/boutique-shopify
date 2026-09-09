@@ -59,6 +59,12 @@ sélecteur de variantes standard du thème au lieu de casser la page.
 
 - Les blocs d'avis clients sont livrés **vides**. Un avis inventé est une pratique
   commerciale trompeuse (art. L121-2 du code de la consommation).
+- La FAQ de la fiche produit émet un balisage `FAQPage` (schema.org). Depuis 2023
+  Google réserve les résultats enrichis FAQ aux sites institutionnels et de santé :
+  le balisage sert à la compréhension de la page, **pas** à obtenir des étoiles.
+- La réponse sur la gynécomastie dit explicitement que le vêtement **n'est pas un
+  traitement médical**. Ne pas retirer cette phrase : c'est ce qui sépare une
+  description de produit d'une allégation de santé.
 - Les mentions de livraison sont volontairement neutres : renseignez vos délais
   réels une fois le fournisseur configuré.
 - Le compteur d'avis est à `0`, ce qui masque la note. Ne l'augmentez qu'avec de

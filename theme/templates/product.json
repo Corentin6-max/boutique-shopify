@@ -104,42 +104,70 @@
         "q1": {
           "type": "question",
           "settings": {
-            "question": "Est-ce que ça se voit sous une chemise ?",
-            "answer": "<p>Non. Le tricotage est sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine, là où un débardeur blanc classique se devine encore.</p>"
+            "question": "Est-ce que ça se voit sous mes vêtements&nbsp;?",
+            "answer": "<p>Sous une chemise, non. Le tricotage est <strong>sans couture latérale</strong> : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine, là où un débardeur blanc classique se devine encore.</p><p>Soyons honnêtes sur la limite : sous un t-shirt fin et très moulant, l'ourlet du bas peut se deviner en pleine lumière. C'est un sous-vêtement gainant, pensé pour la chemise et les hauts qui ne collent pas à la peau.</p>"
           }
         },
         "q2": {
           "type": "question",
           "settings": {
-            "question": "Quelle taille prendre ?",
-            "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong> — c'est la recommandation du fabricant. Le guide des tailles détaillé est accessible au-dessus du sélecteur, avec les mesures exactes en centimètres.</p><p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction.</p>"
+            "question": "Quelle taille prendre&nbsp;?",
+            "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong> — c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal. Le guide des tailles détaillé est accessible au-dessus du sélecteur, avec les mesures exactes en centimètres.</p><p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction.</p>"
           }
         },
         "q3": {
           "type": "question",
           "settings": {
-            "question": "Est-ce confortable toute une journée ?",
-            "answer": "<p>La compression se fait oublier au bout de deux à trois heures. La maille évacue l'humidité, ce qui change tout sur un vêtement porté à même la peau.</p>"
+            "question": "Comment mesurer mon tour de taille correctement&nbsp;?",
+            "answer": "<p>Debout, <strong>sans rentrer le ventre</strong>, passez un mètre ruban à l'endroit le plus large de votre ventre — souvent au niveau du nombril, pas à la ceinture du pantalon. Le ruban reste à plat, ni serré ni lâche, et vous respirez normalement.</p><p>Pas de mètre ruban ? Prenez un lacet ou une ficelle, faites le tour, marquez au stylo, puis mesurez la longueur contre une règle.</p>"
           }
         },
         "q4": {
           "type": "question",
           "settings": {
-            "question": "Comment l'entretenir ?",
-            "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>"
+            "question": "Est-ce que ça aide vraiment pour la gynécomastie&nbsp;?",
+            "answer": "<p>C'est ce pour quoi ce modèle est conçu : la compression du buste <strong>atténue l'aspect de la gynécomastie sous les vêtements</strong>, et l'effet est immédiat dès que vous l'enfilez.</p><p>Soyons clairs sur ce que ce n'est pas : un vêtement gainant modifie la silhouette tant que vous le portez. <strong>Ce n'est pas un traitement médical</strong> et il ne fait rien disparaître. Si la gêne est importante au quotidien, parlez-en à un médecin — c'est un sujet qui se traite.</p>"
           }
         },
         "q5": {
           "type": "question",
           "settings": {
-            "question": "Pourquoi en prendre plusieurs ?",
-            "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. À partir de deux exemplaires, la remise de 20 % s'applique automatiquement au panier.</p>"
+            "question": "Est-ce qu'il remonte ou roule à la taille dans la journée&nbsp;?",
+            "answer": "<p>C'est presque toujours une question de taille. Un gainant trop petit se comprime sur lui-même et roule ; à la bonne taille, la maille répartit la tension et reste en place.</p><p>Le fabricant ne prévoit <strong>pas de bande antidérapante</strong>, donc nous ne vous promettrons pas qu'il ne bouge jamais. La vraie précaution est de ne pas descendre en dessous de votre tour de taille réel : entre deux tailles, prenez la plus grande.</p>"
           }
         },
         "q6": {
           "type": "question",
           "settings": {
-            "question": "En combien de temps suis-je livré ?",
+            "question": "Est-ce confortable toute une journée&nbsp;?",
+            "answer": "<p>La compression se fait oublier au bout de deux à trois heures. La maille est respirante et évacue l'humidité, ce qui change tout sur un vêtement porté à même la peau.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je le porter pour faire du sport&nbsp;?",
+            "answer": "<p>Ce n'est pas fait pour ça. C'est un sous-vêtement gainant conçu pour être porté sous des habits de ville : la maille évacue l'humidité, mais la compression du panneau abdominal n'est pensée ni pour l'effort ni pour la transpiration d'une séance.</p><p>Pour le sport, gardez un vrai vêtement technique.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Comment l'entretenir&nbsp;?",
+            "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge.</strong></p><p>C'est la seule règle qui compte vraiment : la chaleur détruit l'élasthanne, et un gainant dont l'élasthanne a cuit ne gaine plus — il devient un débardeur ordinaire. Séchage à plat ou sur cintre, et il garde son maintien lavage après lavage.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "Pourquoi en prendre plusieurs&nbsp;?",
+            "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. À partir de deux exemplaires, la remise de 20&nbsp;% s'applique automatiquement au panier.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "En combien de temps suis-je livré&nbsp;?",
             "answer": "<p>Comptez <strong>8 à 12 jours</strong>, livraison suivie et offerte, par Colissimo, Colis Privé ou Mondial Relay selon la destination.</p>"
           }
         }
@@ -150,14 +178,22 @@
         "q3",
         "q4",
         "q5",
-        "q6"
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10"
       ],
       "settings": {
         "eyebrow": "Vos questions",
         "heading": "Questions fréquentes",
         "centered": true,
         "band": false,
-        "open_first": true
+        "open_first": true,
+        "cta_note": "Il ne vous manque plus qu'une taille et une couleur.",
+        "cta_label": "Choisir ma taille",
+        "cta_link": "#sw-achat",
+        "rich_snippets": true
       }
     },
     "avant-apres": {
