@@ -1,147 +1,211 @@
 {
   "sections": {
-    "hero": {
-      "type": "shapewear-hero",
+    "main": {
+      "type": "shapewear-pdp",
+      "blocks": {
+        "matiere": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Matière et entretien",
+            "content": "<p>Maille <strong>92 % polyamide / 8 % élasthanne</strong>, tricotée sans couture latérale, extensible dans les deux sens. Respirante et évacuant l'humidité. Aucune substance chimique préoccupante déclarée par le fabricant.</p><p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Pas de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer. Séchage à plat ou sur cintre.</p>"
+          }
+        },
+        "construction": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Comment il est construit",
+            "content": "<p>Le panneau abdominal avant est monté en <strong>deux couches superposées</strong> : la compression est franche là où elle sert, et le reste du vêtement respire.</p><p>La compression remonte dans le dos et soutient les lombaires, ce qui redresse les épaules sans effort conscient.</p>"
+          }
+        },
+        "port": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Comment le porter",
+            "content": "<p>À même la peau, comme un sous-vêtement, puis la chemise ou le t-shirt par-dessus.</p><p>Comptez une journée d'adaptation — la compression se fait oublier au bout de deux ou trois heures.</p>"
+          }
+        },
+        "livraison": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Livraison et retours",
+            "content": "<p>Livraison suivie offerte, <strong>8 à 12 jours</strong> (Colissimo, Colis Privé ou Mondial Relay selon la destination).</p><p>15 jours pour changer de taille : écrivez-nous et on vous renvoie la bonne.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "matiere",
+        "construction",
+        "port",
+        "livraison"
+      ],
       "settings": {
-        "eyebrow": "Shapewear homme",
-        "heading": "Moins deux tailles, en enfilant un débardeur.",
-        "text": "<p>La chemise qui tire entre les boutons. Le ventre qu'on rentre en passant devant un miroir. Trois secondes pour régler ça — sous les vêtements, sans que personne ne le sache.</p>",
-        "chips": "Invisible sous la chemise\nDouble épaisseur sur le ventre\n15 jours pour changer de taille",
-        "product": "debardeur-gainant-homme-sans-coutures-double-epaisseur-ventre",
-        "cta_label": "Découvrir le débardeur",
+        "flag_text": "Best-seller",
+        "max_thumbs": 11,
+        "tagline": "Double épaisseur sur le ventre. Invisible sous la chemise.",
         "rating_value": "4,8",
         "rating_count": 0,
-        "badge": "15 jours pour changer de taille",
-        "background": "#ffffff"
+        "pitch": "Panneau abdominal en double épaisseur\nSans couture latérale : rien ne se dessine sous la chemise\nMaintien du dos qui redresse les épaules\n92 % polyamide / 8 % élasthanne, respirant",
+        "tax_note": "TVA incluse. Livraison calculée au paiement.",
+        "tiers": "1,2,4,6",
+        "tiers_heading": "Plus vous en prenez, plus vous économisez",
+        "discount_percent": 20,
+        "discount_min": 2,
+        "badge_units": 4,
+        "badge_label": "Le plus populaire",
+        "pack_one_note": "Pour tester la coupe",
+        "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4",
+        "add_label": "Ajouter au panier",
+        "stock_note": "En stock",
+        "reassurance": "truck|Livraison suivie offerte, 8 à 12 jours\nrotate|15 jours pour changer de taille\nlock|Paiement sécurisé par Shopify",
+        "size_intro": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine : c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal.</p>",
+        "size_chart": "S|79–84 cm|89–94 cm|55 cm\nM|84–89 cm|94–99 cm|56 cm\nL|89–94 cm|99–104 cm|57 cm\nXL|94–102 cm|104–112 cm|61 cm\n2XL|102–109 cm|112–119 cm|61 cm\n3XL|109–117 cm|119–127 cm|64 cm",
+        "size_note": "<p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction. La longueur est mesurée à plat, le vêtement s'étire au porté.</p>",
+        "product": "debardeur-gainant-homme-sans-coutures-double-epaisseur-ventre"
       }
     },
-    "stats": {
-      "type": "shapewear-stats",
+    "guarantee": {
+      "type": "shapewear-guarantee",
       "blocks": {
-        "s1": {
-          "type": "stat",
+        "g1": {
+          "type": "item",
           "settings": {
-            "value": "2",
-            "label": "couches de tissu sur le ventre"
+            "icon": "rotate",
+            "title": "15 jours pour changer de taille",
+            "text": "Mauvaise taille ? On échange."
           }
         },
-        "s2": {
-          "type": "stat",
+        "g2": {
+          "type": "item",
           "settings": {
-            "value": "0",
-            "label": "couture latérale visible"
+            "icon": "lock",
+            "title": "Paiement sécurisé",
+            "text": "Vos données bancaires ne transitent jamais par nous."
           }
         },
-        "s3": {
-          "type": "stat",
+        "g3": {
+          "type": "item",
           "settings": {
-            "value": "6",
-            "label": "tailles, du S au 3XL"
-          }
-        },
-        "s4": {
-          "type": "stat",
-          "settings": {
-            "value": "5",
-            "label": "coloris, dont un invisible sous le blanc"
+            "icon": "ruler",
+            "title": "Du S au 3XL",
+            "text": "Six tailles, pour couvrir toutes les morphologies."
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ],
-      "settings": {}
-    },
-    "problem": {
-      "type": "shapewear-cards",
-      "blocks": {
-        "p1": {
-          "type": "card",
-          "settings": {
-            "icon": "eye-off",
-            "title": "Le bourrelet de ceinture",
-            "text": "<p>Il apparaît dès qu'on s'assoit, et c'est exactement là que la chemise se tend. Aucun régime ne le règle en une journée — un vêtement, si.</p>"
-          }
-        },
-        "p2": {
-          "type": "card",
-          "settings": {
-            "icon": "arrows-in",
-            "title": "La gaine qui comprime mal",
-            "text": "<p>La plupart des gainants tendent le tissu uniformément : ils serrent partout et ne remodèlent rien. La compression doit être franche sur le ventre, et légère ailleurs.</p>"
-          }
-        },
-        "p3": {
-          "type": "card",
-          "settings": {
-            "icon": "spine",
-            "title": "Le dos voûté",
-            "text": "<p>On rentre le ventre, on creuse les épaules, et la silhouette y perd davantage qu'elle n'y gagne. Le maintien du dos fait le travail à votre place.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
+        "g1",
+        "g2",
+        "g3"
       ],
       "settings": {
-        "eyebrow": "Le vrai problème",
-        "heading": "Ce n'est pas votre ventre. C'est ce que vous mettez par-dessus.",
-        "text": "<p>Trois situations que tous les hommes connaissent, et que le bon vêtement règle immédiatement.</p>",
-        "centered": true,
-        "band": false
+        "band": true
       }
     },
-    "features": {
-      "type": "shapewear-cards",
+    "faq": {
+      "type": "shapewear-faq",
       "blocks": {
-        "f1": {
-          "type": "card",
+        "q1": {
+          "type": "question",
           "settings": {
-            "icon": "layers",
-            "title": "Double épaisseur sur le ventre",
-            "text": "<p>Le panneau abdominal avant est monté en deux couches superposées. La compression est franche là où elle sert, et le reste du vêtement respire.</p>"
+            "question": "Est-ce que ça se voit sous mes vêtements&nbsp;?",
+            "answer": "<p>Sous une chemise, non. Le tricotage est <strong>sans couture latérale</strong> : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine, là où un débardeur blanc classique se devine encore.</p><p>Soyons honnêtes sur la limite : sous un t-shirt fin et très moulant, l'ourlet du bas peut se deviner en pleine lumière. C'est un sous-vêtement gainant, pensé pour la chemise et les hauts qui ne collent pas à la peau.</p>"
           }
         },
-        "f2": {
-          "type": "card",
+        "q2": {
+          "type": "question",
           "settings": {
-            "icon": "eye-off",
-            "title": "Sans couture latérale",
-            "text": "<p>Rien ne se dessine sous une chemise ajustée, un t-shirt fin ou une veste de costume.</p>"
+            "question": "Quelle taille prendre&nbsp;?",
+            "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong> — c'est la recommandation du fabricant, et c'est la mesure qui compte sur un gainant abdominal. Le guide des tailles détaillé est accessible au-dessus du sélecteur, avec les mesures exactes en centimètres.</p><p>Entre deux tailles, prenez la plus grande : la compression est déjà forte par construction.</p>"
           }
         },
-        "f3": {
-          "type": "card",
+        "q3": {
+          "type": "question",
           "settings": {
-            "icon": "spine",
-            "title": "Le dos soutenu",
-            "text": "<p>La compression remonte dans le dos et redresse les épaules. Beaucoup remarquent l'effet sur leur posture avant celui sur leur silhouette.</p>"
+            "question": "Comment mesurer mon tour de taille correctement&nbsp;?",
+            "answer": "<p>Debout, <strong>sans rentrer le ventre</strong>, passez un mètre ruban à l'endroit le plus large de votre ventre — souvent au niveau du nombril, pas à la ceinture du pantalon. Le ruban reste à plat, ni serré ni lâche, et vous respirez normalement.</p><p>Pas de mètre ruban ? Prenez un lacet ou une ficelle, faites le tour, marquez au stylo, puis mesurez la longueur contre une règle.</p>"
           }
         },
-        "f4": {
-          "type": "card",
+        "q4": {
+          "type": "question",
           "settings": {
-            "icon": "wind",
-            "title": "Respirant, toute la journée",
-            "text": "<p>Maille 92 % polyamide / 8 % élasthanne, qui évacue l'humidité. Extensible dans les deux sens, elle suit le mouvement.</p>"
+            "question": "Est-ce que ça aide vraiment pour la gynécomastie&nbsp;?",
+            "answer": "<p>C'est ce pour quoi ce modèle est conçu : la compression du buste <strong>atténue l'aspect de la gynécomastie sous les vêtements</strong>, et l'effet est immédiat dès que vous l'enfilez.</p><p>Soyons clairs sur ce que ce n'est pas : un vêtement gainant modifie la silhouette tant que vous le portez. <strong>Ce n'est pas un traitement médical</strong> et il ne fait rien disparaître. Si la gêne est importante au quotidien, parlez-en à un médecin — c'est un sujet qui se traite.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce qu'il remonte ou roule à la taille dans la journée&nbsp;?",
+            "answer": "<p>C'est presque toujours une question de taille. Un gainant trop petit se comprime sur lui-même et roule ; à la bonne taille, la maille répartit la tension et reste en place.</p><p>Le fabricant ne prévoit <strong>pas de bande antidérapante</strong>, donc nous ne vous promettrons pas qu'il ne bouge jamais. La vraie précaution est de ne pas descendre en dessous de votre tour de taille réel : entre deux tailles, prenez la plus grande.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce confortable toute une journée&nbsp;?",
+            "answer": "<p>La compression se fait oublier au bout de deux à trois heures. La maille est respirante et évacue l'humidité, ce qui change tout sur un vêtement porté à même la peau.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je le porter pour faire du sport&nbsp;?",
+            "answer": "<p>Ce n'est pas fait pour ça. C'est un sous-vêtement gainant conçu pour être porté sous des habits de ville : la maille évacue l'humidité, mais la compression du panneau abdominal n'est pensée ni pour l'effort ni pour la transpiration d'une séance.</p><p>Pour le sport, gardez un vrai vêtement technique.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Comment l'entretenir&nbsp;?",
+            "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge.</strong></p><p>C'est la seule règle qui compte vraiment : la chaleur détruit l'élasthanne, et un gainant dont l'élasthanne a cuit ne gaine plus — il devient un débardeur ordinaire. Séchage à plat ou sur cintre, et il garde son maintien lavage après lavage.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "Pourquoi en prendre plusieurs&nbsp;?",
+            "answer": "<p>Parce qu'il se porte à même la peau et se lave donc après chaque journée. Avec un seul, vous alternez avec vos anciens t-shirts les jours de lessive. À partir de deux exemplaires, la remise de 20&nbsp;% s'applique automatiquement au panier.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "En combien de temps suis-je livré&nbsp;?",
+            "answer": "<p>Comptez <strong>8 à 12 jours</strong>, livraison suivie et offerte, par Colissimo, Colis Privé ou Mondial Relay selon la destination.</p>"
           }
         }
       },
       "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4"
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10"
       ],
       "settings": {
-        "eyebrow": "Conception",
-        "heading": "Quatre détails qui font toute la différence",
+        "eyebrow": "Vos questions",
+        "heading": "Questions fréquentes",
         "centered": true,
+        "band": false,
+        "open_first": true,
+        "cta_note": "Il ne vous manque plus qu'une taille et une couleur.",
+        "cta_label": "Choisir ma taille",
+        "cta_link": "#sw-achat",
+        "rich_snippets": true
+      }
+    },
+    "avant-apres": {
+      "type": "sw-before-after",
+      "settings": {
+        "eyebrow": "Avant / après",
+        "heading": "La même chemise, à trente secondes d'intervalle.",
+        "label_before": "Sans",
+        "label_after": "Avec",
+        "caption": "Faites glisser le curseur — visuel d'illustration.",
         "band": true
       }
     },
@@ -231,160 +295,49 @@
         "band": false
       }
     },
-    "offer": {
-      "type": "shapewear-offer",
-      "settings": {
-        "product": "debardeur-gainant-homme-sans-coutures-double-epaisseur-ventre",
-        "eyebrow": "Offres",
-        "heading": "Un seul, ou de quoi tenir la semaine",
-        "text": "<p>Il se porte à même la peau : il se lave après chaque journée. À partir de deux exemplaires, la remise s'applique automatiquement au panier.</p>",
-        "tiers": "1,2,4,6",
-        "discount_percent": 20,
-        "discount_min": 2,
-        "badge_units": 4,
-        "ribbon": "Le plus populaire",
-        "pack_one_note": "Pour tester la coupe",
-        "cta_label": "Choisir ce pack",
-        "band": true
-      }
-    },
-    "reviews": {
-      "type": "shapewear-reviews",
+    "preuves": {
+      "type": "shapewear-proof",
       "blocks": {
-        "r1": {
-          "type": "review",
+        "p1": {
+          "type": "proof",
           "settings": {
-            "quote": "",
-            "name": "",
-            "stars": 5,
-            "verified": false
+            "media_side": "auto",
+            "eyebrow": "Sur votre morphologie",
+            "heading": "Pensé pour les corps qui en ont besoin",
+            "text": "<p>La plupart des photos de gainants montrent un homme déjà mince. C'est confortable pour la marque, ça ne vous dit rien sur vous.</p><p>Ce modèle est tricoté du <strong>S au 3XL</strong>, soit jusqu'à 117 cm de tour de taille, et la construction ne change pas d'une taille à l'autre : le panneau abdominal reste monté en deux couches sur toute la gamme.</p>",
+            "points": "Six tailles, du S au 3XL — de 79 à 117 cm de tour de taille\nMême panneau abdominal deux couches sur toutes les tailles\nEntre deux tailles, prenez la plus grande"
           }
         },
-        "r2": {
-          "type": "review",
+        "p2": {
+          "type": "proof",
           "settings": {
-            "quote": "",
-            "name": "",
-            "stars": 5,
-            "verified": false
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "quote": "",
-            "name": "",
-            "stars": 5,
-            "verified": false
+            "media_side": "auto",
+            "eyebrow": "Sous la chemise",
+            "heading": "La seule preuve qui compte : on ne le voit pas",
+            "text": "<p>C'est la question que tout le monde se pose et que personne ne pose à voix haute. Un débardeur ordinaire laisse deviner ses coutures latérales dès que la chemise est fine ou claire.</p><p>Ici il n'y en a pas : le vêtement est <strong>tricoté sans couture sur les côtés</strong>. En coloris beige, il disparaît même sous une chemise blanche.</p>",
+            "points": "Tricotage sans couture latérale : aucune ligne à imprimer dans le tissu\nColoris beige pour les chemises claires\nMaille respirante qui évacue l'humidité"
           }
         }
       },
       "block_order": [
-        "r1",
-        "r2",
-        "r3"
+        "p1",
+        "p2"
       ],
       "settings": {
-        "eyebrow": "Avis clients",
-        "heading": "Ce qu'en disent nos clients",
-        "text": "<p>Remplissez ces blocs avec de vrais avis dès vos premières commandes. Tant qu'ils sont vides, la section ne s'affiche pas.</p>",
+        "eyebrow": "Avant de commander",
+        "heading": "Les deux questions que vous vous posez",
+        "text": "",
         "centered": true,
-        "band": false
-      }
-    },
-    "faq": {
-      "type": "shapewear-faq",
-      "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "Est-ce que ça se voit sous une chemise ?",
-            "answer": "<p>Non. Le tricotage est sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "Quelle taille prendre ?",
-            "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine — c'est la recommandation du fabricant. Six tailles, du S au 3XL, avec les mesures exactes dans le guide.</p>"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "Qu'est-ce que la double épaisseur ?",
-            "answer": "<p>Le panneau abdominal avant est monté en deux couches superposées, là où les gainants classiques n'en ont qu'une. C'est ce qui permet une compression franche sur le ventre sans serrer le reste du buste.</p>"
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "question": "Comment l'entretenir ?",
-            "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4"
-      ],
-      "settings": {
-        "eyebrow": "Vos questions",
-        "heading": "Questions fréquentes",
-        "centered": true,
-        "band": true,
-        "open_first": true
-      }
-    },
-    "guarantee": {
-      "type": "shapewear-guarantee",
-      "blocks": {
-        "g1": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "title": "Livraison suivie offerte",
-            "text": "8 à 12 jours, Colissimo ou Mondial Relay."
-          }
-        },
-        "g2": {
-          "type": "item",
-          "settings": {
-            "icon": "rotate",
-            "title": "15 jours pour changer de taille",
-            "text": "Mauvaise taille ? On échange."
-          }
-        },
-        "g3": {
-          "type": "item",
-          "settings": {
-            "icon": "ruler",
-            "title": "Du S au 3XL",
-            "text": "Six tailles, pour couvrir toutes les morphologies."
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "g2",
-        "g3"
-      ],
-      "settings": {
         "band": false
       }
     }
   },
   "order": [
-    "hero",
-    "stats",
-    "problem",
-    "features",
+    "main",
+    "avant-apres",
     "compare",
-    "offer",
-    "reviews",
-    "faq",
-    "guarantee"
+    "preuves",
+    "guarantee",
+    "faq"
   ]
 }

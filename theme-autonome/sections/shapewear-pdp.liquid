@@ -12,6 +12,14 @@
   annoncé ne sera pas celui facturé.
 {%- endcomment -%}
 
+{%- comment -%}
+  Hors d'une fiche produit — sur l'accueil, par exemple — le produit vient
+  du réglage de la section.
+{%- endcomment -%}
+{%- unless product -%}
+  {%- assign product = section.settings.product -%}
+{%- endunless -%}
+
 {%- liquid
   assign color_index = -1
   assign size_index = -1
@@ -406,6 +414,7 @@
   "tag": "section",
   "class": "section-shapewear-pdp",
   "settings": [
+    { "type": "product", "id": "product", "label": "Produit", "info": "À renseigner uniquement hors d'une fiche produit." },
     { "type": "text", "id": "flag_text", "label": "Pastille sur l'image", "default": "Best-seller" },
     { "type": "range", "id": "max_thumbs", "label": "Vignettes affichées", "min": 4, "max": 24, "step": 1, "default": 20 },
     { "type": "text", "id": "tagline", "label": "Accroche", "default": "Double épaisseur sur le ventre. Invisible sous la chemise." },
