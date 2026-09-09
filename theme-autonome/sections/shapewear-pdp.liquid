@@ -56,11 +56,6 @@
   data-sw-sold-out-text="{{ 'products.product.sold_out' | t | escape }}">
 
   <div class="sw__wrap">
-    <p class="sw-crumbs">
-      <a href="{{ routes.root_url }}">Accueil</a> /
-      <span aria-current="page">{{ product.title }}</span>
-    </p>
-
     <div class="sw-pdp__grid" id="sw-achat">
 
       {%- comment -%} -------------------------------------- Galerie {%- endcomment -%}
@@ -106,7 +101,6 @@
       {%- comment -%} ---------------------------------------- Achat {%- endcomment -%}
       <div class="sw-pdp__col sw-pdp__col--info">
 
-        <p class="sw-pdp__brand">{{ product.vendor | default: shop.name }}</p>
         <h1 class="sw-pdp__title">{{ product.title }}</h1>
 
         {%- if section.settings.rating_count > 0 -%}
