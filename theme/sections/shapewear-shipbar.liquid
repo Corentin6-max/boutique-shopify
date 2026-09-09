@@ -1,0 +1,35 @@
+{%- comment -%}
+  Bandeau de réassurance sous l'en-tête. Une seule phrase, celle qui lève
+  la première objection avant même que le visiteur ait vu le produit.
+{%- endcomment -%}
+{%- if section.settings.text != blank -%}
+  <div class="sw sw-shipbar">
+    <span>
+      {%- if section.settings.icon != 'none' -%}
+        {% render 'sw-icon', icon: section.settings.icon %}
+      {%- endif -%}
+      {{ section.settings.text }}
+    </span>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bandeau livraison",
+  "class": "sw-shipbar-section",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Texte", "default": "Livraison suivie offerte, 8 à 12 jours" },
+    {
+      "type": "select", "id": "icon", "label": "Icône", "default": "truck",
+      "options": [
+        { "value": "truck", "label": "Camion" },
+        { "value": "shield", "label": "Bouclier" },
+        { "value": "rotate", "label": "Échange" },
+        { "value": "lock", "label": "Cadenas" },
+        { "value": "none", "label": "Aucune" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Bandeau livraison" }]
+}
+{% endschema %}

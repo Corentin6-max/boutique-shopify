@@ -1544,3 +1544,7 @@
 }
 
 .sw-faq__cta .sw__btn { min-width: 260px; }
+
+/* En-tête : boutique mono-produit, la recherche n'a rien à chercher */
+
+.section-header #SearchToggle { display: none; }

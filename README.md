@@ -33,6 +33,9 @@ theme/
 │   ├── shapewear-faq.liquid
 │   ├── shapewear-guarantee.liquid
 │   └── shapewear-pdp.liquid         Fiche produit complète
+├── sections/  (suite)
+│   ├── shapewear-shipbar.liquid     Bandeau livraison sous l'en-tête
+│   └── header-group.json            En-tête : annonces, menu, bandeau
 ├── snippets/
 │   └── sw-icon.liquid       Jeu d'icônes SVG
 └── templates/
@@ -57,6 +60,16 @@ sélecteur de variantes standard du thème au lieu de casser la page.
 
 ### Points d'attention
 
+- L'en-tête utilise le menu Shopify **`velluno-shapewear`** (3 entrées), pas
+  `main-menu` : le menu de l'ancienne boutique animalerie reste intact pour le
+  thème publié tant que celui-ci n'est pas remplacé.
+- « Guide des tailles » pointe sur `#guide-tailles`. La navigation Shopify ne
+  peut pas porter d'attribut de section : `shapewear.js` écoute donc la
+  destination du lien, et ouvre aussi la fenêtre à l'arrivée si l'ancre est
+  dans l'URL.
+- Le bouton de recherche de l'en-tête est masqué par la feuille de style
+  (`.section-header #SearchToggle`), pas retiré de `sections/header.liquid` :
+  ce fichier appartient au thème de base et n'est pas suivi dans ce dépôt.
 - Les blocs d'avis clients sont livrés **vides**. Un avis inventé est une pratique
   commerciale trompeuse (art. L121-2 du code de la consommation).
 - La FAQ de la fiche produit émet un balisage `FAQPage` (schema.org). Depuis 2023

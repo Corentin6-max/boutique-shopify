@@ -1,0 +1,45 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": { "type": "announcement", "settings": { "text": "Garantie 15 jours — mauvaise taille, on échange" } },
+        "a2": { "type": "announcement", "settings": { "text": "Livraison suivie offerte, sans minimum" } },
+        "a3": { "type": "announcement", "settings": { "text": "Six tailles disponibles, du S au 3XL" } }
+      },
+      "block_order": ["a1", "a2", "a3"],
+      "settings": {
+        "promo_text": "",
+        "promo_highlight": "",
+        "promo_emoji": "",
+        "promo_link": "",
+        "show_countdown": false,
+        "countdown_evergreen": false,
+        "gradient_from": "#0e1116",
+        "gradient_to": "#0e1116",
+        "text_color": "#ffffff",
+        "rotate_speed": 5
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "velluno-shapewear",
+        "sticky": true,
+        "show_currency_selector": false,
+        "drawer_cta_text": "Voir le débardeur",
+        "drawer_cta_link": "/products/debardeur-gainant-homme-sans-coutures-double-epaisseur-ventre"
+      }
+    },
+    "shipbar": {
+      "type": "shapewear-shipbar",
+      "settings": {
+        "text": "Livraison suivie offerte, 8 à 12 jours",
+        "icon": "truck"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header", "shipbar"]
+}

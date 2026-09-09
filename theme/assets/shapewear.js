@@ -393,6 +393,9 @@
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && !modal.hidden) close();
     });
+
+    /* Arrivée depuis une autre page : le guide s'ouvre de lui-même. */
+    if (window.location.hash === '#guide-tailles') open(null);
   };
 
   /* ---------------------------------------------------------- Accordéons */

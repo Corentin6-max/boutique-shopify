@@ -2,7 +2,7 @@
   FAQ en accordéon. Les panneaux sont rendus ouverts puis repliés par
   shapewear.js : sans JavaScript, les réponses restent lisibles et indexables.
 {%- endcomment -%}
-<div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
+<div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}" id="aide">
   <div class="sw__wrap sw__wrap--narrow">
     <div class="sw__section-head{% if section.settings.centered %} sw__section-head--center{% endif %}">
       {%- if section.settings.eyebrow != blank -%}
