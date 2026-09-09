@@ -70,6 +70,11 @@ sélecteur de variantes standard du thème au lieu de casser la page.
 - Le bouton de recherche de l'en-tête est masqué par la feuille de style
   (`.section-header #SearchToggle`), pas retiré de `sections/header.liquid` :
   ce fichier appartient au thème de base et n'est pas suivi dans ce dépôt.
+- **Typographie** : Archivo (titres) et Inter (texte), chargées depuis Google
+  Fonts dans `layout/theme.liquid`, avec une base de 17 px (`html { font-size:
+  106.25% }`). Le bloc `<style>` est posé **après** `css-variables`, donc le
+  sélecteur de polices de l'éditeur Shopify ne pilote plus l'apparence : pour
+  changer de police, éditer ce bloc et le lien Google Fonts au-dessus.
 - Les blocs d'avis clients sont livrés **vides**. Un avis inventé est une pratique
   commerciale trompeuse (art. L121-2 du code de la consommation).
 - La FAQ de la fiche produit émet un balisage `FAQPage` (schema.org). Depuis 2023

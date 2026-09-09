@@ -28,6 +28,11 @@
     {% render 'meta-tags' %}
 
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
     {% style %}
       {{ settings.type_heading_font | font_face: font_display: 'swap' }}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
@@ -39,6 +44,20 @@
     {{ 'shapewear.css' | asset_url | stylesheet_tag }}
 
     {%- render 'css-variables' -%}
+
+    {%- comment -%}
+      Typographie Velluno. Posée après css-variables, qui définit ces deux
+      variables depuis les réglages Shopify : le sélecteur de polices de
+      l'éditeur ne pilote donc plus l'apparence du thème.
+    {%- endcomment -%}
+    <style>
+      :root {
+        --font-heading-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+        --font-heading-weight: 700;
+        --font-body-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      }
+      html { font-size: 106.25%; }
+    </style>
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>

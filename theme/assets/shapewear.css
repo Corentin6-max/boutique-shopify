@@ -28,8 +28,18 @@
   --sw-shadow-lift: 0 2px 4px rgba(14, 17, 22, .06), 0 18px 44px -18px rgba(14, 17, 22, .22);
 
   color: var(--sw-ink);
-  font-family: var(--font-body-family, system-ui, sans-serif);
+  font-family: var(--font-body-family, 'Inter', system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Les titres portent la police d'affichage, le corps celle de lecture. */
+
+.sw h1, .sw h2, .sw h3, .sw h4,
+.sw .sw__h1, .sw .sw__h2, .sw .sw__h3 {
+  font-family: var(--font-heading-family, 'Archivo', system-ui, sans-serif);
+  font-weight: 700;
+  letter-spacing: -.02em;
 }
 
 .sw *,
@@ -1495,8 +1505,8 @@
 
 .sw-proof__text {
   color: var(--sw-ink-soft);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.06rem;
+  line-height: 1.7;
 }
 
 .sw-proof__text p { margin: 0 0 12px; }
@@ -1515,7 +1525,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: .95rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: var(--sw-ink-soft);
 }
