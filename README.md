@@ -27,6 +27,7 @@ theme/
 │   ├── shapewear-stats.liquid
 │   ├── shapewear-cards.liquid       (réutilisable : problème / bénéfices)
 │   ├── shapewear-compare.liquid
+│   ├── shapewear-proof.liquid       (image + texte, masqué tant qu'il n'y a pas de photo)
 │   ├── shapewear-offer.liquid       (rappel des packs, prix lus sur le produit)
 │   ├── shapewear-reviews.liquid
 │   ├── shapewear-faq.liquid

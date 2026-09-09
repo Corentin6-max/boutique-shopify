@@ -259,12 +259,49 @@
         "col_b_sub": "Compression uniforme",
         "band": false
       }
+    },
+    "preuves": {
+      "type": "shapewear-proof",
+      "blocks": {
+        "p1": {
+          "type": "proof",
+          "settings": {
+            "media_side": "auto",
+            "eyebrow": "Sur votre morphologie",
+            "heading": "Pensé pour les corps qui en ont besoin",
+            "text": "<p>La plupart des photos de gainants montrent un homme déjà mince. C'est confortable pour la marque, ça ne vous dit rien sur vous.</p><p>Ce modèle est tricoté du <strong>S au 3XL</strong>, soit jusqu'à 117 cm de tour de taille, et la construction ne change pas d'une taille à l'autre : le panneau abdominal reste monté en deux couches sur toute la gamme.</p>",
+            "points": "Six tailles, du S au 3XL — de 79 à 117 cm de tour de taille\nMême panneau abdominal deux couches sur toutes les tailles\nEntre deux tailles, prenez la plus grande"
+          }
+        },
+        "p2": {
+          "type": "proof",
+          "settings": {
+            "media_side": "auto",
+            "eyebrow": "Sous la chemise",
+            "heading": "La seule preuve qui compte : on ne le voit pas",
+            "text": "<p>C'est la question que tout le monde se pose et que personne ne pose à voix haute. Un débardeur ordinaire laisse deviner ses coutures latérales dès que la chemise est fine ou claire.</p><p>Ici il n'y en a pas : le vêtement est <strong>tricoté sans couture sur les côtés</strong>. En coloris beige, il disparaît même sous une chemise blanche.</p>",
+            "points": "Tricotage sans couture latérale : aucune ligne à imprimer dans le tissu\nColoris beige pour les chemises claires\nMaille respirante qui évacue l'humidité"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2"
+      ],
+      "settings": {
+        "eyebrow": "Avant de commander",
+        "heading": "Les deux questions que vous vous posez",
+        "text": "",
+        "centered": true,
+        "band": false
+      }
     }
   },
   "order": [
     "main",
     "avant-apres",
     "compare",
+    "preuves",
     "guarantee",
     "faq"
   ]
