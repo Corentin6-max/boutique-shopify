@@ -34,14 +34,12 @@
             assign flip = true
           endif
         -%}
-        {%- assign avec_media = false -%}
-        {%- if block.settings.image != blank or request.design_mode -%}
-          {%- assign avec_media = true -%}
-        {%- endif -%}
-
-        {%- if block.settings.heading != blank or block.settings.text != blank or avec_media -%}
-          <section class="sw-proof__row{% if flip and avec_media %} sw-proof__row--flip{% endif %}{% unless avec_media %} sw-proof__row--solo{% endunless %}" {{ block.shopify_attributes }}>
-            {%- if avec_media -%}
+        {%- comment -%}
+          L'emplacement image est toujours rendu : sans photo il affiche un
+          cadre d'attente, pour que la mise en page image + texte se voie
+          dès l'éditeur.
+        {%- endcomment -%}
+          <section class="sw-proof__row{% if flip %} sw-proof__row--flip{% endif %}" {{ block.shopify_attributes }}>
             <div class="sw-proof__media">
               {%- if block.settings.image != blank -%}
                 {{ block.settings.image | image_url: width: 1200 | image_tag:
@@ -51,13 +49,12 @@
                    alt: alt_text,
                    class: 'sw-proof__img' }}
               {%- else -%}
-                <p class="sw-proof__placeholder">Ajoutez la photo de ce bloc.<br>Sans image, il reste masqué en boutique.</p>
+                <p class="sw-proof__placeholder">Emplacement photo<br>Ajoutez l'image de ce bloc.</p>
               {%- endif -%}
               {%- if block.settings.caption != blank -%}
                 <p class="sw-proof__caption">{{ block.settings.caption }}</p>
               {%- endif -%}
             </div>
-            {%- endif -%}
 
             <div class="sw-proof__body">
               {%- if block.settings.eyebrow != blank -%}
@@ -82,7 +79,6 @@
               {%- endif -%}
             </div>
           </section>
-        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
