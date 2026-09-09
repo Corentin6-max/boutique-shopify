@@ -100,7 +100,20 @@
 .sw__section-head { margin-bottom: clamp(28px, 4vw, 48px); }
 .sw__section-head--center { text-align: center; }
 .sw__section-head--center .sw__eyebrow::before { display: none; }
-.sw__section-head--center .sw__lede { margin-inline: auto; }
+
+/* Un titre de section ne doit pas laisser un mot seul sur sa dernière
+   ligne : text-wrap: balance répartit les lignes à largeur égale. */
+.sw__section-head .sw__h1,
+.sw__section-head .sw__h2 { text-wrap: balance; }
+
+/* Centré, un paragraphe se lit mal au-delà d'une quarantaine de signes
+   par ligne : les deux bords sont irréguliers, l'œil perd le début de la
+   ligne suivante. On le resserre et on referme l'interligne. */
+.sw__section-head--center .sw__lede {
+  margin-inline: auto;
+  max-width: 46ch;
+  line-height: 1.55;
+}
 
 /* ---------- Boutons ---------- */
 
