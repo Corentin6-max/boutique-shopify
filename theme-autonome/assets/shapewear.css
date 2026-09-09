@@ -5,30 +5,40 @@
    ========================================================================== */
 
 .sw {
-  --sw-ink: #0e1116;
-  --sw-ink-soft: #3d4552;
-  --sw-muted: #6b7482;
-  --sw-line: #e4e7ec;
-  --sw-line-strong: #cdd3db;
-  --sw-band: #f6f7f9;
-  --sw-band-deep: #eef0f4;
+  /* Palette « os et encre ». Les gris d'origine étaient bleutés — c'est ce
+     qui donnait à la page son air de tableau de bord. Ici chaque neutre est
+     décalé vers le jaune, l'encre comprise : le blanc paraît plus riche, et
+     le beige du produit cesse de jurer avec le fond. */
+  --sw-ink: #1a1714;
+  --sw-ink-soft: #4c463e;
+  --sw-muted: #837b70;
+  --sw-line: #e9e3d9;
+  --sw-line-strong: #d6cec1;
+  --sw-band: #f8f5f0;
+  --sw-band-deep: #f1ece4;
   --sw-paper: #ffffff;
-  --sw-accent: #d1462f;
-  --sw-accent-soft: #fdf0ed;
-  --sw-success: #17795e;
-  --sw-success-soft: #ecf6f2;
-  --sw-gold: #e0a531;
+
+  /* Terre cuite au lieu du rouge vif : la remise reste visible sans prendre
+     le ton « déstockage » d'un rouge saturé. */
+  --sw-accent: #a3452c;
+  --sw-accent-soft: #faefe9;
+  --sw-success: #2f6a4c;
+  --sw-success-soft: #eff4f0;
+  --sw-gold: #ad8038;
 
   --sw-max: 1180px;
   --sw-gap: clamp(16px, 2.5vw, 28px);
   --sw-radius: 14px;
   --sw-radius-sm: 9px;
+  --sw-radius-btn: 12px;
 
-  --sw-shadow: 0 1px 2px rgba(14, 17, 22, .05), 0 8px 24px -12px rgba(14, 17, 22, .12);
-  --sw-shadow-lift: 0 2px 4px rgba(14, 17, 22, .06), 0 18px 44px -18px rgba(14, 17, 22, .22);
+  /* Ombres teintées de la même encre chaude : une ombre grise sur un fond
+     chaud se voit, et fait sale. */
+  --sw-shadow: 0 1px 2px rgba(26, 23, 20, .05), 0 8px 24px -12px rgba(26, 23, 20, .14);
+  --sw-shadow-lift: 0 2px 4px rgba(26, 23, 20, .06), 0 18px 44px -18px rgba(26, 23, 20, .24);
 
   color: var(--sw-ink);
-  font-family: var(--font-body-family, 'Inter', system-ui, sans-serif);
+  font-family: var(--font-body-family, 'Manrope', system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,8 +49,11 @@
 .sw .sw__h1, .sw .sw__h2, .sw .sw__h3 {
   font-family: var(--font-heading-family, 'Archivo', system-ui, sans-serif);
   font-weight: 700;
-  letter-spacing: -.02em;
+  letter-spacing: -.025em;
 }
+
+/* Plus un titre est gros, plus l'espacement d'origine paraît lâche. */
+.sw .sw__h1 { letter-spacing: -.035em; }
 
 .sw *,
 .sw *::before,
@@ -125,7 +138,7 @@
   min-height: 54px;
   padding: 15px 30px;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--sw-radius-btn);
   font: inherit;
   font-size: 1rem;
   font-weight: 700;
@@ -143,7 +156,7 @@
   box-shadow: var(--sw-shadow);
 }
 
-.sw__btn--primary:hover { background: #1b212b; box-shadow: var(--sw-shadow-lift); }
+.sw__btn--primary:hover { background: #2a251f; box-shadow: var(--sw-shadow-lift); }
 
 .sw__btn--ghost {
   background: transparent;
@@ -503,8 +516,13 @@
 
 .sw-mark { display: inline-grid; place-items: center; width: 26px; height: 26px; }
 .sw-mark svg { width: 20px; height: 20px; }
-.sw-mark--yes { color: #4ade80; }
-.sw-mark--no { color: #f87171; }
+/* Les coches d'origine étaient des verts et rouges fluo — lisibles, mais
+   d'un registre « application » qui jure avec le reste. Ici des teintes
+   sourdes, plus une variante éclaircie pour la colonne sombre, où un vert
+   foncé disparaîtrait. */
+.sw-mark--yes { color: #3f8f68; }
+.sw-mark--no { color: #bd7159; }
+.sw-compare__col--us .sw-mark--yes { color: #5cc191; }
 
 /* Sur téléphone le tableau tient dans la largeur de l'écran : plus de
    défilement latéral, la colonne Velluno reste visible en même temps que
@@ -720,17 +738,29 @@
 
 @media (min-width: 760px) { .sw-guarantee__grid { grid-template-columns: repeat(3, 1fr); } }
 
+/* Icône à gauche sur deux rangs, titre et texte empilés à sa droite. En
+   flex, les trois enfants se rangeaient côte à côte : le titre se
+   retrouvait comprimé sur trois lignes et le texte collé contre lui. */
 .sw-guarantee__item {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  row-gap: 4px;
+  align-items: start;
+  padding: 20px 22px;
   border: 1px solid var(--sw-line);
   border-radius: var(--sw-radius);
   background: var(--sw-paper);
 }
 
-.sw-guarantee__item svg { width: 24px; height: 24px; color: var(--sw-ink); flex: none; margin-top: 2px; }
+.sw-guarantee__item svg {
+  grid-row: 1 / span 2;
+  width: 24px;
+  height: 24px;
+  color: var(--sw-ink);
+  flex: none;
+  margin-top: 2px;
+}
 .sw-guarantee__item h3 { font-size: .97rem; margin-bottom: 5px; }
 .sw-guarantee__item p { margin: 0; font-size: .88rem; line-height: 1.55; color: var(--sw-ink-soft); }
 
@@ -846,6 +876,7 @@
   font-weight: 700;
   letter-spacing: -.02em;
   font-family: var(--font-heading-family, inherit);
+  font-variant-numeric: tabular-nums;
 }
 
 .sw-pdp__compare { font-size: 1.05rem; color: var(--sw-muted); }

@@ -2,13 +2,17 @@
 
 :root {
   --font-heading-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-body-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --ink: #0e1116;
-  --ink-soft: #3d4552;
-  --muted: #6b7482;
-  --line: #e4e7ec;
-  --band: #f6f7f9;
-  --accent: #d1462f;
+  --font-body-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Neutres chauds plutôt que gris bleutés : le fond « os » et l'encre
+     légèrement brune donnent au noir et blanc une chaleur que les gris
+     froids n'ont pas, et s'accordent au coloris beige du produit. */
+  --ink: #1a1714;
+  --ink-soft: #4c463e;
+  --muted: #837b70;
+  --line: #e9e3d9;
+  --band: #f8f5f0;
+  --accent: #a3452c;
 }
 
 html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
