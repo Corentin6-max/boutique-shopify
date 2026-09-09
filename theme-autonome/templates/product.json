@@ -53,7 +53,7 @@
         "badge_units": 4,
         "badge_label": "Le plus populaire",
         "pack_one_note": "Pour tester la coupe",
-        "swatch_map": "Noir:#16181d\nBlanc:#f2f1ec\nGris:#8d9299\nBleu marine:#1e2b4d\nBeige:#d9c2a4",
+        "swatch_map": "black:#16181d\nWHITE:#f2f1ec\nGRAY:#8d9299\nBlue:#1e2b4d\nBeige:#d9c2a4",
         "add_label": "Ajouter au panier",
         "stock_note": "En stock",
         "reassurance": "truck|Livraison suivie offerte, 8 à 12 jours\nrotate|15 jours pour changer de taille\nlock|Paiement sécurisé par Shopify",
