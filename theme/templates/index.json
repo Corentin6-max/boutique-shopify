@@ -18,22 +18,76 @@
     "stats": {
       "type": "shapewear-stats",
       "blocks": {
-        "s1": { "type": "stat", "settings": { "value": "2", "label": "couches de tissu sur le ventre" } },
-        "s2": { "type": "stat", "settings": { "value": "0", "label": "couture latérale visible" } },
-        "s3": { "type": "stat", "settings": { "value": "6", "label": "tailles, du S au 3XL" } },
-        "s4": { "type": "stat", "settings": { "value": "5", "label": "coloris, dont un invisible sous le blanc" } }
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "value": "2",
+            "label": "couches de tissu sur le ventre"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "couture latérale visible"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "value": "6",
+            "label": "tailles, du S au 3XL"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "value": "5",
+            "label": "coloris, dont un invisible sous le blanc"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3", "s4"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
       "settings": {}
     },
     "problem": {
       "type": "shapewear-cards",
       "blocks": {
-        "p1": { "type": "card", "settings": { "icon": "eye-off", "title": "Le bourrelet de ceinture", "text": "<p>Il apparaît dès qu'on s'assoit, et c'est exactement là que la chemise se tend. Aucun régime ne le règle en une journée — un vêtement, si.</p>" } },
-        "p2": { "type": "card", "settings": { "icon": "arrows-in", "title": "La gaine qui comprime mal", "text": "<p>La plupart des gainants tendent le tissu uniformément : ils serrent partout et ne remodèlent rien. La compression doit être franche sur le ventre, et légère ailleurs.</p>" } },
-        "p3": { "type": "card", "settings": { "icon": "spine", "title": "Le dos voûté", "text": "<p>On rentre le ventre, on creuse les épaules, et la silhouette y perd davantage qu'elle n'y gagne. Le maintien du dos fait le travail à votre place.</p>" } }
+        "p1": {
+          "type": "card",
+          "settings": {
+            "icon": "eye-off",
+            "title": "Le bourrelet de ceinture",
+            "text": "<p>Il apparaît dès qu'on s'assoit, et c'est exactement là que la chemise se tend. Aucun régime ne le règle en une journée — un vêtement, si.</p>"
+          }
+        },
+        "p2": {
+          "type": "card",
+          "settings": {
+            "icon": "arrows-in",
+            "title": "La gaine qui comprime mal",
+            "text": "<p>La plupart des gainants tendent le tissu uniformément : ils serrent partout et ne remodèlent rien. La compression doit être franche sur le ventre, et légère ailleurs.</p>"
+          }
+        },
+        "p3": {
+          "type": "card",
+          "settings": {
+            "icon": "spine",
+            "title": "Le dos voûté",
+            "text": "<p>On rentre le ventre, on creuse les épaules, et la silhouette y perd davantage qu'elle n'y gagne. Le maintien du dos fait le travail à votre place.</p>"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
       "settings": {
         "eyebrow": "Le vrai problème",
         "heading": "Ce n'est pas votre ventre. C'est ce que vous mettez par-dessus.",
@@ -45,12 +99,45 @@
     "features": {
       "type": "shapewear-cards",
       "blocks": {
-        "f1": { "type": "card", "settings": { "icon": "layers", "title": "Double épaisseur sur le ventre", "text": "<p>Le panneau abdominal avant est monté en deux couches superposées. La compression est franche là où elle sert, et le reste du vêtement respire.</p>" } },
-        "f2": { "type": "card", "settings": { "icon": "eye-off", "title": "Sans couture latérale", "text": "<p>Rien ne se dessine sous une chemise ajustée, un t-shirt fin ou une veste de costume.</p>" } },
-        "f3": { "type": "card", "settings": { "icon": "spine", "title": "Le dos soutenu", "text": "<p>La compression remonte dans le dos et redresse les épaules. Beaucoup remarquent l'effet sur leur posture avant celui sur leur silhouette.</p>" } },
-        "f4": { "type": "card", "settings": { "icon": "wind", "title": "Respirant, toute la journée", "text": "<p>Maille 92 % polyamide / 8 % élasthanne, qui évacue l'humidité. Extensible dans les deux sens, elle suit le mouvement.</p>" } }
+        "f1": {
+          "type": "card",
+          "settings": {
+            "icon": "layers",
+            "title": "Double épaisseur sur le ventre",
+            "text": "<p>Le panneau abdominal avant est monté en deux couches superposées. La compression est franche là où elle sert, et le reste du vêtement respire.</p>"
+          }
+        },
+        "f2": {
+          "type": "card",
+          "settings": {
+            "icon": "eye-off",
+            "title": "Sans couture latérale",
+            "text": "<p>Rien ne se dessine sous une chemise ajustée, un t-shirt fin ou une veste de costume.</p>"
+          }
+        },
+        "f3": {
+          "type": "card",
+          "settings": {
+            "icon": "spine",
+            "title": "Le dos soutenu",
+            "text": "<p>La compression remonte dans le dos et redresse les épaules. Beaucoup remarquent l'effet sur leur posture avant celui sur leur silhouette.</p>"
+          }
+        },
+        "f4": {
+          "type": "card",
+          "settings": {
+            "icon": "wind",
+            "title": "Respirant, toute la journée",
+            "text": "<p>Maille 92 % polyamide / 8 % élasthanne, qui évacue l'humidité. Extensible dans les deux sens, elle suit le mouvement.</p>"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "eyebrow": "Conception",
         "heading": "Quatre détails qui font toute la différence",
@@ -61,24 +148,87 @@
     "compare": {
       "type": "shapewear-compare",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Compression ciblée sur le ventre", "us": "oui", "a": "non", "b": "oui" } },
-        "r2": { "type": "row", "settings": { "label": "Double épaisseur abdominale", "us": "oui", "a": "non", "b": "non" } },
-        "r3": { "type": "row", "settings": { "label": "Sans couture latérale", "us": "oui", "a": "non", "b": "non" } },
-        "r4": { "type": "row", "settings": { "label": "Maintien du dos et de la posture", "us": "oui", "a": "non", "b": "non" } },
-        "r5": { "type": "row", "settings": { "label": "Supportable plus de 8 heures", "us": "oui", "a": "oui", "b": "non" } },
-        "r6": { "type": "row", "settings": { "label": "Coloris invisible sous chemise blanche", "us": "oui", "a": "non", "b": "non" } },
-        "r7": { "type": "row", "settings": { "label": "Tailles jusqu'au 3XL", "us": "oui", "a": "oui", "b": "non" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Poitrine et gynécomastie",
+            "note": "Compression du buste conçue pour atténuer l'aspect de la gynécomastie sous la chemise.",
+            "us": "oui",
+            "a": "non",
+            "b": "non"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Ventre et taille en même temps",
+            "note": "Panneau abdominal monté en deux couches, là où la compression doit être franche.",
+            "us": "oui",
+            "a": "non",
+            "b": "oui"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Invisible sous une chemise",
+            "note": "Tricotage sans couture latérale : aucune ligne ne se dessine dans le tissu.",
+            "us": "oui",
+            "a": "non",
+            "b": "non"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Le dos et la posture",
+            "note": "La compression remonte dans le dos et redresse les épaules sans y penser.",
+            "us": "oui",
+            "a": "non",
+            "b": "non"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Portable toute la journée",
+            "note": "Maille respirante qui évacue l'humidité — pas d'effet sauna.",
+            "us": "oui",
+            "a": "oui",
+            "b": "non"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "Toutes les morphologies",
+            "note": "Six tailles, du S au 3XL.",
+            "us": "oui",
+            "a": "oui",
+            "b": "non"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
       "settings": {
         "eyebrow": "Comparatif",
-        "heading": "Pourquoi pas un simple débardeur ?",
-        "text": "<p>Un débardeur classique cache la peau — il ne change rien à la silhouette. Une gaine premier prix comprime partout de la même façon, se voit, et devient insupportable au bout de deux heures.</p>",
+        "heading": "Ce qui change vraiment, ligne par ligne",
+        "text": "<p>Un débardeur classique cache la peau sans rien changer à la silhouette. Une gaine premier prix comprime partout de la même façon — et se voit.</p>",
         "centered": true,
-        "band": false,
+        "col_label": "Ce qui compte vraiment",
         "col_us": "Velluno",
         "col_a": "Débardeur classique",
-        "col_b": "Gaine premier prix"
+        "col_a_sub": "Sans compression",
+        "col_b": "Gaine premier prix",
+        "col_b_sub": "Compression uniforme",
+        "band": false
       }
     },
     "offer": {
@@ -101,11 +251,39 @@
     "reviews": {
       "type": "shapewear-reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } },
-        "r2": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } },
-        "r3": { "type": "review", "settings": { "quote": "", "name": "", "stars": 5, "verified": false } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "name": "",
+            "stars": 5,
+            "verified": false
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "name": "",
+            "stars": 5,
+            "verified": false
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "quote": "",
+            "name": "",
+            "stars": 5,
+            "verified": false
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
       "settings": {
         "eyebrow": "Avis clients",
         "heading": "Ce qu'en disent nos clients",
@@ -117,24 +295,96 @@
     "faq": {
       "type": "shapewear-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Est-ce que ça se voit sous une chemise ?", "answer": "<p>Non. Le tricotage est sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Quelle taille prendre ?", "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine — c'est la recommandation du fabricant. Six tailles, du S au 3XL, avec les mesures exactes dans le guide.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "Qu'est-ce que la double épaisseur ?", "answer": "<p>Le panneau abdominal avant est monté en deux couches superposées, là où les gainants classiques n'en ont qu'une. C'est ce qui permet une compression franche sur le ventre sans serrer le reste du buste.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Comment l'entretenir ?", "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce que ça se voit sous une chemise ?",
+            "answer": "<p>Non. Le tricotage est sans couture latérale : il n'y a aucune ligne à imprimer dans le tissu. En coloris <strong>beige</strong>, il disparaît même sous une chemise blanche fine.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle taille prendre ?",
+            "answer": "<p>Fiez-vous à votre <strong>tour de taille</strong>, pas à votre poitrine — c'est la recommandation du fabricant. Six tailles, du S au 3XL, avec les mesures exactes dans le guide.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Qu'est-ce que la double épaisseur ?",
+            "answer": "<p>Le panneau abdominal avant est monté en deux couches superposées, là où les gainants classiques n'en ont qu'une. C'est ce qui permet une compression franche sur le ventre sans serrer le reste du buste.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Comment l'entretenir ?",
+            "answer": "<p>Lavage machine à 30°, à l'envers, dans un filet. <strong>Jamais de sèche-linge</strong> : la chaleur abîme l'élasthanne et le vêtement cesse de gainer.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4"],
-      "settings": { "eyebrow": "Vos questions", "heading": "Questions fréquentes", "centered": true, "band": true, "open_first": true }
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "eyebrow": "Vos questions",
+        "heading": "Questions fréquentes",
+        "centered": true,
+        "band": true,
+        "open_first": true
+      }
     },
     "guarantee": {
       "type": "shapewear-guarantee",
       "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison suivie offerte", "text": "8 à 12 jours, Colissimo ou Mondial Relay." } },
-        "g2": { "type": "item", "settings": { "icon": "rotate", "title": "15 jours pour changer de taille", "text": "Mauvaise taille ? On échange." } },
-        "g3": { "type": "item", "settings": { "icon": "ruler", "title": "Du S au 3XL", "text": "Six tailles, pour couvrir toutes les morphologies." } }
+        "g1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison suivie offerte",
+            "text": "8 à 12 jours, Colissimo ou Mondial Relay."
+          }
+        },
+        "g2": {
+          "type": "item",
+          "settings": {
+            "icon": "rotate",
+            "title": "15 jours pour changer de taille",
+            "text": "Mauvaise taille ? On échange."
+          }
+        },
+        "g3": {
+          "type": "item",
+          "settings": {
+            "icon": "ruler",
+            "title": "Du S au 3XL",
+            "text": "Six tailles, pour couvrir toutes les morphologies."
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3"],
-      "settings": { "band": false }
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "settings": {
+        "band": false
+      }
     }
   },
-  "order": ["hero", "stats", "problem", "features", "compare", "offer", "reviews", "faq", "guarantee"]
+  "order": [
+    "hero",
+    "stats",
+    "problem",
+    "features",
+    "compare",
+    "offer",
+    "reviews",
+    "faq",
+    "guarantee"
+  ]
 }

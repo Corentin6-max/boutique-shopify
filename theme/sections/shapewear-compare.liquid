@@ -1,6 +1,10 @@
 {%- comment -%}
-  Tableau comparatif. Chaque ligne est un bloc : intitulé + trois états
-  (nous / alternative 1 / alternative 2) valant « oui », « non » ou du texte.
+  Tableau comparatif.
+
+  Chaque ligne porte un titre — le bénéfice pour le client — et une sous-ligne
+  qui explique par quel mécanisme il est obtenu. C'est cette seconde ligne qui
+  fait la différence entre une liste de cases cochées et un argumentaire :
+  n'y écrivez que ce que la documentation du fournisseur atteste.
 {%- endcomment -%}
 <div class="sw sw-block{% if section.settings.band %} sw-block--band{% endif %}">
   <div class="sw__wrap">
@@ -18,16 +22,33 @@
       <table class="sw-compare__table">
         <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col" class="sw-compare__col--us">{{ section.settings.col_us }}</th>
-            <th scope="col">{{ section.settings.col_a }}</th>
-            <th scope="col">{{ section.settings.col_b }}</th>
+            <th scope="col">{{ section.settings.col_label }}</th>
+            <th scope="col" class="sw-compare__col--us">
+              <span class="sw-compare__marque">{{ section.settings.col_us | default: shop.name }}</span>
+            </th>
+            <th scope="col">
+              {{ section.settings.col_a }}
+              {%- if section.settings.col_a_sub != blank -%}
+                <span class="sw-compare__sub">{{ section.settings.col_a_sub }}</span>
+              {%- endif -%}
+            </th>
+            <th scope="col">
+              {{ section.settings.col_b }}
+              {%- if section.settings.col_b_sub != blank -%}
+                <span class="sw-compare__sub">{{ section.settings.col_b_sub }}</span>
+              {%- endif -%}
+            </th>
           </tr>
         </thead>
         <tbody>
           {%- for block in section.blocks -%}
             <tr {{ block.shopify_attributes }}>
-              <th scope="row">{{ block.settings.label }}</th>
+              <th scope="row">
+                {{ block.settings.label }}
+                {%- if block.settings.note != blank -%}
+                  <span class="sw-compare__why">{{ block.settings.note }}</span>
+                {%- endif -%}
+              </th>
               {%- assign cells = block.settings.us | append: '||' | append: block.settings.a | append: '||' | append: block.settings.b | split: '||' -%}
               {%- for cell in cells -%}
                 {%- assign value = cell | strip -%}
@@ -56,22 +77,28 @@
   "name": "Comparatif Shapewear",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Pourquoi pas un débardeur classique ?" },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Comparatif" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Pourquoi pas un simple débardeur ?" },
     { "type": "richtext", "id": "text", "label": "Texte" },
     { "type": "checkbox", "id": "centered", "label": "Titre centré", "default": true },
-    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": true },
-    { "type": "text", "id": "col_us", "label": "Colonne 1", "default": "Velluno" },
+    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": false },
+
+    { "type": "header", "content": "Colonnes" },
+    { "type": "text", "id": "col_label", "label": "Intitulé de la première colonne", "default": "Ce qui compte vraiment" },
+    { "type": "text", "id": "col_us", "label": "Votre colonne", "default": "Velluno" },
     { "type": "text", "id": "col_a", "label": "Colonne 2", "default": "Débardeur classique" },
-    { "type": "text", "id": "col_b", "label": "Colonne 3", "default": "Gaine premier prix" }
+    { "type": "text", "id": "col_a_sub", "label": "Sous-titre colonne 2", "default": "Sans compression" },
+    { "type": "text", "id": "col_b", "label": "Colonne 3", "default": "Gaine premier prix" },
+    { "type": "text", "id": "col_b_sub", "label": "Sous-titre colonne 3", "default": "Compression uniforme" }
   ],
   "blocks": [
     {
       "type": "row",
       "name": "Ligne",
       "settings": [
-        { "type": "text", "id": "label", "label": "Critère", "default": "Critère" },
-        { "type": "text", "id": "us", "label": "Colonne 1 (oui / non / texte)", "default": "oui" },
+        { "type": "text", "id": "label", "label": "Bénéfice", "default": "Bénéfice pour le client" },
+        { "type": "textarea", "id": "note", "label": "Par quel mécanisme (une phrase)" },
+        { "type": "text", "id": "us", "label": "Votre colonne (oui / non / texte)", "default": "oui" },
         { "type": "text", "id": "a", "label": "Colonne 2", "default": "non" },
         { "type": "text", "id": "b", "label": "Colonne 3", "default": "non" }
       ]

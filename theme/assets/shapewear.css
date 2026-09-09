@@ -357,67 +357,123 @@
 
 /* ==========================================================================
    TABLEAU COMPARATIF
+   La colonne « nous » est un bloc sombre qui dépasse la table en haut et en
+   bas : c'est ce débord qui la fait lire comme une carte posée par-dessus,
+   sans avoir à sortir la cellule du flux du tableau.
    ========================================================================== */
 
-.sw-compare__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.sw-compare__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 18px;
+}
 
 .sw-compare__table {
   width: 100%;
-  min-width: 620px;
+  min-width: 680px;
   border-collapse: separate;
   border-spacing: 0;
-  background: var(--sw-paper);
-  border: 1px solid var(--sw-line);
-  border-radius: var(--sw-radius);
-  overflow: hidden;
 }
 
 .sw-compare__table th,
 .sw-compare__table td {
-  padding: 15px 18px;
+  padding: 16px 18px;
   text-align: left;
-  font-size: .92rem;
-  border-bottom: 1px solid var(--sw-line);
   vertical-align: middle;
 }
 
-.sw-compare__table tbody tr:last-child th,
-.sw-compare__table tbody tr:last-child td { border-bottom: 0; }
+/* Alternance de fond sur les lignes, la colonne sombre passant par-dessus. */
+.sw-compare__table tbody tr:nth-child(odd) th,
+.sw-compare__table tbody tr:nth-child(odd) td { background: var(--sw-paper); }
+.sw-compare__table tbody tr:nth-child(even) th,
+.sw-compare__table tbody tr:nth-child(even) td { background: var(--sw-band); }
 
 .sw-compare__table thead th {
-  font-size: .78rem;
+  font-size: .95rem;
   font-weight: 700;
-  letter-spacing: .07em;
+  color: var(--sw-ink);
+  text-align: center;
+  vertical-align: bottom;
+  padding-bottom: 20px;
+}
+
+.sw-compare__table thead th:first-child {
+  text-align: left;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--sw-muted);
-  background: var(--sw-band);
-  white-space: nowrap;
 }
 
+.sw-compare__sub {
+  display: block;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--sw-muted);
+  margin-top: 2px;
+}
+
+/* Intitulé de ligne : le titre porte le bénéfice, la sous-ligne le mécanisme. */
 .sw-compare__table tbody th {
-  font-weight: 600;
+  width: 38%;
+  font-weight: 700;
+  font-size: .96rem;
   color: var(--sw-ink);
-  width: 40%;
+  line-height: 1.35;
 }
 
-.sw-compare__col--us {
-  background: var(--sw-ink);
-  color: #fff !important;
-  text-align: center !important;
+.sw-compare__why {
+  display: block;
+  font-size: .84rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--sw-ink-soft);
+  margin-top: 4px;
+  max-width: 42ch;
 }
 
+.sw-compare__table td { text-align: center; }
+
+/* La colonne mise en avant */
+.sw-compare__table th.sw-compare__col--us,
 .sw-compare__table td.sw-compare__col--us {
-  background: rgba(14, 17, 22, .035);
-  color: var(--sw-ink) !important;
-  font-weight: 600;
+  background: var(--sw-ink) !important;
+  color: #fff;
+  width: 22%;
 }
 
-.sw-compare__table td:not(:first-child) { text-align: center; }
+.sw-compare__table thead th.sw-compare__col--us {
+  padding-top: 26px;
+  border-radius: var(--sw-radius) var(--sw-radius) 0 0;
+  color: #fff;
+}
 
-.sw-mark { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; }
-.sw-mark svg { width: 13px; height: 13px; }
-.sw-mark--yes { background: var(--sw-success-soft); color: var(--sw-success); }
-.sw-mark--no { background: #f4f5f7; color: #98a2b3; }
+.sw-compare__table tbody tr:last-child td.sw-compare__col--us {
+  padding-bottom: 26px;
+  border-radius: 0 0 var(--sw-radius) var(--sw-radius);
+}
+
+.sw-compare__marque {
+  display: inline-block;
+  font-family: var(--font-heading-family, inherit);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.sw-mark { display: inline-grid; place-items: center; width: 26px; height: 26px; }
+.sw-mark svg { width: 20px; height: 20px; }
+.sw-mark--yes { color: #4ade80; }
+.sw-mark--no { color: #f87171; }
+
+@media (max-width: 700px) {
+  .sw-compare__table th,
+  .sw-compare__table td { padding: 13px 12px; }
+  .sw-compare__table tbody th { width: 44%; }
+}
 
 /* ==========================================================================
    AVIS CLIENTS
