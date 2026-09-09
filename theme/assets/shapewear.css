@@ -587,7 +587,22 @@
 
 @media (min-width: 960px) {
   .sw-pdp__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
-  .sw-pdp__col--info { position: sticky; top: 24px; }
+}
+
+/* La galerie accompagne le scroll pendant que la colonne d'achat défile, et
+   s'arrête d'elle-même au bas de la section : son bloc conteneur est la
+   cellule de grille, dont la hauteur est dictée par la colonne la plus haute.
+   « align-self: start » est indispensable — un élément de grille est étiré par
+   défaut, il remplirait toute la cellule et n'aurait aucune marge pour coller.
+
+   Sous 700 px de hauteur utile, la galerie ne tient pas à l'écran : on la
+   laisse alors défiler normalement plutôt que d'en masquer le bas. */
+@media (min-width: 960px) and (min-height: 700px) {
+  .sw-pdp__col--media {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
 }
 
 /* ---------- Galerie ---------- */
