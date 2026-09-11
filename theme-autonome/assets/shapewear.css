@@ -1786,7 +1786,14 @@
    pas, la largeur reste celle du reste du thème et rien ne bouge. */
 @media (min-width: 860px) {
   .sw-block:has(.sw-avap) .sw__wrap--narrow { max-width: var(--sw-max); }
-  .sw-avap__grid { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+
+  /* Les trois faits sont centrés sur la hauteur de la photo. Calés en
+     haut, ils laissaient un vide sous le troisième, d'autant plus visible
+     que la photo est deux fois plus haute que la colonne. */
+  .sw-avap__grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    align-items: center;
+  }
 }
 
 .sw-avap__faits {
