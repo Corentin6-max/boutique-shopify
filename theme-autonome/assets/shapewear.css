@@ -35,12 +35,12 @@
   --sw-muted: #6e6e6e;
   --sw-line: #e2e1de;
   --sw-line-strong: #cdccc8;
-  /* Plus de blanc : bandes, fonds de carte et fond de page partagent le
-     même gris. Le blanc ne subsiste que là où il doit se lire sur une
-     photo ou sur une surface noire. */
+  /* Les bandes de section restent grises — elles ne doivent pas trancher
+     avec le fond de page. Les cartes, elles, sont blanches : posées sur le
+     gris, ce sont des objets, pas des zones. */
   --sw-band: #ecebe8;
   --sw-band-deep: #ecebe8;
-  --sw-paper: #ecebe8;
+  --sw-paper: #ffffff;
 
   --sw-accent: #f4b740;
   --sw-accent-soft: #fdf6e8;
@@ -1594,8 +1594,10 @@
 
 /* Bandeau livraison sous l'en-tête */
 
+/* Blanche comme les cartes : c'est un bandeau d'information posé sur la
+   page, pas une bande de section. */
 .sw-shipbar {
-  background: var(--sw-band);
+  background: var(--sw-paper);
   border-bottom: 1px solid var(--sw-line);
   padding: 9px 16px;
   text-align: center;
