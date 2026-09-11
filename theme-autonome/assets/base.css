@@ -1,9 +1,12 @@
 /* Velluno — socle du thème. Le reste vit dans shapewear.css, sous .sw */
 
 :root {
-  /* Système visuel relevé par le client. Murecho porte les titres comme le
-     texte : une seule famille, dont les graisses font toute la hiérarchie. */
-  --font-heading-family: "Murecho", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Le relevé du client ne donnait qu'une sans-serif neutre : une palette,
+     pas une identité. Les titres prennent donc Bricolage Grotesque, une
+     grotesque contemporaine aux proportions volontairement irrégulières,
+     qui se remarque sans coûter en lisibilité. Le corps de texte reste en
+     Murecho, conformément au relevé. */
+  --font-heading-family: "Bricolage Grotesque", "Murecho", system-ui, sans-serif;
   --font-body-family: "Murecho", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Les huit couleurs du relevé, à l'identique.

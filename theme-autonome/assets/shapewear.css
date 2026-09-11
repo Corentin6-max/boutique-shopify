@@ -67,9 +67,10 @@
    qu'elle, ce qui est inhabituel mais délibéré dans ce système. */
 .sw h1, .sw h2, .sw h3, .sw h4,
 .sw .sw__h1, .sw .sw__h2, .sw .sw__h3 {
-  font-family: var(--font-heading-family, 'Murecho', system-ui, sans-serif);
+  font-family: var(--font-heading-family, 'Bricolage Grotesque', system-ui, sans-serif);
   letter-spacing: -.01em;
   line-height: 1.2;
+  font-optical-sizing: auto;
 }
 
 .sw .sw__h1 { font-weight: 700; line-height: 1.1; }
