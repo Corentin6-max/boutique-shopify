@@ -28,7 +28,10 @@
 
   --sw-ink: #121212;
   --sw-ink-soft: #333333;
-  --sw-surface-dark: #1e1e1e;
+  /* Bleu nuit demandé par le client : la barre d'annonces et la colonne
+     Velluno du comparatif, les deux surfaces sombres que le visiteur lit
+     comme « la marque ». Le pied de page reste noir. */
+  --sw-surface-dark: #161f33;
   --sw-muted: #6e6e6e;
   --sw-line: #e6e6e6;
   --sw-line-strong: #cfcfcf;
