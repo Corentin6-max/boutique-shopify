@@ -1784,16 +1784,16 @@
   margin-top: 0;
 }
 
-/* C — FAQ : la question ouverte se teinte, les signes passent à l'or.
+/* C — FAQ : en-tête coloré, signes à l'or.
 
-   Le fond crème fait deux choses : il ajoute de la couleur et il montre où
-   l'on en est dans la liste. Les « + » dorés signalent que les autres
-   lignes se déplient — beaucoup de visiteurs ne le voient pas. */
+   Pas de fond teinté sur la question ouverte : le client n'en voulait pas.
+   La question déployée reste repérable par son titre en bleu nuit et par
+   son signe « − », et les « + » dorés signalent que les autres lignes se
+   déplient — beaucoup de visiteurs ne le voient pas. */
 #aide .sw__eyebrow { color: var(--sw-brand); }
 #aide .sw__eyebrow::before { background: var(--sw-brand); }
 #aide .sw__h2 { color: var(--sw-surface-dark); }
 #aide .sw-faq__icon { color: var(--sw-brand); }
-#aide .sw-faq__item:has(.sw-faq__q[aria-expanded="true"]) { background: var(--sw-brand-wash); }
 #aide .sw-faq__q[aria-expanded="true"] { color: var(--sw-surface-dark); }
 
 /* D — Le bloc d'achat qui ferme la FAQ, en carte bleu nuit.
