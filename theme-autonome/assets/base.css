@@ -33,7 +33,11 @@
      blanches et se détachent donc du fond, ce que le blanc sur blanc ne
      permettait pas. */
   --page: #ecebe8;
-  --band: #f5f4f1;
+
+  /* Le client veut un thème sans blanc : les bandes de section et les
+     cartes prennent le gris du fond. Il ne reste de blanc que ce qui doit
+     rester lisible sur une photo ou sur une surface noire. */
+  --band: #ecebe8;
   --accent: #f4b740;
 }
 
@@ -72,7 +76,7 @@ a { color: inherit; }
 
 /* ------------------------------------------------------------- En-tête */
 
-.sw-header { border-bottom: 1px solid var(--line); background: #fff; }
+.sw-header { border-bottom: 1px solid var(--line); background: var(--page); }
 .sw-header__in {
   max-width: 1180px; margin-inline: auto; padding: 16px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -88,7 +92,7 @@ a { color: inherit; }
 .sw-header__nav a:hover { color: var(--ink); }
 .sw-header__cart { font-size: .9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
 .sw-header__count {
-  background: var(--brand); color: #000; color: #fff; border-radius: 999px;
+  background: var(--brand); color: #000; border-radius: 999px;
   min-width: 22px; height: 22px; display: grid; place-items: center; font-size: .76rem;
 }
 @media (max-width: 800px) { .sw-header__nav { display: none; } }

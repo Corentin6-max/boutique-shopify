@@ -35,9 +35,12 @@
   --sw-muted: #6e6e6e;
   --sw-line: #e2e1de;
   --sw-line-strong: #cdccc8;
-  --sw-band: #f5f4f1;
-  --sw-band-deep: #eceae6;
-  --sw-paper: #ffffff;
+  /* Plus de blanc : bandes, fonds de carte et fond de page partagent le
+     même gris. Le blanc ne subsiste que là où il doit se lire sur une
+     photo ou sur une surface noire. */
+  --sw-band: #ecebe8;
+  --sw-band-deep: #ecebe8;
+  --sw-paper: #ecebe8;
 
   --sw-accent: #f4b740;
   --sw-accent-soft: #fdf6e8;
@@ -440,7 +443,7 @@
   text-wrap: pretty;
 }
 
-.sw-block--band .sw-card__icon { background: #fff; }
+.sw-block--band .sw-card__icon { background: var(--sw-paper); }
 
 /* ==========================================================================
    TABLEAU COMPARATIF
