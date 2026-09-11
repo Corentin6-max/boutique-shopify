@@ -28,10 +28,10 @@
 
   --sw-ink: #121212;
   --sw-ink-soft: #333333;
-  /* Bleu nuit demandé par le client : la barre d'annonces et la colonne
-     Velluno du comparatif, les deux surfaces sombres que le visiteur lit
-     comme « la marque ». Le pied de page reste noir. */
-  --sw-surface-dark: #161f33;
+  /* Les surfaces sombres : barre d'annonces, colonne Velluno du
+     comparatif, pastilles d'icônes, carte d'achat, pied de page. Toutes
+     noires — le doré est la seule couleur du thème. */
+  --sw-surface-dark: #121212;
   --sw-muted: #6e6e6e;
   --sw-line: #e2e1de;
   --sw-line-strong: #cdccc8;
@@ -1746,9 +1746,9 @@
 /* ==========================================================================
    COULEUR SUR LES ZONES QUI EN MANQUAIENT
 
-   Quatre endroits, tous repérés par le client. Le bleu nuit #161f33 et
-   l'or #f4b740 sont les deux seules couleurs employées ici — aucune
-   nouvelle teinte n'est introduite.
+   Quatre endroits, tous repérés par le client. Le noir #121212 et l'or
+   #f4b740 sont les deux seules couleurs employées ici — aucune nouvelle
+   teinte n'est introduite.
    ========================================================================== */
 
 /* A — Avant / après : cadre cerné d'or.
