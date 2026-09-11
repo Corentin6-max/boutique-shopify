@@ -9,30 +9,59 @@
       {%- if section.settings.heading != blank -%}<h2 class="sw__h2">{{ section.settings.heading }}</h2>{%- endif -%}
     </div>
 
-    <div class="sw-avap" data-sw-avap tabindex="0" role="slider"
-         aria-label="Comparer avant et après" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-      <div class="sw-avap__couche">
-        {%- if section.settings.image_before != blank -%}
-          <img src="{{ section.settings.image_before | image_url: width: 1400 }}" alt="{{ section.settings.label_before | escape }}" loading="lazy">
-        {%- else -%}
-          <p class="sw-avap__vide">Image « {{ section.settings.label_before }} » à ajouter</p>
-        {%- endif -%}
+    <div class="sw-avap__grid">
+      <div>
+      <div class="sw-avap" data-sw-avap tabindex="0" role="slider"
+           aria-label="Comparer avant et après" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <div class="sw-avap__couche">
+          {%- if section.settings.image_before != blank -%}
+            <img src="{{ section.settings.image_before | image_url: width: 1400 }}" alt="{{ section.settings.label_before | escape }}" loading="lazy">
+          {%- else -%}
+            <p class="sw-avap__vide">Image « {{ section.settings.label_before }} » à ajouter</p>
+          {%- endif -%}
+        </div>
+        <div class="sw-avap__couche sw-avap__couche--apres">
+          {%- if section.settings.image_after != blank -%}
+            <img src="{{ section.settings.image_after | image_url: width: 1400 }}" alt="{{ section.settings.label_after | escape }}" loading="lazy">
+          {%- else -%}
+            <p class="sw-avap__vide">Image « {{ section.settings.label_after }} » à ajouter</p>
+          {%- endif -%}
+        </div>
+        <span class="sw-avap__etiq sw-avap__etiq--avant">{{ section.settings.label_before }}</span>
+        <span class="sw-avap__etiq sw-avap__etiq--apres">{{ section.settings.label_after }}</span>
+        <span class="sw-avap__poignee" aria-hidden="true"></span>
       </div>
-      <div class="sw-avap__couche sw-avap__couche--apres">
-        {%- if section.settings.image_after != blank -%}
-          <img src="{{ section.settings.image_after | image_url: width: 1400 }}" alt="{{ section.settings.label_after | escape }}" loading="lazy">
-        {%- else -%}
-          <p class="sw-avap__vide">Image « {{ section.settings.label_after }} » à ajouter</p>
-        {%- endif -%}
-      </div>
-      <span class="sw-avap__etiq sw-avap__etiq--avant">{{ section.settings.label_before }}</span>
-      <span class="sw-avap__etiq sw-avap__etiq--apres">{{ section.settings.label_after }}</span>
-      <span class="sw-avap__poignee" aria-hidden="true"></span>
-    </div>
 
-    {%- if section.settings.caption != blank -%}
-      <p class="sw-avap__note">{{ section.settings.caption }}</p>
-    {%- endif -%}
+        {%- if section.settings.caption != blank -%}
+          <p class="sw-avap__note">{{ section.settings.caption }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}
+        Trois faits de fabrication, à droite de la photo sur écran large et
+        dessous sur téléphone. Ce sont des caractéristiques du vêtement, pas
+        des promesses de résultat : rien à justifier si un client conteste.
+        Une ligne disparaît si on vide son chiffre.
+      {%- endcomment -%}
+      {%- if section.settings.facts_on -%}
+        <ul class="sw-avap__faits">
+          {%- for i in (1..3) -%}
+            {%- assign n = 'fact_' | append: i | append: '_n' -%}
+            {%- assign u = 'fact_' | append: i | append: '_u' -%}
+            {%- assign t = 'fact_' | append: i | append: '_t' -%}
+            {%- if section.settings[n] != blank -%}
+              <li>
+                <span class="sw-avap__fait-n">{{ section.settings[n] }}</span>
+                <span class="sw-avap__fait-u">{{ section.settings[u] }}</span>
+                {%- if section.settings[t] != blank -%}
+                  <p>{{ section.settings[t] }}</p>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
 </div>
 
@@ -47,7 +76,23 @@
     { "type": "text", "id": "label_before", "label": "Libellé avant", "default": "Sans" },
     { "type": "text", "id": "label_after", "label": "Libellé après", "default": "Avec" },
     { "type": "text", "id": "caption", "label": "Légende", "default": "Faites glisser le curseur — visuel d'illustration." },
-    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": true }
+    { "type": "checkbox", "id": "band", "label": "Fond gris", "default": true },
+
+    { "type": "header", "content": "Chiffres à côté de la photo" },
+    { "type": "paragraph", "content": "N'y mettez que des caractéristiques de fabrication, attestées par la fiche fournisseur — jamais un résultat promis." },
+    { "type": "checkbox", "id": "facts_on", "label": "Afficher les chiffres", "default": true },
+
+    { "type": "text", "id": "fact_1_n", "label": "Chiffre 1", "default": "6" },
+    { "type": "text", "id": "fact_1_u", "label": "Unité 1", "default": "tailles" },
+    { "type": "textarea", "id": "fact_1_t", "label": "Texte 1", "default": "Du S au 3XL, de 79 à 117 cm de tour de taille." },
+
+    { "type": "text", "id": "fact_2_n", "label": "Chiffre 2", "default": "2" },
+    { "type": "text", "id": "fact_2_u", "label": "Unité 2", "default": "couches" },
+    { "type": "textarea", "id": "fact_2_t", "label": "Texte 2", "default": "Le panneau abdominal est monté en double épaisseur, là où la compression doit être franche." },
+
+    { "type": "text", "id": "fact_3_n", "label": "Chiffre 3", "default": "0" },
+    { "type": "text", "id": "fact_3_u", "label": "Unité 3", "default": "couture latérale" },
+    { "type": "textarea", "id": "fact_3_t", "label": "Texte 3", "default": "Tricotage sans couture sur les côtés : aucune ligne ne se dessine sous la chemise." }
   ],
   "presets": [{ "name": "Avant / après" }]
 }

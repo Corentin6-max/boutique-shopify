@@ -1767,6 +1767,65 @@
   box-shadow: 0 0 0 3px var(--sw-brand), 0 18px 44px -18px rgba(18, 18, 18, .26);
 }
 
+/* La photo et, à sa droite, trois faits de fabrication.
+
+   La section garde sa largeur de 820 px : élargir aurait rendu la photo
+   plus grande, mais au prix d'une rupture avec le reste de la page. Les
+   deux colonnes ne s'activent qu'au-delà de 860 px — en dessous, et donc
+   sur tout téléphone, la photo reste pleine largeur et les chiffres se
+   rangent dessous. */
+.sw-avap__grid {
+  display: grid;
+  gap: clamp(22px, 3vw, 38px);
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .sw-avap__grid { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+}
+
+.sw-avap__faits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(20px, 2.4vw, 28px);
+}
+
+/* Un filet au-dessus de chaque fait plutôt qu'entre eux : le premier en
+   reçoit un aussi, ce qui aligne le haut de la colonne sur le haut de la
+   photo. */
+.sw-avap__faits li {
+  border-top: 1px solid var(--sw-line);
+  padding-top: 15px;
+}
+
+.sw-avap__fait-n {
+  font-family: var(--font-heading-family, inherit);
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1;
+  color: var(--sw-brand);
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.sw-avap__fait-u {
+  font-family: var(--font-heading-family, inherit);
+  font-weight: 700;
+  font-size: .94rem;
+  letter-spacing: -.01em;
+  margin-left: 9px;
+  color: var(--sw-ink);
+}
+
+.sw-avap__faits p {
+  margin: 8px 0 0;
+  font-size: .9rem;
+  line-height: 1.55;
+  color: var(--sw-ink-soft);
+}
+
 /* La pastille « avec » prend l'or, « sans » reste blanche : l'œil sait de
    quel côté est la promesse avant même d'avoir lu les deux mots. */
 .sw-avap__etiq--apres { background: var(--sw-brand); color: #000; }
