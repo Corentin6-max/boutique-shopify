@@ -11,7 +11,14 @@
       <h2 class="sw__h2">{{ section.settings.heading }}</h2>
     </div>
 
-    <div class="sw-faq__list" data-sw-accordion {% if section.settings.open_first %}data-sw-accordion-open-first{% endif %}>
+    {%- comment -%}
+      Toutes les questions sont fermées à l'arrivée sur la page. Le réglage
+      « Ouvrir la première question » a été retiré : sa valeur restait
+      enregistrée à « oui » dans les modèles, et le client ne veut pas de ce
+      comportement. Le supprimer ici le neutralise sur les deux pages sans
+      avoir à réécrire un fichier de contenu.
+    {%- endcomment -%}
+    <div class="sw-faq__list" data-sw-accordion>
       {%- for block in section.blocks -%}
         <div class="sw-faq__item" {{ block.shopify_attributes }}>
           <h3>
@@ -70,7 +77,6 @@
     { "type": "text", "id": "heading", "label": "Titre", "default": "Questions fréquentes" },
     { "type": "checkbox", "id": "centered", "label": "Titre centré", "default": true },
     { "type": "checkbox", "id": "band", "label": "Fond gris", "default": false },
-    { "type": "checkbox", "id": "open_first", "label": "Ouvrir la première question", "default": true },
     { "type": "header", "content": "Rappel d'achat" },
     { "type": "text", "id": "cta_note", "label": "Phrase au-dessus du bouton" },
     { "type": "text", "id": "cta_label", "label": "Texte du bouton" },
