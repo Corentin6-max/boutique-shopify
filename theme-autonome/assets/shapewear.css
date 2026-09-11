@@ -24,6 +24,7 @@
   --sw-brand: #f4b740;
   --sw-brand-soft: #f2c86f;
   --sw-brand-wash: #fdf6e8;
+  --sw-brand-mist: #dde3ee;
   --sw-blue: #1d9bf0;
 
   --sw-ink: #121212;
@@ -77,7 +78,7 @@
 }
 
 .sw .sw__h1 { font-weight: 700; line-height: 1.1; }
-.sw .sw__h2 { font-weight: 400; letter-spacing: -.005em; }
+.sw .sw__h2 { font-weight: 600; letter-spacing: -.008em; }
 .sw .sw__h3 { font-weight: 800; letter-spacing: 0; line-height: 1.3; }
 
 /* Le texte courant reste en grotesque : c'est lui qu'on lit longtemps. */
@@ -138,11 +139,13 @@
   opacity: 1;
 }
 
-/* 44 / 24 / 14 px, les valeurs du relevé. Seul le H1 est ramené sur les
-   petits écrans : à 44 px fixe, un titre de section déborde d'un téléphone
-   de 360 px. */
+/* Le relevé donnait 44 / 24 / 14 px. Le H2 passe à 32 px et en graisse
+   600 : à 24 px en graisse normale, un titre de section n'a aucune
+   présence et la police de titre ne peut pas montrer son caractère. Les
+   deux autres valeurs sont conservées. Le H1 est ramené sur les petits
+   écrans, sans quoi 44 px fixes débordent d'un téléphone de 360 px. */
 .sw__h1 { font-size: clamp(30px, 8.5vw, 44px); }
-.sw__h2 { font-size: 24px; }
+.sw__h2 { font-size: clamp(26px, 3.4vw, 32px); }
 .sw__h3 { font-size: 14px; }
 
 .sw__lede {
@@ -1749,15 +1752,21 @@
    nouvelle teinte n'est introduite.
    ========================================================================== */
 
-/* A — Avant / après.
+/* A — Avant / après : fond bleu nuit dilué, cadre cerné d'or.
 
-   Le fond de section reste clair : la photo doit rester le seul objet
-   sombre de la zone. Seul le cadre du curseur est arrondi et détaché du
-   fond par une ombre, pour qu'il se lise comme un objet manipulable. */
+   Le fond n'est pas une couleur de plus : c'est le bleu nuit de la barre
+   d'annonces éclairci jusqu'à devenir un fond. Le liseré doré de 3 px
+   autour du curseur travaille sur ce bleu — l'or et le bleu s'opposent,
+   chacun fait ressortir l'autre —, là où il se serait fondu dans un beige.
+
+   Un fond plat plutôt qu'un dégradé ou une bande : il se comporte de la
+   même façon quelle que soit la hauteur de la section, la longueur du
+   titre ou le format de la photo. */
+.sw-block:has(.sw-avap) { background: var(--sw-brand-mist); }
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  box-shadow: var(--sw-shadow-lift);
+  box-shadow: 0 0 0 3px var(--sw-brand), 0 18px 44px -18px rgba(18, 18, 18, .26);
 }
 
 /* La pastille « avec » prend l'or, « sans » reste blanche : l'œil sait de
