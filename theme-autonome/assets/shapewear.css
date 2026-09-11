@@ -1741,6 +1741,76 @@
 
 .sw-faq__cta .sw__btn { min-width: 260px; }
 
+/* ==========================================================================
+   COULEUR SUR LES ZONES QUI EN MANQUAIENT
+
+   Quatre endroits, tous repérés par le client. Le bleu nuit #161f33 et
+   l'or #f4b740 sont les deux seules couleurs employées ici — aucune
+   nouvelle teinte n'est introduite.
+   ========================================================================== */
+
+/* A — Avant / après : la section entière en bleu nuit.
+
+   C'est le moment où le visiteur voit le produit agir. Sur fond sombre la
+   photo cesse d'être un bloc gris posé sur du blanc et devient l'objet
+   qu'on regarde. Le sélecteur :has() cible la section par son contenu,
+   plutôt que par un identifiant que l'éditeur pourrait renommer. */
+.sw-block:has(.sw-avap) { background: var(--sw-surface-dark); }
+.sw-block:has(.sw-avap) .sw__h2 { color: #fff; }
+.sw-block:has(.sw-avap) .sw__eyebrow { color: var(--sw-brand); }
+.sw-block:has(.sw-avap) .sw__eyebrow::before { background: var(--sw-brand); }
+.sw-block:has(.sw-avap) .sw-avap {
+  border-radius: var(--sw-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, .8);
+}
+.sw-block:has(.sw-avap) .sw-avap__note { color: rgba(255, 255, 255, .62); }
+.sw-block:has(.sw-avap) .sw-avap__vide { color: rgba(255, 255, 255, .55); }
+
+/* La pastille « avec » prend l'or, « sans » reste blanche : l'œil sait de
+   quel côté est la promesse avant même d'avoir lu les deux mots. */
+.sw-avap__etiq--apres { background: var(--sw-brand); color: #000; }
+.sw-avap__etiq--avant { background: #fff; color: var(--sw-ink); }
+
+/* B — Garanties : pictogramme doré sur pastille bleu nuit.
+
+   Les cartes et le fond ne bougent pas. Seules les icônes portent la
+   couleur : assez pour donner du rythme à la rangée, pas assez pour
+   transformer une bande de réassurance en bannière. Le padding passe par
+   content-box, faute de quoi il mangerait les 20 px du dessin. */
+.sw-guarantee__item svg {
+  width: 20px;
+  height: 20px;
+  padding: 9px;
+  box-sizing: content-box;
+  background: var(--sw-surface-dark);
+  border-radius: 12px;
+  color: var(--sw-brand);
+  margin-top: 0;
+}
+
+/* C — FAQ : la question ouverte se teinte, les signes passent à l'or.
+
+   Le fond crème fait deux choses : il ajoute de la couleur et il montre où
+   l'on en est dans la liste. Les « + » dorés signalent que les autres
+   lignes se déplient — beaucoup de visiteurs ne le voient pas. */
+#aide .sw-faq__icon { color: var(--sw-brand); }
+#aide .sw-faq__item:has(.sw-faq__q[aria-expanded="true"]) { background: var(--sw-brand-wash); }
+#aide .sw-faq__q[aria-expanded="true"] { color: var(--sw-surface-dark); }
+
+/* D — Le bloc d'achat qui ferme la FAQ, en carte bleu nuit.
+
+   C'est le dernier endroit de la page où rattraper quelqu'un qui a tout
+   lu. Un filet de séparation et du texte gris n'y suffisaient pas. */
+.sw-faq__cta {
+  background: var(--sw-surface-dark);
+  border: 0;
+  border-radius: 16px;
+  padding: clamp(28px, 4vw, 40px) 24px clamp(30px, 4vw, 42px);
+}
+
+.sw-faq__cta-note { color: rgba(255, 255, 255, .78); font-size: 1.02rem; }
+
 /* En-tête : boutique mono-produit, la recherche n'a rien à chercher */
 
 .section-header #SearchToggle { display: none; }
