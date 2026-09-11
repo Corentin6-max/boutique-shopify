@@ -146,7 +146,7 @@ a { color: inherit; }
 
 /* --------------------------------------------------------- Pied de page */
 
-.sw-footer { background: var(--ink); color: rgba(255,255,255,.72); margin-top: 60px; }
+.sw-footer { background: var(--announce); color: rgba(255,255,255,.72); margin-top: 60px; }
 .sw-footer__in {
   max-width: 1180px; margin-inline: auto; padding: 56px 24px 40px;
   display: grid; gap: 40px; grid-template-columns: 1fr;
