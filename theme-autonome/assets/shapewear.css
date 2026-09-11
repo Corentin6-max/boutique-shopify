@@ -1749,23 +1749,16 @@
    nouvelle teinte n'est introduite.
    ========================================================================== */
 
-/* A — Avant / après : la section entière en bleu nuit.
+/* A — Avant / après.
 
-   C'est le moment où le visiteur voit le produit agir. Sur fond sombre la
-   photo cesse d'être un bloc gris posé sur du blanc et devient l'objet
-   qu'on regarde. Le sélecteur :has() cible la section par son contenu,
-   plutôt que par un identifiant que l'éditeur pourrait renommer. */
-.sw-block:has(.sw-avap) { background: var(--sw-surface-dark); }
-.sw-block:has(.sw-avap) .sw__h2 { color: #fff; }
-.sw-block:has(.sw-avap) .sw__eyebrow { color: var(--sw-brand); }
-.sw-block:has(.sw-avap) .sw__eyebrow::before { background: var(--sw-brand); }
+   Le fond de section reste clair : la photo doit rester le seul objet
+   sombre de la zone. Seul le cadre du curseur est arrondi et détaché du
+   fond par une ombre, pour qu'il se lise comme un objet manipulable. */
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, .8);
+  box-shadow: var(--sw-shadow-lift);
 }
-.sw-block:has(.sw-avap) .sw-avap__note { color: rgba(255, 255, 255, .62); }
-.sw-block:has(.sw-avap) .sw-avap__vide { color: rgba(255, 255, 255, .55); }
 
 /* La pastille « avec » prend l'or, « sans » reste blanche : l'œil sait de
    quel côté est la promesse avant même d'avoir lu les deux mots. */
@@ -1794,6 +1787,9 @@
    Le fond crème fait deux choses : il ajoute de la couleur et il montre où
    l'on en est dans la liste. Les « + » dorés signalent que les autres
    lignes se déplient — beaucoup de visiteurs ne le voient pas. */
+#aide .sw__eyebrow { color: var(--sw-brand); }
+#aide .sw__eyebrow::before { background: var(--sw-brand); }
+#aide .sw__h2 { color: var(--sw-surface-dark); }
 #aide .sw-faq__icon { color: var(--sw-brand); }
 #aide .sw-faq__item:has(.sw-faq__q[aria-expanded="true"]) { background: var(--sw-brand-wash); }
 #aide .sw-faq__q[aria-expanded="true"] { color: var(--sw-surface-dark); }
