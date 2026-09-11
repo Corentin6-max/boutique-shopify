@@ -45,7 +45,7 @@
       {%- endcomment -%}
       {%- if section.settings.facts_on -%}
         <ul class="sw-avap__faits">
-          {%- for i in (1..3) -%}
+          {%- for i in (1..4) -%}
             {%- assign n = 'fact_' | append: i | append: '_n' -%}
             {%- assign u = 'fact_' | append: i | append: '_u' -%}
             {%- assign t = 'fact_' | append: i | append: '_t' -%}
@@ -92,7 +92,11 @@
 
     { "type": "text", "id": "fact_3_n", "label": "Chiffre 3", "default": "0" },
     { "type": "text", "id": "fact_3_u", "label": "Unité 3", "default": "couture latérale" },
-    { "type": "textarea", "id": "fact_3_t", "label": "Texte 3", "default": "Tricotage sans couture sur les côtés : aucune ligne ne se dessine sous la chemise." }
+    { "type": "textarea", "id": "fact_3_t", "label": "Texte 3", "default": "Tricotage sans couture sur les côtés : aucune ligne ne se dessine sous la chemise." },
+
+    { "type": "text", "id": "fact_4_n", "label": "Chiffre 4", "default": "92 %" },
+    { "type": "text", "id": "fact_4_u", "label": "Unité 4", "default": "polyamide" },
+    { "type": "textarea", "id": "fact_4_t", "label": "Texte 4", "default": "Complété par 8 % d'élasthanne : la maille s'étire dans les deux sens." }
   ],
   "presets": [{ "name": "Avant / après" }]
 }
