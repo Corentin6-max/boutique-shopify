@@ -5,48 +5,39 @@
    ========================================================================== */
 
 .sw {
-  /* Système visuel relevé par le client, repris à l'identique.
+  /* Palette « Ardoise & Bronze ».
 
-     Trois noirs : #121212 pour le texte, #1e1e1e pour les surfaces sombres
-     (barre d'annonces, colonne Velluno), #333333 pour les liens et le texte
-     secondaire.
+     Le bronze est la couleur d'action et n'apparaît qu'à quatre endroits :
+     le bouton d'achat, le bouton « Choisir ma taille », la bordure du pack
+     sélectionné et la pastille du panier. Partout où l'ancienne palette
+     mettait de l'ambre — badges, prix des packs, chiffres, « + » des
+     accordéons, titres du pied de page, coches du comparatif — on utilise
+     désormais l'encre, le bronze clair ou le bronze texte.
 
-     #f4b740 est la couleur d'action. Le relevé donne un texte de bouton en
-     #000000 : le bouton est donc doré à texte noir. C'est aussi ce qui rend
-     l'appel à l'achat visible sur une page par ailleurs en noir et blanc.
+     Le vert ne veut dire que « oui / inclus », le rouge que « non ». Aucun
+     des deux n'est décoratif. Tout chiffre est en encre : un prix doit se
+     lire, pas se colorer. */
+  --sw-brand: #8C5E2A;
+  --sw-brand-hover: #744C20;
+  --sw-brand-soft: #F3E7D5;
+  --sw-brand-soft-text: #5E3D18;
+  --sw-brand-link: #7A4F21;
 
-     #f2c86f est sa version diluée — fonds de badge, bandes de section.
-     #1d9bf0 est réservé aux liens et aux éléments cliquables dans le texte.
+  --sw-ink: #14110D;
+  --sw-ink-soft: #3A342C;
+  --sw-muted: #6E665B;
+  --sw-line: #DAD3C6;
+  --sw-line-strong: #C9C0AE;
+  --sw-band: #F7F4EE;
+  --sw-band-deep: #EAE6DD;
+  --sw-paper: #FFFFFF;
+  --sw-surface-dark: #14110D;
+  --sw-on-dark: #EFECE5;
 
-     Le relevé ne donne ni gris de filet ni fond de section : ils sont
-     dérivés en gris strictement neutres, pour ne pas introduire une teinte
-     absente du système. */
-  --sw-brand: #f4b740;
-  --sw-brand-soft: #f2c86f;
-  --sw-brand-wash: #fdf6e8;
-  --sw-blue: #1d9bf0;
-
-  --sw-ink: #121212;
-  --sw-ink-soft: #333333;
-  /* Les surfaces sombres : barre d'annonces, colonne Velluno du
-     comparatif, pastilles d'icônes, carte d'achat, pied de page. Toutes
-     noires — le doré est la seule couleur du thème. */
-  --sw-surface-dark: #121212;
-  --sw-muted: #6e6e6e;
-  --sw-line: #e2e1de;
-  --sw-line-strong: #cdccc8;
-  /* Les bandes de section restent grises — elles ne doivent pas trancher
-     avec le fond de page. Les cartes, elles, sont blanches : posées sur le
-     gris, ce sont des objets, pas des zones. */
-  --sw-band: #ecebe8;
-  --sw-band-deep: #ecebe8;
-  --sw-paper: #ffffff;
-
-  --sw-accent: #f4b740;
-  --sw-accent-soft: #fdf6e8;
-  --sw-success: #1e8b5a;
-  --sw-success-soft: #eef7f2;
-  --sw-gold: #f4b740;
+  --sw-success: #1F6F45;
+  --sw-success-soft: #E7F0EA;
+  --sw-no: #A33A2B;
+  --sw-yes-on-dark: #7FC29C;
 
   --sw-max: 1180px;
   --sw-gap: clamp(16px, 2.5vw, 28px);
@@ -56,8 +47,8 @@
 
   /* Ombres teintées de la même encre chaude : une ombre grise sur un fond
      chaud se voit, et fait sale. */
-  --sw-shadow: 0 1px 2px rgba(18, 18, 18, .06), 0 8px 24px -12px rgba(18, 18, 18, .16);
-  --sw-shadow-lift: 0 2px 4px rgba(18, 18, 18, .07), 0 18px 44px -18px rgba(18, 18, 18, .26);
+  --sw-shadow: 0 1px 2px rgba(20, 17, 13, .06), 0 8px 24px -12px rgba(20, 17, 13, .16);
+  --sw-shadow-lift: 0 2px 4px rgba(20, 17, 13, .07), 0 18px 44px -18px rgba(20, 17, 13, .26);
 
   color: var(--sw-ink);
   font-family: var(--font-body-family, 'Murecho', system-ui, sans-serif);
@@ -88,12 +79,12 @@
 
 /* Deux détails que personne ne remarque et que tout le monde ressent :
    la couleur de sélection et l'anneau de focus au clavier. */
-.sw ::selection { background: var(--sw-brand); color: #000; }
+.sw ::selection { background: var(--sw-brand); color: #fff; }
 
 .sw a:focus-visible,
 .sw button:focus-visible,
 .sw [tabindex]:focus-visible {
-  outline: 2px solid var(--sw-blue);
+  outline: 2px solid var(--sw-brand);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -137,7 +128,7 @@
   content: "";
   width: 22px;
   height: 1px;
-  background: var(--sw-brand);
+  background: var(--sw-line-strong);
   opacity: 1;
 }
 
@@ -201,11 +192,11 @@
 
 .sw__btn--primary {
   background: var(--sw-brand);
-  color: #000;
+  color: #fff;
   box-shadow: var(--sw-shadow);
 }
 
-.sw__btn--primary:hover { background: var(--sw-brand-soft); box-shadow: var(--sw-shadow-lift); }
+.sw__btn--primary:hover { background: var(--sw-brand-hover); box-shadow: var(--sw-shadow-lift); }
 
 .sw__btn--ghost {
   background: transparent;
@@ -229,7 +220,7 @@
 .sw__stars {
   display: inline-flex;
   gap: 2px;
-  color: var(--sw-gold);
+  color: var(--sw-brand-link);
   line-height: 1;
 }
 
@@ -360,7 +351,7 @@
    BANDEAU DE STATISTIQUES
    ========================================================================== */
 
-.sw-stats { background: var(--sw-ink); color: #fff; padding: clamp(26px, 3.5vw, 40px) 0; }
+.sw-stats { background: var(--sw-ink); color: var(--sw-on-dark); padding: clamp(26px, 3.5vw, 40px) 0; }
 
 .sw-stats__grid {
   display: grid;
@@ -425,7 +416,7 @@
   border-radius: 11px;
   display: grid;
   place-items: center;
-  background: var(--sw-brand-wash);
+  background: var(--sw-brand-soft);
   color: var(--sw-ink);
   margin-bottom: 4px;
   flex: none;
@@ -529,14 +520,14 @@
 .sw-compare__table th.sw-compare__col--us,
 .sw-compare__table td.sw-compare__col--us {
   background: var(--sw-surface-dark) !important;
-  color: #fff;
+  color: var(--sw-on-dark);
   width: 22%;
 }
 
 .sw-compare__table thead th.sw-compare__col--us {
   padding-top: 26px;
   border-radius: var(--sw-radius) var(--sw-radius) 0 0;
-  color: #fff;
+  color: var(--sw-on-dark);
 }
 
 .sw-compare__table tbody tr:last-child td.sw-compare__col--us {
@@ -551,7 +542,7 @@
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--sw-on-dark);
 }
 
 /* Texte réservé aux lecteurs d'écran. Sans cette règle, les « Oui » et
@@ -574,9 +565,9 @@
    d'un registre « application » qui jure avec le reste. Ici des teintes
    sourdes, plus une variante éclaircie pour la colonne sombre, où un vert
    foncé disparaîtrait. */
-.sw-mark--yes { color: #1e8b5a; }
-.sw-mark--no { color: #c0392b; }
-.sw-compare__col--us .sw-mark--yes { color: var(--sw-brand); }
+.sw-mark--yes { color: var(--sw-muted); }
+.sw-mark--no { color: var(--sw-no); }
+.sw-compare__col--us .sw-mark--yes { color: var(--sw-yes-on-dark); }
 
 /* Sur téléphone le tableau tient dans la largeur de l'écran : plus de
    défilement latéral, la colonne Velluno reste visible en même temps que
@@ -697,7 +688,7 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--sw-brand-wash);
+  background: var(--sw-brand-soft);
   display: grid;
   place-items: center;
   font-size: .78rem;
@@ -744,7 +735,7 @@
   cursor: pointer;
 }
 
-.sw-faq__q:hover { color: var(--sw-blue); }
+.sw-faq__q:hover { color: var(--sw-brand-link); }
 
 .sw-faq__icon {
   flex: none;
@@ -892,8 +883,8 @@
   position: absolute;
   top: 14px;
   left: 14px;
-  background: var(--sw-accent);
-  color: #fff;
+  background: var(--sw-surface-dark);
+  color: var(--sw-on-dark);
   font-size: .74rem;
   font-weight: 700;
   letter-spacing: .06em;
@@ -936,8 +927,8 @@
 .sw-pdp__compare { font-size: 1.05rem; color: var(--sw-muted); }
 
 .sw-pdp__save {
-  background: var(--sw-brand);
-  color: #000;
+  background: var(--sw-brand-soft);
+  color: var(--sw-brand-soft-text);
   font-size: .8rem;
   font-weight: 700;
   padding: 5px 11px;
@@ -986,7 +977,7 @@
 .sw-select__link {
   font-size: .84rem;
   font-weight: 600;
-  color: var(--sw-ink-soft);
+  color: var(--sw-brand-link);
   text-decoration: underline;
   text-underline-offset: 3px;
   background: none;
@@ -996,7 +987,7 @@
   font-family: inherit;
 }
 
-.sw-select__link:hover { color: var(--sw-blue); }
+.sw-select__link:hover { color: var(--sw-brand-hover); }
 
 /* Bundles */
 
@@ -1027,12 +1018,12 @@
 .sw-bundle__box:hover { border-color: var(--sw-line-strong); }
 
 .sw-bundle input:checked + .sw-bundle__box {
-  border-color: var(--sw-ink);
-  box-shadow: 0 0 0 1px var(--sw-ink);
-  background: var(--sw-brand-wash);
+  border-color: var(--sw-brand);
+  box-shadow: 0 0 0 1px var(--sw-brand);
+  background: var(--sw-brand-soft);
 }
 
-.sw-bundle input:focus-visible + .sw-bundle__box { outline: 2px solid var(--sw-accent); outline-offset: 2px; }
+.sw-bundle input:focus-visible + .sw-bundle__box { outline: 2px solid var(--sw-brand); outline-offset: 2px; }
 
 .sw-bundle__radio {
   width: 20px;
@@ -1050,12 +1041,12 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--sw-ink);
+  background: var(--sw-brand);
   transform: scale(0);
   transition: transform .18s ease;
 }
 
-.sw-bundle input:checked + .sw-bundle__box .sw-bundle__radio { border-color: var(--sw-ink); }
+.sw-bundle input:checked + .sw-bundle__box .sw-bundle__radio { border-color: var(--sw-brand); }
 .sw-bundle input:checked + .sw-bundle__box .sw-bundle__radio::after { transform: scale(1); }
 
 .sw-bundle__body { flex: 1; min-width: 0; }
@@ -1077,11 +1068,11 @@
   text-transform: uppercase;
   padding: 4px 8px;
   border-radius: 5px;
-  background: var(--sw-ink);
-  color: #fff;
+  background: var(--sw-brand-soft);
+  color: var(--sw-brand-soft-text);
 }
 
-.sw-bundle__tag--value { background: var(--sw-brand); color: #000; }
+.sw-bundle__tag--value { background: var(--sw-brand-soft); color: var(--sw-brand-soft-text); }
 
 .sw-bundle__sub { font-size: .84rem; color: var(--sw-muted); margin-top: 3px; }
 
@@ -1129,7 +1120,7 @@
   box-shadow: 0 0 0 1px var(--sw-ink);
 }
 
-.sw-swatch input:focus-visible + .sw-swatch__dot { outline: 2px solid var(--sw-accent); outline-offset: 2px; }
+.sw-swatch input:focus-visible + .sw-swatch__dot { outline: 2px solid var(--sw-brand); outline-offset: 2px; }
 
 .sw-swatch input:disabled + .sw-swatch__dot { opacity: .32; cursor: not-allowed; }
 
@@ -1169,7 +1160,7 @@
   box-shadow: 0 0 0 1px var(--sw-ink);
 }
 
-.sw-size input:focus-visible + .sw-size__box { outline: 2px solid var(--sw-accent); outline-offset: 2px; }
+.sw-size input:focus-visible + .sw-size__box { outline: 2px solid var(--sw-brand); outline-offset: 2px; }
 
 .sw-size input:disabled + .sw-size__box {
   color: var(--sw-muted);
@@ -1187,7 +1178,7 @@
   margin: 0;
   font-size: .87rem;
   font-weight: 600;
-  color: var(--sw-accent);
+  color: var(--sw-no);
   min-height: 0;
 }
 
@@ -1410,8 +1401,8 @@
   top: -11px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--sw-accent);
-  color: #fff;
+  background: var(--sw-brand-soft);
+  color: var(--sw-brand-soft-text);
   font-size: .68rem;
   font-weight: 800;
   letter-spacing: .08em;
@@ -1506,7 +1497,7 @@
 
 /* Prix des paliers */
 
-.sw-bundle__total { color: var(--sw-accent); }
+.sw-bundle__total { color: var(--sw-ink); }
 
 .sw-bundle__was {
   text-decoration: line-through;
@@ -1574,7 +1565,7 @@
   background-size: 15px;
 }
 
-.sw-unit-row select:focus-visible { outline: 2px solid var(--sw-accent); outline-offset: 1px; }
+.sw-unit-row select:focus-visible { outline: 2px solid var(--sw-brand); outline-offset: 1px; }
 
 /* Galerie : bandeau de vignettes défilant plutôt qu'une grille figée */
 
@@ -1684,7 +1675,7 @@
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--sw-accent);
+  color: var(--sw-muted);
 }
 
 .sw-proof__title {
@@ -1751,20 +1742,20 @@
 /* ==========================================================================
    COULEUR SUR LES ZONES QUI EN MANQUAIENT
 
-   Quatre endroits, tous repérés par le client. Le noir #121212 et l'or
-   #f4b740 sont les deux seules couleurs employées ici — aucune nouvelle
-   teinte n'est introduite.
+   Quatre endroits, tous repérés par le client. Ils n'emploient que
+   l'encre, le filet et le vert « oui » de la palette — aucune couleur
+   d'action, qui est réservée au bouton d'achat.
    ========================================================================== */
 
-/* A — Avant / après : cadre cerné d'or.
+/* A — Avant / après : cadre cerné d'un filet neutre.
 
-   Pas de fond propre à cette section : elle repose sur le gris de la
+   Pas de fond propre à cette section : elle repose sur le fond de la
    boutique. Le liseré doré de 3 px suffit à désigner le curseur comme
    l'objet à manipuler. */
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  box-shadow: 0 0 0 3px var(--sw-brand), 0 18px 44px -18px rgba(18, 18, 18, .26);
+  box-shadow: 0 0 0 1px var(--sw-line), 0 18px 44px -18px rgba(20, 17, 13, .26);
 }
 
 /* La photo et, à sa droite, trois faits de fabrication.
@@ -1817,7 +1808,7 @@
   font-weight: 800;
   font-size: clamp(32px, 4vw, 44px);
   line-height: 1;
-  color: var(--sw-brand);
+  color: var(--sw-ink);
   display: inline-block;
   vertical-align: -2px;
 }
@@ -1840,7 +1831,7 @@
 
 /* La pastille « avec » prend l'or, « sans » reste blanche : l'œil sait de
    quel côté est la promesse avant même d'avoir lu les deux mots. */
-.sw-avap__etiq--apres { background: var(--sw-brand); color: #000; }
+.sw-avap__etiq--apres { background: var(--sw-surface-dark); color: var(--sw-on-dark); }
 .sw-avap__etiq--avant { background: #fff; color: var(--sw-ink); }
 
 /* B — Garanties : pictogramme doré sur pastille bleu nuit.
@@ -1856,7 +1847,7 @@
   box-sizing: content-box;
   background: var(--sw-surface-dark);
   border-radius: 12px;
-  color: var(--sw-brand);
+  color: var(--sw-on-dark);
   margin-top: 0;
 }
 
@@ -1866,10 +1857,10 @@
    La question déployée reste repérable par son titre en bleu nuit et par
    son signe « − », et les « + » dorés signalent que les autres lignes se
    déplient — beaucoup de visiteurs ne le voient pas. */
-#aide .sw__eyebrow { color: var(--sw-brand); }
-#aide .sw__eyebrow::before { background: var(--sw-brand); }
+#aide .sw__eyebrow { color: var(--sw-muted); }
+#aide .sw__eyebrow::before { background: var(--sw-line-strong); }
 #aide .sw__h2 { color: var(--sw-surface-dark); }
-#aide .sw-faq__icon { color: var(--sw-brand); }
+#aide .sw-faq__icon { color: var(--sw-brand-link); }
 #aide .sw-faq__q[aria-expanded="true"] { color: var(--sw-surface-dark); }
 
 /* D — Le bloc d'achat qui ferme la FAQ, en carte bleu nuit.
@@ -1883,7 +1874,49 @@
   padding: clamp(28px, 4vw, 40px) 24px clamp(30px, 4vw, 42px);
 }
 
-.sw-faq__cta-note { color: rgba(255, 255, 255, .78); font-size: 1.02rem; }
+.sw-faq__cta-note { color: var(--sw-on-dark); font-size: 1.02rem; }
+
+/* ==========================================================================
+   COULEUR DE LIEN PAR DÉFAUT — GARDE-FOUS
+
+   Deux endroits du thème laissaient passer les couleurs de lien du
+   navigateur : une question de FAQ s'affichait en bleu et le texte du bloc
+   d'achat final en violet. C'est la signature d'un lien sans règle de
+   couleur, et de son état :visited.
+
+   Les trois blocs ci-dessous verrouillent le cas là où il est apparu, puis
+   partout ailleurs : tout lien sans classe, dans une section, prend le
+   bronze de lien au lieu du bleu système.
+   ========================================================================== */
+
+#aide .sw-faq__q,
+#aide .sw-faq__q:link,
+#aide .sw-faq__q:visited,
+#aide .sw-faq__q:active,
+#aide .sw-faq__item > h3,
+#aide .sw-faq__item > h3 > a {
+  color: var(--sw-ink);
+  text-decoration: none;
+}
+
+.sw-faq__cta-note,
+.sw-faq__cta-note *,
+.sw-faq__cta-note a:link,
+.sw-faq__cta-note a:visited { color: var(--sw-on-dark); }
+
+.sw a:not([class]),
+.sw a:not([class]):link,
+.sw a:not([class]):visited {
+  color: var(--sw-brand-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Sur les surfaces sombres, un lien sans classe doit rester lisible. */
+.sw-faq__cta a:not([class]),
+.sw-faq__cta a:not([class]):visited,
+.sw-compare__col--us a:not([class]),
+.sw-compare__col--us a:not([class]):visited { color: var(--sw-on-dark); }
 
 /* En-tête : boutique mono-produit, la recherche n'a rien à chercher */
 

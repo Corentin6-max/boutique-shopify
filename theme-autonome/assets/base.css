@@ -1,44 +1,34 @@
 /* Velluno — socle du thème. Le reste vit dans shapewear.css, sous .sw */
 
 :root {
-  /* Le relevé du client ne donnait qu'une sans-serif neutre : une palette,
-     pas une identité. Les titres prennent donc Bricolage Grotesque, une
-     grotesque contemporaine aux proportions volontairement irrégulières,
-     qui se remarque sans coûter en lisibilité. Le corps de texte reste en
-     Murecho, conformément au relevé. */
+  /* Palette « Ardoise & Bronze ».
+
+     Le bronze #8C5E2A est la couleur d'action, et rien d'autre : bouton
+     d'achat, état sélectionné, pastille du panier. Partout ailleurs on
+     utilise sa version claire ou le texte bronze. Une couleur d'action
+     employée partout ne signale plus rien. */
   --font-heading-family: "Bricolage Grotesque", "Murecho", system-ui, sans-serif;
   --font-body-family: "Murecho", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Les huit couleurs du relevé, à l'identique.
-     #f4b740 est la couleur d'action — le relevé donne un texte de bouton en
-     #000000, donc un bouton clair à texte noir, et non l'inverse.
-     Le relevé ne fournit ni gris de filet ni fond de section : ceux-ci sont
-     dérivés en gris neutres du #121212, pour ne pas introduire une teinte
-     que le système ne contient pas. */
-  --brand: #f4b740;
-  --brand-soft: #f2c86f;
-  --brand-blue: #1d9bf0;
-  --ink: #121212;
-  --ink-soft: #333333;
+  --brand: #8C5E2A;
+  --brand-hover: #744C20;
+  --brand-soft: #F3E7D5;
+  --brand-soft-text: #5E3D18;
+  --brand-link: #7A4F21;
 
-  /* Les surfaces sombres de la boutique — barre d'annonces, pied de page,
-     colonne du comparatif — sont noires. Le doré reste la seule couleur
-     du thème. */
-  --surface-dark: #121212;
-  --muted: #6e6e6e;
-  --line: #e2e1de;
+  --ink: #14110D;
+  --ink-soft: #3A342C;
+  --muted: #6E665B;
+  --line: #DAD3C6;
 
-  /* Fond de toute la boutique. Un gris très légèrement chaud plutôt que
-     neutre : sur un gris froid, l'or vire au moutarde. Les cartes restent
-     blanches et se détachent donc du fond, ce que le blanc sur blanc ne
-     permettait pas. */
-  --page: #ecebe8;
+  --page: #EAE6DD;
+  --band: #F7F4EE;
+  --surface-dark: #14110D;
 
-  /* Le client veut un thème sans blanc : les bandes de section et les
-     cartes prennent le gris du fond. Il ne reste de blanc que ce qui doit
-     rester lisible sur une photo ou sur une surface noire. */
-  --band: #ecebe8;
-  --accent: #f4b740;
+  /* Sur fond sombre : barre d'annonce, pied de page, bloc d'achat final. */
+  --on-dark: #EFECE5;
+  --on-dark-title: #C9BBA4;
+  --on-dark-soft: #A79C8B;
 }
 
 html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
@@ -66,7 +56,7 @@ a { color: inherit; }
 /* ---------------------------------------------------- Barre d'annonces */
 
 .sw-announce {
-  background: var(--surface-dark); color: #fff; text-align: center;
+  background: var(--surface-dark); color: var(--on-dark); text-align: center;
   padding: 11px 16px; font-size: .78rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
   min-height: 42px; display: grid; place-items: center;
@@ -76,7 +66,7 @@ a { color: inherit; }
 
 /* ------------------------------------------------------------- En-tête */
 
-.sw-header { border-bottom: 1px solid var(--line); background: var(--page); }
+.sw-header { border-bottom: 1px solid var(--line); background: var(--band); }
 .sw-header__in {
   max-width: 1180px; margin-inline: auto; padding: 16px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -92,7 +82,7 @@ a { color: inherit; }
 .sw-header__nav a:hover { color: var(--ink); }
 .sw-header__cart { font-size: .9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
 .sw-header__count {
-  background: var(--brand); color: #000; border-radius: 999px;
+  background: var(--brand); color: #fff; border-radius: 999px;
   min-width: 22px; height: 22px; display: grid; place-items: center; font-size: .76rem;
 }
 @media (max-width: 800px) { .sw-header__nav { display: none; } }
@@ -106,10 +96,10 @@ a { color: inherit; }
 }
 .sw-avap__couche { position: absolute; inset: 0; display: grid; place-items: center; }
 .sw-avap__couche img { width: 100%; height: 100%; object-fit: cover; }
-.sw-avap__couche--apres { clip-path: inset(0 calc(100% - var(--pos)) 0 0); background: #eef0f4; }
+.sw-avap__couche--apres { clip-path: inset(0 calc(100% - var(--pos)) 0 0); background: var(--band); }
 .sw-avap__vide { color: var(--muted); font-size: .85rem; padding: 20px; text-align: center; }
 .sw-avap__etiq {
-  position: absolute; top: 14px; background: #fff; border-radius: 999px;
+  position: absolute; top: 14px; background: #fff; color: var(--ink); border-radius: 999px;
   padding: 6px 13px; font-size: .72rem; font-weight: 700; letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -155,7 +145,7 @@ a { color: inherit; }
 
 /* --------------------------------------------------------- Pied de page */
 
-.sw-footer { background: var(--surface-dark); color: rgba(255,255,255,.72); margin-top: 60px; }
+.sw-footer { background: var(--surface-dark); color: var(--on-dark); margin-top: 60px; }
 .sw-footer__in {
   max-width: 1180px; margin-inline: auto; padding: 56px 24px 40px;
   display: grid; gap: 40px; grid-template-columns: 1fr;
@@ -163,17 +153,17 @@ a { color: inherit; }
 @media (min-width: 760px) { .sw-footer__in { grid-template-columns: 1.4fr 1fr 1fr; } }
 .sw-footer__logo {
   font-family: var(--font-heading-family); font-size: 1.5rem; font-weight: 800;
-  font-style: italic; text-transform: uppercase; color: #fff; margin-bottom: 12px;
+  font-style: italic; text-transform: uppercase; color: var(--on-dark); margin-bottom: 12px;
 }
-.sw-footer__txt { font-size: .93rem; max-width: 34ch; }
+.sw-footer__txt { font-size: .93rem; max-width: 34ch; color: var(--on-dark-soft); }
 .sw-footer__mail { margin-top: 14px; font-weight: 600; }
-.sw-footer__mail a { color: #fff; }
-.sw-footer__nav h2 { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--brand); margin-bottom: 14px; }
+.sw-footer__mail a { color: var(--on-dark); text-decoration: underline; text-underline-offset: 3px; }
+.sw-footer__nav h2 { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--on-dark-title); margin-bottom: 14px; }
 .sw-footer__nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: .92rem; }
 .sw-footer__nav a { text-decoration: none; }
-.sw-footer__nav a:hover { color: #fff; }
+.sw-footer__nav a:hover { color: var(--on-dark); }
 .sw-footer__bas {
-  border-top: 1px solid rgba(255,255,255,.13);
+  border-top: 1px solid rgba(255,255,255,.12);
   max-width: 1180px; margin-inline: auto; padding: 20px 24px 36px;
   display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
   font-size: .82rem;
