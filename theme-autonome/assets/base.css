@@ -12,23 +12,23 @@
 
   --brand: #8C5E2A;
   --brand-hover: #744C20;
-  --brand-soft: #F3E7D5;
+  --brand-soft: #F2E3CC;
   --brand-soft-text: #5E3D18;
   --brand-link: #7A4F21;
 
-  --ink: #14110D;
-  --ink-soft: #3A342C;
-  --muted: #6E665B;
-  --line: #DAD3C6;
+  --ink: #221B14;
+  --ink-soft: #4A4034;
+  --muted: #6E6250;
+  --line: #E0D4BE;
 
-  --page: #EAE6DD;
-  --band: #F7F4EE;
-  --surface-dark: #14110D;
+  --page: #EFE8DA;
+  --band: #F8F3E8;
+  --surface-dark: #221B14;
 
   /* Sur fond sombre : barre d'annonce, pied de page, bloc d'achat final. */
-  --on-dark: #EFECE5;
-  --on-dark-title: #C9BBA4;
-  --on-dark-soft: #A79C8B;
+  --on-dark: #F2EDE3;
+  --on-dark-title: #D2BE9C;
+  --on-dark-soft: #B0A48E;
 }
 
 html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
@@ -112,7 +112,7 @@ a { color: inherit; }
 .sw-avap__poignee::after {
   content: ""; position: absolute; top: 50%; left: 50%;
   width: 42px; height: 42px; margin: -21px 0 0 -21px;
-  background: #fff; border-radius: 50%; box-shadow: 0 2px 10px rgba(14,17,22,.25);
+  background: #fff; border-radius: 50%; box-shadow: 0 2px 10px rgba(34, 27, 20,.25);
 }
 .sw-avap__note { text-align: center; margin-top: 18px; font-size: .87rem; color: var(--muted); }
 

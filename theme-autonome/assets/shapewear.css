@@ -19,20 +19,22 @@
      lire, pas se colorer. */
   --sw-brand: #8C5E2A;
   --sw-brand-hover: #744C20;
-  --sw-brand-soft: #F3E7D5;
+  --sw-brand-soft: #F2E3CC;
   --sw-brand-soft-text: #5E3D18;
   --sw-brand-link: #7A4F21;
 
-  --sw-ink: #14110D;
-  --sw-ink-soft: #3A342C;
-  --sw-muted: #6E665B;
-  --sw-line: #DAD3C6;
-  --sw-line-strong: #C9C0AE;
-  --sw-band: #F7F4EE;
-  --sw-band-deep: #EAE6DD;
+  --sw-ink: #221B14;
+  --sw-ink-soft: #4A4034;
+  --sw-muted: #6E6250;
+  --sw-line: #E0D4BE;
+  --sw-line-strong: #CDBC9E;
+  --sw-band: #F8F3E8;
+  --sw-band-deep: #EFE8DA;
   --sw-paper: #FFFFFF;
-  --sw-surface-dark: #14110D;
-  --sw-on-dark: #EFECE5;
+  --sw-surface-dark: #221B14;
+  --sw-on-dark: #F2EDE3;
+
+  --sw-ship: #EADCC4;
 
   --sw-success: #1F6F45;
   --sw-success-soft: #E7F0EA;
@@ -47,8 +49,8 @@
 
   /* Ombres teintées de la même encre chaude : une ombre grise sur un fond
      chaud se voit, et fait sale. */
-  --sw-shadow: 0 1px 2px rgba(20, 17, 13, .06), 0 8px 24px -12px rgba(20, 17, 13, .16);
-  --sw-shadow-lift: 0 2px 4px rgba(20, 17, 13, .07), 0 18px 44px -18px rgba(20, 17, 13, .26);
+  --sw-shadow: 0 1px 2px rgba(34, 27, 20, .06), 0 8px 24px -12px rgba(34, 27, 20, .16);
+  --sw-shadow-lift: 0 2px 4px rgba(34, 27, 20, .07), 0 18px 44px -18px rgba(34, 27, 20, .26);
 
   color: var(--sw-ink);
   font-family: var(--font-body-family, 'Murecho', system-ui, sans-serif);
@@ -1111,8 +1113,8 @@
   position: absolute;
   inset: 4px;
   border-radius: 50%;
-  background: var(--sw-swatch, #ccc);
-  border: 1px solid rgba(14, 17, 22, .12);
+  background: var(--sw-swatch, #E0D4BE);
+  border: 1px solid rgba(34, 27, 20, .12);
 }
 
 .sw-swatch input:checked + .sw-swatch__dot {
@@ -1315,7 +1317,7 @@
 
 .sw-modal[hidden] { display: none; }
 
-.sw-modal__veil { position: absolute; inset: 0; background: rgba(14, 17, 22, .55); border: 0; padding: 0; }
+.sw-modal__veil { position: absolute; inset: 0; background: rgba(34, 27, 20, .55); border: 0; padding: 0; }
 
 .sw-modal__panel {
   position: relative;
@@ -1585,16 +1587,16 @@
 
 /* Bandeau livraison sous l'en-tête */
 
-/* Blanche comme les cartes : c'est un bandeau d'information posé sur la
-   page, pas une bande de section. */
+/* Sable soutenu : entre l'en-tête crème et le fond sable, un blanc pur
+   créait une bande qui n'appartenait à rien. */
 .sw-shipbar {
-  background: var(--sw-paper);
+  background: var(--sw-ship);
   border-bottom: 1px solid var(--sw-line);
   padding: 9px 16px;
   text-align: center;
   font-size: .84rem;
   font-weight: 600;
-  color: var(--sw-ink-soft);
+  color: var(--sw-brand-soft-text);
 }
 
 .sw-shipbar span {
@@ -1603,7 +1605,7 @@
   gap: 8px;
 }
 
-.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-ink); }
+.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-brand-soft-text); }
 
 /* Blocs preuve : une photo, une objection levée */
 
@@ -1755,7 +1757,7 @@
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  box-shadow: 0 0 0 1px var(--sw-line), 0 18px 44px -18px rgba(20, 17, 13, .26);
+  box-shadow: 0 0 0 1px var(--sw-line), 0 18px 44px -18px rgba(34, 27, 20, .26);
 }
 
 /* La photo et, à sa droite, trois faits de fabrication.
