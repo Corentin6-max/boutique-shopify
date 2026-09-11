@@ -21,6 +21,11 @@
   --ink: #121212;
   --ink-soft: #333333;
   --surface-dark: #1e1e1e;
+
+  /* Bleu nuit demandé par le client pour la barre d'annonces. Il sort du
+     relevé, qui n'a que des noirs : c'est un choix assumé, et la seule
+     surface de la boutique à le porter. */
+  --announce: #161f33;
   --muted: #6e6e6e;
   --line: #e6e6e6;
   --band: #f6f6f6;
@@ -52,7 +57,7 @@ a { color: inherit; }
 /* ---------------------------------------------------- Barre d'annonces */
 
 .sw-announce {
-  background: var(--surface-dark); color: #fff; text-align: center;
+  background: var(--announce); color: #fff; text-align: center;
   padding: 11px 16px; font-size: .78rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
   min-height: 42px; display: grid; place-items: center;
