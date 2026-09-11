@@ -24,7 +24,6 @@
   --sw-brand: #f4b740;
   --sw-brand-soft: #f2c86f;
   --sw-brand-wash: #fdf6e8;
-  --sw-brand-mist: #dde3ee;
   --sw-blue: #1d9bf0;
 
   --sw-ink: #121212;
@@ -34,10 +33,10 @@
      comme « la marque ». Le pied de page reste noir. */
   --sw-surface-dark: #161f33;
   --sw-muted: #6e6e6e;
-  --sw-line: #e6e6e6;
-  --sw-line-strong: #cfcfcf;
-  --sw-band: #f6f6f6;
-  --sw-band-deep: #ededed;
+  --sw-line: #e2e1de;
+  --sw-line-strong: #cdccc8;
+  --sw-band: #f5f4f1;
+  --sw-band-deep: #eceae6;
   --sw-paper: #ffffff;
 
   --sw-accent: #f4b740;
@@ -1752,17 +1751,11 @@
    nouvelle teinte n'est introduite.
    ========================================================================== */
 
-/* A — Avant / après : fond bleu nuit dilué, cadre cerné d'or.
+/* A — Avant / après : cadre cerné d'or.
 
-   Le fond n'est pas une couleur de plus : c'est le bleu nuit de la barre
-   d'annonces éclairci jusqu'à devenir un fond. Le liseré doré de 3 px
-   autour du curseur travaille sur ce bleu — l'or et le bleu s'opposent,
-   chacun fait ressortir l'autre —, là où il se serait fondu dans un beige.
-
-   Un fond plat plutôt qu'un dégradé ou une bande : il se comporte de la
-   même façon quelle que soit la hauteur de la section, la longueur du
-   titre ou le format de la photo. */
-.sw-block:has(.sw-avap) { background: var(--sw-brand-mist); }
+   Pas de fond propre à cette section : elle repose sur le gris de la
+   boutique. Le liseré doré de 3 px suffit à désigner le curseur comme
+   l'objet à manipuler. */
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;

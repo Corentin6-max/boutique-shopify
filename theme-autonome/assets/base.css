@@ -27,8 +27,14 @@
      surface de la boutique à le porter. */
   --announce: #161f33;
   --muted: #6e6e6e;
-  --line: #e6e6e6;
-  --band: #f6f6f6;
+  --line: #e2e1de;
+
+  /* Fond de toute la boutique. Un gris très légèrement chaud plutôt que
+     neutre : sur un gris froid, l'or vire au moutarde. Les cartes restent
+     blanches et se détachent donc du fond, ce que le blanc sur blanc ne
+     permettait pas. */
+  --page: #ecebe8;
+  --band: #f5f4f1;
   --accent: #f4b740;
 }
 
@@ -38,7 +44,7 @@ html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: #fff;
+  background: var(--page);
   color: var(--ink);
   font-family: var(--font-body-family);
   line-height: 1.55;
