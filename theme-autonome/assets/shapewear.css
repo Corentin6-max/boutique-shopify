@@ -1780,7 +1780,12 @@
   align-items: start;
 }
 
+/* Au-delà de 860 px, la section sort de sa largeur restreinte et prend
+   celle de la page : la photo retrouve sa taille et les chiffres se logent
+   à côté. En dessous — donc sur tout téléphone — la règle ne s'applique
+   pas, la largeur reste celle du reste du thème et rien ne bouge. */
 @media (min-width: 860px) {
+  .sw-block:has(.sw-avap) .sw__wrap--narrow { max-width: var(--sw-max); }
   .sw-avap__grid { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
 }
 
