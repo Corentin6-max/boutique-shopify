@@ -1300,10 +1300,21 @@
   border-radius: 6px;
 }
 
+/* Sous 560 px, le nom du produit était purement et simplement masqué : la
+   barre n'affichait donc que le prix et le bouton. Il revient, tronqué par
+   une ellipse plutôt que supprimé — c'est la colonne de texte qui cède de
+   la place, pas le contenu. */
 @media (max-width: 560px) {
-  .sw-sticky__name { display: none; }
-  .sw-sticky__info { flex: none; }
-  .sw-sticky .sw__btn { flex: 1; }
+  .sw-sticky__info { flex: 1; min-width: 0; }
+  .sw-sticky__name { font-size: .78rem; }
+  .sw-sticky__meta strong { font-size: 16px; }
+  .sw-sticky__meta span { font-size: 10.5px; }
+
+  .sw-sticky .sw__btn {
+    flex: none;
+    padding-inline: 16px;
+    font-size: 14px;
+  }
 }
 
 /* ---------- Modale guide des tailles ---------- */
@@ -1604,17 +1615,16 @@
 
 /* Empilés, la barre d'annonce et ce bandeau donnaient deux familles de
    couleur sans rapport. Ils n'en forment plus qu'une : une bande d'encre
-   en haut, puis le blanc des cartes pour ce bandeau. Le crème unifié le
-   rendait presque invisible entre un en-tête et une page de même teinte :
-   le blanc le détache sans introduire de beige concurrent. */
+   en haut, et ce bandeau dans le même noir juste en dessous : les deux
+   bandes empilées ne forment plus qu'un seul bloc sombre avant le contenu. */
 .sw-shipbar {
-  background: var(--sw-paper);
+  background: var(--sw-surface-dark);
   border-bottom: 1px solid var(--sw-line);
   padding: 9px 16px;
   text-align: center;
   font-size: .84rem;
   font-weight: 700;
-  color: var(--sw-ink);
+  color: var(--sw-on-dark);
 }
 
 .sw-shipbar span {
@@ -1623,7 +1633,7 @@
   gap: 8px;
 }
 
-.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-ink); }
+.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-on-dark); }
 
 /* Blocs preuve : une photo, une objection levée */
 
