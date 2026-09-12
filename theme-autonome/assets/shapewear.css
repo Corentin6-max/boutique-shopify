@@ -17,8 +17,8 @@
      Le vert ne veut dire que « oui / inclus », le rouge que « non ». Aucun
      des deux n'est décoratif. Tout chiffre est en encre : un prix doit se
      lire, pas se colorer. */
-  --sw-brand: #8C5E2A;
-  --sw-brand-hover: #744C20;
+  --sw-brand: #8A5214;
+  --sw-brand-hover: #6F400D;
   --sw-brand-soft: #F2E3CC;
   --sw-brand-soft-text: #5E3D18;
   --sw-brand-link: #7A4F21;
@@ -28,18 +28,18 @@
   --sw-muted: #6E6250;
   --sw-line: #E0D4BE;
   --sw-line-strong: #CDBC9E;
-  --sw-band: #F8F3E8;
-  --sw-band-deep: #EFE8DA;
+  --sw-band: #F2EADC;
+  --sw-band-deep: #F2EADC;
   --sw-paper: #FFFFFF;
   --sw-surface-dark: #221B14;
   --sw-on-dark: #F2EDE3;
 
-  --sw-ship: #EADCC4;
+  --sw-ship: #F2EADC;
 
-  --sw-success: #1F6F45;
+  --sw-success: #147038;
   --sw-success-soft: #E7F0EA;
   --sw-no: #A33A2B;
-  --sw-yes-on-dark: #7FC29C;
+  --sw-yes-on-dark: #5FCB94;
 
   --sw-max: 1180px;
   --sw-gap: clamp(16px, 2.5vw, 28px);
@@ -659,8 +659,12 @@
   background: none;
   border: 0;
   font: inherit;
-  font-size: 1rem;
-  font-weight: 600;
+  /* La FAQ était composée un cran en dessous du reste de la page : corps
+     plus petit, police de texte là où les autres intitulés prennent la
+     police de titre. Même registre que les blocs de preuve. */
+  font-family: var(--font-heading-family, inherit);
+  font-size: 1.06rem;
+  font-weight: 700;
   color: var(--sw-ink);
   text-align: left;
   cursor: pointer;
@@ -691,10 +695,10 @@
 
 .sw-faq__a {
   padding: 0 2px 22px;
-  font-size: .95rem;
-  line-height: 1.65;
+  font-size: 1.06rem;
+  line-height: 1.7;
   color: var(--sw-ink-soft);
-  max-width: 68ch;
+  max-width: 70ch;
 }
 
 .sw-faq__a p { margin: 0 0 .8em; }
@@ -1598,16 +1602,18 @@
 
 /* Bandeau livraison sous l'en-tête */
 
-/* Sable soutenu : entre l'en-tête crème et le fond sable, un blanc pur
-   créait une bande qui n'appartenait à rien. */
+/* Empilés, la barre d'annonce et ce bandeau donnaient deux familles de
+   couleur sans rapport. Ils n'en forment plus qu'une : une bande d'encre
+   en haut, puis le crème commun à toute la page. La hiérarchie entre les
+   deux se fait par le fond, pas par deux beiges qui se disputent. */
 .sw-shipbar {
-  background: var(--sw-ship);
+  background: var(--sw-band);
   border-bottom: 1px solid var(--sw-line);
   padding: 9px 16px;
   text-align: center;
   font-size: .84rem;
-  font-weight: 600;
-  color: var(--sw-brand-soft-text);
+  font-weight: 700;
+  color: var(--sw-ink);
 }
 
 .sw-shipbar span {
@@ -1616,7 +1622,7 @@
   gap: 8px;
 }
 
-.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-brand-soft-text); }
+.sw-shipbar svg { width: 17px; height: 17px; color: var(--sw-ink); }
 
 /* Blocs preuve : une photo, une objection levée */
 
@@ -2011,6 +2017,11 @@
 @media (min-width: 701px) {
   .sw-compare__table thead th.sw-compare__col--us { border-radius: 10px 10px 0 0; }
   .sw-compare__table tbody tr:last-child td.sw-compare__col--us { border-radius: 0 0 10px 10px; }
+
+  /* Sur grand écran, un symbole de 20 px flottait au milieu d'une colonne
+     de 250 px. Il occupe maintenant sa place. */
+  .sw-compare__table .sw-mark { width: 34px; height: 34px; }
+  .sw-compare__table .sw-mark svg { width: 26px; height: 26px; }
 }
 
 /* B3 — Comparatif sur téléphone : deux colonnes plutôt que trois.
@@ -2031,14 +2042,15 @@
   .sw-compare__scroll { overflow-x: visible; }
   .sw-compare__table { table-layout: fixed; min-width: 0; }
 
+  /* Les deux colonnes de comparaison font la même largeur : à 23 % contre
+     29,5 %, la carte sombre paraissait rétrécie face à sa voisine. */
   .sw-compare__table thead th:first-child,
-  .sw-compare__table tbody th { width: 47.5%; }
+  .sw-compare__table tbody th { width: 48%; }
 
   .sw-compare__table thead th:nth-child(2),
-  .sw-compare__table tbody td:nth-child(2) { width: 23%; }
-
+  .sw-compare__table tbody td:nth-child(2),
   .sw-compare__table thead th:nth-child(3),
-  .sw-compare__table tbody td:nth-child(3) { width: 29.5%; }
+  .sw-compare__table tbody td:nth-child(3) { width: 26%; }
 
   .sw-compare__table tbody th {
     font-size: 12.5px;
@@ -2056,21 +2068,29 @@
   }
 
   .sw-compare__table thead th { font-size: 12px; }
-  .sw-compare__sub { font-size: 10.5px; }
+
+  /* Le sous-titre de colonne passait presque inaperçu sous l'intitulé. */
+  .sw-compare__sub {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--sw-ink-soft);
+  }
 
   .sw-compare__marque { font-size: 10px; letter-spacing: .08em; }
 
   .sw-compare__table th.sw-compare__col--us,
   .sw-compare__table td.sw-compare__col--us { padding-inline: 6px; }
 
+  /* Le reste du tableau est à angles vifs : 8 px détachaient la carte
+     sombre du dessin d'ensemble. */
   .sw-compare__table thead th.sw-compare__col--us {
     padding-top: 18px;
-    border-radius: 8px 8px 0 0;
+    border-radius: 4px 4px 0 0;
   }
 
   .sw-compare__table tbody tr:last-child td.sw-compare__col--us {
     padding-bottom: 18px;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 4px 4px;
   }
 
   .sw-compare__table th,

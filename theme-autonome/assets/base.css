@@ -3,15 +3,15 @@
 :root {
   /* Palette « Ardoise & Bronze ».
 
-     Le bronze #8C5E2A est la couleur d'action, et rien d'autre : bouton
+     Le bronze #8A5214 est la couleur d'action, et rien d'autre : bouton
      d'achat, état sélectionné, pastille du panier. Partout ailleurs on
      utilise sa version claire ou le texte bronze. Une couleur d'action
      employée partout ne signale plus rien. */
   --font-heading-family: "Bricolage Grotesque", "Murecho", system-ui, sans-serif;
   --font-body-family: "Murecho", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --brand: #8C5E2A;
-  --brand-hover: #744C20;
+  --brand: #8A5214;
+  --brand-hover: #6F400D;
   --brand-soft: #F2E3CC;
   --brand-soft-text: #5E3D18;
   --brand-link: #7A4F21;
@@ -21,8 +21,8 @@
   --muted: #6E6250;
   --line: #E0D4BE;
 
-  --page: #EFE8DA;
-  --band: #F8F3E8;
+  --page: #F2EADC;
+  --band: #F2EADC;
   --surface-dark: #221B14;
 
   /* Sur fond sombre : barre d'annonce, pied de page, bloc d'achat final. */
