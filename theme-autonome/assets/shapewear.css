@@ -120,7 +120,7 @@
   gap: 8px;
   font-size: .72rem;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--sw-muted);
   margin: 0 0 14px;
@@ -484,7 +484,7 @@
   text-align: left;
   font-size: .74rem;
   font-weight: 700;
-  letter-spacing: .1em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--sw-muted);
 }
@@ -571,80 +571,9 @@
 .sw-mark--no { color: var(--sw-no); }
 .sw-compare__col--us .sw-mark--yes { color: var(--sw-yes-on-dark); }
 
-/* Sur téléphone le tableau tient dans la largeur de l'écran : plus de
-   défilement latéral, la colonne Velluno reste visible en même temps que
-   l'intitulé de la ligne. Les largeurs sont figées (table-layout: fixed)
-   parce que les trois colonnes de droite ne contiennent qu'une icône :
-   c'est la première colonne qui doit prendre la place restante, et les
-   trois autres juste de quoi loger le plus long mot d'en-tête. */
-@media (max-width: 700px) {
-  .sw-compare__scroll { overflow-x: visible; padding-top: 12px; }
-
-  .sw-compare__table {
-    min-width: 0;
-    table-layout: fixed;
-  }
-
-  .sw-compare__table thead th:first-child,
-  .sw-compare__table tbody th { width: 38.5%; }
-
-  .sw-compare__table thead th + th,
-  .sw-compare__table td { width: 20.5%; }
-
-  .sw-compare__table th,
-  .sw-compare__table td { padding: 15px 4px; overflow-wrap: anywhere; }
-
-  .sw-compare__table thead th {
-    font-size: .58rem;
-    line-height: 1.25;
-    padding-bottom: 12px;
-  }
-
-  .sw-compare__table thead th:first-child {
-    font-size: .58rem;
-    letter-spacing: .07em;
-    padding-left: 0;
-  }
-
-  .sw-compare__sub { font-size: .5rem; line-height: 1.25; margin-top: 3px; }
-
-  .sw-compare__table thead th.sw-compare__col--us { padding-top: 16px; }
-  .sw-compare__table tbody tr:last-child td.sw-compare__col--us { padding-bottom: 16px; }
-
-  .sw-compare__marque { font-size: .66rem; letter-spacing: .04em; }
-
-  .sw-compare__table tbody th {
-    font-size: .88rem;
-    line-height: 1.35;
-    padding-left: 0;
-  }
-
-  /* Colonne de gauche allégée : seuls les intitulés en gras restent, les
-     phrases de mécanisme sont réservées à l'affichage large. */
-  .sw-compare__why { display: none; }
-
-  .sw-mark { width: 20px; height: 20px; }
-  .sw-mark svg { width: 17px; height: 17px; }
-}
-
-/* Écrans les plus étroits (360 et 375 px) : les en-têtes descendent d'un
-   cran et la colonne de gauche gagne quelques points de largeur, pour que
-   « gynécomastie » et « morphologies » tiennent sur une ligne — sans quoi
-   la césure automatique les couperait en plein milieu. */
-@media (max-width: 385px) {
-  .sw-compare__table thead th:first-child,
-  .sw-compare__table tbody th { width: 41.5%; }
-
-  .sw-compare__table thead th + th,
-  .sw-compare__table td { width: 19.5%; }
-
-  .sw-compare__table thead th,
-  .sw-compare__table thead th:first-child { font-size: .53rem; }
-
-  .sw-compare__sub { font-size: .44rem; }
-
-  .sw-compare__table tbody th { font-size: .84rem; }
-}
+/* Le comparatif sur téléphone est traité dans la passe finitions, plus bas
+   dans ce fichier (point B3) : deux colonnes au lieu de trois, ce qui rend
+   inutiles les largeurs et les corps de texte réduits qui tenaient ici. */
 
 /* ==========================================================================
    AVIS CLIENTS
@@ -849,23 +778,80 @@
 .sw-gallery__main {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  background: var(--sw-band);
+  background: var(--sw-paper);
   aspect-ratio: 1 / 1;
   position: relative;
 }
 
-.sw-gallery__main img {
+/* Piste défilante : une image par écran, accrochée au bord. La barre de
+   défilement est masquée à toutes les largeurs — une barre système sous une
+   photo produit fait inachevé — mais le geste, lui, reste possible. */
+.sw-gallery__track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sw-gallery__track::-webkit-scrollbar { display: none; }
+
+.sw-gallery__slide {
+  flex: 0 0 100%;
+  height: 100%;
+  scroll-snap-align: start;
+}
+
+.sw-gallery__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
+/* Pastilles de pagination : repère standard sur téléphone, masqué sur
+   ordinateur où les vignettes jouent déjà ce rôle. */
+.sw-gallery__dots { display: none; }
+
+.sw-gallery__dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--sw-line);
+  cursor: pointer;
+  transition: width .15s ease, height .15s ease, background .15s ease;
+}
+
+.sw-gallery__dot[aria-current="true"] {
+  width: 8px;
+  height: 8px;
+  background: var(--sw-brand);
+}
+
+.sw-gallery__dot:focus-visible { outline: 2px solid var(--sw-brand); outline-offset: 3px; }
+
+/* Bandeau de vignettes défilant, sans barre système visible (A5). Le
+   défilement horizontal reste possible, il se fait par crans. */
 .sw-gallery__thumbs {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 9px;
+  display: flex;
+  gap: 8px;
   margin-top: 9px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sw-gallery__thumbs::-webkit-scrollbar { display: none; }
+
+.sw-gallery__thumbs .sw-gallery__thumb {
+  flex: 0 0 clamp(64px, 13%, 84px);
+  scroll-snap-align: start;
 }
 
 .sw-gallery__thumb {
@@ -1265,13 +1251,13 @@
   position: fixed;
   inset: auto 0 0 0;
   z-index: 60;
-  background: rgba(255, 255, 255, .97);
-  backdrop-filter: blur(10px);
+  background: var(--sw-paper);
   border-top: 1px solid var(--sw-line);
-  padding: 11px clamp(12px, 4vw, 24px);
+  box-shadow: 0 -2px 12px rgba(34, 27, 20, .08);
+  padding: 12px 16px;
   transform: translateY(105%);
   transition: transform .28s cubic-bezier(.4, 0, .2, 1);
-  padding-bottom: max(11px, env(safe-area-inset-bottom));
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
 }
 
 .sw-sticky.is-visible { transform: translateY(0); }
@@ -1294,13 +1280,25 @@
   text-overflow: ellipsis;
 }
 
-.sw-sticky__meta { font-size: .8rem; color: var(--sw-muted); }
-.sw-sticky__meta strong { color: var(--sw-ink); font-size: .93rem; }
+/* Le prix d'abord, en chiffres pleins ; la variante choisie dessous, en
+   rappel. C'est le prix du pack courant, pas celui de l'unité : il suit le
+   sélecteur. */
+.sw-sticky__meta { display: flex; flex-direction: column; }
+.sw-sticky__meta strong { color: var(--sw-ink); font-size: 17px; font-weight: 700; line-height: 1.2; }
+.sw-sticky__meta span { font-size: 11px; color: var(--sw-muted); }
 
-.sw-sticky .sw__btn { min-height: 46px; padding-inline: 26px; flex: none; }
+.sw-sticky .sw__btn {
+  min-height: 46px;
+  padding-inline: 26px;
+  flex: none;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 6px;
+}
 
 @media (max-width: 560px) {
   .sw-sticky__name { display: none; }
+  .sw-sticky__info { flex: none; }
   .sw-sticky .sw__btn { flex: 1; }
 }
 
@@ -1483,10 +1481,10 @@
   gap: 14px;
   margin: 28px 0 14px;
   font-size: .76rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--sw-ink);
+  color: var(--sw-muted);
 }
 
 .sw-divider::before,
@@ -1569,20 +1567,33 @@
 
 .sw-unit-row select:focus-visible { outline: 2px solid var(--sw-brand); outline-offset: 1px; }
 
-/* Galerie : bandeau de vignettes défilant plutôt qu'une grille figée */
+/* Galerie sur téléphone : format portrait, pastilles, plus de vignettes.
 
-.sw-gallery__thumbs {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  padding-bottom: 4px;
-  scroll-snap-type: x proximity;
-}
+   Le cadre carré tassait la photo et les vignettes s'entassaient sous une
+   barre de défilement système. Un 4:5 occupe l'écran et donne de la
+   présence au produit ; les pastilles libèrent la hauteur ainsi gagnée.
 
-.sw-gallery__thumbs .sw-gallery__thumb {
-  flex: 0 0 clamp(58px, 13%, 84px);
-  scroll-snap-align: start;
+   « contain » et non « cover » : les visuels actuels sont des montages avec
+   du texte incrusté, que le recadrage couperait. À repasser en « cover »
+   quand ce seront de vraies photos produit. */
+
+@media (max-width: 760px) {
+  .sw-gallery__main {
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+  }
+
+  .sw-gallery__slide img { object-fit: contain; }
+
+  .sw-gallery__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .sw-gallery__thumbs { display: none; }
 }
 
 /* Bandeau livraison sous l'en-tête */
@@ -1929,4 +1940,166 @@
 #aide,
 #sw-achat {
   scroll-margin-top: 96px;
+}
+
+/* ==========================================================================
+   PASSE FINITIONS
+   ========================================================================== */
+
+/* A1 + A2 — Couleur et soulignement de lien par défaut.
+
+   Le bloc d'achat final affichait sa phrase en bleu-violet et deux
+   intitulés de FAQ étaient soulignés : à chaque fois c'est la feuille de
+   style du navigateur qui passe, sur un élément que rien ne couvrait. On
+   verrouille le bloc entier et tous ses descendants, dans tous les états,
+   plutôt que l'élément où le symptôme s'est montré. */
+
+.sw-faq__cta,
+.sw-faq__cta *,
+.sw-faq__cta a,
+.sw-faq__cta a:link,
+.sw-faq__cta a:visited,
+.sw-faq__cta a:hover,
+.sw-faq__cta a:active { color: var(--sw-on-dark); }
+
+.sw-faq__cta .sw__btn,
+.sw-faq__cta .sw__btn:link,
+.sw-faq__cta .sw__btn:visited,
+.sw-faq__cta .sw__btn:hover,
+.sw-faq__cta .sw__btn:active { color: #fff; }
+
+#aide h2,
+#aide h3,
+.sw-faq__q,
+.sw-faq__q *,
+.sw-faq__q:link,
+.sw-faq__q:visited,
+.sw-faq__q:hover,
+.sw-faq__q:active,
+.sw-faq__item > h3 > a,
+.sw-faq__item > h3 > a:visited {
+  color: var(--sw-ink);
+  text-decoration: none;
+}
+
+/* Un soulignement peut aussi venir d'un <u> ou d'un <ins> collé dans
+   l'éditeur : le titre « Questions fréquentes » en portait un sous sa
+   première lettre. */
+#aide h2 u,
+#aide h2 ins,
+#aide h3 u,
+#aide h3 ins,
+.sw-faq__q u,
+.sw-faq__q ins { text-decoration: none; }
+
+/* C2 — Largeur de lecture.
+
+   Au-delà d'environ 70 caractères par ligne, l'œil perd le début de la
+   ligne suivante. Seuls les paragraphes sont bornés : ni les titres, ni
+   les tableaux, ni les grilles, dont la largeur porte autre chose. */
+@media (min-width: 1100px) {
+  .sw-proof__body > p,
+  .sw-faq__a > p,
+  .sw__section-head > p,
+  .sw-acc__a > p { max-width: 70ch; }
+
+  .sw__section-head--center > p { margin-inline: auto; }
+}
+
+/* C1 — Comparatif sur ordinateur : la carte sombre doit coïncider avec les
+   lignes du tableau, sans dépasser ni en haut ni en bas. */
+@media (min-width: 701px) {
+  .sw-compare__table thead th.sw-compare__col--us { border-radius: 10px 10px 0 0; }
+  .sw-compare__table tbody tr:last-child td.sw-compare__col--us { border-radius: 0 0 10px 10px; }
+}
+
+/* B3 — Comparatif sur téléphone : deux colonnes plutôt que trois.
+
+   Sous 400 px, trois colonnes de comparaison forcent les en-têtes sur
+   trois lignes et coupent les intitulés en plein mot. « Gaine premier
+   prix » est masquée — pas supprimée, elle reste sur ordinateur : c'est la
+   colonne dont l'absence coûte le moins, le débardeur classique étant le
+   vrai point de comparaison du visiteur. */
+@media (max-width: 768px) {
+  .sw-compare__table thead th:last-child,
+  .sw-compare__table tbody td:last-child { display: none; }
+}
+
+@media (max-width: 700px) {
+  /* min-width: 680px est ce qui forçait le défilement latéral : à deux
+     colonnes le tableau tient, et n'a plus besoin d'un conteneur défilant. */
+  .sw-compare__scroll { overflow-x: visible; }
+  .sw-compare__table { table-layout: fixed; min-width: 0; }
+
+  .sw-compare__table thead th:first-child,
+  .sw-compare__table tbody th { width: 47.5%; }
+
+  .sw-compare__table thead th:nth-child(2),
+  .sw-compare__table tbody td:nth-child(2) { width: 23%; }
+
+  .sw-compare__table thead th:nth-child(3),
+  .sw-compare__table tbody td:nth-child(3) { width: 29.5%; }
+
+  .sw-compare__table tbody th {
+    font-size: 12.5px;
+    line-height: 1.4;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
+  }
+
+  .sw-compare__why {
+    display: block;
+    font-size: 11.5px;
+    line-height: 1.4;
+    margin-top: 3px;
+  }
+
+  .sw-compare__table thead th { font-size: 12px; }
+  .sw-compare__sub { font-size: 10.5px; }
+
+  .sw-compare__marque { font-size: 10px; letter-spacing: .08em; }
+
+  .sw-compare__table th.sw-compare__col--us,
+  .sw-compare__table td.sw-compare__col--us { padding-inline: 6px; }
+
+  .sw-compare__table thead th.sw-compare__col--us {
+    padding-top: 18px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .sw-compare__table tbody tr:last-child td.sw-compare__col--us {
+    padding-bottom: 18px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .sw-compare__table th,
+  .sw-compare__table td { padding: 14px 8px; }
+}
+
+/* B4 — En-tête sur téléphone : le strict nécessaire, et discret.
+
+   L'en-tête reste collant mais ne porte pas d'ombre : sur un fond sable,
+   une ombre sous une barre crème fait une deuxième ligne inutile. */
+@media (max-width: 760px) {
+  .sw-header { box-shadow: none; }
+
+  .sw-announce {
+    font-size: 9.5px;
+    padding-inline: 24px;
+  }
+}
+
+/* B5 — Bloc produit sur téléphone.
+
+   Le titre passait sur trois lignes : à 22 px il en tient deux, ce qui
+   laisse le prix visible sans défiler. */
+@media (max-width: 760px) {
+  .sw-pdp__title,
+  .sw__h1 { font-size: 22px; }
+
+  .sw-sizes { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .sw-size__box { font-size: 12px; min-width: 38px; padding-inline: 0; }
+
+  .sw-bundle__box { width: 100%; }
 }

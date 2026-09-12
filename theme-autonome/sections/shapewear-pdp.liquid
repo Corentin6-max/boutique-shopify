@@ -60,19 +60,29 @@
 
       {%- comment -%} -------------------------------------- Galerie {%- endcomment -%}
       <div class="sw-pdp__col sw-pdp__col--media" data-sw-gallery>
+        {%- comment -%}
+          Une seule piste défilante sert les deux formats : sur téléphone on
+          la fait glisser au doigt, sur ordinateur les vignettes la
+          déplacent. Une image unique dont on échangeait la source ne
+          permettait pas le glissement tactile, qui est le geste attendu.
+        {%- endcomment -%}
         <div class="sw-gallery__main">
           {%- if section.settings.flag_text != blank -%}
             <span class="sw-gallery__flag">{{ section.settings.flag_text }}</span>
           {%- endif -%}
 
           {%- if product.media.size > 0 -%}
-            {%- assign first_media = product.media | first -%}
-            <img
-              src="{{ first_media | image_url: width: 1200 }}"
-              alt="{{ first_media.alt | default: product.title | escape }}"
-              width="1200" height="1200"
-              loading="eager" fetchpriority="high"
-              data-sw-gallery-main>
+            <div class="sw-gallery__track" data-sw-gallery-track>
+              {%- for media in product.media limit: section.settings.max_thumbs -%}
+                <div class="sw-gallery__slide">
+                  <img
+                    src="{{ media | image_url: width: 1200 }}"
+                    alt="{{ media.alt | default: product.title | escape }}"
+                    width="1200" height="1200"
+                    {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                </div>
+              {%- endfor -%}
+            </div>
           {%- else -%}
             <div class="sw__ph">
               {% render 'sw-icon', icon: 'image' %}
@@ -82,13 +92,28 @@
         </div>
 
         {%- if product.media.size > 1 -%}
+          {%- comment -%}
+            Sur téléphone, des pastilles : sept vignettes minuscules sur une
+            ligne ne se visent pas au doigt et mangent de la hauteur.
+          {%- endcomment -%}
+          <div class="sw-gallery__dots" data-sw-gallery-dots>
+            {%- for media in product.media limit: section.settings.max_thumbs -%}
+              <button
+                type="button"
+                class="sw-gallery__dot"
+                data-sw-dot="{{ forloop.index0 }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="Voir l'image {{ forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+
           <div class="sw-gallery__thumbs">
             {%- for media in product.media limit: section.settings.max_thumbs -%}
               <button
                 type="button"
                 class="sw-gallery__thumb"
                 data-sw-thumb="{{ media.id }}"
-                data-sw-full="{{ media | image_url: width: 1200 }}"
+                data-sw-index="{{ forloop.index0 }}"
                 aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-label="Voir l'image {{ forloop.index }}">
                 <img src="{{ media | image_url: width: 240 }}" alt="" width="240" height="240" loading="lazy">

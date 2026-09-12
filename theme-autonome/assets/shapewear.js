@@ -256,9 +256,10 @@
 
     if (this.stickyPrice) this.stickyPrice.textContent = this.money(total / 100);
     if (this.stickyMeta) {
-      this.stickyMeta.textContent = units > 1
-        ? units + ' débardeurs'
-        : [top.color, 'Taille ' + top.size].filter(Boolean).join(' · ');
+      /* La barre doit rappeler ce qu'on s'apprête à acheter : la taille
+         d'abord, c'est le choix dont on doute. */
+      var choix = ['Taille ' + top.size, top.color].filter(Boolean).join(' · ');
+      this.stickyMeta.textContent = units > 1 ? units + ' × ' + choix : choix;
     }
 
     this.syncMedia(variant);
@@ -430,24 +431,80 @@
 
   function initGallery(scope) {
     $$('[data-sw-gallery]', scope).forEach(function (gallery) {
-      var main = $('[data-sw-gallery-main]', gallery);
-      if (!main) return;
-      $$('[data-sw-thumb]', gallery).forEach(function (thumb) {
-        thumb.addEventListener('click', function () {
-          var full = thumb.getAttribute('data-sw-full');
-          if (full) main.src = full;
-          $$('[data-sw-thumb]', gallery).forEach(function (other) {
-            other.setAttribute('aria-current', String(other === thumb));
-          });
+      var track = $('[data-sw-gallery-track]', gallery);
+      if (!track) return;
+
+      var slides = $$('.sw-gallery__slide', track);
+      var thumbs = $$('[data-sw-thumb]', gallery);
+      var dots = $$('[data-sw-dot]', gallery);
+      if (slides.length < 2) return;
+
+      function mark(list, index) {
+        list.forEach(function (el, i) {
+          el.setAttribute('aria-current', String(i === index));
         });
+      }
+
+      function show(index, smooth) {
+        var slide = slides[index];
+        if (!slide) return;
+        track.scrollTo({
+          left: slide.offsetLeft - track.offsetLeft,
+          behavior: smooth === false ? 'auto' : 'smooth'
+        });
+      }
+
+      thumbs.forEach(function (thumb, i) {
+        thumb.addEventListener('click', function () { show(i); });
       });
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { show(i); });
+      });
+
+      /* La piste est la source de vérité : qu'on l'ait déplacée au doigt,
+         à la vignette ou à la pastille, c'est sa position qui dit quelle
+         image est visible. */
+      var pending;
+      track.addEventListener('scroll', function () {
+        if (pending) cancelAnimationFrame(pending);
+        pending = requestAnimationFrame(function () {
+          var middle = track.scrollLeft + track.clientWidth / 2;
+          var index = 0;
+          for (var i = 0; i < slides.length; i++) {
+            var left = slides[i].offsetLeft - track.offsetLeft;
+            if (middle >= left && middle < left + slides[i].offsetWidth) { index = i; break; }
+          }
+          mark(thumbs, index);
+          mark(dots, index);
+        });
+      }, { passive: true });
     });
+  }
+
+  /* ------------------------------------------------- Barre d'achat collante */
+
+  /* Le balisage et les styles existaient, mais rien ne posait jamais la
+     classe : la barre restait hors de l'écran en permanence. Elle apparaît
+     quand le bouton d'achat sort du champ de vision, et se retire dès
+     qu'il revient — sinon on propose deux fois la même action. */
+  function initStickyAtc(scope) {
+    var bar = $('[data-sticky-atc]', scope) || $('[data-sticky-atc]');
+    var trigger = $('[data-sticky-trigger]', scope) || $('[data-sticky-trigger]');
+    if (!bar || !trigger || typeof IntersectionObserver !== 'function') return;
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('is-visible', !entry.isIntersecting && entry.boundingClientRect.top < 0);
+      });
+    }, { threshold: 0 }).observe(trigger);
   }
 
   /* ------------------------------------------------------------------ Init */
 
   function init(scope) {
     initGallery(scope);
+    initStickyAtc(scope);
     $$('[data-sw-product]', scope).forEach(function (root) { new ShapewearProduct(root); });
     initAccordions(scope);
   }
