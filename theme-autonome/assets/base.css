@@ -3,32 +3,32 @@
 :root {
   /* Palette « Ardoise & Bronze ».
 
-     Le bronze #8A5214 est la couleur d'action, et rien d'autre : bouton
+     Le bronze #0D0D0D est la couleur d'action, et rien d'autre : bouton
      d'achat, état sélectionné, pastille du panier. Partout ailleurs on
      utilise sa version claire ou le texte bronze. Une couleur d'action
      employée partout ne signale plus rien. */
   --font-heading-family: "Bricolage Grotesque", "Murecho", system-ui, sans-serif;
   --font-body-family: "Murecho", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --brand: #8A5214;
-  --brand-hover: #6F400D;
-  --brand-soft: #F2E3CC;
-  --brand-soft-text: #5E3D18;
-  --brand-link: #7A4F21;
+  --brand: #0D0D0D;
+  --brand-hover: #262626;
+  --brand-soft: #ECECE9;
+  --brand-soft-text: #0D0D0D;
+  --brand-link: #0D0D0D;
 
-  --ink: #221B14;
-  --ink-soft: #4A4034;
-  --muted: #6E6250;
-  --line: #E0D4BE;
+  --ink: #0D0D0D;
+  --ink-soft: #4A4A4A;
+  --muted: #4A4A4A;
+  --line: #E2E2DE;
 
-  --page: #F2EADC;
-  --band: #F2EADC;
-  --surface-dark: #221B14;
+  --page: #F7F7F5;
+  --band: #F7F7F5;
+  --surface-dark: #0D0D0D;
 
   /* Sur fond sombre : barre d'annonce, pied de page, bloc d'achat final. */
-  --on-dark: #F2EDE3;
-  --on-dark-title: #D2BE9C;
-  --on-dark-soft: #B0A48E;
+  --on-dark: #FFFFFF;
+  --on-dark-title: #FFFFFF;
+  --on-dark-soft: #A3A3A3;
 }
 
 html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
@@ -112,7 +112,7 @@ a { color: inherit; }
 .sw-avap__poignee::after {
   content: ""; position: absolute; top: 50%; left: 50%;
   width: 42px; height: 42px; margin: -21px 0 0 -21px;
-  background: #fff; border-radius: 50%; box-shadow: 0 2px 10px rgba(34, 27, 20,.25);
+  background: #fff; border-radius: 50%; box-shadow: 0 2px 10px rgba(13, 13, 13,.25);
 }
 .sw-avap__note { text-align: center; margin-top: 18px; font-size: .87rem; color: var(--muted); }
 

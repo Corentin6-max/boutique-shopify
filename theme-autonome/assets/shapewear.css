@@ -17,29 +17,29 @@
      Le vert ne veut dire que « oui / inclus », le rouge que « non ». Aucun
      des deux n'est décoratif. Tout chiffre est en encre : un prix doit se
      lire, pas se colorer. */
-  --sw-brand: #8A5214;
-  --sw-brand-hover: #6F400D;
-  --sw-brand-soft: #F2E3CC;
-  --sw-brand-soft-text: #5E3D18;
-  --sw-brand-link: #7A4F21;
+  --sw-brand: #0D0D0D;
+  --sw-brand-hover: #262626;
+  --sw-brand-soft: #ECECE9;
+  --sw-brand-soft-text: #0D0D0D;
+  --sw-brand-link: #0D0D0D;
 
-  --sw-ink: #221B14;
-  --sw-ink-soft: #4A4034;
-  --sw-muted: #6E6250;
-  --sw-line: #E0D4BE;
-  --sw-line-strong: #CDBC9E;
-  --sw-band: #F2EADC;
-  --sw-band-deep: #F2EADC;
+  --sw-ink: #0D0D0D;
+  --sw-ink-soft: #4A4A4A;
+  --sw-muted: #4A4A4A;
+  --sw-line: #E2E2DE;
+  --sw-line-strong: #D8D8D4;
+  --sw-band: #F7F7F5;
+  --sw-band-deep: #F7F7F5;
   --sw-paper: #FFFFFF;
-  --sw-surface-dark: #221B14;
-  --sw-on-dark: #F2EDE3;
+  --sw-surface-dark: #0D0D0D;
+  --sw-on-dark: #FFFFFF;
 
-  --sw-ship: #F2EADC;
+  --sw-ship: #F7F7F5;
 
   --sw-success: #147038;
-  --sw-success-soft: #E7F0EA;
+  --sw-success-soft: #E4F0E9;
   --sw-no: #A33A2B;
-  --sw-yes-on-dark: #5FCB94;
+  --sw-yes-on-dark: #35C070;
 
   --sw-max: 1180px;
   --sw-gap: clamp(16px, 2.5vw, 28px);
@@ -49,8 +49,8 @@
 
   /* Ombres teintées de la même encre chaude : une ombre grise sur un fond
      chaud se voit, et fait sale. */
-  --sw-shadow: 0 1px 2px rgba(34, 27, 20, .06), 0 8px 24px -12px rgba(34, 27, 20, .16);
-  --sw-shadow-lift: 0 2px 4px rgba(34, 27, 20, .07), 0 18px 44px -18px rgba(34, 27, 20, .26);
+  --sw-shadow: 0 1px 2px rgba(13, 13, 13, .06), 0 8px 24px -12px rgba(13, 13, 13, .16);
+  --sw-shadow-lift: 0 2px 4px rgba(13, 13, 13, .07), 0 18px 44px -18px rgba(13, 13, 13, .26);
 
   color: var(--sw-ink);
   font-family: var(--font-body-family, 'Murecho', system-ui, sans-serif);
@@ -1103,8 +1103,8 @@
   position: absolute;
   inset: 4px;
   border-radius: 50%;
-  background: var(--sw-swatch, #E0D4BE);
-  border: 1px solid rgba(34, 27, 20, .12);
+  background: var(--sw-swatch, #E2E2DE);
+  border: 1px solid rgba(13, 13, 13, .12);
 }
 
 .sw-swatch input:checked + .sw-swatch__dot {
@@ -1213,7 +1213,7 @@
   color: var(--sw-ink-soft);
 }
 
-.sw-pdp__reassure svg { width: 18px; height: 18px; color: var(--sw-ink); flex: none; }
+.sw-pdp__reassure svg { width: 18px; height: 18px; color: var(--sw-success); flex: none; }
 
 /* ---------- Accordéons produit ---------- */
 
@@ -1257,7 +1257,7 @@
   z-index: 60;
   background: var(--sw-paper);
   border-top: 1px solid var(--sw-line);
-  box-shadow: 0 -2px 12px rgba(34, 27, 20, .08);
+  box-shadow: 0 -2px 12px rgba(13, 13, 13, .08);
   padding: 12px 16px;
   transform: translateY(105%);
   transition: transform .28s cubic-bezier(.4, 0, .2, 1);
@@ -1319,7 +1319,7 @@
 
 .sw-modal[hidden] { display: none; }
 
-.sw-modal__veil { position: absolute; inset: 0; background: rgba(34, 27, 20, .55); border: 0; padding: 0; }
+.sw-modal__veil { position: absolute; inset: 0; background: rgba(13, 13, 13, .55); border: 0; padding: 0; }
 
 .sw-modal__panel {
   position: relative;
@@ -1775,7 +1775,7 @@
 .sw-block:has(.sw-avap) .sw-avap {
   border-radius: var(--sw-radius);
   overflow: hidden;
-  box-shadow: 0 0 0 1px var(--sw-line), 0 18px 44px -18px rgba(34, 27, 20, .26);
+  box-shadow: 0 0 0 1px var(--sw-line), 0 18px 44px -18px rgba(13, 13, 13, .26);
 }
 
 /* La photo et, à sa droite, trois faits de fabrication.
