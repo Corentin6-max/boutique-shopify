@@ -322,7 +322,7 @@
               <p class="sw-pdp__stock">{{ section.settings.stock_note }}</p>
             {%- endif -%}
 
-            <div class="sw-pdp__atc">
+            <div class="sw-pdp__atc" data-sticky-trigger>
               <button type="submit" class="sw__btn sw__btn--primary sw__btn--block" data-sw-add>
                 <span data-sw-add-text>{{ section.settings.add_label }}</span>
               </button>
@@ -393,6 +393,21 @@
       {%- endfor -%}
     ]
   </script>
+
+  <div class="sw-sticky" data-sticky-atc>
+    <div class="sw-sticky__inner">
+      <div class="sw-sticky__info">
+        <div class="sw-sticky__name">{{ product.title }}</div>
+        <div class="sw-sticky__meta">
+          <strong data-sw-sticky-price>{{ current.price | money }}</strong>
+          <span data-sw-sticky-meta></span>
+        </div>
+      </div>
+      <button type="submit" form="{{ form_id }}" class="sw__btn sw__btn--primary">
+        {{ section.settings.add_label }}
+      </button>
+    </div>
+  </div>
 
   <div class="sw-modal" data-sw-modal hidden role="dialog" aria-modal="true" aria-label="Guide des tailles">
     <button type="button" class="sw-modal__veil" data-sw-modal-veil tabindex="-1" aria-hidden="true"></button>
