@@ -1604,10 +1604,11 @@
 
 /* Empilés, la barre d'annonce et ce bandeau donnaient deux familles de
    couleur sans rapport. Ils n'en forment plus qu'une : une bande d'encre
-   en haut, puis le crème commun à toute la page. La hiérarchie entre les
-   deux se fait par le fond, pas par deux beiges qui se disputent. */
+   en haut, puis le blanc des cartes pour ce bandeau. Le crème unifié le
+   rendait presque invisible entre un en-tête et une page de même teinte :
+   le blanc le détache sans introduire de beige concurrent. */
 .sw-shipbar {
-  background: var(--sw-band);
+  background: var(--sw-paper);
   border-bottom: 1px solid var(--sw-line);
   padding: 9px 16px;
   text-align: center;
