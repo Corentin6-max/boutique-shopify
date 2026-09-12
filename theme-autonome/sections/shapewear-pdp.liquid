@@ -179,17 +179,42 @@
               </legend>
               <div class="sw-swatches">
                 {%- for value in color_option.values -%}
-                  {%- assign hex = '#cccccc' -%}
+                  {%- comment -%}
+                    Le réglage « Coloris » reste prioritaire. Mais il associe
+                    les teintes à des noms, et renommer un coloris suffisait à
+                    faire retomber la pastille sur un gris de repli. Les cinq
+                    coloris du catalogue ont donc leur teinte inscrite ici, sous
+                    leurs noms français comme sous ceux du fournisseur.
+                  {%- endcomment -%}
                   {%- liquid
+                    assign hex = ''
+                    assign candidate = value | downcase | strip
+
                     for line in swatch_lines
                       assign pair = line | strip | split: ':'
                       assign key = pair[0] | strip | downcase
-                      assign candidate = value | downcase
                       if key == candidate
                         assign hex = pair[1] | strip
                         break
                       endif
                     endfor
+
+                    if hex == blank
+                      case candidate
+                        when 'noir', 'black'
+                          assign hex = '#16181d'
+                        when 'blanc', 'white'
+                          assign hex = '#f2f1ec'
+                        when 'gris', 'gray', 'grey'
+                          assign hex = '#8d9299'
+                        when 'bleu marine', 'bleu', 'blue', 'navy'
+                          assign hex = '#1e2b4d'
+                        when 'beige'
+                          assign hex = '#d9c2a4'
+                        else
+                          assign hex = '#cccccc'
+                      endcase
+                    endif
                   -%}
                   <label class="sw-swatch">
                     <input
@@ -297,7 +322,7 @@
               <p class="sw-pdp__stock">{{ section.settings.stock_note }}</p>
             {%- endif -%}
 
-            <div class="sw-pdp__atc" data-sticky-trigger>
+            <div class="sw-pdp__atc">
               <button type="submit" class="sw__btn sw__btn--primary sw__btn--block" data-sw-add>
                 <span data-sw-add-text>{{ section.settings.add_label }}</span>
               </button>
@@ -368,21 +393,6 @@
       {%- endfor -%}
     ]
   </script>
-
-  <div class="sw-sticky" data-sticky-atc>
-    <div class="sw-sticky__inner">
-      <div class="sw-sticky__info">
-        <div class="sw-sticky__name">{{ product.title }}</div>
-        <div class="sw-sticky__meta">
-          <strong data-sw-sticky-price>{{ current.price | money }}</strong>
-          <span data-sw-sticky-meta></span>
-        </div>
-      </div>
-      <button type="submit" form="{{ form_id }}" class="sw__btn sw__btn--primary">
-        {{ section.settings.add_label }}
-      </button>
-    </div>
-  </div>
 
   <div class="sw-modal" data-sw-modal hidden role="dialog" aria-modal="true" aria-label="Guide des tailles">
     <button type="button" class="sw-modal__veil" data-sw-modal-veil tabindex="-1" aria-hidden="true"></button>

@@ -1249,74 +1249,6 @@
 .sw-acc__a ul { margin: 0 0 .8em; padding-left: 1.15em; }
 .sw-acc__a li { margin-bottom: .35em; }
 
-/* ---------- Barre collante ---------- */
-
-.sw-sticky {
-  position: fixed;
-  inset: auto 0 0 0;
-  z-index: 60;
-  background: var(--sw-paper);
-  border-top: 1px solid var(--sw-line);
-  box-shadow: 0 -2px 12px rgba(13, 13, 13, .08);
-  padding: 12px 16px;
-  transform: translateY(105%);
-  transition: transform .28s cubic-bezier(.4, 0, .2, 1);
-  padding-bottom: max(12px, env(safe-area-inset-bottom));
-}
-
-.sw-sticky.is-visible { transform: translateY(0); }
-
-.sw-sticky__inner {
-  max-width: var(--sw-max);
-  margin-inline: auto;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.sw-sticky__info { flex: 1; min-width: 0; }
-
-.sw-sticky__name {
-  font-size: .88rem;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Le prix d'abord, en chiffres pleins ; la variante choisie dessous, en
-   rappel. C'est le prix du pack courant, pas celui de l'unité : il suit le
-   sélecteur. */
-.sw-sticky__meta { display: flex; flex-direction: column; }
-.sw-sticky__meta strong { color: var(--sw-ink); font-size: 17px; font-weight: 700; line-height: 1.2; }
-.sw-sticky__meta span { font-size: 11px; color: var(--sw-muted); }
-
-.sw-sticky .sw__btn {
-  min-height: 46px;
-  padding-inline: 26px;
-  flex: none;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 6px;
-}
-
-/* Sous 560 px, le nom du produit était purement et simplement masqué : la
-   barre n'affichait donc que le prix et le bouton. Il revient, tronqué par
-   une ellipse plutôt que supprimé — c'est la colonne de texte qui cède de
-   la place, pas le contenu. */
-@media (max-width: 560px) {
-  .sw-sticky__info { flex: 1; min-width: 0; }
-  .sw-sticky__name { font-size: .78rem; }
-  .sw-sticky__meta strong { font-size: 16px; }
-  .sw-sticky__meta span { font-size: 10.5px; }
-
-  .sw-sticky .sw__btn {
-    flex: none;
-    padding-inline: 16px;
-    font-size: 14px;
-  }
-}
-
 /* ---------- Modale guide des tailles ---------- */
 
 .sw-modal {
@@ -1457,7 +1389,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sw *, .sw *::before, .sw *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-  .sw-sticky { transition: none; }
 }
 
 /* ==========================================================================

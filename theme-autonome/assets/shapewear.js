@@ -51,8 +51,6 @@
     this.button = $('[data-sw-add]', root);
     this.buttonText = $('[data-sw-add-text]', root);
     this.errorEl = $('[data-sw-error]', root);
-    this.stickyPrice = $('[data-sw-sticky-price]');
-    this.stickyMeta = $('[data-sw-sticky-meta]');
 
     this.bind();
     this.syncUnitRows();
@@ -253,14 +251,6 @@
     if (this.button) this.button.removeAttribute('aria-disabled');
     if (this.buttonText) this.buttonText.textContent = this.root.dataset.swAddText || 'Ajouter au panier';
     if (this.errorEl) this.errorEl.textContent = '';
-
-    if (this.stickyPrice) this.stickyPrice.textContent = this.money(total / 100);
-    if (this.stickyMeta) {
-      /* La barre doit rappeler ce qu'on s'apprête à acheter : la taille
-         d'abord, c'est le choix dont on doute. */
-      var choix = ['Taille ' + top.size, top.color].filter(Boolean).join(' · ');
-      this.stickyMeta.textContent = units > 1 ? units + ' × ' + choix : choix;
-    }
 
     this.syncMedia(variant);
   };
@@ -482,29 +472,10 @@
     });
   }
 
-  /* ------------------------------------------------- Barre d'achat collante */
-
-  /* Le balisage et les styles existaient, mais rien ne posait jamais la
-     classe : la barre restait hors de l'écran en permanence. Elle apparaît
-     quand le bouton d'achat sort du champ de vision, et se retire dès
-     qu'il revient — sinon on propose deux fois la même action. */
-  function initStickyAtc(scope) {
-    var bar = $('[data-sticky-atc]', scope) || $('[data-sticky-atc]');
-    var trigger = $('[data-sticky-trigger]', scope) || $('[data-sticky-trigger]');
-    if (!bar || !trigger || typeof IntersectionObserver !== 'function') return;
-
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        bar.classList.toggle('is-visible', !entry.isIntersecting && entry.boundingClientRect.top < 0);
-      });
-    }, { threshold: 0 }).observe(trigger);
-  }
-
   /* ------------------------------------------------------------------ Init */
 
   function init(scope) {
     initGallery(scope);
-    initStickyAtc(scope);
     $$('[data-sw-product]', scope).forEach(function (root) { new ShapewearProduct(root); });
     initAccordions(scope);
   }
