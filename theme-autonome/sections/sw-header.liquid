@@ -1,5 +1,22 @@
 <header class="sw-header">
   <div class="sw-header__in">
+    {%- comment -%}
+      Sous 800 px, la navigation est masquée. Elle l'était sans rien pour la
+      remplacer : un visiteur sur téléphone n'avait aucun accès au guide des
+      tailles ni à l'aide. Ce bouton n'existe qu'en dessous de ce seuil.
+    {%- endcomment -%}
+    <button
+      type="button"
+      class="sw-burger"
+      data-sw-menu-open
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="SwMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+
     <a class="sw-header__logo" href="{{ routes.root_url }}">
       {%- if section.settings.logo != blank -%}
         <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name | escape }}" height="26">
@@ -19,6 +36,24 @@
     </a>
   </div>
 </header>
+
+{%- comment -%}
+  Les liens portent une classe : sans elle, la règle qui souligne les liens
+  sans classe les attraperait au passage.
+{%- endcomment -%}
+<div class="sw sw-menu" id="SwMenu" data-sw-menu hidden>
+  <button type="button" class="sw-menu__veil" data-sw-menu-close tabindex="-1" aria-hidden="true"></button>
+  <div class="sw-menu__panel" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" data-sw-menu-panel>
+    <button type="button" class="sw-menu__close" data-sw-menu-close aria-label="Fermer le menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19"/>
+      </svg>
+    </button>
+    {%- for link in section.settings.menu.links -%}
+      <a class="sw-menu__link" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </div>
+</div>
 
 {% schema %}
 {

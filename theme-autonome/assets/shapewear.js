@@ -500,11 +500,65 @@
     }, { threshold: 0 }).observe(trigger);
   }
 
+  /* ------------------------------------------------- Menu sur téléphone */
+
+  /* La navigation de l'en-tête est masquée sous 800 px. Ce panneau la rend
+     de nouveau atteignable. On l'ouvre en deux temps — on retire d'abord
+     l'attribut hidden, on pose la classe à l'image suivante — sinon le
+     navigateur n'a rien à animer et le panneau apparaît d'un coup. */
+
+  function initMobileMenu(scope) {
+    var menu = $('[data-sw-menu]', scope) || $('[data-sw-menu]');
+    var bouton = $('[data-sw-menu-open]', scope) || $('[data-sw-menu-open]');
+    if (!menu || !bouton) return;
+
+    /* Le focus va sur le panneau, pas sur la croix : un bouton focalisé
+       affiche un anneau, un conteneur non. Les lecteurs d'écran et le
+       clavier entrent quand même dans le dialogue. */
+    var panneau = $('[data-sw-menu-panel]', menu);
+
+    function ouvrir() {
+      menu.hidden = false;
+      requestAnimationFrame(function () {
+        menu.classList.add('is-open');
+        document.body.classList.add('sw-menu-open');
+        bouton.setAttribute('aria-expanded', 'true');
+        if (panneau) panneau.focus();
+      });
+    }
+
+    function fermer() {
+      menu.classList.remove('is-open');
+      document.body.classList.remove('sw-menu-open');
+      bouton.setAttribute('aria-expanded', 'false');
+      bouton.focus();
+      window.setTimeout(function () {
+        if (!menu.classList.contains('is-open')) menu.hidden = true;
+      }, 280);
+    }
+
+    bouton.addEventListener('click', ouvrir);
+    $$('[data-sw-menu-close]', menu).forEach(function (el) {
+      el.addEventListener('click', fermer);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) fermer();
+    });
+
+    /* Repassé sur grand écran, la navigation de l'en-tête reprend la main :
+       laisser le panneau ouvert n'aurait plus de sens. */
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 800 && !menu.hidden) fermer();
+    });
+  }
+
   /* ------------------------------------------------------------------ Init */
 
   function init(scope) {
     initGallery(scope);
     initStickyAtc(scope);
+    initMobileMenu(scope);
     $$('[data-sw-product]', scope).forEach(function (root) { new ShapewearProduct(root); });
     initAccordions(scope);
   }
