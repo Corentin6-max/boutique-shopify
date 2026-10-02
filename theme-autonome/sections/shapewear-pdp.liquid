@@ -51,6 +51,7 @@
   data-sw-size-index="{{ size_index }}"
   data-sw-discount-percent="{{ section.settings.discount_percent }}"
   data-sw-discount-min="{{ section.settings.discount_min }}"
+  data-sw-tier-rates="{{ section.settings.tier_rates | escape }}"
   data-sw-pack-one-note="{{ section.settings.pack_one_note | escape }}"
   data-sw-add-text="{{ section.settings.add_label | escape }}"
   data-sw-sold-out-text="{{ 'products.product.sold_out' | t | escape }}">
@@ -477,6 +478,8 @@
     { "type": "text", "id": "tiers_heading", "label": "Titre au-dessus des packs", "default": "Plus vous en prenez, plus vous économisez" },
     { "type": "number", "id": "discount_percent", "label": "Remise en % appliquée par Shopify", "default": 20 },
     { "type": "number", "id": "discount_min", "label": "À partir de combien d'articles", "default": 2 },
+    { "type": "paragraph", "content": "Paliers de remise : « quantité:pourcentage », séparés par des virgules. Ces valeurs doivent correspondre exactement aux remises automatiques configurées dans Shopify, sinon l'affichage et la caisse divergeront. Laisser vide pour revenir au taux unique ci-dessus." },
+    { "type": "text", "id": "tier_rates", "label": "Paliers de remise (quantité:%)", "default": "2:14,4:20,6:25" },
     { "type": "number", "id": "badge_units", "label": "Palier mis en avant", "default": 4 },
     { "type": "text", "id": "badge_label", "label": "Étiquette du palier mis en avant", "default": "Le plus populaire" },
     { "type": "text", "id": "pack_one_note", "label": "Mention du pack de 1", "default": "Pour tester la coupe" },

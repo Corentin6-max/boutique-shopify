@@ -42,6 +42,7 @@
        ici pour l'affichage : le prix annoncé doit être celui qui sera facturé. */
     this.discountPct = Number(root.dataset.swDiscountPercent || 0) / 100;
     this.discountMin = Number(root.dataset.swDiscountMin || 0);
+    this.tiers = parseTiers(root.dataset.swTierRates);
 
     this.form = $('[data-sw-form]', root);
     this.priceEl = $('[data-sw-price]', root);
@@ -161,11 +162,40 @@
 
   /* -------------------------------------------------------- Rafraîchissement */
 
-  ShapewearProduct.prototype.discounted = function (subtotal, units) {
-    if (this.discountMin > 0 && units >= this.discountMin && this.discountPct > 0) {
-      return Math.round(subtotal * (1 - this.discountPct));
+  /* Paliers de remise, lus depuis le réglage « 2:14,4:20,6:25 ».
+
+     Triés du plus grand seuil au plus petit : pour une quantité donnée on
+     retient le premier palier atteint, donc toujours le plus avantageux.
+     C'est exactement ce que fait Shopify avec plusieurs remises automatiques,
+     qui n'en applique qu'une et choisit la meilleure. Les deux doivent rester
+     d'accord, sinon le client voit un prix et en paie un autre. */
+
+  function parseTiers(brut) {
+    if (!brut) return [];
+    return String(brut).split(',').map(function (part) {
+      var pair = part.split(':');
+      return { min: Number(pair[0]), pct: Number(pair[1]) / 100 };
+    }).filter(function (t) {
+      return t.min > 0 && t.pct > 0 && t.pct < 1;
+    }).sort(function (a, b) {
+      return b.min - a.min;
+    });
+  }
+
+  ShapewearProduct.prototype.rateFor = function (units) {
+    for (var i = 0; i < this.tiers.length; i++) {
+      if (units >= this.tiers[i].min) return this.tiers[i].pct;
     }
-    return subtotal;
+    /* Aucun palier renseigné : on retombe sur le taux unique d'origine. */
+    if (!this.tiers.length && this.discountMin > 0 && units >= this.discountMin) {
+      return this.discountPct;
+    }
+    return 0;
+  };
+
+  ShapewearProduct.prototype.discounted = function (subtotal, units) {
+    var pct = this.rateFor(units);
+    return pct > 0 ? Math.round(subtotal * (1 - pct)) : subtotal;
   };
 
   ShapewearProduct.prototype.update = function () {
